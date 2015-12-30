@@ -11,48 +11,49 @@ Target Server Type    : PGSQL
 Target Server Version : 90303
 File Encoding         : 65001
 
-Date: 2015-12-29 15:10:36
+Date: 2015-12-30 09:04:14
 */
 
 
 -- ----------------------------
 -- Sequence structure for tbcategory_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "tbcategory_id_seq" CASCADE;
+
 CREATE SEQUENCE "tbcategory_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
  START 1
  CACHE 1;
+SELECT setval('"public"."tbcategory_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for tbhistory_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "tbhistory_id_seq" CASCADE;
 CREATE SEQUENCE "tbhistory_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
  START 1
  CACHE 1;
+SELECT setval('"public"."tbhistory_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for tbmemo_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "tbmemo_id_seq" CASCADE;
+
 CREATE SEQUENCE "tbmemo_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 1
+ START 2
  CACHE 1;
-SELECT setval('"public"."tbmemo_id_seq"', 1, true);
+SELECT setval('"public"."tbmemo_id_seq"', 2, true);
 
 -- ----------------------------
 -- Sequence structure for tbuser_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "tbuser_id_seq" CASCADE;
+
 CREATE SEQUENCE "tbuser_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -78,6 +79,7 @@ WITH (OIDS=FALSE)
 -- Records of tbcategory
 -- ----------------------------
 BEGIN;
+INSERT INTO "tbcategory" VALUES ('1', 'sport', null);
 COMMIT;
 
 -- ----------------------------
@@ -99,6 +101,7 @@ WITH (OIDS=FALSE)
 -- Records of tbhistory
 -- ----------------------------
 BEGIN;
+INSERT INTO "tbhistory" VALUES ('1', '2', 'asdf', 'asd', '2015-12-30 09:03:27.906');
 COMMIT;
 
 -- ----------------------------
@@ -125,6 +128,7 @@ WITH (OIDS=FALSE)
 -- Records of tbmemo
 -- ----------------------------
 BEGIN;
+INSERT INTO "tbmemo" VALUES ('2', '1', 'asd', 'asdf', 'asd', '2015-12-30 09:02:17', 't', 'asdfasdasdfasdf', '1', 't');
 COMMIT;
 
 -- ----------------------------
@@ -172,6 +176,27 @@ ALTER TABLE "tbcategory" ADD PRIMARY KEY ("id");
 -- ----------------------------
 ALTER TABLE "tbhistory" ADD PRIMARY KEY ("id");
 
+CREATE or replace FUNCTION "insert_tbhistory"()
+  RETURNS trigger AS $BODY$
+BEGIN
+ IF (TG_OP = 'UPDATE') THEN
+
+INSERT INTO "public"."tbhistory" ("memoid", "title", "content", "date") VALUES(OLD.id,OLD.title,OLD.content,now());
+    return null;
+        END IF;
+END
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE COST 100
+;
+ALTER FUNCTION "public"."insert_tbhistory"() OWNER TO "postgres";
+
+-- ----------------------------
+-- Triggers structure for table tbmemo
+-- ----------------------------
+CREATE TRIGGER "triggger_insert_tbhistory" AFTER UPDATE ON "tbmemo"
+FOR EACH ROW
+EXECUTE PROCEDURE "insert_tbhistory"();
+
 -- ----------------------------
 -- Primary Key structure for table tbmemo
 -- ----------------------------
@@ -190,5 +215,5 @@ ALTER TABLE "tbhistory" ADD FOREIGN KEY ("memoid") REFERENCES "tbmemo" ("id") ON
 -- ----------------------------
 -- Foreign Key structure for table "tbmemo"
 -- ----------------------------
-ALTER TABLE "tbmemo" ADD FOREIGN KEY ("userid") REFERENCES "tbuser" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "tbmemo" ADD FOREIGN KEY ("categoryid") REFERENCES "tbcategory" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "tbmemo" ADD FOREIGN KEY ("userid") REFERENCES "tbuser" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
