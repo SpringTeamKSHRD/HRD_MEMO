@@ -22,11 +22,7 @@
 					url : "${pageContext.request.contextPath}/login",
 					type : "POST",
 					data : $("#frmLogin").serialize(),
-					success : function(data) {
-/* 						if (data == "User account is locked")	alert(data);
-						else if (data == "User is disabled")	alert(data);
-						else if (data == "Bad credentials")		alert(data);
-						else location.href = "${pageContext.request.contextPath}/" + data; */						
+					success : function(data) {					
 						if (data == "User account is locked" || 
 							data == "User is disabled" ||
 							data == "Bad credentials")		

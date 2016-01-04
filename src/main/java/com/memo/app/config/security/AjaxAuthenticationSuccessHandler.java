@@ -1,6 +1,7 @@
 package com.memo.app.config.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -21,13 +22,16 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		String url = "";
+		ArrayList<String> roles=new ArrayList<String>();
 		for (GrantedAuthority authority : authorities) {
-			if (authority.getAuthority().equals("ROLE_ADMIN"))
-				url = "admin/product";
-			else if (authority.getAuthority().equals("ROLE_AUTHOR"))
-				url = "author/product";
-			else	url = "accessDenied";
+			roles.add(authority.getAuthority());
 		}
+		if (roles.contains("ROLE_ADMIN"))
+			url = "admin/admin";
+		else if (roles.contains("ROLE_USER"))
+			url = "user/user";
+		else	url = "accessDenied";
+		
 		response.getWriter().print(url);
 		response.getWriter().flush();
 	}

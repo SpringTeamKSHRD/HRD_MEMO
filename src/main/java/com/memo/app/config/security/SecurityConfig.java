@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 			.antMatchers("/**").permitAll()
-			.antMatchers("/author/**").hasAnyRole("AUTHOR" , "ADMIN")
+			.antMatchers("/author/**").hasAnyRole("USER" , "ADMIN")
 			.antMatchers("/admin/**").hasRole("ADMIN");
 		http
 			.formLogin()
@@ -88,8 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
-	public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("1"));
+	/*public static void main(String[] args) {
+		System.out.println(new BCryptPasswordEncoder().encode("2"));
 		//System.out.println(Base64.getUrlEncoder().encodeToString("1".getBytes()));
-	}
+	}*/
 }

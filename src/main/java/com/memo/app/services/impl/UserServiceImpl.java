@@ -7,26 +7,28 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.User;
-import com.memo.app.repo.UserDao;
+import com.memo.app.repo.impl.UserDaoImpl;
 
 @Service
 public class UserServiceImpl  implements UserDetailsService{
 
 	@Autowired
-	UserDao userDaoImpl;
+	UserDaoImpl userDaoImpl;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		System.out.println(username);
 		User user = userDaoImpl.findUserByUserName(username);
 		if (user == null) {
 			System.out.println("User not found");
 			throw new UsernameNotFoundException("User not found");
 		}
+		System.out.println(user);
 		return user;
 	}
 	
-	public UserDetails loadUserById(int id) throws UsernameNotFoundException {
+	/*public UserDetails loadUserById(int id) throws UsernameNotFoundException {
 		
 		User user = userDaoImpl.loadUserById(id);
 		if (user == null) {
@@ -35,5 +37,5 @@ public class UserServiceImpl  implements UserDetailsService{
 		}
 		return user;
 	}
-
+*/
 }

@@ -41,5 +41,15 @@ public class Main {
 	public String homePahe1(){
 		return "login";
 	}
+	
+	@RequestMapping(value="admin/admin")
+	public String getAdminPage(){
+		return "admin/admin";
+	}
+	@RequestMapping(value="user/user")
+	public String getUserPage(){
+		return "user/user";
+	}
+
 
 }
