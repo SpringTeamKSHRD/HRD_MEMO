@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -37,6 +38,11 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("12345");
 		return dataSource;
+	}
+	
+	@Bean
+	public JdbcTemplate getJdbcTemplate(){
+		return new JdbcTemplate(this.getDataSource());
 	}
 	
 	@Override

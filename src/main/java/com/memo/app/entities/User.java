@@ -1,55 +1,32 @@
 package com.memo.app.entities;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class User implements UserDetails{
-	
-	private static final long serialVersionUID = 1L;
+public class User {
 	
 	private int id;
+	private String name;
+	private char gender;
 	private String email;
-	private String position;
-	private int approvedBy;
-	private Date approvedDate;
-	private Date createdDate;
-	private int createdBy;
-	
-
-	private String username;
 	private String password;
-	private List<UserRole> roles;
-	private boolean accountNonExpired = true;
-    private boolean accountNonLocked = true;
-    private boolean credentialsNonExpired = true;
-    private boolean enabled = true;
-    
-    public User(){}
-    public User(int id, String username){
-    	this.id = id;
-    	this.username = username;
-    }    
+	private String image;
+	private boolean enable;
+	private String role;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getPassword() {
-		return password;
+	public char getGender() {
+		return gender;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setGender(char gender) {
+		this.gender = gender;
 	}
 	public String getEmail() {
 		return email;
@@ -57,79 +34,34 @@ public class User implements UserDetails{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPosition() {
-		return position;
+	public String getPassword() {
+		return password;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public int getApprovedBy() {
-		return approvedBy;
+	public String getImage() {
+		return image;
 	}
-	public void setApprovedBy(int approvedBy) {
-		this.approvedBy = approvedBy;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public Date getApprovedDate() {
-		return approvedDate;
+	public boolean isEnable() {
+		return enable;
 	}
-	public void setApprovedDate(Date approvedDate) {
-		this.approvedDate = approvedDate;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
+	public String getRole() {
+		return role;
 	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-	public int getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-	public List<UserRole> getRoles() {
-		return roles;
-	}
-	public void setRoles(List<UserRole> roles) {
-		this.roles = roles;
-	}
-	public boolean isAccountNonExpired() {
-		return accountNonExpired;
-	}
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
-	}
-	public boolean isAccountNonLocked() {
-		return accountNonLocked;
-	}
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-	public boolean isCredentialsNonExpired() {
-		return credentialsNonExpired;
-	}
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
-	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", position=" + position + ", approvedBy=" + approvedBy
-				+ ", approvedDate=" + approvedDate + ", createdDate=" + createdDate + ", createdBy=" + createdBy
-				+ ", username=" + username + ", password=" + password + ", roles=" + roles + ", accountNonExpired="
-				+ accountNonExpired + ", accountNonLocked=" + accountNonLocked + ", credentialsNonExpired="
-				+ credentialsNonExpired + ", enabled=" + enabled + "]";
+		return "User [id=" + id + ", name=" + name + ", gender=" + gender
+				+ ", email=" + email + ", password=" + password + ", image="
+				+ image + ", enable=" + enable + ", role=" + role + "]";
 	}
 }
-
-

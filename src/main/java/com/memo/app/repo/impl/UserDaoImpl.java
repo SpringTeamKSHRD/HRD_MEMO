@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.memo.app.entities.User;
+import com.memo.app.entities.UserSecurConfig;
 import com.memo.app.entities.UserRole;
 import com.memo.app.repo.UserDao;
 
@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 	DataSource dataSource;
 
 	@Override
-	public User findUserByUserName(String username) {
+	public UserSecurConfig findUserByUserName(String username) {
 
 		String sql = "SELECT id,name,password,enable FROM tbuser WHERE name LIKE ?";
 
@@ -30,9 +30,9 @@ public class UserDaoImpl implements UserDao {
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			User user = null;
+			UserSecurConfig user = null;
 			if (rs.next()) {
-				user = new User();
+				user = new UserSecurConfig();
 				user.setId(rs.getInt(1));
 				user.setUsername(rs.getString(2));
 				user.setPassword(rs.getString(3));
@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 	public List<UserRole> findUserRoleByUserId(int id) {
-			String sql="SELECT role FROM tbuser WHERE id=?";
+			String sql="SELECT id,role FROM tbuser WHERE id=?";
 			try(
 					Connection conn=dataSource.getConnection();
 					PreparedStatement ps=conn.prepareStatement(sql);
@@ -59,7 +59,8 @@ public class UserDaoImpl implements UserDao {
 					UserRole role=null;
 					while(rs.next()){
 						role=new UserRole();
-						role.setName(rs.getString(1));
+						role.setId(rs.getInt(1));
+						role.setName(rs.getString(2));
 						roles.add(role);
 					}
 					System.out.println(roles);
@@ -71,16 +72,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User loadUserById(int id) {
+	public UserSecurConfig loadUserById(int id) {
 		String sql = "SELECT id,name,password,enable FROM tbuser WHERE id=?";
 
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1,id);
 			ResultSet rs = ps.executeQuery();
-			User user = null;
+			UserSecurConfig user = null;
 			if (rs.next()) {
-				user = new User();
+				user = new UserSecurConfig();
 				user.setId(rs.getInt(1));
 				user.setUsername(rs.getString(2));
 				user.setPassword(rs.getString(3));
