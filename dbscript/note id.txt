@@ -1,0 +1,4 @@
+INSERT INTO "public"."tbluniversity" ("universityid", "universityname") VALUES ('36', 'Other');
+INSERT INTO "public"."tbldepartment" ("departmentid", "departmentname") VALUES ('12', 'Other');
+INSERT INTO "public"."tblusertype" ("usertypeid", "usertypename", "viewable", "commentable", "postable", "deleteable", "userable") VALUES ('2', 'Subscriber', 't', 't', 'f', 'f', 'f');
+INSERT INTO "public"."tblusertype" ("usertypeid", "usertypename", "viewable", "commentable", "postable", "deleteable", "userable") VALUES ('5', 'Admin', 't', 't', 't', 't', 't');
