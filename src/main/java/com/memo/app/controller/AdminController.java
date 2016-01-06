@@ -7,7 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/admin")
 public class AdminController {
 	@RequestMapping("")
-	public String adminIndexPage() {
+	public String dashboard() {
+	
 		return "admin/index";
 	}
+	
+	
+	@RequestMapping("/user")
+	
+	public String user() {
+		return "admin/index";
+	}
+	
 }

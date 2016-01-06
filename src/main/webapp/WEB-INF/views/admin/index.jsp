@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/skins/skin-green.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/skins/skin-blue.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,19 +53,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
       <!-- Main Header -->
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="${pageContext.request.contextPath}/admin" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- <span class="logo-mini"><b>A</b>LT</span> -->
           <span class="logo-mini"><img src="${pageContext.request.contextPath}/resources/admin/imgs/memo-logo.png" class="user-image" width="35px" height="35px"></span>
           <!-- logo for regular state and mobile devices -->
-           <span class="logo-lg"><b>Memo</b>KSHRD</span>
+           <span class="logo-lg"><img src="${pageContext.request.contextPath}/resources/admin/imgs/memo-logo.png" class="user-image" width="35px" height="35px">&nbsp;&nbsp;<b>Memo</b>KSHRD</span>
           <%-- <span class="logo-lg"><img src="${pageContext.request.contextPath}/resources/admin/imgs/memo-big-logo.png" class="user-image"></span> --%>
         </a>
 
@@ -226,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="${pageContext.request.contextPath}/resources/admin/imgs/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="${pageContext.request.contextPath}/resources/admin/imgs/sopheak.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
@@ -285,6 +285,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
 
           <!-- Your Page Content Here -->
+          fsadfsdafdas
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
