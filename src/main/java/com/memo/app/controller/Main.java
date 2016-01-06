@@ -18,6 +18,7 @@ import com.memo.app.services.impl.UserServiceImpl;
  * is used to map the user’s requests to handler classes or methods. It can be
  * applied on the class level and also on the method level.
  */
+@RequestMapping(value="/")
 public class Main {
 
 
@@ -42,10 +43,7 @@ public class Main {
 		return "login";
 	}
 	
-	@RequestMapping(value="admin/admin")
-	public String getAdminPage(){
-		return "admin/admin";
-	}
+	
 	@RequestMapping(value="user/user")
 	public String getUserPage(){
 		return "user/user";
