@@ -62,9 +62,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
+          <!-- <span class="logo-mini"><b>A</b>LT</span> -->
+          <span class="logo-mini"><img src="${pageContext.request.contextPath}/resources/admin/imgs/memo-logo.png" class="user-image" width="35px" height="35px"></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Admin</b>LTE</span>
+           <span class="logo-lg"><b>Memo</b>KSHRD</span>
+          <%-- <span class="logo-lg"><img src="${pageContext.request.contextPath}/resources/admin/imgs/memo-big-logo.png" class="user-image"></span> --%>
         </a>
 
         <!-- Header Navbar -->
@@ -246,17 +248,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-            <li class="header">HEADER</li>
+            <!-- <li class="header">HEADER</li> -->
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-            <li class="treeview">
+            <li class="active"><a href="#"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+            <li><a href="#"><i class="fa fa-users"></i><span>Users</span></a></li>
+            <li><a href="#"><i class="fa fa-sticky-note-o"></i><span>Memos</span></a></li>
+            <li><a href="#"><i class="fa fa-line-chart"></i><span>Statistics</span></a></li>
+            <li><a href="#"><i class="fa fa-bug"></i><span>Black List</span><span class="label pull-right bg-red">10</span></a></li>
+            <!-- <li class="treeview">
               <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="#">Link in level 2</a></li>
                 <li><a href="#">Link in level 2</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
