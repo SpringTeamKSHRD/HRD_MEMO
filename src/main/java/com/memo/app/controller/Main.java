@@ -35,6 +35,7 @@ public class Main {
 	@RequestMapping(value="/")
 	public String homePahe(ModelMap model){
 		model.addAttribute("auth", SecurityContextHolder.getContext().getAuthentication());
+		System.out.println("hello ");
 		return "home";
 	}	
 	
