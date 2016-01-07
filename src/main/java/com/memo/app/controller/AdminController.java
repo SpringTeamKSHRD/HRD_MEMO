@@ -19,10 +19,14 @@ public class AdminController {
 		this.putTogether(m, "Users", "List All Users");
 		return "admin/users";
 	}
-	
+	@RequestMapping("/memos")
+	public String memo(ModelMap m) {
+		this.putTogether(m, "Memos", "List All Memos");
+		return "admin/memos";
+	}
 	public void putTogether(ModelMap m,String pageTitle,String pageDesc){
 		m.addAttribute("pageTitle",pageTitle);
 		m.addAttribute("pageDesc",pageDesc);
-		m.addAttribute("active",pageTitle);
+//		m.addAttribute("active",pageTitle);
 	}
 }
