@@ -42,6 +42,10 @@ public class Main {
 	public String homePahe1(){
 		return "login";
 	}
+	@RequestMapping(value="/plugin", method = RequestMethod.GET)
+	public String homePluginPage(){
+		return "plugin";
+	}
 	
 	
 	@RequestMapping(value="user/user")
