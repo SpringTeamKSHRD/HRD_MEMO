@@ -16,7 +16,7 @@ import com.memo.app.entities.UserRole;
 import com.memo.app.repo.UserDao;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserSecurityDaoImpl implements UserDao {
 
 	@Autowired
 	DataSource dataSource;
@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserSecurConfig findUserByUserName(String username) {
 
-		String sql = "SELECT id,name,password,enable FROM tbuser WHERE name LIKE ?";
+		String sql = "SELECT userid,username,password,ismemoenabled FROM public.tbluser WHERE username LIKE ?";
 
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 	public List<UserRole> findUserRoleByUserId(int id) {
-			String sql="SELECT id,role FROM tbuser WHERE id=?";
+			String sql="SELECT usertypeid,usertypename FROM public.v_user_roles WHERE userid=?";
 			try(
 					Connection conn=dataSource.getConnection();
 					PreparedStatement ps=conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
 					while(rs.next()){
 						role=new UserRole();
 						role.setId(rs.getInt(1));
-						role.setName(rs.getString(2));
+						role.setName("ROLE_"+rs.getString(2));
 						roles.add(role);
 					}
 					System.out.println(roles);
@@ -73,7 +73,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserSecurConfig loadUserById(int id) {
-		String sql = "SELECT id,name,password,enable FROM tbuser WHERE id=?";
+		String sql = "SELECT userid,username,password,ismemoenabled FROM public.tbluser WHERE userid=?";
 
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {

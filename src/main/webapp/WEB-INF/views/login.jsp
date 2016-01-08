@@ -13,7 +13,7 @@
 		password : <input type="text" name="password" /> <br /> 
 		<input type="submit" value="Login" />
 	</form>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#frmLogin").submit(function(e) {

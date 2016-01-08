@@ -26,12 +26,11 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		for (GrantedAuthority authority : authorities) {
 			roles.add(authority.getAuthority());
 		}
-		if (roles.contains("ROLE_ADMIN"))
+		if (roles.contains("ROLE_Admin"))
 			url = "admin/admin";
-		else if (roles.contains("ROLE_USER"))
+		else if (roles.contains("ROLE_Subscriber"))
 			url = "user/user";
 		else	url = "accessDenied";
-		
 		response.getWriter().print(url);
 		response.getWriter().flush();
 	}

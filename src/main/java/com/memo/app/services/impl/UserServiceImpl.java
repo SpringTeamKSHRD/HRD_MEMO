@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.UserSecurConfig;
-import com.memo.app.repo.impl.UserDaoImpl;
+import com.memo.app.repo.impl.UserSecurityDaoImpl;
 
 @Service
 public class UserServiceImpl  implements UserDetailsService{
 
 	@Autowired
-	UserDaoImpl userDaoImpl;
+	UserSecurityDaoImpl userDaoImpl;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

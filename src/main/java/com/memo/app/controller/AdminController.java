@@ -29,4 +29,9 @@ public class AdminController {
 		m.addAttribute("pageDesc",pageDesc);
 //		m.addAttribute("active",pageTitle);
 	}
+	@RequestMapping(value="/admin")
+	public String getAdminPage(){
+		return "admin/dashboard";
+	}
+
 }
