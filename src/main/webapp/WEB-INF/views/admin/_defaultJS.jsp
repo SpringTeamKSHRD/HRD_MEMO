@@ -16,6 +16,10 @@
 			$('ul.sidebar-menu li:nth-last-child(4)').addClass('active');
 		}else if(newUrl=="memos"){
 			$('ul.sidebar-menu li:nth-last-child(3)').addClass('active');
+		}else if(newUrl=="statistics"){
+			$('ul.sidebar-menu li:nth-last-child(2)').addClass('active');
+		}else if(newUrl=="blacklist"){
+			$('ul.sidebar-menu li:nth-last-child(1)').addClass('active');
 		}else{
 			$('ul.sidebar-menu li:nth-last-child(5)').addClass('active');
 		}
