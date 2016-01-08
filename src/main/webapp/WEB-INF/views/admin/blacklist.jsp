@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		<%@ include file="_header.jsp" %>
       	<%@ include file="_sideBarMenu.jsp" %>
 			<!-- Your Page Content Here -->
-          welcome users
+          welcome blacklist
 		<%@ include file="_footer.jsp" %>
 		<%@ include file="_controlSideBar.jsp" %>
      
