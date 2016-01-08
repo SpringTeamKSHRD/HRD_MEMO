@@ -5,24 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Dashboard User</title>
+<title>Add User Memo</title>
 <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User Admin</title>   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->
-	<!-- Bootstrap 3.3.5 --> 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/bootstrap/css/bootstrap.min.css"> 
-	<!-- Original Page -->
+	<!-- jQuery 2.1.4 -->
+    <script src="${pageContext.request.contextPath}/resources/user/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<!-- for bootstrap css -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/bootstrap/css/bootstrap.min.css"> <!-- Bootstrap 3.3.5 --> 
+	<!-- for original page -->	
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> <!-- Ionicons -->   
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/font-awesome/css/font-awesome.min.css">   
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/dist/css/AdminLTE.min.css"><!-- Theme style -->   
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/dist/css/skins/_all-skins.min.css"><!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->   
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/iCheck/flat/blue.css"><!-- iCheck -->   
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/morris/morris.css"> <!-- Morris chart -->   
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> <!-- jvectormap -->   
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/datepicker/datepicker3.css"><!-- Date Picker -->  
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/daterangepicker/daterangepicker-bs3.css">  <!-- Daterange picker -->    
+    <!-- <link rel="stylesheet" href="plugins/iCheck/flat/blue.css"> --><!-- iCheck -->   
+    <!-- <link rel="stylesheet" href="plugins/morris/morris.css"> --><!-- Morris chart -->   
+    <!-- <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"> --> <!-- jvectormap -->   
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> --><!-- Date Picker -->  
+    <!-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">-->  <!-- Daterange picker -->    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> <!-- bootstrap wysihtml5 - text editor -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -234,13 +234,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="${pageContext.request.contextPath}/resources/user/dist/img/yoona.jpg" class="user-image" alt="User Image">
+                  <img src="dist/img/yoona.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Ky Sona</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="${pageContext.request.contextPath}/resources/user/dist/img/yoona.jpg" class="img-circle" alt="User Image">
+                    <img src="dist/img/yoona.jpg" class="img-circle" alt="User Image">
                     <p>
                       Ky Sona - Web Developer
                       <small>Member Spring PESS since Nov. 2015</small>
@@ -282,19 +282,10 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-          <div class="user-panel">
-        
-          </div>
+          
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form>
           <!-- /.search form -->
+		  
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN MENU</li>
@@ -303,8 +294,8 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> List Memos</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Add Memo</a></li>
+                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> List Memos</a></li>
+                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Add Memo</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -328,9 +319,12 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Dashboard</h1>
+          <h1>
+            Dashboard
+            <small>Add New Memos</small>
+          </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-home"></i></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
         </section>
@@ -340,67 +334,27 @@
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Total Memos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
+				
+            </div>
             <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Total Websites</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>Public MeMos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                <div class="inner">
-                  <h3>65</h3>
-                  <p>Deleted Memos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
+				
+            </div>
+            <div class="col-lg-3 col-xs-6"> 
+				
+            </div>
+            <div class="col-lg-3 col-xs-6"> 
+					
+            </div>
           </div><!-- /.row -->
           <!-- Main row -->
           <div class="row">
             <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
+            <section class="col-lg-12 connectedSortable">
 			  <!-- List Table Memo -->
 				<div class="box box-info">
 					<div class="box-header">
-					  <i class="fa fa-table fa-2x"></i>
-					  <h3 class="box-title">List Memos</h3>
+					  <i class="fa fa-inbox fa-2x"></i>
+					  <h3 class="box-title">Add Memos</h3>
 					  <!-- tools box -->
 					  <div class="box-tools pull-right">
 						<button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -408,292 +362,83 @@
 					  </div>
 					</div>
 					<div class="box-body">
-					  <table class="table table-hover table-responsive">
-						<thead>
-							  <tr>
-								  <th>ID</th>
-								  <th>Title</th>
-								  <th>Content</th>
-								  <th>Url</th>
-								  <th>Domain</th>
-								  <th>Date</th>
-								  <th>Category</th>
-								  <th>Public</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>2</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>3</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							   <tr>
-								<td>4</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>5</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>6</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>7</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>8</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>9</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>10</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>11</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>12</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>13</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>14</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							  <tr>
-								<td>15</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-								<td>$0.87</td>
-								<td>Alvin</td>
-								<td>Eclair</td>
-							  </tr>
-							</tbody>
-					  </table>
+						<!-- form add memo here. -->
+						<form action="" method="POST">
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<div class="form-group">
+										<label >Title</label>
+										<input type="text" class="form-control" placeholder="Title Memo">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<label>Category</label>
+									<select class="form-control">
+										<option>Technology</option>
+										<option>Entertainment</option>
+										<option>Health</option>
+										<option>Education</option>
+										<option>Others</option>
+									</select>
+								</div>
+							</div> <br/>
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<label>Public Memo</label> <br/>
+									<label class="radio-inline">
+									  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked> Only me
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Public
+									</label>
+								</div>
+							</div><br/>
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<div class="form-group">
+										<label>Content Memo</label>
+										<div class="textarea"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<div class="form-group">
+										<label>URL</label>
+										<input type="text" class="form-control" placeholder="www.khmeracademy.org.kh" disabled>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-xs-24">
+									<button type="button" class="btn btn-warning">Clear</button>
+									<button type="button" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+							
+						</form>
 					</div>
 					<div class="box-footer clearfix">
-						<p>pagination</p>
-						<div id="content">Dynamic Content goes here</div>
-						<div id="page-selection">Pagination goes here</div>
-						<script>
-							// init bootpag
-							$('#page-selection').bootpag({
-								total: 10
-							}).on("page", function(event, /* page number here */ num){
-								 $("#content").html("Insert content"); // some ajax content loading...
-							});
-						</script>
+						<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<!-- implement pagination here -->
+							</div>
+							<div class="col-lg-6 col-xs-12">
+								<!-- show total record ex: 12/100 -->
+							</div>
+						</div>
 					</div>
 				</div>
 			 
-              <!-- /.List Table Memo -->
-			  
-              <!-- Custom tabs (Charts with tabs)-->
-              
-			  <!-- /.Custom tabs (Charts with tabs)-->
-			  
-              <!-- Chat box -->
-              <!-- /.box (chat box) -->
-
-              <!-- TO DO List -->
-			  <!-- /.TO DO List -->
-			  
-              <!-- quick email widget -->
-
             </section><!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
-
-              <!-- Map box -->
-              <div class="box box-solid bg-light-blue-gradient">
-                <div class="box-header">
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-                    <button class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
-                  </div><!-- /. tools -->
-
-                  <i class="fa fa-map-marker"></i>
-                  <h3 class="box-title">
-                    Visitors
-                  </h3>
-                </div>
-                <div class="box-body">
-                  <div id="world-map" style="height: 250px; width: 100%;"></div>
-                </div><!-- /.box-body-->
-                <div class="box-footer no-border">
-                  <div class="row">
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <div id="sparkline-1"></div>
-                      <div class="knob-label">Visitors</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <div id="sparkline-2"></div>
-                      <div class="knob-label">Online</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center">
-                      <div id="sparkline-3"></div>
-                      <div class="knob-label">Exists</div>
-                    </div><!-- ./col -->
-                  </div><!-- /.row -->
-                </div>
-              </div>
-              <!-- /.box -->
-
-              <!-- solid sales graph -->
-
-              <!-- Calendar -->
-              <div class="box box-solid bg-green-gradient">
-                <div class="box-header">
-                  <i class="fa fa-calendar"></i>
-                  <h3 class="box-title">Calendar</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                      <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#">Add new event</a></li>
-                        <li><a href="#">Clear events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">View calendar</a></li>
-                      </ul>
-                    </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div><!-- /. tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <!--The calendar -->
-                  <div id="calendar" style="width: 100%"></div>
-                </div><!-- /.box-body -->
-                <div class="box-footer text-black">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Progress bars -->
-                   
-
-                      
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                      
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div>
-              </div><!-- /.box -->
-
-            </section><!-- right col -->
           </div><!-- /.row (main row) -->
-
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Version</b> 1.0.0
         </div>
         <strong>Copyright &copy; 2015-2016 <a href="#">Memo PESS</a>.</strong> All rights reserved.
       </footer>
@@ -864,33 +609,31 @@
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
-
-    <!-- jQuery 2.1.4 -->
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
+	
     <!-- Bootstrap 3.3.5 -->
     <script src="${pageContext.request.contextPath}/resources/user/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/user/bootstrap/js/bootpag.js"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/plugins/morris/morris.min.js"></script>
-    <!-- Sparkline to use for map-->
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/sparkline/jquery.sparkline.min.js"></script> 
+    <!-- Sparkline -->
+    <script src="${pageContext.request.contextPath}/resources/user/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!-- jvectormap -->
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script> -->
     <!-- jQuery Knob Chart -->
     <script src="${pageContext.request.contextPath}/resources/user/plugins/knob/jquery.knob.js"></script>
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> 
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
     <!-- datepicker -->
-    <script src="${pageContext.request.contextPath}/resources/user/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- <script src="plugins/datepicker/bootstrap-datepicker.js"></script> -->
     <!-- Bootstrap WYSIHTML5 -->
     <script src="${pageContext.request.contextPath}/resources/user/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Slimscroll -->
@@ -902,6 +645,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="${pageContext.request.contextPath}/resources/user/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="${pageContext.request.contextPath}/resources/user/dist/js/demo.js"></script>
-  </body>
+    <!-- <script src="dist/js/demo.js"></script> -->
+</body>
 </html>

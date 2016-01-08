@@ -12,4 +12,14 @@ public class UserController {
 	public String getUserDashBaord(){
 		return "user/user";
 	}
+	
+	@RequestMapping(value="/addmemo")
+	public String getUserAddMemo(){
+		return "user/addmemo";
+	}
+	
+	@RequestMapping(value="/listmemo")
+	public String getUserListMemo(){
+		return "user/listmemo";
+	}
 }
