@@ -19,10 +19,10 @@ public class UserDaoRepoImpl implements UserDaoRepoService {
 	@Override
 	public int saveUser(User user) {
 		
-		String sql="INSERT INTO tbuser(name,gender,email,password,image)"
-				+ " VALUES(?,?,?,?,?)";
+		String sql="INSERT INTO public.tbluser(username,password,gender,email,usertypeid,universityid,userimageurl)"
+				+ " VALUES(?,?,?,?,?,?,?)";
 		String password=new BCryptPasswordEncoder().encode(user.getPassword());
-		Object[] obj=new Object[]{user.getName(),user.getGender(),user.getEmail(),password,user.getImage()};
+		Object[] obj=new Object[]{user.getUsername(),password,user.getGender(),user.getEmail(),36,12,user.getImage()};
 		try{
 			return jdbcTemplate.update(sql,obj);
 		}catch(Exception ex){
@@ -34,8 +34,9 @@ public class UserDaoRepoImpl implements UserDaoRepoService {
 	@Override
 	public int updateUser(User user) {
 		
-		String sql="UPDATE tbuser SET name=?,gender=?,email=?,password=?,image=? WHERE id=?";
-		Object[] obj=new Object[]{user.getName(),user.getGender(),user.getEmail(),user.getPassword(),user.getImage(),user.getId()};
+		String password=new BCryptPasswordEncoder().encode(user.getPassword());
+		String sql="UPDATE tbuser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
+		Object[] obj=new Object[]{user.getUsername(),password,user.getGender(),user.getEmail(),user.getImage(),user.getUserid()};
 		try{
 			return jdbcTemplate.update(sql,obj);
 		}catch(Exception ex){
@@ -43,11 +44,10 @@ public class UserDaoRepoImpl implements UserDaoRepoService {
 		}
 		return 0;
 	}
-
 	@Override
 	public int changeUserEnable(int id) {
 		
-		String sql="UPDATE tbuser SET enable= NOT enable WHERE id=?";
+		String sql="UPDATE tbuser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
 		try{
 			return jdbcTemplate.update(sql,id);
 		}catch(Exception ex){

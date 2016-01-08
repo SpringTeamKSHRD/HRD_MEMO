@@ -5,7 +5,6 @@ import java.util.List;
 import com.memo.app.entities.User;
 
 public interface UserDaoRepoService {
-	
 	public int saveUser(User user);
 	public int updateUser(User user);
 	public int changeUserEnable(int id);
