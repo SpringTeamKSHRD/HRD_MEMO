@@ -9,8 +9,6 @@
 	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.min.css' />
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
-	<link rel='stylesheet' type='text/css'
-	href='${pageContext.request.contextPath}/resources/css/myanimate.css' />
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
@@ -18,10 +16,10 @@
 <title>Login</title>
 <style>
 #frm-wrapper {
-	width: 400px;
+	width: 370px;
 	height: 350px;
-	margin: 8% auto;
-	box-shadow: -2px -2px 7px gray;
+	margin: 40px auto;
+	box-shadow: 2px 2px 7px gray;
 }
 </style>
 </head>
@@ -60,19 +58,13 @@
 				</div>
 				<div class="row">
 					<div class="col s12" style='text-align: right;'>
-						<button class="btn waves-effect waves-light" type="submit"
-							style="background: #00E676;">Login</button>
+						<button class="btn waves-effect waves-light" type="submit">Login</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript">
-	$(function(){
-		$("h4").addClass("animated jello");
-	});
 		
-	</script>
 	<script type="text/javascript">
 		$(function() {
 			$("#frmLogin")
@@ -111,7 +103,7 @@
 }
 
 .card {
-	background: #00E676;
+background:#009688;
 	color: white;
 }
 #ceckboxcon{

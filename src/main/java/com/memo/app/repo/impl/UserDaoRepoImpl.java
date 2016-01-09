@@ -13,45 +13,49 @@ import com.memo.app.repo.UserDao;
 
 @Repository
 public class UserDaoRepoImpl implements UserDao {
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public int saveUser(User user) {
-		
-		String sql="INSERT INTO public.tbluser(username,password,gender,email,usertypeid,universityid,userimageurl)"
-				+ " VALUES(?,?,?,?,?,?,?)";
-		String password=new BCryptPasswordEncoder().encode(user.getPassword());
-		Object[] obj=new Object[]{user.getUsername(),password,user.getGender(),user.getEmail(),36,12,user.getImage()};
-		try{
-			return jdbcTemplate.update(sql,obj);
-		}catch(Exception ex){
-			System.out.println(ex.getMessage());
+		if (this.getEmail(user.getEmail())!="") {
+			String sql = "INSERT INTO public.tbluser(username,password,gender,email,usertypeid,universityid,departmentid,userimageurl)"
+					+ " VALUES(?,?,?,?,?,?,?)";
+			String password = new BCryptPasswordEncoder().encode(user.getPassword());
+			Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), 2, 36, 12,
+					user.getImage() };
+			try {
+				return jdbcTemplate.update(sql, obj);
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
 		}
 		return 0;
 	}
-	
+
 	@Override
 	public int updateUser(User user) {
-		
-		String password=new BCryptPasswordEncoder().encode(user.getPassword());
-		String sql="UPDATE tbuser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
-		Object[] obj=new Object[]{user.getUsername(),password,user.getGender(),user.getEmail(),user.getImage(),user.getUserid()};
-		try{
-			return jdbcTemplate.update(sql,obj);
-		}catch(Exception ex){
+
+		String password = new BCryptPasswordEncoder().encode(user.getPassword());
+		String sql = "UPDATE tbuser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
+		Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), user.getImage(),
+				user.getUserid() };
+		try {
+			return jdbcTemplate.update(sql, obj);
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 		return 0;
 	}
+
 	@Override
 	public int changeUserEnable(int id) {
-		
-		String sql="UPDATE tbuser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
-		try{
-			return jdbcTemplate.update(sql,id);
-		}catch(Exception ex){
+
+		String sql = "UPDATE tbuser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
+		try {
+			return jdbcTemplate.update(sql, id);
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 		return 0;
@@ -59,34 +63,35 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public List<User> getUserList() {
-		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
-				+ "FROM public.tbluser us "
-				+ "INNER JOIN public.tblusertype ut "
-				+ "ON us.usertypeid=ut.usertypeid";
-		List<User> users=jdbcTemplate.query(sql,new UserRowMapper());
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid";
+		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
 		return users;
 	}
 
 	@Override
 	public List<User> searchUser(String name) {
-		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
-				+ "FROM public.tbluser us "
-				+ "INNER JOIN public.tblusertype ut "
-				+ "ON us.usertypeid=ut.usertypeid "
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "WHERE us.username=?";
-		List<User> users=jdbcTemplate.query(sql,new Object[]{name},new UserRowMapper());
+		List<User> users = jdbcTemplate.query(sql, new Object[] { name }, new UserRowMapper());
 		return users;
 	}
 
 	@Override
 	public List<User> searchUser(int id) {
-		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
-				+ "FROM public.tbluser us "
-				+ "INNER JOIN public.tblusertype ut "
-				+ "ON us.usertypeid=ut.usertypeid "
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "WHERE us.userid=?";
-		List<User> users=jdbcTemplate.query(sql,new Object[]{id},new UserRowMapper());
+		List<User> users = jdbcTemplate.query(sql, new Object[] { id }, new UserRowMapper());
 		return users;
+	}
+
+	@Override
+	public String getEmail(String email) {
+		String sql = "SELECT email FROM public.tbluser WHERE 	email LIKE ?";
+		String result = jdbcTemplate.queryForObject(sql, new Object[] { email }, String.class);
+		return result;
 	}
 
 }

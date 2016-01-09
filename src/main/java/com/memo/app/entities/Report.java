@@ -5,13 +5,19 @@ import java.sql.Date;
 public class Report {
 	private int id;
 	private int reporterid;
-	private String reportname;
+	private String reportername;
+	private String reporterimage;
 	private int memoid;
 	private String memo;
 	private int ownermemoid;
 	private String ownermemoname;
+	private String ownermemoimage;
 	private Date reportdate;
 	private boolean isblock;
+	private String description;
+	private Date memodate;
+	private String memotitle;
+	private String memocontent;
 	public int getId() {
 		return id;
 	}
@@ -42,12 +48,6 @@ public class Report {
 	public void setIsblock(boolean isblock) {
 		this.isblock = isblock;
 	}
-	public String getReportname() {
-		return reportname;
-	}
-	public void setReportname(String reportname) {
-		this.reportname = reportname;
-	}
 	public String getMemo() {
 		return memo;
 	}
@@ -65,5 +65,47 @@ public class Report {
 	}
 	public void setOwnermemoname(String ownermemoname) {
 		this.ownermemoname = ownermemoname;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getReportername() {
+		return reportername;
+	}
+	public void setReportername(String reportername) {
+		this.reportername = reportername;
+	}
+	public String getReporterimage() {
+		return reporterimage;
+	}
+	public void setReporterimage(String reporterimage) {
+		this.reporterimage = reporterimage;
+	}
+	public String getOwnermemoimage() {
+		return ownermemoimage;
+	}
+	public void setOwnermemoimage(String ownermemoimage) {
+		this.ownermemoimage = ownermemoimage;
+	}
+	public Date getMemodate() {
+		return memodate;
+	}
+	public void setMemodate(Date memodate) {
+		this.memodate = memodate;
+	}
+	public String getMemotitle() {
+		return memotitle;
+	}
+	public void setMemotitle(String memotitle) {
+		this.memotitle = memotitle;
+	}
+	public String getMemocontent() {
+		return memocontent;
+	}
+	public void setMemocontent(String memocontent) {
+		this.memocontent = memocontent;
 	}
 }

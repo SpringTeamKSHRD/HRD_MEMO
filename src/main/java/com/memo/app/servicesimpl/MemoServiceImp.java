@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.HistoryMemo;
@@ -11,6 +12,7 @@ import com.memo.app.entities.Memo;
 import com.memo.app.repo.impl.MemoDaoImp;
 
 @Service
+@Lazy
 public class MemoServiceImp implements com.memo.app.services.MemoService{
 	@Autowired
 	private MemoDaoImp memoDao;
