@@ -2,6 +2,7 @@ package com.memo.app.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,12 +25,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @ComponentScan(basePackages = "com.memo.app")
 public class WebConfig extends WebMvcConfigurerAdapter{
-	
+	@Autowired
+	private DataSource dataSource;
 	/*
 	 * @Bean annotation tells Spring that a method annotated with @Bean will
 	 * return an object that should be registered as a bean in the Spring
 	 * application context.
 	 */
+<<<<<<< Updated upstream
 	@Bean
 	public DataSource getDataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -39,10 +42,21 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		dataSource.setPassword("12345");
 		return dataSource;
 	}
+=======
+//	@Bean
+//	public DataSource getDataSource(){
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName("org.postgresql.Driver");
+//		dataSource.setUrl("jdbc:postgresql://localhost:5432/memodb");
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("12345");
+//		return dataSource;
+//	}
+>>>>>>> Stashed changes
 	
 	@Bean
 	public JdbcTemplate getJdbcTemplate(){
-		return new JdbcTemplate(this.getDataSource());
+		return new JdbcTemplate(dataSource);
 	}
 	
 	@Override
