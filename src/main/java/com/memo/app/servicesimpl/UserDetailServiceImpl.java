@@ -1,4 +1,4 @@
-package com.memo.app.services.impl;
+package com.memo.app.servicesimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +10,7 @@ import com.memo.app.entities.UserSecurConfig;
 import com.memo.app.repo.impl.UserSecurityDaoImpl;
 
 @Service
-public class UserServiceImpl  implements UserDetailsService{
+public class UserDetailServiceImpl  implements UserDetailsService{
 
 	@Autowired
 	UserSecurityDaoImpl userDaoImpl;
@@ -24,15 +24,4 @@ public class UserServiceImpl  implements UserDetailsService{
 		}
 		return user;
 	}
-	
-	/*public UserDetails loadUserById(int id) throws UsernameNotFoundException {
-		
-		User user = userDaoImpl.loadUserById(id);
-		if (user == null) {
-			System.out.println("User not found");
-			throw new UsernameNotFoundException("User not found");
-		}
-		return user;
-	}
-*/
 }

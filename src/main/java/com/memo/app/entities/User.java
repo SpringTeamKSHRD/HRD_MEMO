@@ -1,16 +1,18 @@
 package com.memo.app.entities;
 
+import java.sql.Date;
 
 public class User {
 	
 	private int userid;
 	private String username;
 	private String password;
-	private char gender;
+	private String gender;
 	private String email;
 	private String image;
 	private boolean ismemoenable;
 	private String type;
+	private Date registerdate;
 	public int getUserid() {
 		return userid;
 	}
@@ -29,10 +31,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getEmail() {
@@ -59,8 +61,10 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-	
-	
+	public Date getRegisterdate() {
+		return registerdate;
+	}
+	public void setRegisterdate(Date registerdate) {
+		this.registerdate = registerdate;
+	}
 }

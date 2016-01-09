@@ -1,15 +1,16 @@
-package com.memo.app.repo;
+package com.memo.app.services;
 
 import java.util.List;
 
 import com.memo.app.entities.User;
 
-public interface UserDaoRepoService {
-	public int saveUser(User user);
-	public int updateUser(User user);
-	public int changeUserEnable(int id);
+public interface UserService {
+	public boolean saveUser(User user);
+	public boolean updateUser(User user);
+	public boolean changeUserEnable(int id);
 	public List<User> getUserList();
 	public List<User> searchUser(String name);
 	public List<User> searchUser(int id);
+
 
 }

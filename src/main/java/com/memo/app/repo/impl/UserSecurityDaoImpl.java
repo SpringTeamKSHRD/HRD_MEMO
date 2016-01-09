@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 
 import com.memo.app.entities.UserSecurConfig;
 import com.memo.app.entities.UserRole;
-import com.memo.app.repo.UserDao;
+import com.memo.app.repo.UserSecurityConfigDao;
 
 @Repository
-public class UserSecurityDaoImpl implements UserDao {
+public class UserSecurityDaoImpl implements UserSecurityConfigDao {
 
 	@Autowired
 	DataSource dataSource;

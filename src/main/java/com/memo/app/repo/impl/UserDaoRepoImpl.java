@@ -7,11 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.memo.app.RowMapper.UserRowMapper;
 import com.memo.app.entities.User;
-import com.memo.app.repo.UserDaoRepoService;
+import com.memo.app.repo.UserDao;
 
 @Repository
-public class UserDaoRepoImpl implements UserDaoRepoService {
+public class UserDaoRepoImpl implements UserDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -58,19 +59,34 @@ public class UserDaoRepoImpl implements UserDaoRepoService {
 
 	@Override
 	public List<User> getUserList() {
-		return null;
+		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us "
+				+ "INNER JOIN public.tblusertype ut "
+				+ "ON us.usertypeid=ut.usertypeid";
+		List<User> users=jdbcTemplate.query(sql,new UserRowMapper());
+		return users;
 	}
 
 	@Override
 	public List<User> searchUser(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us "
+				+ "INNER JOIN public.tblusertype ut "
+				+ "ON us.usertypeid=ut.usertypeid "
+				+ "WHERE us.username=?";
+		List<User> users=jdbcTemplate.query(sql,new Object[]{name},new UserRowMapper());
+		return users;
 	}
 
 	@Override
 	public List<User> searchUser(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+				+ "FROM public.tbluser us "
+				+ "INNER JOIN public.tblusertype ut "
+				+ "ON us.usertypeid=ut.usertypeid "
+				+ "WHERE us.userid=?";
+		List<User> users=jdbcTemplate.query(sql,new Object[]{id},new UserRowMapper());
+		return users;
 	}
 
 }

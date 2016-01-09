@@ -1,0 +1,64 @@
+package com.memo.app.servicesimpl;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.memo.app.entities.HistoryMemo;
+import com.memo.app.entities.Memo;
+import com.memo.app.repo.impl.MemoDaoImp;
+
+@Service
+public class MemoServiceImp implements com.memo.app.services.MemoService{
+	@Autowired
+	private MemoDaoImp memoDao;
+
+	@Override
+	public List<Memo> listMemo() {
+		return memoDao.listMemo();
+	}
+
+	@Override
+	public boolean insertMemo(Memo memo) {
+		return memoDao.insertMemo(memo);
+	}
+
+	@Override
+	public boolean updateMemo(Memo memo) {
+		return memoDao.updateMemo(memo);
+	}
+
+	@Override
+	public boolean deleteMemo(int id) {
+		return memoDao.deleteMemo(id);
+	}
+
+	@Override
+	public Memo getMemo(int id) {
+		return memoDao.getMemo(id);
+	}
+
+	@Override
+	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
+		return memoDao.filterMemoByColumnName(column_name,value);
+	}
+
+	@Override
+	public List<HistoryMemo> listHistoryMemo(int memoid) {
+		return memoDao.listHistoryMemo(memoid);
+	}
+
+	@Override
+	public List<Memo> filterMemoByDate(Date sd, Date ed) {
+		return memoDao.filterMemoByDate(sd, ed);
+	}
+
+	@Override
+	public int countColumn(Object column_name, Object value) {
+		return memoDao.countColumn(column_name, value);
+	}
+	
+	
+}

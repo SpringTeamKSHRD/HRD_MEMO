@@ -15,7 +15,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.memo.app.services.impl.UserServiceImpl;
+import com.memo.app.servicesimpl.UserDetailServiceImpl;
 
 @Configuration
 /*
@@ -30,7 +30,7 @@ import com.memo.app.services.impl.UserServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	UserServiceImpl userDetailsService;	
+	UserDetailServiceImpl userDetailsService;	
 	
 	@Autowired
 	@Qualifier(value="ajaxAuthenticationSuccessHandler")
