@@ -1,13 +1,12 @@
 package com.memo.app.entities;
 
-<<<<<<< Updated upstream
+
 import java.sql.Date;
-=======
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
->>>>>>> Stashed changes
+
 
 @Entity
 @Table(name="tbluser",schema="public")
@@ -23,15 +22,16 @@ public class User {
 	private String image;
 	@Column(name="ismemoenabled")
 	private boolean ismemoenable;
-<<<<<<< Updated upstream
+	@Column(name="usertypeid")
 	private String type;
 	private Date registerdate;
-=======
-	@Column(name="usertypeid")
-	private int typeId;
-	
-	
->>>>>>> Stashed changes
+
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getUserid() {
 		return userid;
 	}
@@ -74,24 +74,17 @@ public class User {
 	public void setIsmemoenable(boolean ismemoenable) {
 		this.ismemoenable = ismemoenable;
 	}
-	public int getTypeId() {
-		return typeId;
-	}
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
-	}
-<<<<<<< Updated upstream
 	public Date getRegisterdate() {
 		return registerdate;
 	}
 	public void setRegisterdate(Date registerdate) {
 		this.registerdate = registerdate;
 	}
-=======
+
 
 	
 	
 	
 	
->>>>>>> Stashed changes
+
 }
