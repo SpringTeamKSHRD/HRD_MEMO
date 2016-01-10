@@ -8,21 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name="tbluser",schema="public")
+
 public class User {
 	
-	@Id
+
 	private int userid;
 	private String username;
 	private String password;
 	private String gender;
 	private String email;
-	@Column(name="userimageurl")
 	private String image;
-	@Column(name="ismemoenabled")
 	private boolean ismemoenable;
-	@Column(name="usertypeid")
 	private String type;
 	private Date registerdate;
 

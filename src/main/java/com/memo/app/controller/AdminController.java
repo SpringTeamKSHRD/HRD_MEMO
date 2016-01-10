@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.memo.app.service.IDashboardService;
 import com.memo.app.service.IUserService;
 
 @Controller
@@ -17,11 +18,13 @@ public class AdminController {
 	@Autowired
 	private IUserService userservice;
 	
+	@Autowired
+	private IDashboardService dashboard;
 	
 	@RequestMapping("")
 	public String dashboard(ModelMap m) {
 		this.putTogether(m, "Dashboard", "Control Panel");
-		m.addAttribute("userList",userservice.ListAllUser());
+		m.addAttribute("dashboard",dashboard.getDashboardInfo());
 		return "admin/dashboard";
 	}
 

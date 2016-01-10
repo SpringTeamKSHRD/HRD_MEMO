@@ -26,6 +26,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		<%@ include file="_header.jsp" %>
       	<%@ include file="_sideBarMenu.jsp" %>
 			<!-- Your Page Content Here -->
+			${dashboard}
+			
           <!-- Small boxes (Stat box) -->
           <div class="row" id="first-row" >
             <div class="col-lg-3 col-lg-offset-3 col-xs-6">
