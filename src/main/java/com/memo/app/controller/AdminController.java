@@ -48,5 +48,9 @@ public class AdminController {
 	public String getAdminPage(){
 		return "admin/dashboard";
 	}
+	@RequestMapping(value="adminnotification")
+	public String getNotifationPage(){
+		return "admin/adminnotification";
+	}
 
 }
