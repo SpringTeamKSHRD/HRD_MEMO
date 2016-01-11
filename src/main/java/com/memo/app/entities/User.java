@@ -14,6 +14,12 @@ public class User {
 
 	private int userid;
 	private String username;
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", gender=" + gender
+				+ ", email=" + email + ", image=" + image + ", ismemoenable=" + ismemoenable + ", type=" + type
+				+ ", registerdate=" + registerdate + "]";
+	}
 	private String password;
 	private String gender;
 	private String email;

@@ -53,5 +53,11 @@ public class HUserRepoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public User getUserDialInfo(String emial) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

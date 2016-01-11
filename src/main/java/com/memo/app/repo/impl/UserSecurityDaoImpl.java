@@ -23,8 +23,9 @@ public class UserSecurityDaoImpl implements UserSecurityConfigDao {
 
 	@Override
 	public UserSecurConfig findUserByUserName(String username) {
+		System.out.println(username);
 
-		String sql = "SELECT userid,username,password,ismemoenabled FROM public.tbluser WHERE username LIKE ?";
+		String sql = "SELECT userid,email,password,ismemoenabled FROM public.tbluser WHERE email LIKE ?";
 
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -73,7 +74,7 @@ public class UserSecurityDaoImpl implements UserSecurityConfigDao {
 
 	@Override
 	public UserSecurConfig loadUserById(int id) {
-		String sql = "SELECT userid,username,password,ismemoenabled FROM public.tbluser WHERE userid=?";
+		String sql = "SELECT userid,email,password,ismemoenabled FROM public.tbluser WHERE userid=?";
 
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {

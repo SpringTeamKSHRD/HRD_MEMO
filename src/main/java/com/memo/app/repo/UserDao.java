@@ -9,8 +9,9 @@ public interface UserDao {
 	public int updateUser(User user);
 	public int changeUserEnable(int id);
 	public List<User> getUserList();
-	public List<User> searchUser(String name);
+	public List<User> searchUser(String email);
 	public List<User> searchUser(int id);
 	public String getEmail(String email);
+	public User getUserDialInfo(String emial);
 
 }

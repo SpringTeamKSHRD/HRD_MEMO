@@ -88,8 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
-	/*public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("2"));
+/*	public static void main(String[] args) {
+		System.out.println(new BCryptPasswordEncoder().encode("3"));
 		//System.out.println(Base64.getUrlEncoder().encodeToString("1".getBytes()));
 	}*/
 }

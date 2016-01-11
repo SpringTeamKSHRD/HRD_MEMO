@@ -9,6 +9,7 @@
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 </head>
 <body>
+<div>${sessionScope["USER"].image}</div>
  <textarea rows="10" cols="50" id="messages" readonly="readonly"></textarea><br/>
      <input type="text" id="forsend" size="45"/><input type="button" value="Send" onclick="sendMessage()"/>
      <div id="numnot" style="background: red; color: white; font-size: 17; border-radius:90%; padding: 5px; width: 30px; height: 30px; margin: auto; font-weight: bolder;"></div>
