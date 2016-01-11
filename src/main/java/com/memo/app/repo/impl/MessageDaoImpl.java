@@ -37,7 +37,6 @@ public class MessageDaoImpl implements MessageDao {
 			});
 			return inserts;
 	}
-
 	@Override
 	public List<Message> getUserMessage(int userid) {
 		String sql="SELECT msg.id,dmsg.message "
