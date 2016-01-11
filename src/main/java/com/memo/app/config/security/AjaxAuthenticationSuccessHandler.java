@@ -27,7 +27,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 			roles.add(authority.getAuthority());
 		}
 		if (roles.contains("ROLE_Admin"))
-			url = "admin/admin";
+			url = "admin";
 		else if (roles.contains("ROLE_Subscriber"))
 			url = "user/user";
 		else	url = "accessDenied";

@@ -2,8 +2,6 @@ package com.memo.app.repo.impl;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +10,6 @@ import com.memo.app.repo.UserDao;
 @Primary
 @Repository
 public class HUserRepoImpl implements UserDao {
-	@Autowired
-	private SessionFactory sf;
 
 	@Override
 	public int saveUser(User user) {
@@ -57,12 +53,5 @@ public class HUserRepoImpl implements UserDao {
 		return null;
 	}
 
-	@Override
-	public String getEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 	
 }

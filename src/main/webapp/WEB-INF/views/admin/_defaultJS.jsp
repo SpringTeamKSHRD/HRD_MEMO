@@ -7,6 +7,8 @@
     <!-- AdminLTE App -->
     <script src="${pageContext.request.contextPath}/resources/admin/js/app.min.js"></script>
 	<script>
+	
+		/* ADD ACTIVE CLASS TO MENU */
 		var url = $(location).attr('href');;
 		url = url.split("/");
 		var newUrl=url[5];
@@ -25,7 +27,7 @@
 		}
 		
 		
-		/* sideBarMenu */
+		/* sideBarMenu NOTIFICATION */
 		var result = ${dashboard};
 	  	if(result.unreportedlist==0){
 	  		$("#unreported-list").hide();	
