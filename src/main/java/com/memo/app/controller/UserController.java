@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/user")
 public class UserController {
     
-	@RequestMapping(value="/user")
+	@RequestMapping(value="")
 	public String getUserDashBaord(){
 		return "user/user";
 	}
