@@ -56,6 +56,12 @@ public class HUserRepoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String getEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

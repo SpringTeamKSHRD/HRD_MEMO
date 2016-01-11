@@ -24,6 +24,13 @@
 			$('ul.sidebar-menu li:nth-last-child(5)').addClass('active');
 		}
 		
+		
+		/* sideBarMenu */
+		var result = ${dashboard};
+	  	if(result.unreportedlist==0){
+	  		$("#unreported-list").hide();	
+	  	}
+	  	$("#unreported-list").html(result.unreportedlist);	
 	</script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the

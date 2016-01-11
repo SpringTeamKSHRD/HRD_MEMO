@@ -26,7 +26,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		<%@ include file="_header.jsp" %>
       	<%@ include file="_sideBarMenu.jsp" %>
 			<!-- Your Page Content Here -->
-			${dashboard}
 			
           <!-- Small boxes (Stat box) -->
           <div class="row" id="first-row" >
@@ -34,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3 id="total-user">${dashboard}</h3>
                   <p>Users</p>
                 </div>
                 <div class="icon">
@@ -47,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3 id="total-memo"></h3>
                   <p>Memos</p>
                 </div>
                 <div class="icon">
@@ -62,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3 id="total-site">0</h3>
                   <p>Total Sites</p>
                 </div>
                 <div class="icon">
@@ -75,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3 id="total-report-list">0</h3>
                   <p>Reported Memos</p>
                 </div>
                 <div class="icon">
@@ -90,5 +89,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
      
 
  <%@ include file="_defaultJS.jsp" %>
+<script>
+/*   var result = ${dashboard}; 
+ * ${dashboard} get from _defaultJs.jsp 
+ */
+   	$("#total-user").html(result.totaluser);
+  	$("#total-memo").html(result.totalmemo);
+  	$("#total-site").html(result.totalsite);
+  	$("#total-report-list").html(result.totalreportlist);
+  	
+  	
+  	
+</script>
   </body>
 </html>

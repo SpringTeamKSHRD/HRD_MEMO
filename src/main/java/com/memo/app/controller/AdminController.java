@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.memo.app.service.IDashboardService;
@@ -21,10 +23,14 @@ public class AdminController {
 	@Autowired
 	private IDashboardService dashboard;
 	
+	@ModelAttribute
+	public void commonObject(Model model){
+		model.addAttribute("dashboard",dashboard.getDashboardInfo());
+	}
+	
 	@RequestMapping("")
 	public String dashboard(ModelMap m) {
 		this.putTogether(m, "Dashboard", "Control Panel");
-		m.addAttribute("dashboard",dashboard.getDashboardInfo());
 		return "admin/dashboard";
 	}
 

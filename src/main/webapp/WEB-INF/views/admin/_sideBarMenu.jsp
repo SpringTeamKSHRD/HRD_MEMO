@@ -36,7 +36,7 @@
             <li ><a href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-users"></i><span>Users</span></a></li>
             <li > <a href="${pageContext.request.contextPath}/admin/memos"><i class="fa fa-sticky-note-o"></i><span>Memos</span></a></li>
             <li ><a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa fa-line-chart"></i><span>Statistics</span></a></li>
-            <li ><a href="${pageContext.request.contextPath}/admin/blacklist"><i class="fa fa-bug"></i><span>Black List</span><span class="label pull-right bg-red">10</span></a></li>
+            <li ><a href="${pageContext.request.contextPath}/admin/blacklist" id="report-lsit"><i class="fa fa-bug"></i><span>Black List</span><span class="label pull-right bg-red" id="unreported-list">0</span></a></li>
             <!-- <li class="treeview">
               <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
