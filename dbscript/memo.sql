@@ -256,3 +256,13 @@ ALTER TABLE "memo"."tbmessage" ADD FOREIGN KEY ("userid") REFERENCES "public"."t
 -- ----------------------------
 ALTER TABLE "memo"."tbreport" ADD FOREIGN KEY ("reporterid") REFERENCES "public"."tbluser" ("userid") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "memo"."tbreport" ADD FOREIGN KEY ("memoid") REFERENCES "memo"."tbmemo" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- create view login
+-- ----------------------------
+CREATE VIEW "memo".v_user_roles 
+AS
+SELECT ut.usertypeid,u.userid,u.username,ut.usertypename
+FROM "public".tblusertype ut
+INNER JOIN "public".tbluser u
+ON ut.usertypeid =u.usertypeid

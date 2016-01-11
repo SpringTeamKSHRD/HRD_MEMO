@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.invalidateHttpSession(true)
 			.deleteCookies("JESSIONID")
 			.permitAll();
+		http.headers().frameOptions().disable();
 		http.csrf().disable();
 		http.exceptionHandling().accessDeniedPage("/accessDenied");
 	}
