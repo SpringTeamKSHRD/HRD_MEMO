@@ -6,13 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script
+	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
+<script src='${pageContext.request.contextPath}/resources/js/hrdmemoplugin.js'></script>
 </head>
 <body>
-	hello, ${auth.name} <br/>
-	<br/>
-	<a href="${pageContext.request.contextPath}/login">login</a>
-	<a href="${pageContext.request.contextPath}/logout">logout</a>
-	<a href="${pageContext.request.contextPath}/admin/product">admin</a>
-	<a href="${pageContext.request.contextPath}/author/product">author</a>
+	<div id="hrd_memo_pess">
+	</div>
 </body>
 </html>
