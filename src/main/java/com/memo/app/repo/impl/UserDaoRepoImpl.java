@@ -86,8 +86,13 @@ public class UserDaoRepoImpl implements UserDao {
 		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
 				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "WHERE us.userid=?";
+		try{
 		List<User> users = jdbcTemplate.query(sql, new Object[] { id }, new UserRowMapper());
 		return users;
+		}catch(Exception ex){
+			
+		}
+		return null;
 	}
 
 	@Override
