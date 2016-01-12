@@ -7,10 +7,10 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="${pageContext.request.contextPath}/resources/admin/imgs/sopheak.jpg" class="img-circle" alt="User Image">
+              <img src="${pageContext.request.contextPath}/resources/admin/imgs/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+              <p class="text-capitalize"><%-- ${sessionScope['USER'].username} --%> Sopheak Nem</p>
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
