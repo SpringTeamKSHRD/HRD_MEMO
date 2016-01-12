@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->	
 	<!-- Materialize --> 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/materialize/css/materialize.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/materialize/css/materialize.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Materialize Icon -->
 	<!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,6 +17,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
 	<!-- CK editor -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/ckeditor/ckeditor.js"></script>
+	<!-- <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  -->
 </head>
 <body >
 	<!-- Navbar goes here -->
@@ -214,7 +218,7 @@
     <!-- ./Container --> 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- Bootpag -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/bootpag/bootpag.js"></script>
