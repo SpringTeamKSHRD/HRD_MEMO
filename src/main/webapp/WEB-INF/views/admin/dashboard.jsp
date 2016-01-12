@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- ./col -->
           </div><!-- /.row -->
 		<%@ include file="_footer.jsp" %>
-		<%@ include file="_controlSideBar.jsp" %>
+		<%-- <%@ include file="_controlSideBar.jsp" %> --%>
      
 
  <%@ include file="_defaultJS.jsp" %>

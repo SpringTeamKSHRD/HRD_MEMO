@@ -18,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- Your Page Content Here -->
           welcome statistics
 		<%@ include file="_footer.jsp" %>
-		<%@ include file="_controlSideBar.jsp" %>
+		<%-- <%@ include file="_controlSideBar.jsp" %> --%>
      
 
  <%@ include file="_defaultJS.jsp" %>
