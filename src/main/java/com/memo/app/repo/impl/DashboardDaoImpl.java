@@ -28,7 +28,10 @@ private JdbcTemplate jdbcTemplate;
 	@Override
 	@Transactional
 	public String getDashboardData() {
-		String sql="SELECT row_to_json (T) FROM ( SELECT (SELECT COUNT(*) FROM tbluser) AS totaluser, (SELECT COUNT(*) FROM memo.tbmemo) AS totalmemo, ( SELECT COUNT (DISTINCT(DOMAIN)) FROM memo.tbmemo ) AS totalsite, ( SELECT COUNT (*) FROM memo.tbreport ) AS totalreportlist, ( SELECT COUNT (*) FROM memo.tbreport WHERE isblocked = FALSE ) AS unreportedlist ) T";
+		String sql="SELECT row_to_json (T) FROM ( SELECT (SELECT COUNT(*) FROM tbluser) AS totaluser, "
+				+ "(SELECT COUNT(*) FROM memo.tbmemo) AS totalmemo, ( SELECT COUNT (DISTINCT(DOMAIN)) FROM memo.tbmemo ) AS totalsite, "
+				+ "( SELECT COUNT (*) FROM memo.tbreport ) AS totalreportlist, "
+				+ "( SELECT COUNT (*) FROM memo.tbreport WHERE isblocked = FALSE ) AS unreportedlist ) T";
 		String result= jdbcTemplate.queryForObject(sql, String.class);
 		System.out.println(result);
 		return result;
