@@ -49,7 +49,7 @@ public class UserSecurityDaoImpl implements UserSecurityConfigDao {
 		return null;
 	}
 	public List<UserRole> findUserRoleByUserId(int id) {
-			String sql="SELECT usertypeid,usertypename FROM public.v_user_roles WHERE userid=?";
+			String sql="SELECT usertypeid,usertypename FROM memo.v_user_roles WHERE userid=?";
 			try(
 					Connection conn=dataSource.getConnection();
 					PreparedStatement ps=conn.prepareStatement(sql);

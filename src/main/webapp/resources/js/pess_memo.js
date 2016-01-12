@@ -1,4 +1,9 @@
 $(document).ready(function(){      
+	$(".btn-main").click(function(){
+		$(".image_textarae_btnsave_container").slideUp(500);
+		$(".form_register_wraper").slideUp(500);
+		$(".form_login_memo_wraper").slideUp(500);
+	});
     $("#btnmemoboard").click(function(){
 		$(".image_textarae_btnsave_container").slideDown(500);
 		$(".form_register_wraper").slideUp(500);

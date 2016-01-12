@@ -44,6 +44,10 @@ public class Main {
 	@RequestMapping(value="/plugin", method = RequestMethod.GET)
 	public String homePluginPage(){
 		return "plugin";
+	}	
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+	public String homePdluginPage(){
+		return "test";
 	}
 
 }

@@ -35,38 +35,30 @@
 			<div class='row'>
 			
 				<form class='col s12'> 
-					<div class='row'>
-					  <div class="input-field col s9">
-					    <select>
-					      <option value="" disabled selected>Choose your Category</option>
-					      <option value="1">Category 1</option>
-					      <option value="2">Category 2</option>
-					      <option value="3">Category 3</option>
-					    </select>					    
-					  </div>
-					  <div class="input-field col s3 switch">
-					    <label>
-					    	Public
-					      <input type="checkbox">
-					      <span class="lever"></span>					      
-					    </label>
-					  </div>
-		    		</div>	
+				
 		    		<div class='row'>
-						<div class='input-field col s1'> 
-				    		<img id='user_image' src='resources/Male-icon.png' width='50px' height='50px'/>
+						<div class='input-field col s2'> 
+				    		<img id='user_image' src='resources/Male-icon.png' width='50px' height='50px' class="circle responsive-img valign"/>
 						</div>
-						<div class='input-field col s11'> 
+						<div class='input-field col s10 '> 
 				    		<input id='title' type='tel' class='validate'><label for='title'>Title</label>
-						</div>
+						</div> 	
 					</div>
+					
 					<div class='row'> 
 			    		<div class='input-field col s12'>
 								 <textarea id="note" ></textarea>
 						</div>
 					</div> 
 					<div class='row'>
-						<div class='input-field right'> 
+					 <div class="input-field switch ">
+					    <label>
+					    	Public
+					      <input type="checkbox">
+					      <span class="lever"></span>					      
+					    </label>
+					  </div> 
+						<div class='input-field right '> 
 			    			<a class='waves-effect waves-light btn'><i class='material-icons right'>done_all</i>Save</a> 
 			    		</div>
 					</div>
