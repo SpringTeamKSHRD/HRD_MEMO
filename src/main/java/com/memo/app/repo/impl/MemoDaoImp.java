@@ -33,7 +33,19 @@ public class MemoDaoImp implements MemoDao{
 					+"FROM tbmemo";
 		return jdbcTemplate.query(sql, new MemoRowMapper());
 	}
-
+	
+	@Override
+	public List<Memo> listMemo(int limit, int page) {
+		System.out.println("list memo with pagination.");
+		if(page<=0) page=1;
+		int offset = limit * page - limit;
+		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,isenable,ispublic "
+					+"FROM memo.tbmemo "
+					+"ORDER BY id "
+					+"LIMIT ? OFFSET ?";				
+		return jdbcTemplate.query(sql, new Object[]{limit,offset},new MemoRowMapper());
+	}
+	
 	@Override
 	public boolean insertMemo(Memo memo) {
 		System.out.println("insert memo dao.");
@@ -118,6 +130,7 @@ public class MemoDaoImp implements MemoDao{
 				  +"WHERE userid=? AND ispublic=true";
 		return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
 	}
+	
 	
 	
 

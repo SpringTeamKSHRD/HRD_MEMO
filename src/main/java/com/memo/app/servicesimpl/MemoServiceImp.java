@@ -23,6 +23,11 @@ public class MemoServiceImp implements com.memo.app.services.MemoService{
 	}
 
 	@Override
+	public List<Memo> listMemo(int limit, int page) {
+		return memoDao.listMemo(limit, page);
+	}
+	
+	@Override
 	public boolean insertMemo(Memo memo) {
 		return memoDao.insertMemo(memo);
 	}
@@ -61,6 +66,8 @@ public class MemoServiceImp implements com.memo.app.services.MemoService{
 	public int countColumn(Object column_name, Object value) {
 		return memoDao.countColumn(column_name, value);
 	}
+
+	
 	
 	
 }

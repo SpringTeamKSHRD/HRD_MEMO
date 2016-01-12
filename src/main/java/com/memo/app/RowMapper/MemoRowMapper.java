@@ -12,7 +12,7 @@ public class MemoRowMapper implements RowMapper<Memo>{
 	@Override
 	public Memo mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		System.out.println("memo row mapper.");
+		//System.out.println("memo row mapper.");
 		Memo memo=new Memo();
 		memo.setId(rs.getInt(1));
 		memo.setUserid(rs.getInt(2));
@@ -22,9 +22,9 @@ public class MemoRowMapper implements RowMapper<Memo>{
 		memo.setDomain(rs.getString(6));
 		memo.setUrl(rs.getString(7));
 		memo.setDate(rs.getDate(8));
-		memo.setCategoryid(rs.getInt(9));
-		memo.setIsenable(rs.getBoolean(10));
-		memo.setIspublic(rs.getBoolean(11));
+		//memo.setCategoryid(rs.getInt(9));
+		memo.setIsenable(rs.getBoolean(9));
+		memo.setIspublic(rs.getBoolean(10));
 		
 		return memo;
 	}

@@ -8,6 +8,7 @@ import com.memo.app.entities.Memo;
 
 public interface MemoDao {
 	public List<Memo> listMemo();
+	public List<Memo> listMemo(int limit, int page);
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);
 	public boolean deleteMemo(int id);
