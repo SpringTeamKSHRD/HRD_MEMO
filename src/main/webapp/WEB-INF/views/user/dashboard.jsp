@@ -35,13 +35,17 @@
 		<div class="row top_menu">
 			<div class="col s12 m4 l4">
 				<div class="row">
-					<div class="col s12 m6 l4"> <br/>
-						<select class="browser-default">
-							<option value="1">Title</option>
-							<option value="2">Date</option>
-							<option value="3">Website</option>
-							<option value="4">Public</option>
-						</select>
+					<div class="col s12 m6 l4">
+						<div class="input-field col s12">
+						    <select>
+							      <!-- <option value="" disabled selected>Choose your option</option> -->
+							      <option value="1">Title</option>
+							      <option value="2">Date</option>
+							      <option value="3">Website</option>
+							      <option value="3">Public</option>
+						    </select>
+						    <label>Filtering</label>
+						</div>
 					</div>
 					<div class="col s12 m6 l8">
 						<div id="filterarea">
@@ -75,13 +79,16 @@
 					<!-- Number of rows to show in collection-->
 					<div class="row">
 						<div class="col s12 m4 l4 body_left"> <br/>
-							<label>Number of Rows</label>
-							<select class="browser-default">
-								<option value="1">5</option>
-								<option value="2">10</option>
-								<option value="3">20</option>
-								<option value="4">50</option>
-							</select>
+							<div class="input-field col s12">
+						    <select>
+							      <!-- <option value="" disabled selected>Choose your option</option> -->
+							      <option value="1">5</option>
+							      <option value="2">10</option>
+							      <option value="3">30</option>
+							      <option value="3">50</option>
+						    </select>
+						    <label>Number of rows</label>
+						</div>
 						</div>
 					</div>
 					<ul class="collection">
@@ -133,16 +140,18 @@
 			</div>
 			<!-- Right Body Section -->
 			<div class="col s12 m8 l8 body_right"> <!-- Note that "m8 l9" was added -->
-				<br/>
 				<div class="z-depth-1" >
 					<!-- List of components memo--> 
 					<div class="row">
 						<div class="col s12 m4 l3">
-							<label>Privacy Memo</label>
-							<select class="browser-default">
-								<option value="1">Private</option>
-								<option value="2">Public</option>
-							</select>
+							<div class="input-field col s12">
+								<select>
+								      <!-- <option value="" disabled selected>Choose your option</option> -->
+								      <option value="1">Private</option>
+								      <option value="2">Public</option>
+							    </select>
+							    <label>Privacy</label>
+						    </div>
 						</div>
 						<div class="col s12 m4 l5">
 							<div class="row">
@@ -154,15 +163,18 @@
 							</div>
 						</div>
 						<div class="col s12 m4 l4">
-							<label>Category Memo</label>
-							<select class="browser-default">
-								<option value="1">Technology</option>
-								<option value="2">Sport</option>
-								<option value="2">Entertainment</option>
-								<option value="2">Environment</option>
-								<option value="2">Society</option>
-								<option value="2">Others</option>
-							</select>
+							<div class="input-field col s12">
+						    <select>
+							      <!-- <option value="" disabled selected>Choose your option</option> -->
+							      <option value="1">Technology</option>
+							      <option value="2">Sport</option>
+							      <option value="3">Environment</option>
+							      <option value="3">Entertainment</option>
+							      <option value="3">Society</option>
+							      <option value="3">Others</option>
+						    </select>
+						    <label>Category</label>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -203,6 +215,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- Bootpag -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/bootpag/bootpag.js"></script>
   </body>
