@@ -44,8 +44,10 @@ public class Main {
 
 	@RequestMapping(value = "/plugin", method = RequestMethod.GET)
 	public String homePluginPage(@RequestParam("type") String type) {
-		if(type.equals("add"))
-			return "plugin/add";
+		if(type.equals("add1"))
+			return "plugin/add1";
+		if(type.equals("add2"))
+			return "plugin/add2";
 		else if(type.equals("list"))
 			return "plugin/list";
 		else if(type.equals("login"))

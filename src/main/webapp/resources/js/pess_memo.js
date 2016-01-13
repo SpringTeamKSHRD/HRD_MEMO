@@ -1,4 +1,7 @@
-$(document).ready(function(){      
+$(document).ready(function(){   
+	$(".more").click(function(){
+		$(".progress").toggle(500);
+	});
 	$(".btn-main").click(function(){
 		$(".image_textarae_btnsave_container").slideUp(500);
 		$(".form_register_wraper").slideUp(500);
@@ -23,7 +26,7 @@ $(document).ready(function(){
     	$("textarea#note").css({"border": "2px solid #009688"});
     });
     $("body").on("focusout", "textarea#note", function(e) {    	
-    	$("textarea#note").css({"border": "1px solid #9e9e9e"});
+    	$("textarea#note").css({"border": "1px solid #ddd"});
     });
     $(function() {
         $( ".pess_memo" ).draggable();
