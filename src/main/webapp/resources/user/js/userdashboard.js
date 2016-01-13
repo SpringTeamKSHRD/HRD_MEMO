@@ -64,34 +64,37 @@ function editmemo(id) {
 }
 
 function saveMemo(){
-	alert("Save memo.");
-	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
 	
-	json = {
-			userid : 1,
-			gender : $('input:radio[name=gender]:checked').val(),
-			email : $("#email").val(),
-			username : $("#username").val(),
-			password : $("#password").val(),
-			address : $("#address").val(),
-			phone : $("#phone").val(),
+	/*var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
+	alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);*/
+	
+	/*json = {
+			userid : $('#userid').val(),
+			titlememo : $('.titlememo').val(),
+			content : data,
+			titleurl : "Memo Dashboard",
+			domain : "www.khmeracademy.org.kh",
+			url : "http://khmeracademy.org.kh",
+			isenable : true,
+			ispublic : true //$('select[name="privacy"] option:selected').val()
 			//enable : $('input:radio[name=enable]:checked').val(),
-			image : $("#image").val().split("\\").pop(), //"default.jpg" 
-			role_id: $('select[name="role_id"] option:selected').val()
-		};
-	 
+			//image : $("#image").val().split("\\").pop(), //"default.jpg" 
+		};*/
+	/*alert("after data json.");
 	$.ajax({
 		type : "POST",
-		url : domain+"/user/"+ id,
+		url : domain + "/user/",
+		data : JSON.stringify(json),
+		contentType: 'application/json',
 		success : function(data) {
-			//alert(data.DATA.content);
-			CKEDITOR.instances.editor1.setData(data.DATA.content);
+			alert("Success :" + data.MESSAGE);
+			//uploadImage();
 		},
 		error : function(data) {
-			alert("Unsuccess:" + data.MESSAGE);
+			alert("Unsuccess: " + data.MESSAGE);
 			console.log("ERROR..." + data);
 		}
-	});
+	});*/
 }
 
 

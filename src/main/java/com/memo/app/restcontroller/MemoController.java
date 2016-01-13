@@ -48,6 +48,7 @@ public class MemoController {
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
 		System.out.println("add memo controller.");		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if (memoService.insertMemo(memo)) {			
 			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
 			map.put("STATUS", HttpStatus.CREATED.value());

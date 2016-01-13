@@ -121,7 +121,7 @@
 			<!-- Right Body Section -->
 			<div class="col s12 m8 l8 body_right"> <!-- Note that "m8 l9" was added -->
 			<form action="#" method="POST" enctype="multipart/form-data">
-				<input type="text" name="id" value="${sessionScope['USER'].userid}" hidden="true"/>
+				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 				<div class="z-depth-1" >
 					<!-- List of components memo--> 
 					<div class="row">
@@ -129,8 +129,8 @@
 							<div class="input-field col s12">
 								<select name="privacy">
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
-								      <option value="1">Private</option>
-								      <option value="2">Public</option>
+								      <option value="0">Private</option>
+								      <option value="1">Public</option>
 							    </select>
 							    <label>Privacy</label>
 						    </div> 
@@ -139,7 +139,7 @@
 							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>
-								  <input id="icon_prefix" type="text" name="titlememo" class="validate">
+								  <input id="icon_prefix" type="text" class=" titlememo validate">
 								  <label for="icon_prefix">Title Memo</label>
 								</div>
 							</div>
