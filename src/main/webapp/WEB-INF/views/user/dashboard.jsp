@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Memo</title>  
     <meta charset="utf-8">
@@ -79,7 +80,7 @@
 		<div class="row">
 			<!-- Left Body Section -->
 			<div class="col s12 m4 l4 body_left"> <!-- Note that "m4 l3" was added -->
-				<div class="z-depth-1" id="listmemo" >
+				<div class="z-depth-1">
 					<!-- Number of rows to show in collection-->
 					<div class="row">
 						<div class="col s12 m4 l4 body_left"> <br/>
@@ -95,7 +96,7 @@
 						</div>
 						</div>
 					</div>
-					<div id="listmemo">
+					<div id="listmemo" style="max-height:500px; overflow-y:scroll">
 					
 					</div>
 					
@@ -119,41 +120,43 @@
 			</div>
 			<!-- Right Body Section -->
 			<div class="col s12 m8 l8 body_right"> <!-- Note that "m8 l9" was added -->
+			<form action="#" method="POST" enctype="multipart/form-data">
+				<input type="text" name="id" value="${sessionScope['USER'].userid}" hidden="true"/>
 				<div class="z-depth-1" >
 					<!-- List of components memo--> 
 					<div class="row">
 						<div class="col s12 m4 l3">
 							<div class="input-field col s12">
-								<select>
+								<select name="privacy">
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
 								      <option value="1">Private</option>
 								      <option value="2">Public</option>
 							    </select>
 							    <label>Privacy</label>
-						    </div>
+						    </div> 
 						</div>
 						<div class="col s12 m4 l5">
 							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>
-								  <input id="icon_prefix" type="text" class="validate">
+								  <input id="icon_prefix" type="text" name="titlememo" class="validate">
 								  <label for="icon_prefix">Title Memo</label>
 								</div>
 							</div>
 						</div>
 						<div class="col s12 m4 l4">
-							<div class="input-field col s12">
-						    <select>
-							      <!-- <option value="" disabled selected>Choose your option</option> -->
-							      <option value="1">Technology</option>
-							      <option value="2">Sport</option>
-							      <option value="3">Environment</option>
-							      <option value="3">Entertainment</option>
-							      <option value="3">Society</option>
-							      <option value="3">Others</option>
-						    </select>
-						    <label>Category</label>
-						</div>
+							<!-- <div class="input-field col s12">
+							    <select>
+								      <option value="" disabled selected>Choose your option</option>
+								      <option value="1">Technology</option>
+								      <option value="2">Sport</option>
+								      <option value="3">Environment</option>
+								      <option value="3">Entertainment</option>
+								      <option value="3">Society</option>
+								      <option value="3">Others</option>
+							    </select>
+							    <label>Category</label>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -164,30 +167,45 @@
 						<div class="col s12 m4 l12">
 							<form>
 								<textarea name="editor1" id="editor1" rows="10" cols="20">
-									This is my textarea to be replaced with CKEditor.
+									This is ckeditor.
 								</textarea>
 								<script>
 									// Replace the <textarea id="editor1"> with a CKEditor
 									// instance, using default configuration.
 									CKEDITOR.replace( 'editor1' );
-								</script>
+								</script> 
 							</form>
 						</div>
 					</div>
 				</div>
 				<!-- ./CK Editor -->
+				<!-- url here -->
+				<div>
+					<div class="row">
+						  <label>Current URL</label>
+						  <select class="browser-default" disabled>
+						    <option value="www.khmeracademy.org.kh" disabled selected>www.khmeracademy.org.kh</option>
+						  </select>
+					</div> 
+				</div>
+				<!-- ./ url here -->
 				<!-- Button Save and Cancel -->
 				<div>
 					<div class="row">
-						<div class="col s12 m4 l2 right">
-							<input type="button" value="Save"/>
-							<input type="button" value="Cancel"/>							
-						</div>
+						&nbsp;&nbsp;
+						<a class="waves-effect waves-light btn " onclick="saveMemo()">Save</a> 
+						<a class="waves-effect waves-light btn " onclick="ClearMemo()">Cancel</a>
+							<!-- <div class="col s12 m4 l2 right">
+								<input type="button" value="Save"/>
+								<input type="button" value="Cancel"/>							
+							</div> -->
 					</div>
 				</div>
+			</form>
 			</div>
 
 		</div>
+		<!-- ./close row body which contain body left and body right -->
 		<!-- ./Page Layout body here -->
 	</div>
     <!-- ./Container --> 
@@ -196,7 +214,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Dashboard Script -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/userdashboard.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/userdashboard.js"></script> 
 	<!-- Bootpag -->
 	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/bootpag/bootpag.js"></script> --%>
   </body>

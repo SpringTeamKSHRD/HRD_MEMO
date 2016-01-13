@@ -41,7 +41,7 @@ public class MemoDaoImp implements MemoDao{
 		int offset = limit * page - limit;
 		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
-					+"ORDER BY id "
+					+"ORDER BY id DESC "
 					+"LIMIT ? OFFSET ?";				
 		return jdbcTemplate.query(sql, new Object[]{limit,offset},new MemoRowMapper());
 	}
@@ -82,9 +82,9 @@ public class MemoDaoImp implements MemoDao{
 
 	@Override
 	public Memo getMemo(int id) {
-		System.out.println("List memo dao.");
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,categoryid,isenable,ispublic"
-					+"FROM tbmemo"
+		System.out.println("get memo dao.");
+		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,isenable,ispublic "
+					+"FROM memo.tbmemo "
 					+"WHERE id=?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
 	}
