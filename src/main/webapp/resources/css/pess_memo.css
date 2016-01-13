@@ -1,3 +1,6 @@
+body {
+    overflow:hidden;
+} 
 *{
 	margin: 0px;
 }
@@ -71,14 +74,12 @@ background:rgba(0,0,0,0.15);display:inline-block;padding:6px 12px;left:-12px;bor
 	margin-bottom: 15px;
 }
 textarea#note{
-	height: 145px !important;
+	height: 60px !important;
     border: 1px solid #9e9e9e;	
     padding: 15px;
     resize: none;
-
     overflow: auto;
     outline: none;
-
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;

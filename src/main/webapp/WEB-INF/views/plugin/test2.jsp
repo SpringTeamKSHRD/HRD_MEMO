@@ -17,15 +17,8 @@
 			<iframe src="http://localhost:8080/HRD_MEMO/plugin" height="500px" width="500px" frameborder="0"></iframe>			
 		</div>
 		<script src="jquery-1.11.3.min.js"></script>
-		<script>
-			var head = document.getElementsByTagName("head")[0];
-			script = document.createElement("script"), script.onload = function() {
-			    $(document).ready(function() {
-			        $("head").append('<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/admin/css/jquery.quicknote.css" type="text/css" />'), $("body").append('<div id="qn"></div>'), $("body").append('<script src="http://localhost:8080/HRD_MEMO/resources/admin/js/jquery.quicknote.js"/>'), $(function() {
-			            $("#qn").quicknote()
-			        })
-			    })
-			}, script.type = "text/javascript", script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", head.appendChild(script);
-		</script>
+
+			<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script>
+
 	</body>
 </html>

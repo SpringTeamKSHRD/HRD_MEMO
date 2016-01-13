@@ -13,5 +13,19 @@
 <body>
 	<div id="hrd_memo_pess">
 	</div>
+	
+hello, ${auth.name} 
+ <a href="${pageContext.request.contextPath}/login">login</a>		
+ <a href="${pageContext.request.contextPath}/logout">logout</a>		
+ <a href="${pageContext.request.contextPath}/admin/product">admin</a>		
+ <a href="${pageContext.request.contextPath}/author/product">author</a>
+ <br/>plugin
+ <a href="${pageContext.request.contextPath}/plugin?type=add1">add1</a>
+ <a href="${pageContext.request.contextPath}/plugin?type=add2">add2</a>
+ <a href="${pageContext.request.contextPath}/plugin?type=login">login</a>
+ <a href="${pageContext.request.contextPath}/plugin?type=signup">signup</a>
+ <br/>test
+ <a href="${pageContext.request.contextPath}/plugin?type=test1">test1</a>
+ <a href="${pageContext.request.contextPath}/plugin?type=test2">test2</a>
 </body>
 </html>

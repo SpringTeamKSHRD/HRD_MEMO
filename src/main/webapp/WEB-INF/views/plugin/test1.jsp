@@ -3,14 +3,14 @@
 <head>
 	<title></title>
 	<style type="text/css">
-		.video-container {
+		.memo-container {
 			position: relative;
-			padding-bottom: 56.25%;
+			padding-bottom: 251px;
 			padding-top: 35px;
 			height: 0;
 			overflow: hidden;
 		}
-		.video-container iframe {
+		.memo-container iframe {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -27,13 +27,13 @@
 	
 	<button id="btn-memo">Note</button>
 	<div class="col-sm-3"></div>
-	<div class="col-sm-6 video-container">
-		<iframe src="http://localhost:8080/HRD_MEMO/plugin?type=add" frameborder=0 id="frame-memo"></iframe>
+	<div class="col-sm-6 memo-container">
+		<iframe src="http://localhost:8080/HRD_MEMO/plugin?type=add1" frameborder=0 id="frame-memo"></iframe>
 	</div>
 	<div class="col-sm-3"></div>
 	<script>
 	$("#btn-memo").click(function(){
-		$("iframe#frame-memo").slideToggle(500);	
+		$("iframe#frame-memo").slideToggle(1000);	
 	});	
 	</script>
 </body>

@@ -46,7 +46,7 @@
 									</div>
 									<div class='input-field right' style="margin-top: inherit;">
 										<a class='waves-effect waves-light btn'
-											style="margin: 7 0 10 0;"><i class='material-icons right'>done_all</i>Save</a>
+											style="margin: 7 0 10 0;"><i class='material-icons'>done_all</i></a>
 									</div>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 									</div>
 									<div class='input-field right' style="margin-top: inherit;">
 										<a class='waves-effect waves-light btn'
-											style="margin: 7 0 10 0;"><i class='material-icons right'>done_all</i>Save</a>
+											style="margin: 7 0 10 0;"><i class='material-icons'>done_all</i></a>
 									</div>
 								</div>
 							</div>
@@ -92,7 +92,7 @@
 									</div>
 									<div class='input-field right' style="margin-top: inherit;">
 										<a class='waves-effect waves-light btn'
-											style="margin: 7 0 10 0;"><i class='material-icons right'>done_all</i>Save</a>
+											style="margin: 7 0 10 0;"><i class='material-icons'>done_all</i></a>
 									</div>
 								</div>
 							</div>

@@ -24,21 +24,7 @@
 	<div class='form_register_wraper'>
 		<div class='row'>
 			<form class='col s12'>
-				<div class='col s3'>
-					<div class='fileinput fileinput-new' data-provides='fileinput'
-						style='width: 100%; height: 175px;'>
-						<div class='fileinput-preview thumbnail' data-trigger='fileinput'
-							style='width: 100%; border: 1px solid #eee;'>
-							<img id='image' class="responsive-img" src='Male-icon.png' />
-						</div>
-						<div>
-							<span class='btn btn-success btn-file'> <input type='file'
-								name='studentimg' id='studentimg'>Profile
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class='col s9'>
+
 					<div class='row'>
 						<div class='input-field col s12'>
 							<input id='username' type='text' class='validate'> <label
