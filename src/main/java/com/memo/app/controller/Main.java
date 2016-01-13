@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.servicesimpl.UserDetailServiceImpl;
 
@@ -20,7 +21,6 @@ import com.memo.app.servicesimpl.UserDetailServiceImpl;
  */
 public class Main {
 
-
 	@Autowired
 	UserDetailServiceImpl userDetailsService;
 	/*
@@ -30,24 +30,37 @@ public class Main {
 	 * @Autowired and @Inject works very similar but @Resource has bit
 	 * different.
 	 */
-	
-	@RequestMapping(value="/")
-	public String homePahe(ModelMap model){
+
+	@RequestMapping(value = "/")
+	public String homePahe(ModelMap model) {
 		model.addAttribute("auth", SecurityContextHolder.getContext().getAuthentication());
 		return "home";
-	}	
-	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String homePahe1(){
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String homePahe1() {
 		return "login";
 	}
-	@RequestMapping(value="/plugin", method = RequestMethod.GET)
-	public String homePluginPage(){
-		return "plugin";
-	}	
-	@RequestMapping(value="/test", method = RequestMethod.GET)
-	public String homePdluginPage(){
-		return "test";
+
+	@RequestMapping(value = "/plugin", method = RequestMethod.GET)
+	public String homePluginPage(@RequestParam("type") String type) {
+		if(type.equals("add"))
+			return "plugin/add";
+		else if(type.equals("list"))
+			return "plugin/list";
+		else if(type.equals("login"))
+			return "plugin/login";
+		else //if(type.equals("signup"))
+			return "plugin/signup";
+	}
+
+	@RequestMapping(value = "/test1", method = RequestMethod.GET)
+	public String homePdluginPage() {
+		return "test1";
+	}
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public String homePdluasdfginPage() {
+		return "test2";
 	}
 
 }
