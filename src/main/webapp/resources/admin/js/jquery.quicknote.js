@@ -69,7 +69,7 @@
 				console.log('Error: Position >> ' + this.config.pos + ' not found.');
 			}
 
-			var showHide = '<div id="qn_sh"><span>Show/Hide</span></div>';
+			var showHide = '<div id="qn_sh"><span>KhmerAcademy Memo</span></div>';
 			var divNotes = '<div id="notes"></div>';
 			var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
 			$(showHide).appendTo(this.$el);
@@ -78,18 +78,19 @@
 
 			// CHECK EXISTING NOTES IN localStorage
 			if (this.config.storage === true) {
-				var ls = JSON.parse(localStorage.getItem('quicknote')) || [];
-				if (ls) {
-					// LOAD THE NOTES
-					$.each(ls, function(index, obj) {
-						$('<span class="quicknote" id="' + ls[index].id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(ls[index].note);
-						$('<span class="close"></span>').prependTo('#' + ls[index].id);
-						var qnText = ls[index].note;
-						if (isURL(qnText)) {
-							$('#' + ls[index].id).addClass('quicknote-bword');
-						}
-					});
-				}
+				 $.getJSON('http://localhost:8080/HRD_MEMO/admin/memo/1', function(json) {
+						
+						// LOAD THE NOTES
+							$.each(json.RESPONSE_DATA, function(index, obj) {
+								$('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
+								$('<span class="close"></span>').prependTo('#' + obj.id);
+								var qnText = obj.content;
+								if (isURL(qnText)) {
+									$('#' + obj.id).addClass('quicknote-bword');
+								}
+							});
+					 });
+					
 			}
 		},
 		completeNote: function() {

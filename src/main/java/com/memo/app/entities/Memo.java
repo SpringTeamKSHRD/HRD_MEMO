@@ -2,7 +2,14 @@ package com.memo.app.entities;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tbmemo",schema="memo")
 public class Memo {
+	@Id
 	private int id;
 	private int userid;
 	private int categoryid;
