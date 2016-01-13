@@ -8,24 +8,20 @@
 <title>Insert title here</title>
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
-<script src='${pageContext.request.contextPath}/resources/js/hrdmemoplugin.js'></script>
 </head>
 <body>
-	<div id="hrd_memo_pess">
-	</div>
-	
-hello, ${auth.name} 
- <a href="${pageContext.request.contextPath}/login">login</a>		
- <a href="${pageContext.request.contextPath}/logout">logout</a>		
- <a href="${pageContext.request.contextPath}/admin/product">admin</a>		
- <a href="${pageContext.request.contextPath}/author/product">author</a>
- <br/>plugin
- <a href="${pageContext.request.contextPath}/plugin?type=add1">add1</a>
- <a href="${pageContext.request.contextPath}/plugin?type=add2">add2</a>
- <a href="${pageContext.request.contextPath}/plugin?type=login">login</a>
- <a href="${pageContext.request.contextPath}/plugin?type=signup">signup</a>
- <br/>test
- <a href="${pageContext.request.contextPath}/plugin?type=test1">test1</a>
- <a href="${pageContext.request.contextPath}/plugin?type=test2">test2</a>
+	<div id="hrd_memo_pess"></div>
 </body>
+<script
+	src='${pageContext.request.contextPath}/resources/js/hrdmemoplugin.js'></script>
+<style>
+#hrd_memo_pess {
+	width: 100%;
+	height: auto;
+}
+</style>
+<script type="text/javascript">
+	var iframeWin = document.getElementById('hrdmemo_iframe').contentWindow;
+	iframeWin.addEventListener('resize', function(){alert("ok"); });
+</script>
 </html>

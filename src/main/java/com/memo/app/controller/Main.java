@@ -61,4 +61,8 @@ public class Main {
 			return "plugin/test2";
 		return "";
 	}
+	@RequestMapping(value = "/hrdmemoplugin", method = RequestMethod.GET)
+	public String getPluginPage() {
+		return "hrdmemoplugin";
+	}
 }
