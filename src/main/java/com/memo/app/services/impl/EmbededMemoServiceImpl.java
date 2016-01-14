@@ -19,4 +19,9 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 		return embededMemoRepo.listById(id);
 	}
 
+	@Override
+	public Boolean memoLogin(String email, String password) {
+		return embededMemoRepo.login(email, password);
+	}
+
 }

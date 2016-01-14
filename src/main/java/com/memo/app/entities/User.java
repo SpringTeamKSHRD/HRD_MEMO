@@ -6,13 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
-
+@Entity
+@Table(name="tbluser",schema="public")
 public class User {
 	
-
+	@Id
 	private int userid;
+	
 	private String username;
 	@Override
 	public String toString() {
@@ -23,9 +26,13 @@ public class User {
 	private String password;
 	private String gender;
 	private String email;
+	@Transient
 	private String image;
+	@Transient
 	private boolean ismemoenable;
+	@Transient
 	private String type;
+	@Transient
 	private Date registerdate;
 
 	public String getType() {

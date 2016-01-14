@@ -80,11 +80,11 @@
 			var showHide = '<div id="qn_sh" ><span>KhmerAcademy Memo</span></div>';
 			var loginForm = '<form id="frmLogin" method="post"></form>';
 			var divUserPass = '<div id="username-password"></div>';
-			var divBtn = '<div id="div-btn" class="btn-group" style="margin-top:10px"></div>';
-			var usernameInput = '<p><input type="email" name="username" id="username" maxlength="500" placeholder="E-mail" required></p>';
+			var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
+			var usernameInput = '<p><input type="email" name="email" id="username" maxlength="500" placeholder="E-mail" required></p>';
 			var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
-			var submitBtn = '<input type="submit" name="btnLogin" class="btn btn-primary btn-sm" value="Login" id="logBtn">';
-			var regBtn = '<input type="submit" name="btnReg" class="btn btn-success btn-sm" value="Register" id="regBtn">';
+			var submitBtn = '<input type="submit" name="btnLogin" class="memo-btn memo-btn-primary memo-btn-sm" value="Login" id="logBtn">';
+			var regBtn = '<input type="submit" name="btnReg" class="memo-btn memo-btn-success memo-btn-sm" value="Register" id="regBtn">';
 			$(showHide).appendTo(this.$el);
 			$(divUserPass).appendTo(this.$el);
 			$(loginForm).appendTo(this.$el.find('#username-password'));
@@ -105,17 +105,11 @@
 						e.preventDefault();
 						$
 								.ajax({
-									url : "http://localhost:8080/HRD_MEMO/login",
+									url : "http://localhost:8080/HRD_MEMO/plugin/memo/login",
 									type : "POST",
 									data : $("#frmLogin").serialize(),
 									success : function(data) {
-										if (data == "User account is locked"
-												|| data == "User is disabled"
-												|| data == "Bad credentials")
-											alert(data);
-										else
-											location.href = "${pageContext.request.contextPath}/"
-													+ data;
+										console.log(data);
 									},
 									error : function(data) {
 										alert(data);
@@ -138,7 +132,7 @@
 					 });*/
 				$.ajax({
 					method:"GET",
-					url: "http://localhost:8080/HRD_MEMO/admin/memo/1",
+					url: "http://localhost:8080/HRD_MEMO/plugin/memo/1",
 					dataType: "JSON",
 					/*data:{id:1},*/
 					success: function(json){

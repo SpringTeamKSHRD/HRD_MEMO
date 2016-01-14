@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.memo.app.entities.Memo;
@@ -33,6 +34,25 @@ public class EmbededMemoController {
 			map.put("MESSAGE", "SUCCESS");
 			map.put("STATUS", HttpStatus.OK.value());			
 			map.put("RESPONSE_DATA", list);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			map.put("MESSAGE", "LIST EMPTY");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());			
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@RequestMapping(value ="/login", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> login(@RequestParam("email") String email,@RequestParam("password") String password) {
+		System.out.println("login");
+		System.out.println(embededMemoService.memoLogin(email, password));
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());			
+			map.put("RESPONSE_DATA", embededMemoService.memoLogin(email, password));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
