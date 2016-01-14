@@ -53,28 +53,9 @@ public class Main {
 		return "help";
 	}
 
-	@RequestMapping(value = "/plugin", method = RequestMethod.GET)
-	public String homePluginPage(@RequestParam("type") String type) {
-		System.out.println(type);
-		if(type.equals("add1"))
-			return "plugin/add1";
-		if(type.equals("add2"))
-			return "plugin/add2";
-		else if(type.equals("list"))
-			return "plugin/list";
-		else if(type.equals("login"))
-			return "plugin/login";
-		else if(type.equals("signup"))
-			return "plugin/signup";
-		else if(type.equals("test1"))
-			return "plugin/test1";
-		else if(type.equals("test2"))
-			return "plugin/test2";
-		return "";
-	}
 	@RequestMapping(value = "/plugin/add", method = RequestMethod.GET)
 	public String add() {
-		return "plugin/add";
+		return "plugin/add1";
 	}
 	@RequestMapping(value = "/plugin/login", method = RequestMethod.GET)
 	public String login() {

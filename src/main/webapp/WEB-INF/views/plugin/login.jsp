@@ -11,7 +11,7 @@
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='${pageContext.request.contextPath}/resources/js/pess_memo.js'></script>
+	src='${pageContext.request.contextPath}/resources/embed/pess_memo.js'></script>
 <script src='${pageContext.request.contextPath}/resources/js/dragbox.js'></script>
 <script
 	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js'></script>

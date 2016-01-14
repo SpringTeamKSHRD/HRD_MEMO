@@ -11,7 +11,7 @@
 	<script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='${pageContext.request.contextPath}/resources/js/embed/pess_memo.js'></script>
+	src='${pageContext.request.contextPath}/resources/embed/pess_memo.js'></script>
 	<script src='${pageContext.request.contextPath}/resources/js/dragbox.js'></script>
 	<script
 	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js'></script>
@@ -121,7 +121,7 @@ $.ajax({
     type: "get",
     success: function (response) {
         if(response["isLogin"] == false)
-        window.location = "http://localhost:8080/HRD_MEMO/plugin?type=login";
+        window.location = "http://localhost:8080/HRD_MEMO/plugin/login";
     }
 });
 
