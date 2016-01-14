@@ -36,7 +36,13 @@
 			if (Storage === void(0)) {
 				this.config.storage = false;
 			}
-			this.appendElem();
+			
+			if(typeof $.session.get('email') === 'undefined'){
+				this.login();
+			}else{
+				this.appendElem();
+			}
+			
 			this.completeNote();
 		},
 		isURL: function(str) {
@@ -75,48 +81,8 @@
 			$(showHide).appendTo(this.$el);
 			$(divNotes).appendTo(this.$el);
 			$(notesInp).appendTo(this.$el.find('#notes'));
-
-				// SIGN IN FORM			
-			var showHide = '<div id="qn_sh" ><span>KhmerAcademy Memo</span></div>';
-			var loginForm = '<form id="frmLogin" method="post"></form>';
-			var divUserPass = '<div id="username-password"></div>';
-			var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
-			var usernameInput = '<p><input type="email" name="email" id="username" maxlength="500" placeholder="E-mail" required></p>';
-			var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
-			var submitBtn = '<input type="submit" name="btnLogin" class="memo-btn memo-btn-primary memo-btn-sm" value="Login" id="logBtn">';
-			var regBtn = '<input type="submit" name="btnReg" class="memo-btn memo-btn-success memo-btn-sm" value="Register" id="regBtn">';
-			$(showHide).appendTo(this.$el);
-			$(divUserPass).appendTo(this.$el);
-			$(loginForm).appendTo(this.$el.find('#username-password'));
-			$(usernameInput).appendTo(this.$el.find('#frmLogin'));
-			$(passwordInput).appendTo(this.$el.find('#frmLogin'));
-			$(divBtn).appendTo(this.$el.find('#frmLogin'));
-			$(regBtn).appendTo(this.$el.find('#div-btn'));
-			$(submitBtn).appendTo(this.$el.find('#div-btn'));
-			
-			$("#regBtn").click(function(e){
-				e.preventDefault();
-				alert(window.location.href);
-			});
-			
-			$("#frmLogin")
-			.submit(
-					function(e) {
-						e.preventDefault();
-						$
-								.ajax({
-									url : "http://localhost:8080/HRD_MEMO/plugin/memo/login",
-									type : "POST",
-									data : $("#frmLogin").serialize(),
-									success : function(data) {
-										console.log(data);
-									},
-									error : function(data) {
-										alert(data);
-										console.log(data);
-									}
-								});
-					});
+			$.session.remove('email');
+//			$('.qn_container #notes,.qn_container #username-password').hide();
 			// CHECK EXISTING NOTES IN localStorage
 			if (this.config.storage === true) {
 				 /*$.getJSON('http://localhost:8080/HRD_MEMO/admin/memo/1', function(json) {
@@ -148,6 +114,69 @@
 				});
 					
 			}
+		},
+		login:function(){
+			var isURL = this.isURL;
+
+			// THEME
+			if (this.config.theme == 'light') {
+				this.$el.addClass('qn_container_light').addClass('qn_container');
+			} else if (this.config.theme == 'dark') {
+				this.$el.addClass('qn_container');
+			} else {
+				console.log('Error: Theme >> ' + this.config.theme + ' not found.');
+				// SET DEFAULT
+				this.$el.addClass('qn_container');
+			}
+
+			// POSITION
+			if (this.config.pos == 'left') {
+				this.$el.css({ 'left':'0', 'bottom':'0', 'margin-left':'5px' });
+			} else if (this.config.pos == 'right') {
+			} else {
+				console.log('Error: Position >> ' + this.config.pos + ' not found.');
+			}
+			// SIGN IN FORM			
+			var showHide = '<div id="qn_sh" ><span>KhmerAcademy Memo</span></div>';
+			var loginForm = '<form id="frmLogin" method="post"></form>';
+			var divUserPass = '<div id="username-password"></div>';
+			var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
+			var usernameInput = '<p><input type="email" name="email" id="email" maxlength="500" placeholder="E-mail" required></p>';
+			var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
+			var submitBtn = '<input type="submit" name="btnLogin" class="memo-btn memo-btn-primary memo-btn-sm" value="Login" id="logBtn">';
+			var regBtn = '<input type="submit" name="btnReg" class="memo-btn memo-btn-success memo-btn-sm" value="Register" id="regBtn">';
+			$(showHide).appendTo(this.$el);
+			$(divUserPass).appendTo(this.$el);
+			$(loginForm).appendTo(this.$el.find('#username-password'));
+			$(usernameInput).appendTo(this.$el.find('#frmLogin'));
+			$(passwordInput).appendTo(this.$el.find('#frmLogin'));
+			$(divBtn).appendTo(this.$el.find('#frmLogin'));
+			$(submitBtn).appendTo(this.$el.find('#div-btn'));
+			$(regBtn).appendTo(this.$el.find('#div-btn'));
+			
+			$("#frmLogin")
+			.submit(
+					function(e) {
+						e.preventDefault();
+						$
+								.ajax({
+									url : "http://localhost:8080/HRD_MEMO/plugin/memo/login",
+									type : "POST",
+									data : $("#frmLogin").serialize(),
+									success : function(data) {
+										if(data.RESPONSE_DATA==true){
+										$.session.set("email",data.EMAIL);
+										location.reload();
+									
+										}
+										
+									},
+									error : function(data) {
+										alert(data.RESPONSE_DATA);
+										
+									}
+								});
+					});
 		},
 		completeNote: function() {
 			var storage = this.config.storage;

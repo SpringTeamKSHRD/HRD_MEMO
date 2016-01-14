@@ -50,6 +50,7 @@ public class EmbededMemoController {
 		System.out.println(embededMemoService.memoLogin(email, password));
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
+			map.put("EMAIL",email);
 			map.put("MESSAGE", "SUCCESS");
 			map.put("STATUS", HttpStatus.OK.value());			
 			map.put("RESPONSE_DATA", embededMemoService.memoLogin(email, password));
