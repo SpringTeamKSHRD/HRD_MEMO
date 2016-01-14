@@ -39,6 +39,7 @@
 			
 			if(typeof $.session.get('email') === 'undefined'){
 				this.login();
+//				this.init();
 			}else{
 				this.appendElem();
 			}
@@ -117,7 +118,7 @@
 		},
 		login:function(){
 			var isURL = this.isURL;
-
+			
 			// THEME
 			if (this.config.theme == 'light') {
 				this.$el.addClass('qn_container_light').addClass('qn_container');
@@ -166,7 +167,7 @@
 									success : function(data) {
 										if(data.RESPONSE_DATA==true){
 										$.session.set("email",data.EMAIL);
-										location.reload();
+										//location.reload();
 									
 										}
 										
@@ -177,6 +178,11 @@
 									}
 								});
 					});
+			$("#regBtn").click(function(e){
+				e.preventDefault();
+				var win = window.open("http://www.khmeracademy.org", '_blank');
+				  win.focus();
+			});
 		},
 		completeNote: function() {
 			var storage = this.config.storage;
