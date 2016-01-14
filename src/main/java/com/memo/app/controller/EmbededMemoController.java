@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.memo.app.entities.Memo;
-import com.memo.app.service.IEmbededMemoService;
+import com.memo.app.services.IEmbededMemoService;
 
 @RestController
 @RequestMapping("/admin/memo")

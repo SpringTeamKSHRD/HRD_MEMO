@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.repo.IEmebededMemoRepo;
-import com.memo.app.service.IEmbededMemoService;
+import com.memo.app.services.IEmbededMemoService;
 
 @Service
 public class EmbededMemoServiceImpl implements IEmbededMemoService {

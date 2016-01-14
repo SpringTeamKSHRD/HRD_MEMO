@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.memo.app.servicesimpl.UserDetailServiceImpl;
+import com.memo.app.services.impl.UserDetailServiceImpl;
 
 @Controller /*
 			 * Indicates that an annotated class is a "Controller" of Spring

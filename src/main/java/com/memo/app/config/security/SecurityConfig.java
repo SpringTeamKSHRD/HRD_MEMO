@@ -16,7 +16,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.memo.app.servicesimpl.UserDetailServiceImpl;
+import com.memo.app.services.impl.UserDetailServiceImpl;
 
 @Configuration
 /*

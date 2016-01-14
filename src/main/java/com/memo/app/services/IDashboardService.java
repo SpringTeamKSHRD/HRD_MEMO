@@ -1,4 +1,4 @@
-package com.memo.app.service;
+package com.memo.app.services;
 
 public interface IDashboardService {
 	public String getDashboardInfo();

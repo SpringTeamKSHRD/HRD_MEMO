@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.User;
-import com.memo.app.service.IUserService;
+import com.memo.app.services.IUserService;
 @Service
 public class HUserServiceImpl implements IUserService {
 
