@@ -44,29 +44,10 @@ function displayData(data) {
 	//${pageContext.request.contextPath}/resources/upload/profile/
 }
 
-//edit or detail memo
-function editmemo(id) {
-	//alert("detail memo id "+id);
-	 var data = CKEDITOR.instances.editor1.getData(); //alert(data);
-	 
-	 	$.ajax({
-		type : "GET",
-		url : domain+"/user/"+ id,
-		success : function(data) {
-			//alert(data.DATA.content);
-			CKEDITOR.instances.editor1.setData(data.DATA.content);
-		},
-		error : function(data) {
-			alert("Unsuccess:" + data.MESSAGE);
-			console.log("ERROR..." + data);
-		}
-	});
-}
-
 function saveMemo(){
 	
 	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
-	var isenable,ispublic;
+	var ispublic;
 	
 	if($('select[name="privacy"] option:selected').val()==0) ispublic=false;
 	else ispublic=true;
@@ -99,10 +80,127 @@ function saveMemo(){
 	});
 }
 
+//edit or detail memo
+function editmemo(id) {
+	//alert("detail memo id "+id);
+	var value1="Private";
+	var value2="Public";
+	var data = CKEDITOR.instances.editor1.getData(); //alert(data);
+	 
+	 	$.ajax({
+		type : "GET",
+		url : domain+"/user/"+ id,
+		success : function(data) {
+			//alert(data.DATA.ispublic);
+			$("#userid").val(data.DATA.userid);
+			$(".titlememo").val(data.DATA.titlememo);
+			
+			if(data.DATA.ispublic==false){
+				// clear contents
+			    var $selectDropdown = $("#privacy") .empty()
+										            .html(' ');
+
+			    // add new value
+			    $selectDropdown.append($("<option></option>").attr("value","0")
+			        										 .text(value1)
+			    );
+			   
+			    $selectDropdown.append($("<option></option>").attr("value","1")
+					        					             .text(value2)
+			    );
+
+			    // trigger event
+			    $selectDropdown.trigger('contentChanged');		    
+			    
+			}else{
+				// clear contents
+			    var $selectDropdown = $("#privacy") .empty()
+										            .html(' ');
+			    // add new value
+			    $selectDropdown.append($("<option></option>").attr("value","1")
+			        										 .text(value2)
+			    );
+			   
+			    $selectDropdown.append($("<option></option>").attr("value","0")
+					        					             .text(value1)
+			    );
+
+			    // trigger event
+			    $selectDropdown.trigger('contentChanged');
+			}
+			
+			CKEDITOR.instances.editor1.setData(data.DATA.content);
+			//change button to update
+			$("#btnsave").text("Update");
+			$("#btnsave").attr("onclick","updateMemo("+id+")");
+			
+		},
+		error : function(data) {
+			alert("Unsuccess:" + data.MESSAGE);
+			console.log("ERROR..." + data);
+		}
+	});
+}
+
+$('select').on('contentChanged', function() {
+    // re-initialize (update)
+    $(this).material_select();
+  });
+
+function updateMemo(id){
+	alert("id for update.");
+	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
+	var ispublic;
+	
+	if($('select[name="privacy"] option:selected').val()==0) ispublic=false;
+	else ispublic=true;
+	
+	json = {userid : parseInt($('#userid').val()),
+			titlememo : $('.titlememo').val(),
+			content : data,
+			/*titleurl : "Memo Dashboard",
+			domain : "www.khmeracademy.org.kh",
+			url : "http://khmeracademy.org.kh",
+			isenable : true,*/
+			ispublic : ispublic,
+			id : id
+		};
+	
+	$.ajax({
+		type : "PUT",
+		url : domain + "/user/"+id,
+		data : JSON.stringify(json),
+		contentType: 'application/json',
+		success : function(data) {
+			alert("Success :" + data.MESSAGE);
+			//uploadImage();
+		},
+		error : function(data) {
+			alert("Unsuccess: " + data.MESSAGE);
+			console.log("ERROR..." + data);
+		}
+	});
+	
+}
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+function cancelMemo(){
+	// jong do ey do tov ot kvol ! proz ot jes :'(
+}
 /*function edituser(id) {
 	location.href = "${pageContext.request.contextPath}/user/" + "editmemo/"+ id;
 }*/

@@ -119,6 +119,7 @@
 				</div>
 			</div>
 			<!-- Right Body Section -->
+			
 			<div class="col s12 m8 l8 body_right"> <!-- Note that "m8 l9" was added -->
 			<form action="#" method="POST" enctype="multipart/form-data">
 				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
@@ -127,7 +128,7 @@
 					<div class="row">
 						<div class="col s12 m4 l3">
 							<div class="input-field col s12">
-								<select name="privacy">
+								<select id="privacy" >
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
 								      <option value="0">Private</option>
 								      <option value="1">Public</option>
@@ -193,8 +194,8 @@
 				<div>
 					<div class="row">
 						&nbsp;&nbsp;
-						<a class="waves-effect waves-light btn " onclick="saveMemo()">Save</a> 
-						<a class="waves-effect waves-light btn " onclick="ClearMemo()">Cancel</a>
+						<a class="waves-effect waves-light btn " id="btnsave" onclick="saveMemo()">Save</a> 
+						<a class="waves-effect waves-light btn " id="btncancel" onclick="CancelMemo()">Cancel</a>
 							<!-- <div class="col s12 m4 l2 right">
 								<input type="button" value="Save"/>
 								<input type="button" value="Cancel"/>							
