@@ -118,6 +118,7 @@
 		},
 		login:function(){
 			var isURL = this.isURL;
+			var _this=this;
 			
 			// THEME
 			if (this.config.theme == 'light') {
@@ -168,7 +169,8 @@
 										if(data.RESPONSE_DATA==true){
 										$.session.set("email",data.EMAIL);
 										//location.reload();
-									
+										$('#qn > #qn_sh,#username-password').remove();
+										_this.appendElem();
 										}
 										
 									},
