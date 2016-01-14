@@ -56,7 +56,7 @@
 		},
 		appendElem: function() {
 			var isURL = this.isURL;
-
+			var _this=this;
 			// THEME
 			if (this.config.theme == 'light') {
 				this.$el.addClass('qn_container_light').addClass('qn_container');
@@ -76,13 +76,20 @@
 				console.log('Error: Position >> ' + this.config.pos + ' not found.');
 			}
 				// ALREADY LOGGED IN			
-			var showHide = '<div id="qn_sh"><span>KhmerAcademy Memo</span></div>';
+			var showHide = '<div id="qn_sh"><span id="show-hide">KhmerAcademy Memo</span><span style="font-weight:bold;color:red;" id="logout">Log out</span></div>';
 			var divNotes = '<div id="notes"></div>';
 			var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
 			$(showHide).appendTo(this.$el);
 			$(divNotes).appendTo(this.$el);
 			$(notesInp).appendTo(this.$el.find('#notes'));
-			$.session.remove('email');
+			
+			
+			$('#logout').click(function(){
+				$.session.remove('email');
+				$('#qn > #qn_sh,#notes').remove();
+				_this.login();
+			});
+			
 //			$('.qn_container #notes,.qn_container #username-password').hide();
 			// CHECK EXISTING NOTES IN localStorage
 			if (this.config.storage === true) {
@@ -139,7 +146,7 @@
 				console.log('Error: Position >> ' + this.config.pos + ' not found.');
 			}
 			// SIGN IN FORM			
-			var showHide = '<div id="qn_sh" ><span>KhmerAcademy Memo</span></div>';
+			var showHide = '<div id="qn_sh" ><span id="show-hide">KhmerAcademy Memo</span></div>';
 			var loginForm = '<form id="frmLogin" method="post"></form>';
 			var divUserPass = '<div id="username-password"></div>';
 			var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
@@ -156,10 +163,14 @@
 			$(submitBtn).appendTo(this.$el.find('#div-btn'));
 			$(regBtn).appendTo(this.$el.find('#div-btn'));
 			
+			
+			$('.qn_container #notes,.qn_container #username-password').hide();
 			$("#frmLogin")
 			.submit(
 					function(e) {
+						
 						e.preventDefault();
+						
 						$
 								.ajax({
 									url : "http://localhost:8080/HRD_MEMO/plugin/memo/login",
@@ -171,6 +182,9 @@
 										//location.reload();
 										$('#qn > #qn_sh,#username-password').remove();
 										_this.appendElem();
+										}else{
+											$('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
+											$("#qn_sh").append('<span style="color:red;text-decoration:none;" id="alert">Invalid username or password !</span>')
 										}
 										
 									},
@@ -184,6 +198,9 @@
 				e.preventDefault();
 				var win = window.open("http://www.khmeracademy.org", '_blank');
 				  win.focus();
+			});
+			$('#email').focus(function(event) {
+				$('#alert').remove();
 			});
 		},
 		completeNote: function() {
@@ -228,8 +245,9 @@
 			});
 
 			// SHOW AND HIDE
-			this.$el.on('click', '#qn_sh span', function() {
-				$('.qn_container #notes,.qn_container #username-password').slideToggle(100);
+			this.$el.on('click', '#qn_sh #show-hide', function() {
+				$('#alert').remove();
+				$('.qn_container #logout,.qn_container #notes,.qn_container #username-password').slideToggle(100);
 			});
 
 			// CLICK TO CLOSE NOTES
