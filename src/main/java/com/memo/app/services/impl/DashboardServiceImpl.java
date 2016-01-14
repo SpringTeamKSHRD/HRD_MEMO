@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.repo.IDashboardDao;
-import com.memo.app.service.IDashboardService;
+import com.memo.app.services.IDashboardService;
 @Service
 public class DashboardServiceImpl implements IDashboardService {
 	@Autowired

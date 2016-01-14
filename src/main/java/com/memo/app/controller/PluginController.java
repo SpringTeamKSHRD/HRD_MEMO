@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
-import com.memo.app.servicesimpl.ReportServiceImpl;
-import com.memo.app.servicesimpl.UserServiceImpl;
+import com.memo.app.services.impl.ReportServiceImpl;
+import com.memo.app.services.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping(value="/plugin")

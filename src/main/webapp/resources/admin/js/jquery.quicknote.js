@@ -68,7 +68,7 @@
 			} else {
 				console.log('Error: Position >> ' + this.config.pos + ' not found.');
 			}
-
+				// ALREADY LOGGED IN			
 			var showHide = '<div id="qn_sh"><span>KhmerAcademy Memo</span></div>';
 			var divNotes = '<div id="notes"></div>';
 			var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
@@ -76,10 +76,56 @@
 			$(divNotes).appendTo(this.$el);
 			$(notesInp).appendTo(this.$el.find('#notes'));
 
+				// SIGN IN FORM			
+			var showHide = '<div id="qn_sh" ><span>KhmerAcademy Memo</span></div>';
+			var loginForm = '<form id="frmLogin" method="post"></form>';
+			var divUserPass = '<div id="username-password"></div>';
+			var divBtn = '<div id="div-btn" class="btn-group" style="margin-top:10px"></div>';
+			var usernameInput = '<p><input type="email" name="username" id="username" maxlength="500" placeholder="E-mail" required></p>';
+			var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
+			var submitBtn = '<input type="submit" name="btnLogin" class="btn btn-primary btn-sm" value="Login" id="logBtn">';
+			var regBtn = '<input type="submit" name="btnReg" class="btn btn-success btn-sm" value="Register" id="regBtn">';
+			$(showHide).appendTo(this.$el);
+			$(divUserPass).appendTo(this.$el);
+			$(loginForm).appendTo(this.$el.find('#username-password'));
+			$(usernameInput).appendTo(this.$el.find('#frmLogin'));
+			$(passwordInput).appendTo(this.$el.find('#frmLogin'));
+			$(divBtn).appendTo(this.$el.find('#frmLogin'));
+			$(regBtn).appendTo(this.$el.find('#div-btn'));
+			$(submitBtn).appendTo(this.$el.find('#div-btn'));
+			
+			$("#regBtn").click(function(e){
+				e.preventDefault();
+				alert(window.location.href);
+			});
+			
+			$("#frmLogin")
+			.submit(
+					function(e) {
+						e.preventDefault();
+						$
+								.ajax({
+									url : "http://localhost:8080/HRD_MEMO/login",
+									type : "POST",
+									data : $("#frmLogin").serialize(),
+									success : function(data) {
+										if (data == "User account is locked"
+												|| data == "User is disabled"
+												|| data == "Bad credentials")
+											alert(data);
+										else
+											location.href = "${pageContext.request.contextPath}/"
+													+ data;
+									},
+									error : function(data) {
+										alert(data);
+										console.log(data);
+									}
+								});
+					});
 			// CHECK EXISTING NOTES IN localStorage
 			if (this.config.storage === true) {
-				 $.getJSON('http://localhost:8080/HRD_MEMO/admin/memo/1', function(json) {
-						
+				 /*$.getJSON('http://localhost:8080/HRD_MEMO/admin/memo/1', function(json) {
 						// LOAD THE NOTES
 							$.each(json.RESPONSE_DATA, function(index, obj) {
 								$('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
@@ -89,7 +135,23 @@
 									$('#' + obj.id).addClass('quicknote-bword');
 								}
 							});
-					 });
+					 });*/
+				$.ajax({
+					method:"GET",
+					url: "http://192.168.178.186:8080/HRD_MEMO/admin/memo/1",
+					dataType: "JSON",
+					/*data:{id:1},*/
+					success: function(json){
+						$.each(json.RESPONSE_DATA, function(index, obj) {
+							$('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
+							$('<span class="close"></span>').prependTo('#' + obj.id);
+							var qnText = obj.content;
+							if (isURL(qnText)) {
+								$('#' + obj.id).addClass('quicknote-bword');
+							}
+						});
+					}
+				});
 					
 			}
 		},
@@ -136,7 +198,7 @@
 
 			// SHOW AND HIDE
 			this.$el.on('click', '#qn_sh span', function() {
-				$('.qn_container #notes').slideToggle(100);
+				$('.qn_container #notes,.qn_container #username-password').slideToggle(100);
 			});
 
 			// CLICK TO CLOSE NOTES

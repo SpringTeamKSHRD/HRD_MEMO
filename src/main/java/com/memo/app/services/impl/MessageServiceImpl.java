@@ -1,4 +1,4 @@
-package com.memo.app.servicesimpl;
+package com.memo.app.services.impl;
 
 import java.util.List;
 

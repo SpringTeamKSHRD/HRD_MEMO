@@ -10,8 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.memo.app.service.IDashboardService;
-import com.memo.app.service.IUserService;
+import com.memo.app.services.IDashboardService;
+import com.memo.app.services.IUserService;
 
 @Controller
 @RequestMapping(value="/admin")
