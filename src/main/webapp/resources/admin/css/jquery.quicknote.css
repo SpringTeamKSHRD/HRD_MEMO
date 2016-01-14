@@ -64,7 +64,7 @@
 /* end show/hide */
 
 /* notes container */
-#notes
+#notes,#username-password
 {
     position: relative;
     overflow: hidden;
@@ -74,8 +74,8 @@
 /* end notes container */
 
 /* notes */
-#notes > span,
-#notes p
+#notes > span,#username-password > span,
+#notes p,#username-password p
 {
 
     font-family: 'Open Sans', sans, arial;
@@ -83,30 +83,30 @@
     display: inline-block;
     text-align: left;
 }
-#notes p,
-#notes p input
+#notes p,#username-password p,
+#notes p input,#username-password p input
 {
     font-size: .9em;
     width: 100%;
 }
-#notes p
+#notes p,#username-password p
 {
     margin: 5px auto 0 auto;
     /*padding: 2px;*/
 }
-#notes p input
+#notes p input,#username-password p input
 {
     width: 100%;
     color: #6d6d6d;
     border: 1px solid #ccc;
 }
-#notes p input:focus
+#notes p input:focus,#username-password p input:focus
 {
     border-color: #ccc;
     box-shadow: 0;
 }
 .quicknote,
-#notes p input
+#notes p input,#username-password p input
 {
     position: relative;
     height: auto;
@@ -177,13 +177,22 @@
 /* end show/hide */
 
 /* notes light */
-.qn_container_light #notes span
+.qn_container_light #notes span,.qn_container_light #username-password span,
 {
     color: #2da68f;
     border: 1px solid #97e8fc;
     background: #7AF4DC;
 }
-.qn_container_light #notes input {
+.qn_container_light #notes input,.qn_container_light #username-password input {
     background: #F7F7F7;
+}
+
+#div-btn #logBtn{
+	min-width:140px;
+	
+}
+#div-btn #regBtn{
+	min-width:145px;
+	margin-right:5px;
 }
 /* end notes light */
