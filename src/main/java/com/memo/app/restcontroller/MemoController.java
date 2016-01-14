@@ -24,7 +24,7 @@ public class MemoController {
 	
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
-		System.out.println("list user controller.");
+		//System.out.println("list user controller.");
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (pathVariables.containsKey("limit") && pathVariables.containsKey("page")) {
@@ -46,11 +46,11 @@ public class MemoController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
-		System.out.println("add memo controller.");		
+		//System.out.println("add memo controller.");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (memoService.insertMemo(memo)) {			
-			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
+			map.put("MESSAGE", "MEMO HAS BEEN CREATED SUCCESSFULLY.");
 			map.put("STATUS", HttpStatus.CREATED.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
 		} else {
@@ -62,7 +62,7 @@ public class MemoController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(@PathVariable("id") int id) {
-		System.out.println("detail controller");
+		//System.out.println("get memo controller.");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Memo memo = memoService.getMemo(id);
 		System.out.println(memo.getContent());

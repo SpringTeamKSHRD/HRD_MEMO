@@ -49,7 +49,7 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean insertMemo(Memo memo) {
 		System.out.println("insert memo dao.");
-		String sql="INSERT INTO memo.tbmemo VALUES(?,?,?,?,?,?,?,?)";
+		String sql="INSERT INTO memo.tbmemo(userid,titlememo,content,titleurl,domain,url,isenable,ispublic) VALUES(?,?,?,?,?,?,?,?)";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),memo.getTitleurl(),memo.getDomain(),
 								  memo.getUrl(),memo.isIsenable(),memo.isIspublic()};
 		int i=jdbcTemplate.update(sql,obj);

@@ -44,7 +44,7 @@ function displayData(data) {
 	//${pageContext.request.contextPath}/resources/upload/profile/
 }
 
-//
+//edit or detail memo
 function editmemo(id) {
 	//alert("detail memo id "+id);
 	 var data = CKEDITOR.instances.editor1.getData(); //alert(data);
@@ -65,22 +65,24 @@ function editmemo(id) {
 
 function saveMemo(){
 	
-	/*var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
-	alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);*/
+	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
+	var isenable,ispublic;
 	
-	/*json = {
-			userid : $('#userid').val(),
+	if($('select[name="privacy"] option:selected').val()==0) ispublic=false;
+	else ispublic=true;
+	//alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);
+	
+	json = {userid : parseInt($('#userid').val()),
 			titlememo : $('.titlememo').val(),
 			content : data,
 			titleurl : "Memo Dashboard",
 			domain : "www.khmeracademy.org.kh",
 			url : "http://khmeracademy.org.kh",
 			isenable : true,
-			ispublic : true //$('select[name="privacy"] option:selected').val()
-			//enable : $('input:radio[name=enable]:checked').val(),
-			//image : $("#image").val().split("\\").pop(), //"default.jpg" 
-		};*/
-	/*alert("after data json.");
+			ispublic : ispublic
+		};
+	
+	//alert("after data json.")
 	$.ajax({
 		type : "POST",
 		url : domain + "/user/",
@@ -94,7 +96,7 @@ function saveMemo(){
 			alert("Unsuccess: " + data.MESSAGE);
 			console.log("ERROR..." + data);
 		}
-	});*/
+	});
 }
 
 
