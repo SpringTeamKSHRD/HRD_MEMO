@@ -15,6 +15,25 @@
 	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js'></script>
 <title>Login</title>
 <style>
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.row {
+	margin: 0px;
+}
+
+.card {
+	background: #009688;
+	color: white;
+}
+
+#ceckboxcon {
+	padding-left: 55px;
+}
+</style>
+<style>
 #frm-wrapper {
 	width: 370px;
 	height: 350px;
@@ -49,13 +68,13 @@
 							for="password">Password</label>
 					</div>
 				</div>
-				<div class='row'>
+				<!-- 				<div class='row'>
 					<div class='col s12' id='ceckboxcon'>
 						<p>
 							<input type="checkbox" id="test5" /> <label for="test5">Remember me</label>
 						</p>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col s12" style='text-align: right;'>
 						<button class="btn waves-effect waves-light" type="submit">Login</button>
@@ -64,51 +83,9 @@
 			</form>
 		</div>
 	</div>
-		
-	<script type="text/javascript">
-		$(function() {
-			$("#frmLogin")
-					.submit(
-							function(e) {
-								e.preventDefault();
-								$
-										.ajax({
-											url : "${pageContext.request.contextPath}/login",
-											type : "POST",
-											data : $("#frmLogin").serialize(),
-											success : function(data) {
-												if (data == "User account is locked"
-														|| data == "User is disabled"
-														|| data == "Bad credentials")
-													alert(data);
-												else
-													location.href = "${pageContext.request.contextPath}/"
-															+ data;
-											},
-											error : function(data) {
-												console.log(data);
-											}
-										});
-							});
-		});
+	<script type="text/javascript">var path = '${pageContext.request.contextPath}/'</script>
+	<script type="text/javascript"
+		src='${pageContext.request.contextPath}/resources/js/login.js'>	
 	</script>
-	<style>
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-.row {
-	margin: 0px;
-}
-
-.card {
-background:#009688;
-	color: white;
-}
-#ceckboxcon{
-padding-left: 55px;
-}
-</style>
 </body>
 </html>

@@ -67,7 +67,8 @@ public class MemoServiceImp implements com.memo.app.services.MemoService{
 		return memoDao.countColumn(column_name, value);
 	}
 
-	
-	
-	
+	@Override
+	public List<Memo> listMemoByUrl(String domain, String url, int userid) {
+		return memoDao.listMemoByUrl(domain, url, userid);		
+	}	
 }

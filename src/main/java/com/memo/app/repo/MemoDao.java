@@ -9,6 +9,7 @@ import com.memo.app.entities.Memo;
 public interface MemoDao {
 	public List<Memo> listMemo();
 	public List<Memo> listMemo(int limit, int page);
+	public List<Memo> listMemoByUrl(String domain, String url, int userid);
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);
 	public boolean deleteMemo(int id);
@@ -18,5 +19,4 @@ public interface MemoDao {
 	public List<Memo> filterMemoByDate(Date sd,Date ed);
 	public int countColumn(Object column_name,Object value);
 	public int countPublicMemo(int userid);
-	
 }

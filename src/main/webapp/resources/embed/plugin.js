@@ -1,7 +1,7 @@
 $(function() {
 	$("#btn-memo").click(function(){
-		$("iframe#frame-memo").slideToggle(500);
-	});
+		$("iframe#frame-memo").slideToggle(500);});	
+	$(".memo-container").append("<iframe src='http://localhost:8080/HRD_MEMO/plugin?type=add1' frameborder=0 id='frame-memo'></iframe>");
 	$(".memo-container").css({
 		"position": "relative",
 		"padding-bottom": "251px",
@@ -9,6 +9,7 @@ $(function() {
 		"height": "0",
 		"overflow": "hidden"});
 	$("#frame-memo").css({
+		"display":"none",
 		"position":" absolute",
 		"top": "0",
 		"left": "0",
