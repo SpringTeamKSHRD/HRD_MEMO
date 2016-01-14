@@ -138,7 +138,7 @@
 					 });*/
 				$.ajax({
 					method:"GET",
-					url: "http://192.168.178.186:8080/HRD_MEMO/admin/memo/1",
+					url: "http://localhost:8080/HRD_MEMO/admin/memo/1",
 					dataType: "JSON",
 					/*data:{id:1},*/
 					success: function(json){

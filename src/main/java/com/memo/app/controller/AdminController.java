@@ -34,10 +34,7 @@ public class AdminController {
 		return "admin/dashboard";
 	}
 
-	@RequestMapping("/test")
-	public String testMemo(ModelMap m) {
-		return "admin/test_memo";
-	}
+	
 	
 	@RequestMapping("/users")
 	public String users(ModelMap m) {

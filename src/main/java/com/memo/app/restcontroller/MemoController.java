@@ -24,7 +24,7 @@ public class MemoController {
 	
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
-		//System.out.println("list user controller.");
+		System.out.println("list user controller.");
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (pathVariables.containsKey("limit") && pathVariables.containsKey("page")) {
@@ -46,11 +46,11 @@ public class MemoController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
-		//System.out.println("add memo controller.");		
+		System.out.println("add memo controller.");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (memoService.insertMemo(memo)) {			
-			map.put("MESSAGE", "MEMO HAS BEEN CREATED SUCCESSFULLY.");
+			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
 			map.put("STATUS", HttpStatus.CREATED.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
 		} else {
@@ -62,7 +62,7 @@ public class MemoController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(@PathVariable("id") int id) {
-		//System.out.println("get memo controller.");
+		System.out.println("detail controller");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Memo memo = memoService.getMemo(id);
 		System.out.println(memo.getContent());
@@ -76,20 +76,6 @@ public class MemoController {
 			map.put("MESSAGE", "MEMO NOT FOUND.");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-	}
-	
-	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo memo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (memoService.updateMemo(memo)) {
-			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
-			map.put("STATUS", HttpStatus.FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} else {
-			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-		}
 	}
 	
 }

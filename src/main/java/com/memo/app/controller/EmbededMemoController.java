@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,12 @@ import com.memo.app.entities.Memo;
 import com.memo.app.services.IEmbededMemoService;
 
 @RestController
+@RequestMapping("/plugin/memo")
 public class EmbededMemoController {
 	@Autowired
 	private IEmbededMemoService embededMemoService;
 	
-	@RequestMapping(value ="/admin/memo/{id}", method = RequestMethod.GET)
+	@RequestMapping(value ="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listArticle(@PathVariable int id) {
 		System.out.println("list memo");
 		List<Memo> list = embededMemoService.listMemoByUserId(id);
@@ -39,5 +41,5 @@ public class EmbededMemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 }

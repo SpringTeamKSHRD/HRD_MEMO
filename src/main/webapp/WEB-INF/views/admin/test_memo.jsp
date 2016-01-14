@@ -8,7 +8,7 @@
 </head>
 <body>
 	 <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/memo.min.js"></script>  --%>
-	 <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script> 
+	 <script src="http://localhost:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script> 
 	<!-- <script>
 		var div = document.createElement("div");
 		div.setAttribute("id", "qn"), document.body.insertBefore(div,

@@ -16,7 +16,7 @@ import com.memo.app.services.impl.UserDetailServiceImpl;
 			 */
 
 /*
- * is used to map the user’s requests to handler classes or methods. It can be
+ * is used to map the userï¿½s requests to handler classes or methods. It can be
  * applied on the class level and also on the method level.
  */
 public class Main {
@@ -64,5 +64,9 @@ public class Main {
 	@RequestMapping(value = "/hrdmemoplugin", method = RequestMethod.GET)
 	public String getPluginPage() {
 		return "hrdmemoplugin";
+	}
+	@RequestMapping("/test")
+	public String testMemo(ModelMap m) {
+		return "admin/test_memo";
 	}
 }

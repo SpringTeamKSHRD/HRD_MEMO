@@ -49,7 +49,7 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean insertMemo(Memo memo) {
 		System.out.println("insert memo dao.");
-		String sql="INSERT INTO memo.tbmemo(userid,titlememo,content,titleurl,domain,url,isenable,ispublic) VALUES(?,?,?,?,?,?,?,?)";
+		String sql="INSERT INTO memo.tbmemo VALUES(?,?,?,?,?,?,?,?)";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),memo.getTitleurl(),memo.getDomain(),
 								  memo.getUrl(),memo.isIsenable(),memo.isIspublic()};
 		int i=jdbcTemplate.update(sql,obj);
@@ -60,10 +60,11 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean updateMemo(Memo memo) {
 		System.out.println("update memo dao.");
-		String sql="UPDATE tbmemo SET userid=?,titlememo=?,content=?,ispublic=? "
-								 +"WHERE id=?;";
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),
-								  memo.isIspublic(),memo.getId()};
+		String sql="UPDATE tbmemo SET userid=?,titlememo=?,content=?,titleurl=?,domain=?"
+									 +"url=?,date=?,categoryid=?,isenable=?,ispublic=?"
+									 +"WHERE id=?;";
+		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),memo.getTitleurl(),memo.getDomain(),
+								  memo.getUrl(),memo.getDate(),memo.getCategoryid(),memo.isIsenable(),memo.isIspublic(),memo.getId()};
 		int i=jdbcTemplate.update(sql,obj);
 		if(i>0) return true;
 		else return false;
