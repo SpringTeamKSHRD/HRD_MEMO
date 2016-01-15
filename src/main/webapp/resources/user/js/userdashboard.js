@@ -73,6 +73,7 @@ function saveMemo(){
 		contentType: 'application/json',
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
+			loadPage();
 			//uploadImage();
 		},
 		error : function(data) {
@@ -112,7 +113,7 @@ function editmemo(id) {
 			    $selectDropdown.trigger('contentChanged');		    		    
 			}else{
 				// clear contents
-			    var $selectDropdown = $("#privacy") .empty()						            .html(' ');
+			    var $selectDropdown = $("#privacy").empty().html(' ');
 			    // add new value
 			    $selectDropdown.append($("<option></option>").attr("value","1")
 			        										 .text(value2)
@@ -143,7 +144,7 @@ $('select').on('contentChanged', function() {
   });
 
 function updateMemo(id){
-	alert("id for update."+id);
+	//alert("id for update."+id);
 	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
 	var ispublic;
 	
@@ -168,6 +169,7 @@ function updateMemo(id){
 		contentType: 'application/json',
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
+			loadPage();
 			//uploadImage();
 		},
 		error : function(data) {
@@ -178,23 +180,10 @@ function updateMemo(id){
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function cancelMemo(){
 	// jong do ey do tov ot kvol ! proz ot jes :'(
+	CKEDITOR.instances.editor1.setData("");
+	$(".titlememo").val("");
 	loadPage();
 }
 /*function edituser(id) {

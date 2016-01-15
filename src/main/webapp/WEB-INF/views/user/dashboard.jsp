@@ -141,18 +141,7 @@
 							</div>
 						</div>
 						<div class="col s12 m4 l4">
-							<!-- <div class="input-field col s12">
-							    <select>
-								      <option value="" disabled selected>Choose your option</option>
-								      <option value="1">Technology</option>
-								      <option value="2">Sport</option>
-								      <option value="3">Environment</option>
-								      <option value="3">Entertainment</option>
-								      <option value="3">Society</option>
-								      <option value="3">Others</option>
-							    </select>
-							    <label>Category</label>
-							</div> -->
+							<!-- Category here -->
 						</div>
 					</div>
 				</div>
@@ -163,7 +152,7 @@
 						<div class="col s12 m4 l12">
 							<form>
 								<textarea name="editor1" id="editor1" rows="10" cols="20">
-									This is ckeditor.
+									
 								</textarea>
 								<script>
 									// Replace the <textarea id="editor1"> with a CKEditor

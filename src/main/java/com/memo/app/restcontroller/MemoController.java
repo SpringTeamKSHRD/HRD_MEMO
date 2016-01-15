@@ -78,4 +78,20 @@ public class MemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo memo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (memoService.updateMemo(memo)) {
+			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	
 }
