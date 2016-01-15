@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Memo</title>  
     <meta charset="utf-8">
@@ -18,10 +17,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
 	<!-- CK editor -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/ckeditor/ckeditor.js"></script>
-	<!-- <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  -->
 </head>
 <body >
 	<!-- Navbar goes here -->
@@ -195,7 +190,7 @@
 					<div class="row">
 						&nbsp;&nbsp;
 						<a class="waves-effect waves-light btn " id="btnsave" onclick="saveMemo()">Save</a> 
-						<a class="waves-effect waves-light btn " id="btncancel" onclick="CancelMemo()">Cancel</a>
+						<a class="waves-effect waves-light btn " id="btncancel" onclick="cancelMemo()">Cancel</a>
 							<!-- <div class="col s12 m4 l2 right">
 								<input type="button" value="Save"/>
 								<input type="button" value="Cancel"/>							
