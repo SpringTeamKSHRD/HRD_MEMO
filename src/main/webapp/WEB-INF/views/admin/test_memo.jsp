@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script
+	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 	 <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/memo.min.js"></script>  --%>
-	 <script src="http://localhost:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script> 
+	 <!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script> --> 
 	<!-- <script>
 		var div = document.createElement("div");
 		div.setAttribute("id", "qn"), document.body.insertBefore(div,
@@ -30,5 +32,10 @@
 				script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js",
 				head.appendChild(script);
 	</script> -->
+	<div id="hrd_memo_pess">
+	</div>
+	<script
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>
+<style>
 </body>
 </html>

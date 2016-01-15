@@ -60,8 +60,8 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean updateMemo(Memo memo) {
 		System.out.println("update memo dao.");
-		String sql="UPDATE tbmemo SET userid=?,titlememo=?,content=?,ispublic=? "
-								 +"WHERE id=?;";
+		String sql="UPDATE memo.tbmemo SET userid=?,titlememo=?,content=?,ispublic=? "
+								      +"WHERE id=?;";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),
 								  memo.isIspublic(),memo.getId()};
 		int i=jdbcTemplate.update(sql,obj);

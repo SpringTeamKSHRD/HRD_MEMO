@@ -23,6 +23,7 @@
 /* container dark */
 .qn_container
 {
+	z-index:999;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -117,6 +118,8 @@
 }
 .quicknote
 {
+	min-width:290px;
+	padding-top:20px;
     font-size: .8em;
     position: relative;
     overflow: auto;
@@ -188,11 +191,18 @@
 }
 
 #div-btn #logBtn{
-	min-width:140px;
+	min-width:145px;
 	
 }
 #div-btn #regBtn{
 	min-width:145px;
-	margin-right:5px;
+	margin-right:0px;
+}
+.memo-img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -2px;
 }
 /* end notes light */

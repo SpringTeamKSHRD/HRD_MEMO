@@ -3,8 +3,7 @@ loadPage();
 
 function loadPage(){
 	//alert("load page");
-	$
-			.ajax({
+	$.ajax({
 				type : "GET",
 				url : domain+"/user/list/"+20,
 				dataType : 'json',
@@ -18,6 +17,9 @@ function loadPage(){
 					console.log("ERROR..." + data);
 				}
 			});
+	//change button to update
+	$("#btnsave").text("Save");
+	$("#btnsave").attr("onclick","saveMemo()");
 }
 
 function displayData(data) {
@@ -49,7 +51,7 @@ function saveMemo(){
 	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
 	var ispublic;
 	
-	if($('select[name="privacy"] option:selected').val()==0) ispublic=false;
+	if($("#privacy").val()==0) ispublic=false;
 	else ispublic=true;
 	//alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);
 	
@@ -71,6 +73,7 @@ function saveMemo(){
 		contentType: 'application/json',
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
+			loadPage();
 			//uploadImage();
 		},
 		error : function(data) {
@@ -99,32 +102,25 @@ function editmemo(id) {
 				// clear contents
 			    var $selectDropdown = $("#privacy") .empty()
 										            .html(' ');
-
 			    // add new value
 			    $selectDropdown.append($("<option></option>").attr("value","0")
 			        										 .text(value1)
-			    );
-			   
+			    );   
 			    $selectDropdown.append($("<option></option>").attr("value","1")
 					        					             .text(value2)
 			    );
-
 			    // trigger event
-			    $selectDropdown.trigger('contentChanged');		    
-			    
+			    $selectDropdown.trigger('contentChanged');		    		    
 			}else{
 				// clear contents
-			    var $selectDropdown = $("#privacy") .empty()
-										            .html(' ');
+			    var $selectDropdown = $("#privacy").empty().html(' ');
 			    // add new value
 			    $selectDropdown.append($("<option></option>").attr("value","1")
 			        										 .text(value2)
-			    );
-			   
+			    ); 
 			    $selectDropdown.append($("<option></option>").attr("value","0")
 					        					             .text(value1)
 			    );
-
 			    // trigger event
 			    $selectDropdown.trigger('contentChanged');
 			}
@@ -148,11 +144,11 @@ $('select').on('contentChanged', function() {
   });
 
 function updateMemo(id){
-	alert("id for update.");
+	//alert("id for update."+id);
 	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
 	var ispublic;
 	
-	if($('select[name="privacy"] option:selected').val()==0) ispublic=false;
+	if($("#privacy").val()==0) ispublic=false;
 	else ispublic=true;
 	
 	json = {userid : parseInt($('#userid').val()),
@@ -173,6 +169,7 @@ function updateMemo(id){
 		contentType: 'application/json',
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
+			loadPage();
 			//uploadImage();
 		},
 		error : function(data) {
@@ -183,23 +180,11 @@ function updateMemo(id){
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function cancelMemo(){
 	// jong do ey do tov ot kvol ! proz ot jes :'(
+	CKEDITOR.instances.editor1.setData("");
+	$(".titlememo").val("");
+	loadPage();
 }
 /*function edituser(id) {
 	location.href = "${pageContext.request.contextPath}/user/" + "editmemo/"+ id;
