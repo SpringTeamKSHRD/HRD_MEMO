@@ -1,4 +1,4 @@
-package com.memo.app.controller;
+package com.memo.app.restcontroller;
 
 import java.util.HashMap;
 import java.util.Map;

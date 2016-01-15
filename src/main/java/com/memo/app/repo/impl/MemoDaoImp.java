@@ -139,7 +139,7 @@ public class MemoDaoImp implements MemoDao{
 					"WHERE DOMAIN = ? " +
 						"AND url = ? " +
 						"AND userid = ? " +
-						"AND isenable = TRUE";
+						"AND isenable = TRUE limit 1";
 		return jdbcTemplate.query(sql,new Object[]{domain,url,userid},new MemoRowMapper());
 	}	
 }
