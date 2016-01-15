@@ -16,18 +16,6 @@ Date: 2016-01-05 17:14:33
 
 CREATE SCHEMA memo;
 -- ----------------------------
--- Sequence structure for tbcategory_id_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "memo"."tbcategory_id_seq" CASCADE;
-CREATE SEQUENCE "memo"."tbcategory_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-SELECT setval('"memo"."tbcategory_id_seq"', 1, true);
-
--- ----------------------------
 -- Sequence structure for tbhistory_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "memo"."tbhistory_id_seq" CASCADE;
@@ -76,24 +64,6 @@ CREATE SEQUENCE "memo"."tbreport_id_seq"
 SELECT setval('"memo"."tbreport_id_seq"', 1, true);
 
 -- ----------------------------
--- Table structure for tbcategory
--- ----------------------------
-DROP TABLE IF EXISTS "memo"."tbcategory" CASCADE;
-CREATE TABLE "memo"."tbcategory" (
-"id" int4 DEFAULT nextval('"memo".tbcategory_id_seq'::regclass) NOT NULL,
-"category" varchar COLLATE "default" NOT NULL,
-"description" varchar COLLATE "default"
-)
-WITH (OIDS=FALSE)
-
-;
-
--- ----------------------------
--- Records of tbcategory
--- ----------------------------
-INSERT INTO "memo"."tbcategory" VALUES ('1', 'sport', 'sadfasdf');
-
--- ----------------------------
 -- Table structure for tbhistory
 -- ----------------------------
 DROP TABLE IF EXISTS "memo"."tbhistory" CASCADE;
@@ -120,13 +90,11 @@ DROP TABLE IF EXISTS "memo"."tbmemo" CASCADE;
 CREATE TABLE "memo"."tbmemo" (
 "id" int4 DEFAULT nextval('"memo".tbmemo_id_seq'::regclass) NOT NULL,
 "userid" int4 NOT NULL,
-"titlememo" varchar COLLATE "default" NOT NULL,
+"title" varchar COLLATE "default" NOT NULL,
 "content" varchar COLLATE "default",
-"titleurl" varchar COLLATE "default",
 "domain" varchar COLLATE "default",
 "url" varchar(32) COLLATE "default" NOT NULL,
 "date" timestamp(6) NOT NULL,
-"categoryid" int4 NOT NULL,
 "isenable" bool NOT NULL,
 "ispublic" bool NOT NULL
 )
@@ -137,7 +105,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of tbmemo
 -- ----------------------------
-INSERT INTO "memo"."tbmemo" VALUES ('1', '1', 'sdfsdfsdfs', 'sdf', 'sdf', 'sdf', 'sdf', '2016-01-05 17:09:58', '1', 't', 't');
+INSERT INTO "memo"."tbmemo" VALUES ('1', '1', 'sdfsdfsdfs', 'sdf', 'sdf', 'sdf', '2016-01-05 17:09:58', 't', 't');
 
 -- ----------------------------
 -- Table structure for tbmessage
@@ -181,16 +149,10 @@ INSERT INTO "memo"."tbreport" VALUES ('1', '1', '1', 'asdasdf', '2016-01-05 17:1
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
-ALTER SEQUENCE "memo"."tbcategory_id_seq" OWNED BY "memo"."tbcategory"."id";
 ALTER SEQUENCE "memo"."tbhistory_id_seq" OWNED BY "memo"."tbhistory"."id";
 ALTER SEQUENCE "memo"."tbmemo_id_seq" OWNED BY "memo"."tbmemo"."id";
 ALTER SEQUENCE "memo"."tbmessage_id_seq" OWNED BY "memo"."tbmessage"."id";
 ALTER SEQUENCE "memo"."tbreport_id_seq" OWNED BY "memo"."tbreport"."id";
-
--- ----------------------------
--- Primary Key structure for table tbcategory
--- ----------------------------
-ALTER TABLE "memo"."tbcategory" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table tbhistory
@@ -205,7 +167,7 @@ CREATE or replace FUNCTION "memo"."insert_tbhistory"()
 BEGIN
  IF (TG_OP = 'UPDATE') THEN
 
-INSERT INTO "memo"."tbhistory" ("memoid", "title", "content", "date") VALUES(OLD.id,OLD.titlememo,OLD.content,now());
+INSERT INTO "memo"."tbhistory" ("memoid", "title", "content", "date") VALUES(OLD.id,OLD.title,OLD.content,now());
     return null;
         END IF;
 END
@@ -243,7 +205,6 @@ ALTER TABLE "memo"."tbhistory" ADD FOREIGN KEY ("memoid") REFERENCES "memo"."tbm
 -- ----------------------------
 -- Foreign Key structure for table "memo"."tbmemo"
 -- ----------------------------
-ALTER TABLE "memo"."tbmemo" ADD FOREIGN KEY ("categoryid") REFERENCES "memo"."tbcategory" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "memo"."tbmemo" ADD FOREIGN KEY ("userid") REFERENCES "public"."tbluser" ("userid") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
