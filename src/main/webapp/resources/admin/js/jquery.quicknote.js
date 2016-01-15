@@ -13,6 +13,117 @@
  *    	Changed font to Open Sans
  * 	Text wrapping
  */
+var dateFormat = function () {
+	var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+		timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+		timezoneClip = /[^-+\dA-Z]/g,
+		pad = function (val, len) {
+			val = String(val);
+			len = len || 2;
+			while (val.length < len) val = "0" + val;
+			return val;
+		};
+
+	// Regexes and supporting functions are cached through closure
+	return function (date, mask, utc) {
+		var dF = dateFormat;
+
+		// You can't provide utc if you skip other args (use the "UTC:" mask prefix)
+		if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
+			mask = date;
+			date = undefined;
+		}
+
+		// Passing date through Date applies Date.parse, if necessary
+		date = date ? new Date(date) : new Date;
+		if (isNaN(date)) throw SyntaxError("invalid date");
+
+		mask = String(dF.masks[mask] || mask || dF.masks["default"]);
+
+		// Allow setting the utc argument via the mask
+		if (mask.slice(0, 4) == "UTC:") {
+			mask = mask.slice(4);
+			utc = true;
+		}
+
+		var	_ = utc ? "getUTC" : "get",
+			d = date[_ + "Date"](),
+			D = date[_ + "Day"](),
+			m = date[_ + "Month"](),
+			y = date[_ + "FullYear"](),
+			H = date[_ + "Hours"](),
+			M = date[_ + "Minutes"](),
+			s = date[_ + "Seconds"](),
+			L = date[_ + "Milliseconds"](),
+			o = utc ? 0 : date.getTimezoneOffset(),
+			flags = {
+				d:    d,
+				dd:   pad(d),
+				ddd:  dF.i18n.dayNames[D],
+				dddd: dF.i18n.dayNames[D + 7],
+				m:    m + 1,
+				mm:   pad(m + 1),
+				mmm:  dF.i18n.monthNames[m],
+				mmmm: dF.i18n.monthNames[m + 12],
+				yy:   String(y).slice(2),
+				yyyy: y,
+				h:    H % 12 || 12,
+				hh:   pad(H % 12 || 12),
+				H:    H,
+				HH:   pad(H),
+				M:    M,
+				MM:   pad(M),
+				s:    s,
+				ss:   pad(s),
+				l:    pad(L, 3),
+				L:    pad(L > 99 ? Math.round(L / 10) : L),
+				t:    H < 12 ? "a"  : "p",
+				tt:   H < 12 ? "am" : "pm",
+				T:    H < 12 ? "A"  : "P",
+				TT:   H < 12 ? "AM" : "PM",
+				Z:    utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
+				o:    (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+				S:    ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+			};
+
+		return mask.replace(token, function ($0) {
+			return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+		});
+	};
+}();
+
+// Some common format strings
+dateFormat.masks = {
+	"default":      "ddd mmm dd yyyy HH:MM:ss",
+	shortDate:      "m/d/yy",
+	mediumDate:     "mmm d, yyyy",
+	longDate:       "mmmm d, yyyy",
+	fullDate:       "dddd, mmmm d, yyyy",
+	shortTime:      "h:MM TT",
+	mediumTime:     "h:MM:ss TT",
+	longTime:       "h:MM:ss TT Z",
+	isoDate:        "yyyy-mm-dd",
+	isoTime:        "HH:MM:ss",
+	isoDateTime:    "yyyy-mm-dd'T'HH:MM:ss",
+	isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+};
+
+// Internationalization strings
+dateFormat.i18n = {
+	dayNames: [
+		"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+		"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+	],
+	monthNames: [
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+		"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+	]
+};
+
+// For convenience...
+Date.prototype.format = function (mask, utc) {
+	return dateFormat(this, mask, utc);
+};
 
 ;(function($, window, document, undefined) {
 
@@ -79,9 +190,13 @@
 			var showHide = '<div id="qn_sh"><span id="show-hide">KhmerAcademy Memo</span><span style="font-weight:bold;color:red;" id="logout">Log out</span></div>';
 			var divNotes = '<div id="notes"></div>';
 			var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
+//			var notesInp = '<p><textarea name="qn_input" row="4"></textarea></p>';
+			var titleInp = '<p><input type="text" name="txttitle" id="txttitle" placeholder="Your title..." style="font-weight:bolder"></p>';
 			$(showHide).appendTo(this.$el);
 			$(divNotes).appendTo(this.$el);
+			$(titleInp).appendTo(this.$el.find('#notes'));
 			$(notesInp).appendTo(this.$el.find('#notes'));
+			
 			
 			
 			$('#logout').click(function(){
@@ -106,13 +221,16 @@
 					 });*/
 				$.ajax({
 					method:"GET",
-					url: "http://localhost:8080/HRD_MEMO/plugin/memo/1",
+					url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/1",
 					dataType: "JSON",
 					/*data:{id:1},*/
 					success: function(json){
+						
 						$.each(json.RESPONSE_DATA, function(index, obj) {
+							var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
 							$('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
 							$('<span class="close"></span>').prependTo('#' + obj.id);
+							$(imgPath).prependTo('#' + obj.id);
 							var qnText = obj.content;
 							if (isURL(qnText)) {
 								$('#' + obj.id).addClass('quicknote-bword');
@@ -173,7 +291,7 @@
 						
 						$
 								.ajax({
-									url : "http://localhost:8080/HRD_MEMO/plugin/memo/login",
+									url : "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/login",
 									type : "POST",
 									data : $("#frmLogin").serialize(),
 									success : function(data) {
@@ -210,14 +328,20 @@
 			this.$el.on('keypress', '#notes input', function(e) {
 				// RETURN KEY PRESSED
 				if (e.which == 13 || e.keyCode == 13) {
-					var notesInpVal = $('#notes input').val();
-
-					if (notesInpVal) {
+					var notesInpVal = $("#notes input[name$='qn_input']").val();
+					var titleInput = $('#txttitle').val();
+					if (notesInpVal && titleInput) {
 						var uniqid = Date.now();
-
+						var now = new Date();
+						
+//						alert(now.format())
+						var timePath= '<span style="position:absolute;top:5px;right:5px;color:white">'+now.format()+'</span>';
+						var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
 						// CREATE NOTES
 						$('<span class="quicknote" id="qn_' + uniqid + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(notesInpVal);
 						$('<span class="close"></span>').prependTo('#qn_' + uniqid);
+						$(imgPath).prependTo('#qn_' + uniqid);
+						$(timePath).prependTo('#qn_' + uniqid);
 						// word-break: break-all IF HAS URL FORMAT
 						var qnText = $('#qn_' + uniqid).text();
 						if (isURL(qnText)) {

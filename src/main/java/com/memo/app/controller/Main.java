@@ -61,4 +61,8 @@ public class Main {
 	public String login() {
 		return "plugin/login";
 	}
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String testMemo() {
+		return "admin/test_memo";
+	}
 }
