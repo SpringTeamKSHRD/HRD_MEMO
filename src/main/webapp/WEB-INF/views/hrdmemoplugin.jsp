@@ -6,52 +6,66 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
-	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.min.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
-	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
+	<div class='row' style="height: 45px;">
 		<div class="fixed-action-btn horizontal">
-	    <a class="btn-floating">
-	      <i class="large material-icons">mode_edit</i>
-	    </a>
-	    <ul>
-	      <li><a class="btn-floating red menu-btn" id="btn-active-memo"><i class="material-icons">insert_chart</i></a></li>
-	      <li><a class="btn-floating yellow darken-1 menu-btn"><i class="material-icons">format_quote</i></a></li>
-	      <li><a class="btn-floating green menu-btn"><i class="material-icons">publish</i></a></li>
-	    </ul>
-	  </div>
+			<a class="btn-floating"> <i class="large material-icons">mode_edit</i>
+			</a>
+			<ul>
+				<li><a class="btn-floating red menu-btn" id="btn-active-memo"><i
+						class="material-icons">comment</i></a></li>
+				<li><a class="btn-floating yellow darken-1 menu-btn"><i
+						class="material-icons">lock_open</i></a></li>
+				<li><a class="btn-floating green menu-btn"><i
+						class="material-icons">open_in_browser</i></a></li>
+			</ul>
+		</div>
+	</div>
 	<div class="row" style="margin-top: 10px;">
 		<form class="col s12" id="hrd-memo-frm">
 			<div class="row">
-				<div class="col m1 s2">
-					<img alt="" src="">
+				<div class="col s12" id="img_desc_wrapper">
+					<table>
+						<tr style="padding: 0px;">
+							<td style="width: 50px; padding: 0px;"><img alt="" src="resources/Male-icon.png"
+								style="width: 45px; height: 59px; border-radius:90%; border: 1px solid gray;"></td>
+							<td style="padding: 0px;"><textarea
+									style="height: 60px; border: 2px solid #009688;" id="desc_memo"></textarea></td>
+						</tr>
+					</table>
 				</div>
-				<div class="input-field col m10 s9">
-					<input type="text" id="icon_prefix" class="validate"> <label
-						for="icon_prefix">Title</label>
-				</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<textarea rows="4"></textarea>
-					</div>
-				</div>
-				<div class="row" style="margin-top: 3px;">
-					<div class="input-field col m1 s2" style="padding-left: 0px;">
-						<input type="checkbox" class="filled-in" id="filled-in-box" /> <label
-							for="filled-in-box">Public</label>
-					</div>
-					<div class="input-field col m11 s10" style="text-align: right;">
-						<button class="btn waves-effect" type="button" style="padding: 0px 5px; 
-						height: 30px;">Save</button>
-					</div>
-				</div>
+			</div>
+			<div class="row" style="margin-top: 2px;">
+				<table>
+					<tr style="padding: 0px;">
+						<td style="width: 50px; padding: 0px;"></td>
+						<td style="padding: 0px;">
+							<div class="input-field col s1" style="padding-left: 0px;">
+								<input type="checkbox" class="filled-in" id="filled-in-box" />
+								<label for="filled-in-box">Public</label>
+							</div>
+							<div class="input-field col s11" style="text-align: right;">
+								<button class="btn waves-effect" type="button"
+									style="padding: 0px 5px; height: 30px;" id='btn-save-memo'>Save</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</form>
+	</div>
+	<div class='row'
+		style="margin-top: 10px; padding: 0px; width: 100%; height: auto;"
+		id="memo-panel">
+		<div class="col s11" style="margin: auto;" id="memo-panel"></div>
 	</div>
 </body>
 <style>
@@ -61,9 +75,9 @@
 	overflow: none;
 }
 
-img {
-	width: 40px;
-	height: 50px;
+.col, .s1, .s10 {
+	margin: 0px;
+	padding: 0px;
 }
 
 .row, .input-field {
@@ -71,30 +85,74 @@ img {
 	padding: 0px;
 }
 
-.fixed-action-btn{
-top: 10px;
-right: 10px;
-height: 35px;
+.fixed-action-btn {
+	top: 5px;
+	right: 20px;
+	height: 70px;
+}
 
+#btn-active_wrapper {
+	height: 30px;
+	padding-top: 20px;
+	text-align: right;
 }
-.menu-btn{
-margin: 0px;
-width: 30px;
-height: 30px;
-}
-#btn-active_wrapper{
-margin-top: 3px;
-height: 30px;
-padding-top:20px;
-text-align: right;
-}
-#hrd-memo-frm{
-display: none;
+
+#hrd-memo-frm {
+	display: none;
 }
 </style>
 <script type="text/javascript">
-$("#btn-active-memo").click(function(){
-	$("#hrd-memo-frm").slideToggle();
-});
+	var display = true;
+	iframeparent = parent.document.getElementById('hrdmemo_iframe');
+	$("#btn-active-memo")
+			.click(
+					function() {
+						$("#hrd-memo-frm")
+								.slideToggle(
+										300,
+										function() {
+											if (display == true) {
+												iframeparent.style.height = parent.document
+														.getElementById("hrdmemo_iframe").contentWindow.document.body.scrollHeight
+														- 4 + "px";
+												display = false;
+											} else {
+												iframeparent.style.height = 70 + "px";
+												display = true;
+											}
+										});
+					});
+	$("#btn-save-memo")
+			.click(
+					function() {
+						$("#memo-panel")
+								.append(
+										"<span class='chip' style='display:block; margin:5px; height:auto;'>"
+												+ $("#desc_memo").val()
+												+ "<i class='material-icons' onclick='deleteMsg()'>close</i></span>");
+						$("#desc_memo").val("");
+						var moreh = iframeparent.offsetHeight + 10;
+						iframeparent.style.height = moreh + "px";
+
+					});
+	function deleteMsg() {
+		var moreh = iframeparent.offsetHeight - 90;
+		iframeparent.style.height = moreh + "px";
+	}
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,18 +10,12 @@
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 </head>
 <body>
-	<div id="hrd_memo_pess"></div>
+	<div id="hrd_memo_pess">
+	</div>
+	<h1>HRD MEMO</h1>
 </body>
 <script
-	src='${pageContext.request.contextPath}/resources/js/hrdmemoplugin.js'></script>
-<style>
-#hrd_memo_pess {
-	width: 100%;
-	height: auto;
-}
-</style>
+	src='http://localhost:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>
 <script type="text/javascript">
-	var iframeWin = document.getElementById('hrdmemo_iframe').contentWindow;
-	iframeWin.addEventListener('resize', function(){alert("ok"); });
 </script>
 </html>
