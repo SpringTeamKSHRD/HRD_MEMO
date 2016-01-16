@@ -30,8 +30,6 @@ public class AdminController {
 		this.putTogether(m, "Dashboard", "Control Panel");
 		return "admin/dashboard";
 	}
-
-	
 	
 	@RequestMapping("/users")
 	public String users(ModelMap m) {

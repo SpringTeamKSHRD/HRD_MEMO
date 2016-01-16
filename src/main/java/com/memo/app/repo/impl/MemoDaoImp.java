@@ -29,7 +29,7 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public List<Memo> listMemo() {
 		System.out.println("List memo dao.");
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,categoryid,isenable,ispublic"
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM tbmemo";
 		return jdbcTemplate.query(sql, new MemoRowMapper());
 	}
@@ -39,7 +39,7 @@ public class MemoDaoImp implements MemoDao{
 		System.out.println("list memo with pagination.");
 		if(page<=0) page=1;
 		int offset = limit * page - limit;
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,isenable,ispublic "
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"ORDER BY id DESC "
 					+"LIMIT ? OFFSET ?";				
@@ -49,9 +49,9 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean insertMemo(Memo memo) {
 		System.out.println("insert memo dao.");
-		String sql="INSERT INTO memo.tbmemo(userid,titlememo,content,titleurl,domain,url,isenable,ispublic) VALUES(?,?,?,?,?,?,?,?)";
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),memo.getTitleurl(),memo.getDomain(),
-								  memo.getUrl(),memo.isIsenable(),memo.isIspublic()};
+		String sql="INSERT INTO memo.tbmemo(userid,title,content,domain,url,date,isenable,ispublic ) VALUES(?,?,?,?,?,?,?,?)";
+		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),memo.getDomain(),
+								  memo.getUrl(),memo.getDate(),memo.isIsenable(),memo.isIspublic()};
 		int i=jdbcTemplate.update(sql,obj);
 		if(i>0) return true;
 		else return false;
@@ -60,9 +60,9 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public boolean updateMemo(Memo memo) {
 		System.out.println("update memo dao.");
-		String sql="UPDATE memo.tbmemo SET userid=?,titlememo=?,content=?,ispublic=? "
+		String sql="UPDATE memo.tbmemo SET userid=?,title=?,content=?,ispublic=? "
 								      +"WHERE id=?;";
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitlememo(),memo.getContent(),
+		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),
 								  memo.isIspublic(),memo.getId()};
 		int i=jdbcTemplate.update(sql,obj);
 		if(i>0) return true;
@@ -82,7 +82,7 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public Memo getMemo(int id) {
 		System.out.println("get memo dao.");
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,isenable,ispublic "
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
@@ -90,7 +90,7 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
 		System.out.println("filter memo dao.");
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,categoryid,isenable,ispublic"
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM tbmemo"
 					+"WHERE "+column_name
 					+"LIKE ?";
@@ -100,24 +100,24 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public List<HistoryMemo> listHistoryMemo(int memoid) {
 		System.out.println("list history memo dao.");
-		String sql="SELECT id,memoid,title,content,date"
-					+"FROM tbhistory"
+		String sql="SELECT id,memoid,title,content,date "
+					+"FROM tbhistory "
 					+"WHERE id=?";
 		return jdbcTemplate.query(sql,new Object[]{memoid},new HistoryMemoRowMapper());
 	}
 	@Override
 	public List<Memo> filterMemoByDate(Date sd, Date ed) {
 		System.out.println("filter date meo.");
-		String sql="SELECT id,userid,titlememo,content,titleurl,domain,url,date,categoryid,isenable,ispublic"
-				  +"FROM tbmemo"
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
+				  +"FROM tbmemo "
 				  +"WHERE date BETWEEN ? AND ?";
 		return jdbcTemplate.query(sql, new Object[]{sd,ed},new MemoRowMapper());
 	}
 	@Override
 	public int countColumn(Object column_name, Object value) {
 		System.out.println("count column.");
-		String sql="SELECT COUNT("+column_name+")"
-				  +"FROM tbmemo"
+		String sql="SELECT COUNT("+column_name+") "
+				  +"FROM tbmemo "
 				  +"WHERE userid=?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{column_name,value},Integer.class);
 	}
@@ -132,9 +132,6 @@ public class MemoDaoImp implements MemoDao{
 	@Override
 	public List<Memo> listMemoByUrl(String domain, String url, int userid) {
 		System.out.println("list memo by url");
-		System.out.println(domain);
-		System.out.println(url);
-		System.out.println(userid);
 		String sql="SELECT	* FROM memo.tbmemo " +
 					"WHERE DOMAIN = ? " +
 						"AND url = ? " +

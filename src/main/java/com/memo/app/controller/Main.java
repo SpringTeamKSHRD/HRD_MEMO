@@ -45,21 +45,7 @@ public class Main {
 	public String getPluginPage() {
 		return "hrdmemoplugin";
 	}
-	
-	@RequestMapping(value = "/help")
-	public String help(ModelMap model) {
-		model.addAttribute("auth", SecurityContextHolder.getContext().getAuthentication());
-		return "help";
-	}
 
-	@RequestMapping(value = "/plugin/add", method = RequestMethod.GET)
-	public String add() {
-		return "plugin/add1";
-	}
-	@RequestMapping(value = "/plugin/login", method = RequestMethod.GET)
-	public String login() {
-		return "plugin/login";
-	}
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testMemo() {
 		return "admin/test_memo";

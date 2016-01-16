@@ -12,10 +12,8 @@ public class Memo {
 	@Id
 	private int id;
 	private int userid;
-	private int categoryid;
-	private String titlememo;
+	private String title;
 	private String content;
-	private String titleurl;
 	private String domain;
 	private String url;
 	private Date date;
@@ -33,29 +31,17 @@ public class Memo {
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
-	public int getCategoryid() {
-		return categoryid;
+	public String getTitle() {
+		return title;
 	}
-	public void setCategoryid(int categoryid) {
-		this.categoryid = categoryid;
-	}
-	public String getTitlememo() {
-		return titlememo;
-	}
-	public void setTitlememo(String titlememo) {
-		this.titlememo = titlememo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getTitleurl() {
-		return titleurl;
-	}
-	public void setTitleurl(String titleurl) {
-		this.titleurl = titleurl;
 	}
 	public String getDomain() {
 		return domain;
@@ -87,7 +73,5 @@ public class Memo {
 	public void setIspublic(boolean ispublic) {
 		this.ispublic = ispublic;
 	}
-	
-	
 	
 }
