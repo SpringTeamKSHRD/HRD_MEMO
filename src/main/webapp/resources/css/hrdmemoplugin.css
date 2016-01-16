@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+* {
+	margin: 0px;
+	padding: 0px;
+	overflow: none;
+}
+
+.col, .s1, .s10 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.row, .input-field {
+	margin: 0px;
+	padding: 0px;
+}
+
+.fixed-action-btn {
+	top: 5px;
+	right: 20px;
+	height: 70px;
+}
+
+#btn-active_wrapper {
+	height: 30px;
+	padding-top: 20px;
+	text-align: right;
+}
+
+#hrd-memo-frm {
+	display: none;
+}
+
+#hrd-login-frm ,#hrd-register-frm{
+	box-shadow: 1px -1px 6px gray;
+	padding: 0px 0px 5px 0px;
+	display: none;
+	margin: 0px;
+}

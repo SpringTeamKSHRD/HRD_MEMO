@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,9 +33,9 @@ public class PluginController {
 	@Autowired
 	private MemoServiceImp memoDao;
 	
-	@RequestMapping(value="/signup",method=RequestMethod.POST)
-	public ResponseEntity<Map<String,Object>> userSignup(User user){
-		
+	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user){
+		System.out.println(user);
 	  Map<String,Object> map=new HashMap<String,Object>();
 	  if(userDao.saveUser(user)==true){
 		  map.put("MESSAGE","USER HAS BEEN SIGN UP");

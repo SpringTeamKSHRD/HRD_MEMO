@@ -22,12 +22,11 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public int saveUser(User user) {
-		if (this.getEmail(user.getEmail())!="") {
+		if (this.getEmail(user.getEmail())=="") {
 			String sql = "INSERT INTO public.tbluser(username,password,gender,email,usertypeid,universityid,departmentid,userimageurl)"
-					+ " VALUES(?,?,?,?,?,?,?)";
+					+ " VALUES(?,?,?,?,?,?,?,?)";
 			String password = new BCryptPasswordEncoder().encode(user.getPassword());
-			Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), 2, 36, 12,
-					user.getImage() };
+			Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), 2, 36, 12,user.getImage() };
 			try {
 				return jdbcTemplate.update(sql, obj);
 			} catch (Exception ex) {
@@ -66,10 +65,15 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public List<User> getUserList() {
+		try{
 		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
 				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid";
 		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
 		return users;
+		}catch(Exception ex){
+			System.out.println("UserDaoRepoImpl error getUsertList()");
+		}
+		return null;
 	}
 
 	@Override
@@ -97,9 +101,14 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public String getEmail(String email) {
-		String sql = "SELECT email FROM public.tbluser WHERE 	email LIKE ?";
+		String sql = "SELECT email FROM public.tbluser WHERE email LIKE ?";
+		try{
 		String result = jdbcTemplate.queryForObject(sql, new Object[] { email }, String.class);
 		return result;
+		}catch(Exception ex){
+			System.out.println("UserDaoRepoImpl error getEmail(email)");
+		}
+		return "";
 	}
 
 	@Override
