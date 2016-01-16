@@ -12,21 +12,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>${pageTitle } | Memo</title>
-	<%@ include file="_defaultCss.jsp" %>
-	<style>
-	
-		@media only screen and (min-width: 960px) and (min-width: 768px) {
-			#first-row{
-				padding-top:10%;
-			}
-		}
-	</style>
+  <%@ include file="_defaultCss.jsp" %>
+  <style>
+    @media only screen and (min-width: 960px) and (min-width: 768px) {
+      #first-row{
+        padding-top:10%;
+      }
+    }
+  </style>
   </head>
-
-  		<%@ include file="_header.jsp" %>
-      	<%@ include file="_sideBarMenu.jsp" %>
-			<!-- Your Page Content Here -->
-			
+      <%@ include file="_header.jsp" %>
+        <%@ include file="_sideBarMenu.jsp" %>
+      <!-- Your Page Content Here -->
           <!-- Small boxes (Stat box) -->
           <div class="row" id="first-row" >
             <div class="col-lg-3 col-lg-offset-3 col-xs-6">
@@ -84,22 +81,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
-		<%@ include file="_footer.jsp" %>
-		<%-- <%@ include file="_controlSideBar.jsp" %> --%>
-     
-
+    <%@ include file="_footer.jsp" %>
+    <%-- <%@ include file="_controlSideBar.jsp" %> --%>
  <%@ include file="_defaultJS.jsp" %>
 <script>
 /*   var result = ${dashboard}; 
  * ${dashboard} get from _defaultJs.jsp 
  */
-   	$("#total-user").html(result.totaluser);
-  	$("#total-memo").html(result.totalmemo);
-  	$("#total-site").html(result.totalsite);
-  	$("#total-report-list").html(result.totalreportlist);
-  	
-  	
-  	
+    $("#total-user").html(result.totaluser);
+    $("#total-memo").html(result.totalmemo);
+    $("#total-site").html(result.totalsite);
+    $("#total-report-list").html(result.totalreportlist);
 </script>
   </body>
 </html>

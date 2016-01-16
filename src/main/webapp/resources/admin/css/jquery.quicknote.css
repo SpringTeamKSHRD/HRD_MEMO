@@ -10,20 +10,19 @@
  */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
 *,
 :before,
-:after
-{
+:after {
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
+
 /* container dark */
-.qn_container
-{
-	z-index:999;
+
+.qn_container {
+    z-index: 999;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -34,20 +33,23 @@
     margin-right: 5px;
     padding: 5px;
     -webkit-border-radius: 5px 5px 0 0;
-       -moz-border-radius: 5px 5px 0 0;
-            border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
     background: #313a39;
 }
+
+
 /* end container */
 
+
 /* show/hide */
-#qn_sh
-{
+
+#qn_sh {
     position: relative;
     text-align: center;
 }
-#qn_sh span
-{
+
+#qn_sh span {
     font-family: 'Open Sans', sans, arial;
     font-size: .8em;
     display: table;
@@ -57,69 +59,81 @@
     color: #dbdbdb;
 }
 
-#qn_sh span:hover
-{
+#qn_sh span:hover {
     cursor: pointer;
     text-decoration: underline;
 }
+
+
 /* end show/hide */
 
+
 /* notes container */
-#notes,#username-password
-{
+
+#notes,
+#username-password {
     position: relative;
     overflow: hidden;
     width: auto;
 }
 
+
 /* end notes container */
 
-/* notes */
-#notes > span,#username-password > span,
-#notes p,#username-password p
-{
 
+/* notes */
+
+#notes > span,
+#username-password > span,
+#notes p,
+#username-password p {
     font-family: 'Open Sans', sans, arial;
     right: 0;
     display: inline-block;
     text-align: left;
 }
-#notes p,#username-password p,
-#notes p input,#username-password p input
-{
+
+#notes p,
+#username-password p,
+#notes p textarea,
+#username-password p input {
     font-size: .9em;
     width: 100%;
 }
-#notes p,#username-password p
-{
+
+#notes p,
+#username-password p {
     margin: 5px auto 0 auto;
     /*padding: 2px;*/
 }
-#notes p input,#username-password p input
-{
+
+#notes p textarea,
+#username-password p input {
     width: 100%;
     color: #6d6d6d;
     border: 1px solid #ccc;
 }
-#notes p input:focus,#username-password p input:focus
-{
+
+#notes p textarea:focus,
+#username-password p input:focus {
     border-color: #ccc;
     box-shadow: 0;
 }
+
 .quicknote,
-#notes p input,#username-password p input
-{
+#notes p textarea,
+#username-password p input {
     position: relative;
     height: auto;
     padding: 7px;
     -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-            border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
-.quicknote
-{
-	min-width:290px;
-	padding-top:20px;
+
+.quicknote {
+    min-width: 290px;
+    padding-top: 20px;
     font-size: .8em;
     position: relative;
     overflow: auto;
@@ -135,19 +149,20 @@
     color: #1e5866;
     background: #51c5e2;
 }
+
 .quicknote-bword {
     word-break: break-all !important;
 }
-.quicknote:first-child
-{
+
+.quicknote:first-child {
     margin-top: 0;
 }
-.close:before
-{
+
+.close:before {
     content: 'x';
 }
-.close
-{
+
+.close {
     font-weight: bold;
     position: relative;
     top: 0;
@@ -158,51 +173,66 @@
     color: #6b2424;
 }
 
-.close:hover
-{
+.close:hover {
     cursor: pointer;
 }
+
+
 /* end notes */
 
+
 /* container light */
-.qn_container_light
-{
+
+.qn_container_light {
     border: 1px solid #ddd;
     background: #EFEFEF;
 }
+
+
 /* end container light */
 
+
 /* show/hide */
-.qn_container_light #qn_sh span
-{
+
+.qn_container_light #qn_sh span {
     color: #737373;
 }
+
+
 /* end show/hide */
 
+
 /* notes light */
-.qn_container_light #notes span,.qn_container_light #username-password span,
+
+.qn_container_light #notes span,
+.qn_container_light #username-password span,
 {
     color: #2da68f;
     border: 1px solid #97e8fc;
     background: #7AF4DC;
 }
-.qn_container_light #notes input,.qn_container_light #username-password input {
+
+.qn_container_light #notes textarea,
+.qn_container_light #username-password input {
     background: #F7F7F7;
 }
 
-#div-btn #logBtn{
-	min-width:145px;
-	
+#div-btn #logBtn {
+    min-width: 145px;
 }
-#div-btn #regBtn{
-	min-width:145px;
-	margin-right:0px;
+
+#div-btn #regBtn {
+    min-width: 145px;
+    margin-right: 0px;
 }
-.memo-img{
-    width: 25px;
-    height: 25px;
+
+.memo-img {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 10px;
     margin-top: -2px;
 }
+
+
 /* end notes light */
