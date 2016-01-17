@@ -35,7 +35,7 @@ public class PluginController {
 	private ReportServiceImpl reportDao;
 	@Autowired
 	private MemoServiceImpl memoDao;
-
+	
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user){
 		System.out.println(user);
@@ -49,6 +49,20 @@ public class PluginController {
 		  map.put("STATUS",HttpStatus.NOT_ACCEPTABLE.value());
 		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 	  }
+	}
+	@RequestMapping(value = "/savememo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
+		System.out.println("add memo controller.");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (memoDao.insertMemo(memo)) {			
+			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
+			map.put("STATUS", HttpStatus.CREATED.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN CREATED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
 	}
 	
 	@RequestMapping(value="/report", method = RequestMethod.POST)

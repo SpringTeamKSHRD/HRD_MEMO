@@ -24,81 +24,85 @@ pageEncoding="ISO-8859-1"%>
 					class="material-icons">comment</i></a></li>
 					<li><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
 						class="material-icons">lock_open</i></a></li>
-						<li><a class="btn-floating green menu-btn" id="btn-active-register"><i
-							class="material-icons">open_in_browser</i></a></li>
-						</ul>
-					</div>
+				<li><a class="btn-floating green menu-btn" id="btn-active-register"><i
+						class="material-icons">open_in_browser</i></a></li>
+			</ul>
+		</div>
+	</div>
+	<!--Memo Form-->
+	<div class="row" style="margin-top: 5px;">
+		<form class="col s12" id="hrd-memo-frm">
+			<div class="row">
+				<div class="col s12" id="img_desc_wrapper">
+					<table>
+						<tr style="padding: 0px;">
+							<td style="width: 50px; padding: 0px; margin: 0px;"><img alt=""
+								src="resources/Male-icon.png"
+								style="width: 45px; height: 59px; border: 1px solid gray; padding: 2px;">
+							</td>
+							<td style="padding: 0px; margin: 0px;">
+								<textarea style="height: 60px; border: 2px solid #009688;" id="descmemo">
+								</textarea>	
+							</td>
+						</tr>
+					</table>
 				</div>
-				<!--Memo Form-->
-				<div class="row" style="margin-top: 10px;">
-					<form class="col s12" id="hrd-memo-frm">
-						<div class="row">
-							<div class="col s12" id="img_desc_wrapper">
-								<table>
-									<tr style="padding: 0px;">
-										<td style="width: 50px; padding: 0px;"><img alt=""
-											src="resources/Male-icon.png"
-											style="width: 45px; height: 59px; border-radius: 90%; border: 1px solid gray;"></td>
-											<td style="padding: 0px;"><textarea
-												style="height: 60px; border: 2px solid #009688;" id="desc_memo"></textarea></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-								<div class="row" style="margin-top: 2px;">
-									<table>
-										<tr style="padding: 0px;">
-											<td style="width: 50px; padding: 0px;"></td>
-											<td style="padding: 0px;">
-												<div class="input-field col s1" style="padding-left: 0px;">
-													<input type="checkbox" class="filled-in" id="filled-in-box" />
-													<label for="filled-in-box">Public</label>
-												</div>
-												<div class="input-field col s11" style="text-align: right;">
-													<button class="btn waves-effect" type="button"
-													style="padding: 0px 5px; height: 30px;" id='btn-save-memo'>Save</button>
-												</div>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</form>
-						</div>
-						<!--End memo form  -->
-						<!--Login Form  -->
-						<div class="row">
-							<form class="col s12" id="hrd-login-frm">
-								<div class='row'>
-									<div class="card-panel teal"
-									style="padding: 10px; font-size: 17px; color: white; font-weight: bold;">
-									<i class="material-icons">lock</i>
-								</div>
+			</div>
+			<div class="row" style="margin-top: 2px;">
+				<table>
+					<tr style="padding: 0px;">
+						<td style="width: 50px; padding: 0px;"></td>
+						<td style="padding: 0px;">
+							<div class="input-field col s1" style="padding-left: 0px;">
+								<input type="checkbox" class="filled-in" id="public" />
+								<label for="public">Public</label>
 							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix">perm_identity</i> <input
-									id="icon_prefix" type="email" class="validate"> <label
-									for="icon_prefix">Email</label>
-								</div>
+							<div class="input-field col s11" style="text-align: right;">
+								<button class="btn waves-effect" type="button" 
+										style="padding: 0px 5px; height: 30px;" 
+										id='btn-save-memo'>Save</button>
 							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix">vpn_key</i> <input
-									id="icon_prefix" type="password" class="validate"> <label
-									for="icon_prefix">Password</label>
-								</div>
-							</div>
-							<div class='row'>
-								<div class='col s12'>
-									<button class="btn waves-effect waves-light" type="submit"
-									name="action" style="padding-top: 0px; float: right;">
-									<i class="material-icons">done_all</i>
-								</button>
-							</div>
-						</div>
-					</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</div>
+	<!--End memo form  -->
+	<!--Login Form  -->
+	<div class="row">
+		<form class="col s12" id="hrd-login-frm">
+			<div class='row'>
+				<div class="card-panel teal"
+					style="padding: 10px; font-size: 17px; color: white; font-weight: bold;">
+					<i class="material-icons">lock</i>
 				</div>
-				<!--Login Form  -->
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">perm_identity</i> <input
+						id="loginemail" type="email" class="validate"> <label
+						for="loginemail">Email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">vpn_key</i> <input
+						id="loginpassword" type="password" class="validate"> <label
+						for="loginpassword">Password</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col s12'>
+					<button class="btn waves-effect waves-light" type="button" onclick="loginMemo()"
+						name="action" style="padding-top: 0px; float: right;">
+						<i class="material-icons">done_all</i>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--end login form  -->
 				<!--Register Form  -->
 				<div class="row">
 					<form class="col s12" id="hrd-register-frm">
@@ -143,95 +147,97 @@ pageEncoding="ISO-8859-1"%>
 			</form>
 		</div>
 		<!--Register Form  -->
-		<div class='row'
-		style="margin-top: 10px; padding: 0px; width: 100%; height: auto;"
-		id="memo-panel">
-		<div class="col s11" style="margin: auto;" id="memo-panel"></div>
-	</div>
 </body>
 <link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
-	var display = true;
-	iframeparent = parent.document.getElementById('hrdmemo_iframe');
+	var display=true;
 	$("#btn-active-memo").click(function() {
-		$("#hrd-login-frm").css('display','none');
-		$("#hrd-register-frm").css('display','none');
-		$("#hrd-memo-frm").slideToggle(10,
-			function() {
-				if (display == true) {
-					iframeparent.style.height =150+ "px";
-					display = false;
-				} else {
-					iframeparent.style.height = 70 + "px";
-					display = true;
-				}
-			});
-	});
-	var display1 = true;
+		display1=true;
+		display2=true;
+						if(display==true){
+							iframeSizeMemoPanel('150px');
+							display=false;
+						}else{
+							display=true;
+							iframeSizeMemoPanel('55px');	
+						}
+						$("#hrd-login-frm").css('display','none');
+						$("#hrd-register-frm").css('display','none');
+						$("#hrd-memo-frm").slideToggle(10);
+					});
+	var display1=true;
 	$("#btn-active-login").click(function() {
-		$("#hrd-memo-frm").css('display','none');
-		$("#hrd-register-frm").css('display','none');
-		$("#hrd-login-frm").slideToggle(10,
-			function() {
-				if (display1 == true) {
-					iframeparent.style.height = 200+ "px";
-					display1 = false;
-				} else {
-					iframeparent.style.height = 70 + "px";
-					display1 = true;
+		display=true;
+		display2=true;
+				if(display1==true){
+					iframeSizeLoginPanel('280px');
+					display1=false;
+				}else{
+					display1=true;
+					iframeSizeLoginPanel('55px');
 				}
-			});
+				$("#hrd-memo-frm").css('display','none');
+				$("#hrd-register-frm").css('display','none');
+				$("#hrd-login-frm").slideToggle(10);
 	});
-	var display2 = true;
+	var display2=true;
 	$("#btn-active-register").click(function() {
-		$("#hrd-login-frm").css('display','none');
-		$("#hrd-memo-frm").css('display','none');
-		$("#hrd-register-frm").slideToggle(10,
-			function() {
-				if (display2 == true) {
-					iframeparent.style.height =250+ "px";
-					display2 = false;
-				} else {
-					iframeparent.style.height = 70 + "px";
-					display2= true;
+		display1=true;
+		display=true;
+				if(display2==true){
+					iframeSizeRegisterPanel('350px');
+					display2=false;
+				}else{
+					display2=true;
+					iframeSizeRegisterPanel('55px');
 				}
+				$("#hrd-login-frm").css('display','none');
+				$("#hrd-memo-frm").css('display','none');
+				$("#hrd-register-frm").slideToggle(10);
 			});
-	});	
-	
-	$("#btn-save-memo").click(function() {
-		$("#memo-panel")
-		.append(
-			"<span class='chip' style='display:block; margin:5px; height:auto;'>"
-			+ $("#desc_memo").val()
-			+ "<i class='material-icons' onclick='deleteMsg()'>close</i></span>");
-		$("#desc_memo").val("");
-		var moreh = iframeparent.offsetHeight + 10;
-		iframeparent.style.height = moreh + "px";
-
-	});
-	function deleteMsg() {
-		var moreh = iframeparent.offsetHeight - 90;
-		iframeparent.style.height = moreh + "px";
+	function iframeSizeMemoPanel(height){
+		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
 	}
+	function iframeSizeLoginPanel(height){
+		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+	}
+	function iframeSizeRegisterPanel(height){
+		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+	}
+	//sign up user
 	function signUpUser(){
-		json={
-			username:$("#name").val(),
-			email:$("#email").val(),
-			password:$("#password").val(),
-			gender:$('input[name="gender"]:checked').val(),
-			image:'Male-icon.png'
+		var json={
+				username:$("#name").val(),
+				email:$("#email").val(),
+				password:$("#password").val(),
+				gender:$('input[name="gender"]:checked').val(),
+				image:'Male-icon.png'
 		};
-		$.ajax({
-			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/plugin/signup",
-			contentType: 'application/json;charset=utf-8',
-			data: JSON.stringify(json),
-			success : function(data) {
-				alert(data.MESSAGE);
-			},
-			error : function(data) {
-			}
-		});
+				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
 	}
+	//login memo
+	function loginMemo(){
+	var json={
+				email:$("#loginemail").val(),
+				password:$("#loginpassword").val()
+		};
+				parent.postMessage("login#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+	}
+	//save memo
+	$("#btn-save-memo").click(function() {
+		var ismpublic="";
+		var pbl=document.getElementById("public");
+			if(pbl.checked){
+				ismpublic=true;
+			}else{
+				ismpublic=false;
+			}
+		 var json={
+				content:$("#descmemo").val(),
+				ispublic:ismpublic
+				};
+				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+	});
+	$("#descmemo").val("");
 </script>
 </html>

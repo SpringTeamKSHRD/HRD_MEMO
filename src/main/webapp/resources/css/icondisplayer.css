@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+.material-icons {
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: 'liga';
+   -moz-font-feature-settings: 'liga';
+   font-feature-settings: 'liga';
+}
+.chip {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  background-color: #e4e4e4;
+  margin: 4px;
+}
+.chip i.material-icons {
+  cursor: pointer;
+  float: right;
+  font-size: 16px;
+  line-height: 32px;
+  padding-left: 8px;
+}

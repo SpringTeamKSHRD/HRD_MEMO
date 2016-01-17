@@ -16,6 +16,4 @@
 </body>
 <script
 	src='http://localhost:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>
-<script type="text/javascript">
-</script>
 </html>
