@@ -80,12 +80,12 @@
 					<div class="row">
 						<div class="col s12 m4 l4 body_left"> <br/>
 							<div class="input-field col s12">
-						    <select>
+						    <select id="limit_row">
 							      <!-- <option value="" disabled selected>Choose your option</option> -->
-							      <option value="1">5</option>
-							      <option value="2">10</option>
-							      <option value="3">30</option>
-							      <option value="3">50</option>
+							      <option value="5">5</option>
+							      <option value="10">10</option>
+							      <option value="30">30</option>
+							      <option value="50">50</option>
 						    </select>
 						    <label>Number of rows</label>
 						</div>
@@ -93,18 +93,7 @@
 					</div>
 					<div id="listmemo" style="max-height:500px; overflow-y:scroll">
 					
-					</div>
-					
-					<!-- <ul class="collection">
-						<li class="collection-item avatar">
-						  <img src="image/yoona.jpg" alt="" class="circle">
-						  <a><i class="material-icons">room</i></a>
-						  <span class="title">Title</span>
-						  <p> Cambodia is a developing country. Economic depends on agriculture. Angorwat temple is in Siem Reap province.</p>
-						  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-						</li>						
-					</ul> -->
-					
+					</div>					
 				</div>
 				<!-- pagination -->
 				<div class="row">
@@ -180,10 +169,6 @@
 						&nbsp;&nbsp;
 						<a class="waves-effect waves-light btn " id="btnsave" onclick="saveMemo()">Save</a> 
 						<a class="waves-effect waves-light btn " id="btncancel" onclick="cancelMemo()">Cancel</a>
-							<!-- <div class="col s12 m4 l2 right">
-								<input type="button" value="Save"/>
-								<input type="button" value="Cancel"/>							
-							</div> -->
 					</div>
 				</div>
 			</form>
@@ -199,7 +184,12 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Dashboard Script -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/userdashboard.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/delete_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/update_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/add_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
 	<!-- Bootpag -->
 	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/bootpag/bootpag.js"></script> --%>
   </body>
