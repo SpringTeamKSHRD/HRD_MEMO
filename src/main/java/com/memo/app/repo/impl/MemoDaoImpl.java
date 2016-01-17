@@ -36,14 +36,14 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<Memo> listMemo(int limit, int page) {
-		System.out.println("list memo with pagination.");
-		if(page<=0) page=1;
-		int offset = limit * page - limit;
+		//System.out.println("list memo with pagination."+limit);
+		/*if(page<=0) page=1;
+		int offset = limit * page - limit;*/
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"ORDER BY id DESC "
 					+"LIMIT ? OFFSET ?";				
-		return jdbcTemplate.query(sql, new Object[]{limit,offset},new MemoRowMapper());
+		return jdbcTemplate.query(sql, new Object[]{limit,0},new MemoRowMapper());
 	}
 	
 	@Override
