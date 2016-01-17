@@ -16,12 +16,13 @@ public class MemoRowMapper implements RowMapper<Memo>{
 		Memo memo=new Memo();
 		memo.setId(rs.getInt(1));
 		memo.setUserid(rs.getInt(2));
-		memo.setContent(rs.getString(3));
-		memo.setDomain(rs.getString(4));
-		memo.setUrl(rs.getString(5));
-		memo.setDate(rs.getDate(6));
-		memo.setIsenable(rs.getBoolean(7));
-		memo.setIspublic(rs.getBoolean(8));		
+		memo.setTitle(rs.getString(3));
+		memo.setContent(rs.getString(4));
+		memo.setDomain(rs.getString(5));
+		memo.setUrl(rs.getString(6));
+		memo.setDate(rs.getDate(7));
+		memo.setIsenable(rs.getBoolean(8));
+		memo.setIspublic(rs.getBoolean(9));		
 		return memo;
 	}
 

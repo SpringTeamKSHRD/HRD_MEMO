@@ -37,19 +37,19 @@
 				<div class="row">
 					<div class="col s12 m6 l4">
 						<div class="input-field col s12">
-						    <select>
+						    <select id="searching">
 							      <!-- <option value="" disabled selected>Choose your option</option> -->
 							      <option value="1">Title</option>
-							      <option value="2">Date</option>
-							      <option value="3">Website</option>
-							      <option value="3">Public</option>
+							      <option value="2">Website</option>
+							      <option value="3">Privacy</option>
+							      <option value="4">Date</option>
 						    </select>
-						    <label>Filtering</label>
+						    <label>Searching</label>
 						</div>
 					</div>
 					<div class="col s12 m6 l8">
-						<div id="filterarea">
-						
+						<div id="searcharea">
+							
 						</div>
 					</div>
 				</div>
