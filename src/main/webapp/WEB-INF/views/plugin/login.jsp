@@ -7,22 +7,27 @@
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/css/plugin.css' />
 </head>
 <body>
-	<form id="frmLogin" method="POST" class='col s12'>
+	<form id="frmLogin" method="POST" class="col s12"
+		style="padding: 10px;">
+		<div class="row" style="margin-bottom: 0px;">Please Log In to
+			Note</div>
+		<hr style="margin: 5px 0 10px 0; border-top: 1px solid #ddd;">
 		<div class="row" style="margin-bottom: 0px;">
-			<div class="input-field col s12">
-				<i class="material-icons prefix">perm_identity</i> <input
-					id="username" type="text" class="validate" name='username'
-					style="margin-bottom: 0px;"> <label for="username">Email</label>
+			<div class="input-field col s12" style="margin: 0px;">
+				<i class="material-icons prefix active">perm_identity</i> <input
+					id="username" type="text" class="validate valid" name="username"
+					style="margin-bottom: 0px;" placeholder="Enter Email">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 0px;">
-			<div class="input-field col s12">
-				<i class="material-icons prefix">vpn_key</i> <input id="password"
-					type="password" class="validate" name='password'
-					style="margin-bottom: 0px;"> <label for="password">Password</label>
+			<div class="input-field col s12" style="margin-top: 5px;">
+				<i class="material-icons prefix active">vpn_key</i> <input
+					id="password" type="password" class="validate valid"
+					name="password" style="margin-bottom: 0px;" placeholder="Enter Password">
 			</div>
 		</div>
 		<div class="row" style="margin: 0px 15px 0px 15px;">
+
 			<button class="btn waves-effect waves-light right" type="submit"
 				style="margin: 7px 0 7px 0;">
 				<i class="large material-icons">input</i>

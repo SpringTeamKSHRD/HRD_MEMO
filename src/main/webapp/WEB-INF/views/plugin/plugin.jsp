@@ -7,21 +7,34 @@
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/css/plugin.css' />
 </head>
 <body>
-	<form id="frmMemo" method="POST" class='col s12'>
-		<div class='row' style="margin-bottom: 0px;">
-			<div class="col s12" style="padding: 0px;">
-				<textarea id="note" style="border: 1px solid #ddd;"></textarea>
-			</div>
-		</div>
+	<form id="frmMemo" method="POST" class="col s12"
+		style="padding: 15px 15px 15px 15px;">
+		<div class="row" style="margin-bottom: 0px;">Write Your Note
+			Here</div>
+		<hr style="margin: 5px 0 10px 0; border-top: 1px solid #ddd;">
+		<ul class="collection" style="margin: 0px;">
+			<li class="collection-item avatar"
+				style="border: 0px !important; padding: 0px 0px 0px 72px; height: 0px; min-height: 0px;">
+				<img src="${pageContext.request.contextPath}/resources/Male-icon.png" alt="" class="circle">
+
+				<div class="row" style="margin-bottom: 0px;">
+					<div class="col s12" style="padding: 0px;">
+						<textarea id="note" style="border: 1px solid rgb(221, 221, 221);"></textarea>
+					</div>
+				</div>
+
+			</li>
+		</ul>
 		<div class="row" style="margin: 0 15px 0 15px;">
-			<div class="input-field switch " style="margin-top: inherit;">
-				<label> Public <input type="checkbox"> <span
-					class="lever"></span>
-				</label>
+			<div class="input-field left" style="margin-top: inherit;">
+				<p>
+					<input type="checkbox" id="test5"> <label for="test5">Public</label>
+				</p>
 			</div>
-			<div class='input-field right' style="margin-top: inherit;">							
-				<button class="btn waves-effect waves-light right" type="submit" style="margin: 7px 0 7px 0;">
-					<i class='material-icons'>done_all</i>
+			<div class="input-field right" style="margin-top: inherit;">
+				<button class="btn waves-effect waves-light right" type="submit"
+					style="margin: 7px 0 7px 0;">
+					<i class="material-icons">done_all</i>
 				</button>
 			</div>
 		</div>

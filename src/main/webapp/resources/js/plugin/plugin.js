@@ -10,12 +10,13 @@ $(function() {
 	//add style to iframe-container 
 	$(".memo-container").css({
 		"position": "relative",
-		"height": "154px",
+		"height": "197px",
+		"display":"none",
 		"overflow": "hidden"});
 	//add style to iframe
 	$("#frame-memo").css({
-		"padding":"15px 15px 10px 15px",
-		"display":"none",
+		//"padding":"15px 15px 10px 15px",
+		//"display":"none",
 		"position":" absolute",
 		"top": "0",
 		"left": "0",
@@ -23,7 +24,7 @@ $(function() {
 		"height": "100%",
 		"overflow": "hidden"});
 	//onclick button slidetoggle iframe
-	$("#btn-memo").click(function(){$("iframe#frame-memo").slideToggle(500);});
+	$("#btn-memo").click(function(){$(".memo-container").slideToggle(500);});
 });
 
 
