@@ -64,16 +64,25 @@ public class PluginController {
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}
 	}
+	
 	@RequestMapping(value="/memo", method = RequestMethod.GET)
-	public ResponseEntity<Object> addMemo(
+	public ResponseEntity<Map<String, Object>> getMemo(
 			@RequestParam("domain") String domain,
 			@RequestParam("url") String url, 
 			HttpServletRequest request) {
-		
-		HttpStatus status = HttpStatus.OK;
-		User currentUser = (User)request.getSession(true).getAttribute("USER");
-		Memo memo = memoDao.getMemoByUrl(domain, url.replace(" ", "%20"), currentUser.getUserid());
-		return new ResponseEntity<Object>(memo, status);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {		
+			User currentUser = (User)request.getSession(true).getAttribute("USER");
+			map.put("MESSAGE", memoDao.getMemoByUrl(domain, url.replace(" ", "%20"), currentUser.getUserid()));
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("isLogin", "false");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
 	@RequestMapping(value="/memo", method = RequestMethod.POST)
@@ -116,14 +125,12 @@ public class PluginController {
 			map.put("IS_LOGIN", isAuthenticated());
 			status = HttpStatus.OK;
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			map.put("MESSAGE", e.getMessage());
 			map.put("IS_LOGIN", isAuthenticated());
 			status = HttpStatus.BAD_REQUEST;
 			e.printStackTrace();
 			return new ResponseEntity<Map<String, Object>>(map, status);
 		}
-		System.out.println(isAuthenticated());
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
@@ -132,6 +139,5 @@ public class PluginController {
 	}
 	private String getUsername() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
-	
+	}	
 }

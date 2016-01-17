@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>Memo</title>
-	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/css/pess_memo.css' />
-	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/materialize/css/materialize.min.css' />
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/css/plugin.css' />
 </head>
 <body>
 	<form id="frmMemo" method="POST" class='col s12'>

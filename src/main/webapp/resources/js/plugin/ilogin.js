@@ -1,3 +1,4 @@
+//################js for embed inside the iframe with login.jsp
 //on submit form, post to server to login
 $(document).ready(function(){
 	$("#frmLogin").submit(function(e) {

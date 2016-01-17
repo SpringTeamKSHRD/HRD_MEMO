@@ -1,3 +1,4 @@
+//################js for embed inside the iframe with plugin.jsp
 //function convert url parameter to json
 function ParamToJson() {            
     var pairs = location.search.slice(1).split('&');    
@@ -8,7 +9,7 @@ function ParamToJson() {
     });
     return JSON.parse(JSON.stringify(result));
 }
-/*####################LOGIC*/
+//####################LOGIC
 //check if user is login
 $.ajax({
     url: "http://localhost:8080/HRD_MEMO/plugin/user/status",
@@ -25,7 +26,7 @@ $(document).ready(function(){
 	    url: "http://localhost:8080/HRD_MEMO/plugin/memo"+location.search,
 	    type: "get",
 	    success: function (response) {
-	            $('#note').val(response['content']);
+	            $('#note').val(response['MESSAGE']['content']);
 	    }
 	});
 	//add new memo
@@ -47,7 +48,7 @@ $(document).ready(function(){
 		});
     });
 });
-/*####################UI LOGIC*/
+//####################UI LOGIC
 $(document).ready(function(){
 	//on focus textarea add new border style
     $("body").on("focus", "textarea#note", function(e) {    	
