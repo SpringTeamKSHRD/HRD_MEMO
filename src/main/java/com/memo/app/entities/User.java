@@ -14,15 +14,8 @@ import javax.persistence.Transient;
 public class User {
 	
 	@Id
-	private int userid;
-	
+	private int userid;	
 	private String username;
-	@Override
-	public String toString() {
-		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", gender=" + gender
-				+ ", email=" + email + ", image=" + image + ", ismemoenable=" + ismemoenable + ", type=" + type
-				+ ", registerdate=" + registerdate + "]";
-	}
 	private String password;
 	private String gender;
 	private String email;
@@ -89,11 +82,11 @@ public class User {
 	public void setRegisterdate(Date registerdate) {
 		this.registerdate = registerdate;
 	}
-
-
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", gender=" + gender
+				+ ", email=" + email + ", image=" + image + ", ismemoenable=" + ismemoenable + ", type=" + type
+				+ ", registerdate=" + registerdate + "]";
+	}
 
 }

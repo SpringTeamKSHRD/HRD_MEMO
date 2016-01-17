@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
-import com.memo.app.repo.impl.MemoDaoImp;
+import com.memo.app.repo.impl.MemoDaoImpl;
 
 @Service
 @Lazy
-public class MemoServiceImp implements com.memo.app.services.MemoService{
+public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	@Autowired
-	private MemoDaoImp memoDao;
+	private MemoDaoImpl memoDao;
 
 	@Override
 	public List<Memo> listMemo() {
@@ -68,7 +68,7 @@ public class MemoServiceImp implements com.memo.app.services.MemoService{
 	}
 
 	@Override
-	public List<Memo> listMemoByUrl(String domain, String url, int userid) {
-		return memoDao.listMemoByUrl(domain, url, userid);		
+	public Memo getMemoByUrl(String domain, String url, int userid) {
+		return memoDao.getMemoByUrl(domain, url, userid);		
 	}	
 }

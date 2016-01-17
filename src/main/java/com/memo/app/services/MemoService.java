@@ -8,11 +8,11 @@ import com.memo.app.entities.Memo;
 
 public interface MemoService {
 	public List<Memo> listMemo();
-	public List<Memo> listMemo(int limit, int page);
-	public List<Memo> listMemoByUrl(String domain, String url, int userid);
+	public List<Memo> listMemo(int limit, int page);	
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);
 	public boolean deleteMemo(int id);
+	public Memo getMemoByUrl(String domain, String url, int userid);
 	public Memo getMemo(int id);
 	public List<Memo> filterMemoByColumnName(Object column_name,Object value);
 	public List<HistoryMemo> listHistoryMemo(int memoid);

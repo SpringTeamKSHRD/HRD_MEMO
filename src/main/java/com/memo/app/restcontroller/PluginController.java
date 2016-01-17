@@ -1,8 +1,10 @@
 package com.memo.app.restcontroller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.memo.app.entities.Memo;
 import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
-import com.memo.app.services.impl.MemoServiceImp;
+import com.memo.app.services.impl.MemoServiceImpl;
 import com.memo.app.services.impl.ReportServiceImpl;
 import com.memo.app.services.impl.UserServiceImpl;
 
@@ -31,8 +34,8 @@ public class PluginController {
 	@Autowired
 	private ReportServiceImpl reportDao;
 	@Autowired
-	private MemoServiceImp memoDao;
-	
+	private MemoServiceImpl memoDao;
+
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user){
 		System.out.println(user);
@@ -48,7 +51,7 @@ public class PluginController {
 	  }
 	}
 	
-	@RequestMapping(value="/report")
+	@RequestMapping(value="/report", method = RequestMethod.POST)
 	public ResponseEntity<Map<String,Object>> userReport(Report rp){
 		Map<String,Object> map=new HashMap<String,Object>();
 		if(reportDao.saveReport(rp)==true){
@@ -61,33 +64,74 @@ public class PluginController {
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value="/memo", method = RequestMethod.GET)
+	public ResponseEntity<Object> addMemo(
+			@RequestParam("domain") String domain,
+			@RequestParam("url") String url, 
+			HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.OK;
+		User currentUser = (User)request.getSession(true).getAttribute("USER");
+		Memo memo = memoDao.getMemoByUrl(domain, url.replace(" ", "%20"), currentUser.getUserid());
+		return new ResponseEntity<Object>(memo, status);
+	}
 	
-	@RequestMapping(value="/check")
-	public ResponseEntity<Map<String,Object>> checkUrl(HttpServletRequest request,
-		@RequestParam("domain") String domain, @RequestParam("url") String url){		
-		Map<String,Object> map=new HashMap<String,Object>();
-		HttpStatus status = null;		
-		try {
-			User currentUser = (User)request.getSession().getAttribute("USER");
-			map.put("MESSAGE", memoDao.listMemoByUrl(domain,url, currentUser.getUserid()));
-			status = HttpStatus.OK;
-		} catch (Exception e) {
-			e.printStackTrace();
-			map.put("isLogin", "false");			
-			status = HttpStatus.INTERNAL_SERVER_ERROR;			
+	@RequestMapping(value="/memo", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> addMemo(
+			@RequestBody Memo memo, 
+			HttpServletRequest request) {
+				
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = null;
+		User currentUser = (User)request.getSession().getAttribute("USER");
+		memo.setDate(new Date());
+		memo.setUserid(currentUser.getUserid());
+		if (memoDao.insertMemo(memo)) {			
+			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
+			status = HttpStatus.CREATED;			
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN CREATED.");
+			status = HttpStatus.NOT_FOUND;
 		}
-		return new ResponseEntity<Map<String,Object>>(map, status);
-	}	
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
 	
-	@RequestMapping(value = "/status", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Map<String, Object>> status(HttpServletRequest request) {
+	@RequestMapping(value = "/user/status", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Map<String, Object>> userStatus(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpStatus status = HttpStatus.OK;
 		map.put("isLogin", isAuthenticated());
+		map.put("username", getUsername());
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
+	@RequestMapping(value = "/autologin/admin", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Map<String, Object>> autologin(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			request.login("admin@gmail.com", "1");
+			map.put("MESSAGE", "AUTO LOG IN SUCCESS WITH DEFAULT ADMIN ACCOUNT 'admin'");
+			map.put("STATUS", "200");
+			map.put("IS_LOGIN", isAuthenticated());
+			status = HttpStatus.OK;
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			map.put("MESSAGE", e.getMessage());
+			map.put("IS_LOGIN", isAuthenticated());
+			status = HttpStatus.BAD_REQUEST;
+			e.printStackTrace();
+			return new ResponseEntity<Map<String, Object>>(map, status);
+		}
+		System.out.println(isAuthenticated());
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
 	public boolean isAuthenticated() {
-		return !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken);
+		return !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken);		
 	}
+	private String getUsername() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+	
 }

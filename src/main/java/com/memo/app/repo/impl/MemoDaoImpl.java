@@ -14,12 +14,12 @@ import com.memo.app.entities.Memo;
 import com.memo.app.repo.MemoDao;
 
 @Repository
-public class MemoDaoImp implements MemoDao{
+public class MemoDaoImpl implements MemoDao{
 	
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public MemoDaoImp(JdbcTemplate jdbcTemplate){
+	public MemoDaoImpl(JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -85,7 +85,7 @@ public class MemoDaoImp implements MemoDao{
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
+		return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
 	}
 	@Override
 	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
@@ -130,13 +130,13 @@ public class MemoDaoImp implements MemoDao{
 		return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
 	}
 	@Override
-	public List<Memo> listMemoByUrl(String domain, String url, int userid) {
+	public Memo getMemoByUrl(String domain, String url, int userid) {
 		System.out.println("list memo by url");
-		String sql="SELECT	* FROM memo.tbmemo " +
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic FROM memo.tbmemo " +
 					"WHERE DOMAIN = ? " +
 						"AND url = ? " +
 						"AND userid = ? " +
-						"AND isenable = TRUE limit 1";
-		return jdbcTemplate.query(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+						"AND isenable = TRUE ";
+		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
 	}	
 }

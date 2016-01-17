@@ -17,7 +17,7 @@ public class Memo {
 	private String domain;
 	private String url;
 	private Date date;
-	private boolean isenable;
+	private boolean isenable = true;
 	private boolean ispublic;
 	public int getId() {
 		return id;
@@ -72,6 +72,12 @@ public class Memo {
 	}
 	public void setIspublic(boolean ispublic) {
 		this.ispublic = ispublic;
+	}
+	@Override
+	public String toString() {
+		return "Memo [id=" + id + ", userid=" + userid + ", title=" + title + ", content=" + content + ", domain="
+				+ domain + ", url=" + url + ", date=" + date + ", isenable=" + isenable + ", ispublic=" + ispublic
+				+ "]";
 	}
 	
 }

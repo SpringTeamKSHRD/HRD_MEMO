@@ -93,7 +93,7 @@ CREATE TABLE "memo"."tbmemo" (
 "title" varchar COLLATE "default" NOT NULL,
 "content" varchar COLLATE "default",
 "domain" varchar COLLATE "default",
-"url" varchar(32) COLLATE "default" NOT NULL,
+"url" varchar COLLATE "default" NOT NULL,
 "date" timestamp(6) NOT NULL,
 "isenable" bool NOT NULL,
 "ispublic" bool NOT NULL
