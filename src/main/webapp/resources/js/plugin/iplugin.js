@@ -21,12 +21,15 @@ $.ajax({
     }
 });
 $(document).ready(function(){
+	var edit_state = false;
 	//get a memo if avaiable
 	$.ajax({
 	    url: "http://localhost:8080/HRD_MEMO/plugin/memo"+location.search,
 	    type: "get",
 	    success: function (response) {
 	            $('#note').val(response['MESSAGE']['content']);
+	            $('#ispublic')[0].checked=response['MESSAGE']['ispublic']
+	            edit_state = true;
 	    }
 	});
 	//add new memo
@@ -36,6 +39,7 @@ $(document).ready(function(){
 		var obj = ParamToJson();
 		//add content from textarea
 		obj.content = $('#note').val();
+		obj.ispublic = $('#test5').prop('checked');
 		//then post it to server
 		$.ajax({
 		    url: "http://localhost:8080/HRD_MEMO/plugin/memo",

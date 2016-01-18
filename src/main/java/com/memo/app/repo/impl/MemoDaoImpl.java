@@ -131,12 +131,12 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public Memo getMemoByUrl(String domain, String url, int userid) {
-		System.out.println("list memo by url");
+		System.out.println("get memo by url");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic FROM memo.tbmemo " +
 					"WHERE DOMAIN = ? " +
 						"AND url = ? " +
 						"AND userid = ? " +
-						"AND isenable = TRUE ";
+						"AND isenable = TRUE LIMIT 1";
 		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
 	}	
 }

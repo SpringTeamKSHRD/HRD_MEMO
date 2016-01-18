@@ -90,13 +90,13 @@ DROP TABLE IF EXISTS "memo"."tbmemo" CASCADE;
 CREATE TABLE "memo"."tbmemo" (
 "id" int4 DEFAULT nextval('"memo".tbmemo_id_seq'::regclass) NOT NULL,
 "userid" int4 NOT NULL,
-"title" varchar COLLATE "default" NOT NULL,
 "content" varchar COLLATE "default",
+"title" varchar COLLATE "default",
 "domain" varchar COLLATE "default",
 "url" varchar COLLATE "default" NOT NULL,
 "date" timestamp(6) NOT NULL,
-"isenable" bool NOT NULL,
-"ispublic" bool NOT NULL
+"isenable" bool DEFAULT true NOT NULL,
+"ispublic" bool DEFAULT false NOT NULL
 )
 WITH (OIDS=FALSE)
 
