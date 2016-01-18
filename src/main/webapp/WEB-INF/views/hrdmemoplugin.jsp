@@ -6,13 +6,13 @@ pageEncoding="ISO-8859-1"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<link rel='stylesheet' type='text/css'
-	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
 	<div class='row' style="height: 45px;">
@@ -41,7 +41,7 @@ pageEncoding="ISO-8859-1"%>
 								style="width: 45px; height: 59px; border: 1px solid gray; padding: 2px;">
 							</td>
 							<td style="padding: 0px; margin: 0px;">
-								<textarea style="height: 60px; border: 2px solid #009688;" id="descmemo">
+								<textarea style="max-height: 60px; height:60px; border: 2px solid #009688;" id="descmemo">
 								</textarea>	
 							</td>
 						</tr>
@@ -148,8 +148,13 @@ pageEncoding="ISO-8859-1"%>
 		</div>
 		<!--Register Form  -->
 </body>
-<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
+<link rel="stylesheet" href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
+var url="";
+function handlingMsg(e){
+	url=e.data;
+}
+addEventListener("message",handlingMsg,true);
 	var display=true;
 	$("#btn-active-memo").click(function() {
 		display1=true;
@@ -196,13 +201,13 @@ pageEncoding="ISO-8859-1"%>
 				$("#hrd-register-frm").slideToggle(10);
 			});
 	function iframeSizeMemoPanel(height){
-		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+		parent.postMessage('size#'+height,url);
 	}
 	function iframeSizeLoginPanel(height){
-		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+		parent.postMessage('size#'+height,url);
 	}
 	function iframeSizeRegisterPanel(height){
-		parent.postMessage('size#'+height,'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+		parent.postMessage('size#'+height,url);
 	}
 	//sign up user
 	function signUpUser(){
@@ -213,7 +218,7 @@ pageEncoding="ISO-8859-1"%>
 				gender:$('input[name="gender"]:checked').val(),
 				image:'Male-icon.png'
 		};
-				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),url);
 	}
 	//login memo
 	function loginMemo(){
@@ -221,7 +226,7 @@ pageEncoding="ISO-8859-1"%>
 				email:$("#loginemail").val(),
 				password:$("#loginpassword").val()
 		};
-				parent.postMessage("login#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+				parent.postMessage("login#"+JSON.stringify(json, null, '\t'),url);
 	}
 	//save memo
 	$("#btn-save-memo").click(function() {
@@ -236,7 +241,7 @@ pageEncoding="ISO-8859-1"%>
 				content:$("#descmemo").val(),
 				ispublic:ismpublic
 				};
-				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),'http://localhost:8080/HRD_MEMO/hrdmemoplugin');
+				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),url);
 	});
 	$("#descmemo").val("");
 </script>
