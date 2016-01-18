@@ -14,7 +14,8 @@ public interface MemoDao {
 	public boolean deleteMemo(int id);
 	public Memo getMemoByUrl(String domain, String url, int userid);
 	public Memo getMemo(int id);
-	public List<Memo> filterMemoByColumnName(Object column_name,Object value);
+	public List<Memo> filterMemoByColumnName(String column_name,String value);
+	public List<Memo> filterMemoByPrivacy(boolean privacy);
 	public List<HistoryMemo> listHistoryMemo(int memoid);
 	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);

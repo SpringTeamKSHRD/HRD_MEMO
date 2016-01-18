@@ -2,14 +2,14 @@ var domain=window.location.origin+"/HRD_MEMO";
 
 	var s_website="<div class='row'>"
 					+"<div class='input-field col s12'>"
-						+"<input placeholder='type website name' id='first_name' type='text' class='validate'>"
+						+"<input placeholder='type website name' id='search_website' onkeyup='filterByWebsite()' type='text' class='validate'>"
 					+"</div>"
 				 +"</div>";
 	var s_public="&nbsp;&nbsp;<br/><br/>"
 				+"<div class='switch'>"
 					+"<label>"
 						+"Public"
-							+"<input type='checkbox'>"
+							+"<input type='checkbox' id='ispublic' onchange='filterByPublic()'>"
 							+"<span class='lever'></span>"
 						+"</label>"
 				+"</div>";
@@ -30,18 +30,72 @@ var domain=window.location.origin+"/HRD_MEMO";
 			$("#searcharea").html(s_website);
 		}else if(value==2){
 			$("#searcharea").html(s_public);
+			filterByPublic();
 		}else if(value==3){
 			$("#searcharea").html(s_date);
 		}
 
 	});
 	
+	var ispublic=false;
+	function filterByPublic(){
+			$.ajax({
+				type : "GET",
+				url : domain+"/user/privacy/"+ispublic,
+				success : function(data) {
+					//alert("Success :" + data);
+					displayData(data);
+				},
+				error : function(data) {
+					//alert("Unsuccess: " + data.MESSAGE);
+					console.log("ERROR..." + data);
+				}
+			});	
+			if(ispublic==false) ispublic=true;
+			else ispublic=false;
+	}
+	
+	function filterByTitle(){
+		//alert("hello");
+		var title=$("#search_title").val();
+		$.ajax({
+			type : "GET",
+			url : domain+"/user/filter/title/"+title,
+			success : function(data) {
+				//alert("Success :" + data);
+				displayData(data);
+			},
+			error : function(data) {
+				//alert("Unsuccess: " + data.MESSAGE);
+				console.log("ERROR..." + data);
+			}
+		});
+	}
+	
+	function filterByWebsite(){
+		//alert(website);
+		var website=$("#search_website").val(); 
+		$.ajax({
+			type : "GET",
+			url : domain+"/user/filter/domain/"+website,
+			success : function(data) {
+				//alert("Success :" + data);
+				displayData(data);
+			},
+			error : function(data) {
+				//alert("Unsuccess: " + data.MESSAGE);
+				console.log("ERROR..." + data);
+			}
+		});
+	}
+	
 	function filterByDate(){
 		//alert("start date :"+$("#s_date").val()+" And end date: "+$("#e_date").val()); alert(typeof($("#s_date")));
 		var sd=$("#s_date").val();
 		var ed=$("#e_date").val();
-		alert("start date :"+sd+" And end date: "+ed);
-		if(sd!=null && ed!=null){
+		//alert("start date :"+sd+" And end date: "+ed);
+		if(sd!=null || ed!=null){
+			//alert("send to server.")
 			$.ajax({
 				type : "GET",
 				url : domain+"/user/filterdate/"+sd+"/"+ed,

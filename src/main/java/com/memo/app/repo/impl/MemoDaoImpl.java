@@ -113,14 +113,14 @@ public class MemoDaoImpl implements MemoDao{
 		return null;
 	}
 	@Override
-	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
+	public List<Memo> filterMemoByColumnName(String column_name,String value) {
 		System.out.println("filter memo dao.");
-		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM memo.tbmemo"
-					+"WHERE "+column_name
-					+"LIKE ?";
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic"
+					+" FROM memo.tbmemo "
+					+" WHERE "+column_name
+					+" LIKE ?";
 		try{
-			return jdbcTemplate.query(sql, new Object[]{"%"+value+"%"},new MemoRowMapper());
+			return jdbcTemplate.query(sql, new Object[]{value+"%"},new MemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -146,9 +146,10 @@ public class MemoDaoImpl implements MemoDao{
 		System.out.println("filter date meo.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 				  +"FROM memo.tbmemo "
-				  +"WHERE date BETWEEN ? AND ?";
+				  +"WHERE date BETWEEN '"+sd+"' AND '"+ed+"'"
+				  +" ORDER BY title";
 		try{
-			return jdbcTemplate.query(sql, new Object[]{sd,ed},new MemoRowMapper());
+			return jdbcTemplate.query(sql,new MemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -197,5 +198,18 @@ public class MemoDaoImpl implements MemoDao{
 		}
 		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
 
+	}
+	@Override
+	public List<Memo> filterMemoByPrivacy(boolean privacy) {
+		System.out.println("filter memo dao.");
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic"
+					+" FROM memo.tbmemo "
+					+" WHERE ispublic=?";
+		try{
+			return jdbcTemplate.query(sql,new Object[]{privacy},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}	
 }

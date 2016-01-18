@@ -24,6 +24,7 @@ public class MemoController {
 	@Autowired
 	private MemoService memoService;
 	
+	// list memo with limiting amount of rows
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
 		System.out.println("list user controller.");
@@ -46,6 +47,7 @@ public class MemoController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 	
+	// insert memo 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
 		System.out.println("add memo controller.");		
@@ -62,6 +64,7 @@ public class MemoController {
 		}
 	}
 	
+	// search memo by specific ID
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(@PathVariable("id") int id) {
 		System.out.println("detail controller");
@@ -80,6 +83,45 @@ public class MemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 	}
 	
+	// filter memo by title
+	@RequestMapping(value = "/filter/{column}/{value}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> filterMemo(@PathVariable("column") String column,@PathVariable("value") String value) {
+		//System.out.println("filter name controller.");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Memo> list=new ArrayList<Memo>();
+		list = memoService.filterMemoByColumnName(column, value);
+		if (list.isEmpty()) {			
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);			
+		}
+		map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+		map.put("STATUS", HttpStatus.FOUND.value());
+		map.put("DATA", list);
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			
+	}
+	
+	// filter memo by title
+		@RequestMapping(value = "/privacy/{ispublic}", method = RequestMethod.GET)
+		public ResponseEntity<Map<String, Object>> filterMemoByPrivacy(@PathVariable("ispublic") boolean ispublic) {
+			//System.out.println("filter name controller.");
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Memo> list=new ArrayList<Memo>();
+			list = memoService.filterMemoByPrivacy(ispublic);
+			if (list.isEmpty()) {			
+				map.put("MESSAGE", "MEMO NOT FOUND.");
+				map.put("STATUS", HttpStatus.NOT_FOUND.value());
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);			
+			}
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA", list);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+				
+		}
+		
+	// filter memo by date range
 	@RequestMapping(value = "/filterdate/{sd}/{ed}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> filterDate(@PathVariable("sd") Object sd,@PathVariable("ed") Object ed) {
 		System.out.println("filter date controller.");
@@ -97,7 +139,7 @@ public class MemoController {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			
 	}
-	
+	// update memo
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo memo) {
 		Map<String, Object> map = new HashMap<String, Object>();

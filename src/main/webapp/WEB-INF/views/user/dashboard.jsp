@@ -65,7 +65,7 @@
 				<div class="row">
 					<div class="input-field col s12">
 					  <i class="material-icons prefix">search</i>
-					  <input type="text" class="validate">
+					  <input type="text" id="search_title" onkeyup="filterByTitle()" class="validate">
 					  <label for="icon_telephone">Search</label>					  
 					</div>
 				</div>

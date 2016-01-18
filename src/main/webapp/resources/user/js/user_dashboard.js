@@ -53,7 +53,7 @@ function displayData(data) {
 	contents += "</ul>";
 	$("#listmemo").html(contents);
 }
-
+	/*When user select on combobox to change amount of rows to display.*/
 	$("#limit_row").change(function(){
 		var limit=$("#limit_row").val(); //alert(limit);
 		

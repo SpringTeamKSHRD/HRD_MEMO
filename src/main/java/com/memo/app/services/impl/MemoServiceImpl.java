@@ -1,6 +1,4 @@
 package com.memo.app.services.impl;
-
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	}
 
 	@Override
-	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
+	public List<Memo> filterMemoByColumnName(String column_name,String value) {
 		return memoDao.filterMemoByColumnName(column_name,value);
 	}
 
@@ -70,5 +68,10 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	@Override
 	public Memo getMemoByUrl(String domain, String url, int userid) {
 		return memoDao.getMemoByUrl(domain, url, userid);		
+	}
+
+	@Override
+	public List<Memo> filterMemoByPrivacy(boolean privacy) {
+		return memoDao.filterMemoByPrivacy(privacy);
 	}	
 }
