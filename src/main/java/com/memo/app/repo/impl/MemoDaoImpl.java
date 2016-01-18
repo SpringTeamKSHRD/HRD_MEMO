@@ -30,8 +30,13 @@ public class MemoDaoImpl implements MemoDao{
 	public List<Memo> listMemo() {
 		System.out.println("List memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM tbmemo";
-		return jdbcTemplate.query(sql, new MemoRowMapper());
+					+"FROM memo.tbmemo";
+		try{
+			return jdbcTemplate.query(sql, new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
@@ -42,8 +47,13 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"ORDER BY id DESC "
-					+"LIMIT ? OFFSET ?";				
-		return jdbcTemplate.query(sql, new Object[]{limit,0},new MemoRowMapper());
+					+"LIMIT ? OFFSET ?";
+		try{
+			return jdbcTemplate.query(sql, new Object[]{limit,0},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
@@ -52,9 +62,13 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="INSERT INTO memo.tbmemo(userid,title,content,domain,url,date,isenable,ispublic ) VALUES(?,?,?,?,?,?,?,?)";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),memo.getDomain(),
 								  memo.getUrl(),memo.getDate(),memo.isIsenable(),memo.isIspublic()};
-		int i=jdbcTemplate.update(sql,obj);
-		if(i>0) return true;
-		else return false;
+		try{
+			int i=jdbcTemplate.update(sql,obj);
+			if(i>0) return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
@@ -64,19 +78,27 @@ public class MemoDaoImpl implements MemoDao{
 								      +"WHERE id=?;";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),
 								  memo.isIspublic(),memo.getId()};
-		int i=jdbcTemplate.update(sql,obj);
-		if(i>0) return true;
-		else return false;
+		try{
+			int i=jdbcTemplate.update(sql,obj);
+			if(i>0) return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
     }
 
 	@Override
 	public boolean deleteMemo(int id) {
 		System.out.println("delete memo dao.");
-		String sql = "DELETE FROM tbmemo"
+		String sql = "DELETE FROM memo.tbmemo"
 					 +"WHERE id=?;";
-		int i = jdbcTemplate.update(sql, id);
-		if (i > 0) return true;
-		else return false;
+		try{
+			int i = jdbcTemplate.update(sql, id);
+			if (i > 0) return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
@@ -85,50 +107,83 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
-		return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
+		try{
+			return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	@Override
 	public List<Memo> filterMemoByColumnName(Object column_name,Object value) {
 		System.out.println("filter memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM tbmemo"
+					+"FROM memo.tbmemo"
 					+"WHERE "+column_name
 					+"LIKE ?";
-		return jdbcTemplate.query(sql, new Object[]{"%"+value+"%"},new MemoRowMapper());
+		try{
+			return jdbcTemplate.query(sql, new Object[]{"%"+value+"%"},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
 	public List<HistoryMemo> listHistoryMemo(int memoid) {
 		System.out.println("list history memo dao.");
 		String sql="SELECT id,memoid,title,content,date "
-					+"FROM tbhistory "
+					+"FROM memo.tbhistory "
 					+"WHERE id=?";
-		return jdbcTemplate.query(sql,new Object[]{memoid},new HistoryMemoRowMapper());
+		try{
+			return jdbcTemplate.query(sql,new Object[]{memoid},new HistoryMemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
+	
 	@Override
-	public List<Memo> filterMemoByDate(Date sd, Date ed) {
+	public List<Memo> filterMemoByDate(Object sd, Object ed) {
 		System.out.println("filter date meo.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-				  +"FROM tbmemo "
+				  +"FROM memo.tbmemo "
 				  +"WHERE date BETWEEN ? AND ?";
-		return jdbcTemplate.query(sql, new Object[]{sd,ed},new MemoRowMapper());
+		try{
+			return jdbcTemplate.query(sql, new Object[]{sd,ed},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
+	
 	@Override
 	public int countColumn(Object column_name, Object value) {
 		System.out.println("count column.");
 		String sql="SELECT COUNT("+column_name+") "
-				  +"FROM tbmemo "
+				  +"FROM memo.tbmemo "
 				  +"WHERE userid=?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{column_name,value},Integer.class);
+		try{
+			return jdbcTemplate.queryForObject(sql, new Object[]{column_name,value},Integer.class);
+		}catch(Exception  e){
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	@Override
 	public int countPublicMemo(int userid) {
 		System.out.println("count public memo.");
 		String sql="SELECT COUNT(id)"
-				  +"FROM tbmemo"
+				  +"FROM memo.tbmemo"
 				  +"WHERE userid=? AND ispublic=true";
-		return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
+		try{
+			return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 0;
 	}
+	
 	@Override
 	public Memo getMemoByUrl(String domain, String url, int userid) {
 		System.out.println("list memo by url");
@@ -137,6 +192,11 @@ public class MemoDaoImpl implements MemoDao{
 						"AND url = ? " +
 						"AND userid = ? " +
 						"AND isenable = TRUE ";
-		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+		try{
+			return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}	
 }

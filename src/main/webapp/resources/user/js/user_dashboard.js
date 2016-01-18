@@ -55,8 +55,8 @@ function displayData(data) {
 }
 
 	$("#limit_row").change(function(){
-		var limit=$("#limit_row").val();
-		alert(limit);
+		var limit=$("#limit_row").val(); //alert(limit);
+		
 		clearMemo();
 		$.ajax({
 					type : "GET",

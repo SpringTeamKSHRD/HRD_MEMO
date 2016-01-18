@@ -39,10 +39,9 @@
 						<div class="input-field col s12">
 						    <select id="searching">
 							      <!-- <option value="" disabled selected>Choose your option</option> -->
-							      <option value="1">Title</option>
-							      <option value="2">Website</option>
-							      <option value="3">Privacy</option>
-							      <option value="4">Date</option>
+							      <option value="1">Website</option>
+							      <option value="2">Privacy</option>
+							      <option value="3">Date</option>
 						    </select>
 						    <label>Searching</label>
 						</div>

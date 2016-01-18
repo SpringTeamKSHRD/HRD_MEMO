@@ -1,7 +1,9 @@
 package com.memo.app.restcontroller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +78,24 @@ public class MemoController {
 			map.put("MESSAGE", "MEMO NOT FOUND.");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value = "/filterdate/{sd}/{ed}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> filterDate(@PathVariable("sd") Object sd,@PathVariable("ed") Object ed) {
+		System.out.println("filter date controller.");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Memo> list=new ArrayList<Memo>();
+		list = memoService.filterMemoByDate(sd, ed);
+		if (list.isEmpty()) {			
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);	
+		}
+		map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+		map.put("STATUS", HttpStatus.FOUND.value());
+		map.put("DATA", list);
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)

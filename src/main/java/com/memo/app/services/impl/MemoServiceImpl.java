@@ -58,7 +58,7 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	}
 
 	@Override
-	public List<Memo> filterMemoByDate(Date sd, Date ed) {
+	public List<Memo> filterMemoByDate(Object sd, Object ed) {
 		return memoDao.filterMemoByDate(sd, ed);
 	}
 

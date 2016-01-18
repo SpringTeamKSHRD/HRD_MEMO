@@ -16,7 +16,7 @@ public interface MemoDao {
 	public Memo getMemo(int id);
 	public List<Memo> filterMemoByColumnName(Object column_name,Object value);
 	public List<HistoryMemo> listHistoryMemo(int memoid);
-	public List<Memo> filterMemoByDate(Date sd,Date ed);
+	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);
 	public int countPublicMemo(int userid);
 }
