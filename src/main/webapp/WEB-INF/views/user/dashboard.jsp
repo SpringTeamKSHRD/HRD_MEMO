@@ -22,11 +22,11 @@
 	<!-- Navbar goes here -->
 	<nav>
 		<div class="nav-wrapper teal lighten-2">
-			<a href="#!" class="brand-logo">Logo</a>
+			<a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 			<ul class="right hide-on-med-and-down">
-			  <li><a href="sass.html">Notification</a></li>
-			  <li><a href="badges.html">Ky Sona</a></li>
-			  <li><a href="badges.html">About us</a></li>
+			  <li><a href="#">Notification</a></li>
+			  <li><a href="#"><%-- <img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" width="5%" height="5%"/> --%>Ky Sona</a></li>
+			  <li><a href="#">About us</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -71,6 +71,7 @@
 				</div>
 			</div>
 		</div>
+		<%-- <p>${sessionScope['USER'].image}</p> --%>
 		<div class="row">
 			<!-- Left Body Section -->
 			<div class="col s12 m4 l4 body_left"> <!-- Note that "m4 l3" was added -->
