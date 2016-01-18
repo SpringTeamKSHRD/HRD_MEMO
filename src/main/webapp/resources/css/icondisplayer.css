@@ -6,17 +6,19 @@
    font-feature-settings: 'liga';
 }
 .chip {
-  display: inline-block;
-  font-size: 13px;
+  display: block;
+  font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
-  line-height: 32px;
+  line-height: 25px;
   padding: 0 12px;
   border-radius: 16px;
   background-color: #e4e4e4;
-  margin: 4px;
-  word-wrap:break-word;
-  display:block;
+  width:"100%";
+  white-space:normal;
+  word-wrap: break-word;
+  margin: 3px auto;
+  display:table;
 }
 .chip i.material-icons {
   cursor: pointer;

@@ -13,7 +13,6 @@
 	<div id="hrd_memo_pess">
 	
 	</div>
-	<h1>HRD MEMO</h1>
 </body>
 <script
 	src='http://192.168.178.123:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>

@@ -1,6 +1,9 @@
 //add css to iclude iframe
 $('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
 $('head').append("<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'/>");
+$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
+$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
+$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
 //iframe wrapper
 var wrapper=document.getElementById("hrd_memo_pess");
 var ifrm_hrdmemo = document.createElement("IFRAME");
@@ -16,10 +19,6 @@ ifrm_hrdmemo.style.padding="0px";
 ifrm_hrdmemo.style.border ="none";
 ifrm_hrdmemo.setAttribute('scrolling','no');
 ifrm_hrdmemo.style.overflow="hidden";
-//create script for iframe auto heigth
-var memo_auto_height=document.createElement("SCRIPT");
-memo_auto_height.setAttribute("src",'http://192.168.178.123:8080/HRD_MEMO/resources/js/iframeautoheight.js')
-ifrm_hrdmemo.append(memo_auto_height);
 //wrapper style
 wrapper.style.height="auto";
 wrapper.style.width="100%";
@@ -31,8 +30,7 @@ wrapper.appendChild(ifrm_hrdmemo);
 var desc_panel=document.createElement("DIV");
 desc_panel.style.width="95%";
 desc_panel.style.height="auto";
-desc_panel.style.padding="0px";
-desc_panel.style.margin="10px";
+desc_panel.style.padding="5px";
 wrapper.appendChild(desc_panel);
 
 var title = document.getElementsByTagName("title")[0].innerHTML;
@@ -41,7 +39,6 @@ var domain=location.hostname;
 
 function handlingMsg(e){
 	if(e.origin=="http://192.168.178.123:8080"){
-		alert(document.getElementById("hrdmemo_iframe").contentWindow.style.height);
 		var datas = e.data.split("#");
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
@@ -101,17 +98,35 @@ function createDescribeBox(text){
 	desc.setAttribute('class','chip');
 	var close=document.createElement("i");
 	close.setAttribute('class','material-icons');
+	close.setAttribute('title','close');
+	close.style.color="red";
 	var close_text=document.createTextNode("close");
 	close.appendChild(close_text);
+	var report=document.createElement("i");
+	report.setAttribute('class','material-icons');
+	report.setAttribute('title','report');
+	report.style.color="#00E676";
+	var report_text=document.createTextNode("assignment");
+	report.appendChild(report_text);
 	var desc_text=document.createTextNode(text);
 	desc.appendChild(desc_text);
 	desc.appendChild(close);
+	desc.appendChild(report);
 	desc_panel.appendChild(desc);
 }
 
 $(document).on('click.chip', '.chip .material-icons', function (e) {
-	var ch=desc_panel.offsetHeight;
-  $(this).parent().remove();
+	if($(this).text()=='close'){
+		 $(this).parent().remove();
+	}else{
+			alertify.prompt("Enter your report to this memo", function (e, str) {
+			    if (e) {
+			        alert(str);
+			    } else {
+			        alert("you didn't report..!");
+			    }
+				}, "");
+		    }
 });
 
 function sendDomain(){

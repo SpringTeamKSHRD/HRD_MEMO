@@ -241,6 +241,8 @@ addEventListener("message",handlingMsg,true);
 				content:$("#descmemo").val(),
 				ispublic:ismpublic
 				};
+		 $("#descmemo").val("");
+		 $("#descmemo").focus();
 				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),url);
 	});
 	$("#descmemo").val("");
