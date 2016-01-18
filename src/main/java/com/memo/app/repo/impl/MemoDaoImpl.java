@@ -1,6 +1,4 @@
 package com.memo.app.repo.impl;
-
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,7 +184,7 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public Memo getMemoByUrl(String domain, String url, int userid) {
-		System.out.println("list memo by url");
+		System.out.println("get memo by url");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic FROM memo.tbmemo " +
 					"WHERE DOMAIN = ? " +
 						"AND url = ? " +
@@ -197,6 +195,7 @@ public class MemoDaoImpl implements MemoDao{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+
 	}	
 }

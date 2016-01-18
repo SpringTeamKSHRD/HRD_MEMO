@@ -26,26 +26,46 @@ $(document).ready(function(){
 	    url: "http://localhost:8080/HRD_MEMO/plugin/memo"+location.search,
 	    type: "get",
 	    success: function (response) {
+	    		$('#memoid').val(response['MESSAGE']['id']);
 	            $('#note').val(response['MESSAGE']['content']);
+	            $('#ispublic')[0].checked=response['MESSAGE']['ispublic']
+	            $('#btnsubmit').html("Save");
 	    }
 	});
-	//add new memo
+	//on submit form
     $("#frmMemo").submit(function(e) {
-		e.preventDefault();	
+		e.preventDefault();
 		//convert url paramenter to json
 		var obj = ParamToJson();
 		//add content from textarea
 		obj.content = $('#note').val();
-		//then post it to server
-		$.ajax({
-		    url: "http://localhost:8080/HRD_MEMO/plugin/memo",
-		    type: "post",
-		    data: JSON.stringify(obj),
-		    contentType: 'application/json;charset=utf-8',	          
-		    success: function (response) {
-		    	alert(response['MESSAGE']);
-		    }
-		});
+		obj.ispublic = $('#ispublic').prop('checked');
+		//add new memo
+		if($('#btnsubmit').text()=='Add'){
+			$.ajax({
+			    url: "http://localhost:8080/HRD_MEMO/plugin/memo",
+			    type: "post",
+			    data: JSON.stringify(obj),
+			    contentType: 'application/json;charset=utf-8',	          
+			    success: function (response) {
+			    	alert(response['MESSAGE']);
+			    }
+			});
+		}
+		//update memo
+		if($('#btnsubmit').text()=='Save'){
+			//add id from input hidden
+			obj.id = $('#memoid').val();
+			$.ajax({
+			    url: "http://localhost:8080/HRD_MEMO/plugin/memo",
+			    type: "put",
+			    data: JSON.stringify(obj),
+			    contentType: 'application/json;charset=utf-8',	          
+			    success: function (response) {
+			    	alert(response['MESSAGE']);
+			    }
+			});
+		}
     });
 });
 //####################UI LOGIC

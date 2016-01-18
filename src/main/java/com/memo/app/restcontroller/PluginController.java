@@ -119,6 +119,27 @@ public class PluginController {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
+	@RequestMapping(value = "/memo", method = RequestMethod.PUT)
+	public ResponseEntity<Map<String, Object>> updateMemo(
+			@RequestBody Memo memo,
+			HttpServletRequest request) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = null;
+		User currentUser = (User)request.getSession().getAttribute("USER");
+		memo.setDate(new Date());
+		memo.setUserid(currentUser.getUserid());
+		System.out.println(memo);
+		if (memoDao.updateMemo(memo)) {
+			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
+			status = HttpStatus.OK;			
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
 	@RequestMapping(value = "/user/status", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Map<String, Object>> userStatus(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
