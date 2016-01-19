@@ -24,4 +24,8 @@ public class UserController {
 	public String getNotifationPage(){
 		return "user/usernotification";
 	}
+	@RequestMapping(value="/userprofile")
+	public String getUserProfile(){
+		return "user/profile";
+	}
 }

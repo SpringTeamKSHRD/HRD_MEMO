@@ -2,6 +2,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 loadPage();
 
 function loadPage(){
+	//alert("loadpage.");
 	clearMemo();
 	$.ajax({
 				type : "GET",
@@ -24,12 +25,8 @@ function loadPage(){
 
 /* list data */
 function displayData(data) {
-	var contents = "<ul class='collection highlight'>"
-				 	+"<li>"
-				 		/*+"<p class='listmemo active'>"
-				 			+"List Memos"
-				 		+"</p>"*/
-				 	+"</li>";
+	//alert("display data.");
+	var contents = "<ul class='collection highlight'>";
 	var privacy;
 
 	for (var i = 0; i < data.DATA.length; i++) {

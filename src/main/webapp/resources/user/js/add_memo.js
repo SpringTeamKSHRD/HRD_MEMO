@@ -8,7 +8,6 @@ function saveMemo(){
 	if($("#privacy").val()==0) ispublic=false;
 	else ispublic=true;
 	//alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);
-	
 	json = {userid : parseInt($('#userid').val()),
 			title : $('.titlememo').val(),
 			content : data,

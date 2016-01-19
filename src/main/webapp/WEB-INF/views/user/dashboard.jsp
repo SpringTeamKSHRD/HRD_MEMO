@@ -32,63 +32,23 @@
 	</nav>
 	<div class="container-fluid">
 		<!-- Page Layout body here -->
-		<div class="row top_menu">
-			<div class="col s12 m4 l4">
-				<div class="row">
-					<div class="col s12 m6 l4">
-						<div class="input-field col s12">
-						    <select id="searching">
-							      <option value="" disabled selected>Filter memo here.</option> 
-							      <option value="1">Website</option>
-							      <option value="2">Privacy</option>
-							      <option value="3">Date</option>
-						    </select>
-						    <label>Searching</label>
-						</div>
-					</div>
-					<div class="col s12 m6 l8">
-						<div id="searcharea">
-							
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col s12 m4 l5">
-				<!-- Empty Area -->
-				<div class="row">
-					<div class="col s12 m6 l3">
-					 	
-					</div>
-				</div>
-			</div>
-			<div class="col s12 m4 l3">
-				<div class="row">
-					<div class="input-field col s12">
-					  <i class="material-icons prefix">search</i>
-					  <input type="text" id="search_title" onkeyup="filterByTitle()" class="validate">
-					  <label for="icon_telephone">Search</label>					  
-					</div>
-				</div>
-			</div>
-		</div>
-		<%-- <p>${sessionScope['USER'].image}</p> --%>
 		<div class="row">
 			<!-- Left Body Section -->
-			<div class="col s12 m4 l4 body_left"> <!-- Note that "m4 l3" was added -->
+			<div class="col s12 m4 l3 body_left"> <!-- Note that "m4 l3" was added -->
 				<div class="z-depth-1">
 					<!-- Number of rows to show in collection-->
 					<div class="row">
-						<div class="col s12 m4 l4 body_left"> <br/>
+						<div class="col s12 m6 l12 body_left"> <br/>
 							<div class="input-field col s12">
-						    <select id="limit_row">
-							      <!-- <option value="" disabled selected>Choose your option</option> -->
-							      <option value="5">5</option>
-							      <option value="10">10</option>
-							      <option value="30">30</option>
-							      <option value="50">50</option>
-						    </select>
-						    <label>Number of rows</label>
-						</div>
+							    <select id="limit_row">
+								      <!-- <option value="" disabled selected>Choose your option</option> -->
+								      <option value="5">5</option>
+								      <option value="10">10</option>
+								      <option value="30">30</option>
+								      <option value="50">50</option>
+							    </select>
+							    <label>Number of rows</label>
+							</div>
 						</div>
 					</div>
 					<!-- List Tile Memo -->
@@ -114,13 +74,36 @@
 			</div>
 			<!-- Right Body Section -->
 			
-			<div class="col s12 m8 l8 body_right"> <!-- Note that "m8 l9" was added -->
+			<div class="col s12 m8 l9 body_right"> <!-- Note that "m8 l9" was added -->
+			<!-- Search Area -->
+			<div class="row">
+				<div class="col s12 m12 l6">
+					<div id="searcharea">
+					
+					</div>
+				</div>
+				<div class="col s12 m12 l6 right">
+					<div class="input-field col s12">
+					    <select id="searching">
+					      <option value="" disabled selected>choose option for searching.</option>
+					  	  <option value="1">Title</option>
+					      <option value="2">Website</option>
+					      <option value="3">Privacy</option>
+					      <option value="4">Date</option>
+					    </select>
+					    <label>Search</label>
+					</div>
+				</div>
+			</div>
 			<form action="#" method="POST" enctype="multipart/form-data">
 				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 				<div class="z-depth-1" >
 					<!-- List of components memo--> 
 					<div class="row">
-						<div class="col s12 m4 l3">
+						<div class="col s12 m4 l4">
+							
+						</div>
+						<div class="col s12 m4 l2 right">
 							<div class="input-field col s12">
 								<select id="privacy" >
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
@@ -130,7 +113,7 @@
 							    <label>Privacy</label>
 						    </div> 
 						</div>
-						<div class="col s12 m4 l5">
+						<div class="col s12 m4 l6 right">
 							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>
@@ -138,9 +121,6 @@
 								  <label for="icon_prefix">Title Memo</label>
 								</div>
 							</div>
-						</div>
-						<div class="col s12 m4 l4">
-							<!-- Category here -->
 						</div>
 					</div>
 				</div>

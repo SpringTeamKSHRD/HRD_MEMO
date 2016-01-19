@@ -1,5 +1,10 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
+	var s_title="<div class='row'>"
+					+"<div class='input-field col s12'>"
+						+"<input placeholder='type title memo' id='search_title' onkeyup='filterByTitle()' type='text' class='validate'>"
+					+"</div>"
+				 +"</div>";
 	var s_website="<div class='row'>"
 					+"<div class='input-field col s12'>"
 						+"<input placeholder='type website name' id='search_website' onkeyup='filterByWebsite()' type='text' class='validate'>"
@@ -24,14 +29,16 @@ var domain=window.location.origin+"/HRD_MEMO";
 
 	$("#searching").change(function(){
 		$("#searcharea").html("");
-		
 		var value = $("#searching").val(); //alert(value);
+		
 		if(value==1){
-			$("#searcharea").html(s_website);
+			$("#searcharea").html(s_title);
 		}else if(value==2){
+			$("#searcharea").html(s_website);
+		}else if(value==3){
 			$("#searcharea").html(s_public);
 			filterByPublic();
-		}else if(value==3){
+		}else if(value==4){
 			$("#searcharea").html(s_date);
 		}
 
@@ -89,7 +96,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 		});
 	}
 	
-	function filterByDate(){
+	/*function filterByDate(){
 		//alert("start date :"+$("#s_date").val()+" And end date: "+$("#e_date").val()); alert(typeof($("#s_date")));
 		var sd=$("#s_date").val();
 		var ed=$("#e_date").val();
@@ -111,4 +118,4 @@ var domain=window.location.origin+"/HRD_MEMO";
 				}
 			});
 		}
-	}
+	}*/
