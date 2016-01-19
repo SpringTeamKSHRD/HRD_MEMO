@@ -31,6 +31,7 @@ var desc_panel=document.createElement("DIV");
 desc_panel.style.width="95%";
 desc_panel.style.height="auto";
 desc_panel.style.padding="5px";
+desc_panel.style.marginLeft="63px";
 wrapper.appendChild(desc_panel);
 
 var title = document.getElementsByTagName("title")[0].innerHTML;
@@ -75,7 +76,6 @@ var domain=location.hostname;
 function saveMemo(data){
 	var json=JSON.parse(data);
 	createDescribeBox(json.content);
-	/*json.titleurl=title;
 	json.titlememo=title;
 	json.domain=domain;
 	json.url=url;
@@ -91,7 +91,7 @@ function saveMemo(data){
 		},
 		error : function(data) {
 		}
-	});*/
+	});
 }
 function createDescribeBox(text){
 	var desc=document.createElement("P");
@@ -120,16 +120,34 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 		 $(this).parent().remove();
 	}else{
 			alertify.prompt("Enter your report to this memo", function (e, str) {
-			    if (e) {
-			        alert(str);
-			    } else {
-			        alert("you didn't report..!");
+			    if (e&&str!=""){
+			        sendReportNotify();
 			    }
 				}, "");
 		    }
 });
-
+//Send current url to child
 function sendDomain(){
 	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(url,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 }
 addEventListener('load',sendDomain,true);
+//report memo
+var hrd_notify_url="ws://192.168.178.123:8080/HRD_MEMO/memo/usernotification";
+var hrd_memo_websocket=new WebSocket(hrd_notify_url);
+
+var messages=document.getElementById("messages");
+var message=document.getElementById("forsend");
+
+hrd_memo_websocket.onopen=function(message){
+	 messages.value="Connected...!\n";
+}
+hrd_memo_websocket.onclose=function(message){
+	 websocket.close();
+}
+hrd_memo_websocket.onmessage=function(message){
+	 if(message.data==="response"){
+	 }
+}
+function sendReportNotify(){
+	hrd_memo_websocket.send("report");
+}

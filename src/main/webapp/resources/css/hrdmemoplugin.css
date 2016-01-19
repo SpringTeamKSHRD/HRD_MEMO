@@ -37,3 +37,7 @@
 	display: none;
 	margin: 0px;
 }
+#btn-active-memo,#btn-active-login,#btn-active-register{
+	width: 30px;
+	height: 30px;
+}
