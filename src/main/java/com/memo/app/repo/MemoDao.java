@@ -1,6 +1,5 @@
 package com.memo.app.repo;
 
-import java.util.Date;
 import java.util.List;
 
 import com.memo.app.entities.HistoryMemo;
@@ -20,4 +19,6 @@ public interface MemoDao {
 	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);
 	public int countPublicMemo(int userid);
+	//PHALLEAK
+	public List<Memo> pluginGetMemo(int userid,String url);
 }

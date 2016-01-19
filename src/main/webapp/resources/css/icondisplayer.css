@@ -8,18 +8,17 @@
 .chip {
   display: block;
   font-size: 14px;
-  font-weight: bolder;
+  font-weight: 500;
   color:black;
-  line-height: 25px;
+  line-height: 20px;
   padding:0px 3px;
   background-color: #FAFAFA;
   width:"100%";
   white-space:normal;
-  border-left:3px solid #009688;
-  border-bottom:1px solid #009688;
+  border-left:3px solid #1976D2;
   word-wrap: break-word;
-  box-shadow:2px 2px 4px #E0E0E0;
-  margin: 3px;
+  box-shadow:1px 1px 4px gray;
+  margin: 5px;
   display:table;
   word-break:break-all;
   margin-left: 15px;
@@ -35,7 +34,7 @@
 	margin: 0px;
 	padding:2px;
     width: 100%;
-    background: #009688;
+    background: #1976D2;
     height: 30px;
 }
 .user-memo-img{
@@ -44,4 +43,9 @@
 	border-radius:90%;
 	background: white;
 	display: inline;
+}
+.mymemo-footer{
+	background: #69F0AE;
+	margin: 0px;
+	width: 100%;
 }

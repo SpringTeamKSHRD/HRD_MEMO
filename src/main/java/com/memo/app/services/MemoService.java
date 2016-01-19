@@ -1,6 +1,5 @@
 package com.memo.app.services;
 
-import java.util.Date;
 import java.util.List;
 
 import com.memo.app.entities.HistoryMemo;
@@ -19,5 +18,7 @@ public interface MemoService {
 	public List<HistoryMemo> listHistoryMemo(int memoid);
 	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);
+	//Phalleak
+	public List<Memo> pluginGetMemo(int userid,String url);
 	
 }

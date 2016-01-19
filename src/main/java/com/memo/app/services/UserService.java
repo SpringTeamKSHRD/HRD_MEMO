@@ -11,6 +11,7 @@ public interface UserService {
 	public List<User> getUserList();
 	public List<User> searchUser(String name);
 	public List<User> searchUser(int id);
+	public User getUserByEmail(String email);
 
 
 }

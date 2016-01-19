@@ -1,7 +1,9 @@
 package com.memo.app.restcontroller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,23 +41,23 @@ public class PluginController {
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user){
-		System.out.println(user);
 	  Map<String,Object> map=new HashMap<String,Object>();
 	  if(userDao.saveUser(user)==true){
 		  map.put("MESSAGE","USER HAS BEEN SIGN UP");
 		  map.put("STATUS",HttpStatus.ACCEPTED.value());
+		  map.put("DATA",userDao.getUserByEmail(user.getEmail()));
 		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 	  }else{
 		  map.put("MESSAGE","USER SIGN UP FIALED");
 		  map.put("STATUS",HttpStatus.NOT_ACCEPTABLE.value());
-		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.NOT_ACCEPTABLE);
 	  }
 	}
 	@RequestMapping(value = "/savememo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
-		System.out.println("add memo controller.");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (memoDao.insertMemo(memo)) {			
+		if (memoDao.getMemoByUrl(memo.getDomain(),memo.getUrl(),memo.getUserid())==null) {	
+			memoDao.insertMemo(memo);
 			map.put("MESSAGE", "MEMO HAS BEEN CREATED.");
 			map.put("STATUS", HttpStatus.CREATED.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -64,7 +67,23 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-	
+	@RequestMapping(value = "/plugingetmemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> getMemo(@RequestBody Memo memo) {
+		System.out.println(memo.getUserid()+" "+memo.getUrl());
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Memo> memos=new ArrayList<Memo>();
+		memos=memoDao.pluginGetMemo(memo.getUserid(),memo.getUrl());
+		if (!memos.isEmpty()) {	
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("STATUS", HttpStatus.CREATED.value());
+			map.put("DATA",memos);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
 	@RequestMapping(value="/report", method = RequestMethod.POST)
 	public ResponseEntity<Map<String,Object>> userReport(Report rp){
 		Map<String,Object> map=new HashMap<String,Object>();
@@ -78,6 +97,20 @@ public class PluginController {
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable("id") int id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (memoDao.deleteMemo(id)) {
+			map.put("MESSAGE", "MEMO HAS BEEN DELETED.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN DELETED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+
 	
 	@RequestMapping(value="/memo", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(

@@ -1,8 +1,11 @@
 package com.memo.app.repo.impl;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.memo.app.RowMapper.HistoryMemoRowMapper;
@@ -187,16 +190,15 @@ public class MemoDaoImpl implements MemoDao{
 	public Memo getMemoByUrl(String domain, String url, int userid) {
 		System.out.println("get memo by url");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic FROM memo.tbmemo " +
-					"WHERE DOMAIN = ? " +
-						"AND url = ? " +
+					"WHERE DOMAIN LIKE ? " +
+						"AND url LIKE ? " +
 						"AND userid = ? " +
 						"AND isenable = TRUE ";
 		try{
-			return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+			return jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
 		}catch(Exception e){
-			e.printStackTrace();
 		}
-		return (Memo)jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+		return null;
 
 	}
 	@Override
@@ -211,5 +213,35 @@ public class MemoDaoImpl implements MemoDao{
 			e.printStackTrace();
 		}
 		return null;
-	}	
+	}
+	@Override
+	public List<Memo> pluginGetMemo(int userid, String url) {
+		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl "
+				+ "FROM memo.tbmemo mm "
+				+ "INNER JOIN public.tbluser us ON mm.userid=us.userid "
+				+ "WHERE (mm.userid=? AND mm.url=? AND mm.isenable=true) OR (mm.ispublic=true AND mm.url=? AND mm.isenable=true) ORDER BY mm.id DESC";
+		Object[] obj=new Object[]{userid,url,url};
+		try{
+			List<Memo> memos=jdbcTemplate.query(sql,obj,new RowMapper<Memo>(){
+
+				@Override
+				public Memo mapRow(ResultSet rs, int i) throws SQLException {
+					Memo mm=new Memo();
+					mm.setId(rs.getInt(1));
+					mm.setUserid(rs.getInt(2));
+					mm.setTitle(rs.getString(3));
+					mm.setContent(rs.getString(4));
+					mm.setDate(rs.getDate(5));
+					mm.setIspublic(rs.getBoolean(6));
+					mm.setUserimage(rs.getString(7));
+					return mm;
+				}
+			});
+			return memos;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 }

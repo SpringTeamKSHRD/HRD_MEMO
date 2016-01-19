@@ -6,19 +6,19 @@ pageEncoding="ISO-8859-1"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<link rel='stylesheet' type='text/css'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 	<script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
 	<div class='row col s12' style="height: 45px; text-align: center;">
 	<p id="error" style="margin: auto; color:white; background: #FF1744; height: 100%; display:none;"></p>
 		<div class="fixed-action-btn horizontal">
-			<a class="btn-floating"> <i class="large material-icons">mode_edit</i>
+			<a class="btn-floating btn-large"> <i class="large material-icons">mode_edit</i>
 			</a>
 			<ul>
 				<li><a class="btn-floating red menu-btn" id="btn-active-memo"><i
@@ -149,11 +149,20 @@ pageEncoding="ISO-8859-1"%>
 		</div>
 		<!--Register Form  -->
 </body>
-<link rel="stylesheet" href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
+<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
 var url="";
+var obj=null;
 function handlingMsg(e){
-	url=e.data;
+	var parentData=e.data.split("#");
+	url=parentData[0];
+	obj=JSON.parse(parentData[1]);
+	if(obj==null){
+		$("#btn-active-memo").css('display','none');
+	}else{
+		$("#btn-active-login").css('display','none');
+		$("#btn-active-register").css('display','none');
+	}
 }
 addEventListener("message",handlingMsg,true);
 	var display=true;
@@ -259,6 +268,7 @@ addEventListener("message",handlingMsg,true);
 				ismpublic=false;
 			}
 		 var json={
+				userid:obj.userid,
 				content:$("#descmemo").val(),
 				ispublic:ismpublic
 				};
@@ -276,6 +286,5 @@ addEventListener("message",handlingMsg,true);
 	    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(email);
 	}
-	
 </script>
 </html>

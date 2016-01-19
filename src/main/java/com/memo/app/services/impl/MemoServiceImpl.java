@@ -73,5 +73,10 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	@Override
 	public List<Memo> filterMemoByPrivacy(boolean privacy) {
 		return memoDao.filterMemoByPrivacy(privacy);
+	}
+
+	@Override
+	public List<Memo> pluginGetMemo(int userid, String url) {
+		return memoDao.pluginGetMemo(userid, url);
 	}	
 }

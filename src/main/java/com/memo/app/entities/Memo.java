@@ -15,6 +15,7 @@ public class Memo {
 	@Id
 	private int id;
 	private int userid;
+	private String userimage;
 	private String title;
 	private String content;
 	@Column(name="domain_name")
@@ -85,6 +86,19 @@ public class Memo {
 	}
 	public void setFullDomain(String fullDomain) {
 		this.fullDomain = fullDomain;
+	}
+	
+	public String getUserimage() {
+		return userimage;
+	}
+	public void setUserimage(String userimage) {
+		this.userimage = userimage;
+	}
+	public String getDomainName() {
+		return domainName;
+	}
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 	@Override
 	public String toString() {
