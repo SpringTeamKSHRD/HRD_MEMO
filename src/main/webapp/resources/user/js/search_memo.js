@@ -96,7 +96,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 		});
 	}
 	
-	/*function filterByDate(){
+	function filterByDate(){
 		//alert("start date :"+$("#s_date").val()+" And end date: "+$("#e_date").val()); alert(typeof($("#s_date")));
 		var sd=$("#s_date").val();
 		var ed=$("#e_date").val();
@@ -118,4 +118,4 @@ var domain=window.location.origin+"/HRD_MEMO";
 				}
 			});
 		}
-	}*/
+	}

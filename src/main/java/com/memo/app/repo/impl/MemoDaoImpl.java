@@ -39,7 +39,7 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<Memo> listMemo(int limit, int page) {
-		System.out.println("list memo with pagination."+limit);
+		System.out.println("list memo with amount of rows: "+limit);
 		/*if(page<=0) page=1;
 		int offset = limit * page - limit;*/
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "

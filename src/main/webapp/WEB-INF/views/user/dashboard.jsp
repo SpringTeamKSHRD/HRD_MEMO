@@ -41,7 +41,7 @@
 						<div class="col s12 m6 l12 body_left"> <br/>
 							<div class="input-field col s12">
 							    <select id="limit_row">
-								      <!-- <option value="" disabled selected>Choose your option</option> -->
+								      <option value="" disabled selected>Amount of row.</option>
 								      <option value="5">5</option>
 								      <option value="10">10</option>
 								      <option value="30">30</option>
@@ -128,7 +128,7 @@
 				<br/>
 				<div>
 					<div class="row">
-						<div class="col s12 m4 l12">
+						<div class="col s12 m12 l12">
 							<form>
 								<textarea name="editor1" id="editor1" rows="10" cols="20">
 									

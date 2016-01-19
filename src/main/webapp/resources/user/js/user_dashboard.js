@@ -75,7 +75,8 @@ function displayData(data) {
 	
 	/*When user select on combobox to change amount of rows to display.*/
 	$("#limit_row").change(function(){
-		var limit=$("#limit_row").val(); alert(limit);
+		var limit=$("#limit_row").val();
+		alert(limit);
 		
 		clearMemo();
 		$.ajax({
