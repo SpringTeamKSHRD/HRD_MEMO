@@ -20,16 +20,18 @@
 </head>
 <body >
 	<!-- Navbar goes here -->
-	<nav>
-		<div class="nav-wrapper teal lighten-2">
-			<a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
-			<ul class="right hide-on-med-and-down">
-			  <li><a href="#">Notification</a></li>
-			  <li><a href="#"><%-- <img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" width="5%" height="5%"/> --%>Ky Sona</a></li>
-			  <li><a href="#">About us</a></li>
-			</ul>
-		</div>
-	</nav>
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper teal lighten-2">
+				<a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+				<ul class="right hide-on-med-and-down">
+				  <li><a href="#">Notification</a></li>
+				  <li><a href="#"><%-- <img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" width="5%" height="5%"/> --%>Ky Sona</a></li>
+				  <li><a href="#">About us</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 	<div class="container-fluid">
 		<!-- Page Layout body here -->
 		<div class="row">
@@ -40,8 +42,8 @@
 					<div class="row">
 						<div class="col s12 m6 l12 body_left"> <br/>
 							<div class="input-field col s12">
-							    <select id="limit_row">
-								      <option value="" disabled selected>Amount of row.</option>
+							    <select id="limit_row" onchange="limitRow()">
+								      <!-- <option value="" disabled selected>Amount of row.</option> -->
 								      <option value="5">5</option>
 								      <option value="10">10</option>
 								      <option value="30">30</option>
@@ -61,7 +63,7 @@
 				          </div>
 				        </div>
 				      </div>
-					<div id="listmemo" style="max-height:500px; overflow-y:scroll">
+					<div id="listmemo" style="max-height:670px; overflow-y:scroll">
 						
 					</div>					
 				</div>
@@ -77,12 +79,8 @@
 			<div class="col s12 m8 l9 body_right"> <!-- Note that "m8 l9" was added -->
 			<!-- Search Area -->
 			<div class="row">
+				<br/>
 				<div class="col s12 m12 l6">
-					<div id="searcharea">
-					
-					</div>
-				</div>
-				<div class="col s12 m12 l6 right">
 					<div class="input-field col s12">
 					    <select id="searching">
 					      <option value="" disabled selected>choose option for searching.</option>
@@ -94,15 +92,20 @@
 					    <label>Search</label>
 					</div>
 				</div>
+				<div class="col s12 m12 l6">
+					<div id="searcharea">
+					
+					</div>
+				</div>
 			</div>
 			<form action="#" method="POST" enctype="multipart/form-data">
 				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 				<div class="z-depth-1" >
 					<!-- List of components memo--> 
 					<div class="row">
-						<div class="col s12 m4 l4">
+						<!-- <div class="col s12 m4 l4">
 							
-						</div>
+						</div> -->
 						<div class="col s12 m4 l2 right">
 							<div class="input-field col s12">
 								<select id="privacy" >
@@ -113,7 +116,7 @@
 							    <label>Privacy</label>
 						    </div> 
 						</div>
-						<div class="col s12 m4 l6 right">
+						<div class="col s12 m4 l10 right">
 							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>

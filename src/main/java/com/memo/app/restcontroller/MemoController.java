@@ -27,7 +27,7 @@ public class MemoController {
 	// list memo with limiting amount of rows
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
-		System.out.println("list user controller.");
+		System.out.println("list user controller."+pathVariables.get("limit"));
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (pathVariables.containsKey("limit") && pathVariables.containsKey("page")) {

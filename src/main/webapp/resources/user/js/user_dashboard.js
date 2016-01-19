@@ -37,18 +37,22 @@ function displayData(data) {
 					+ "<b><span class='title'>"
 						+ data.DATA[i].id
 					+ "</span>"
-					+ "<b><span class='title'>"
+					+ "<span class='title'>"
 						+ data.DATA[i].title
 					+ "</span>"
 					+"<a><i class='material-icons right reddel' onclick='deletememo("+data.DATA[i].id+")'>delete</i></a>"
 					+ "<p>"
 						+ data.DATA[i].content.substring(0, 30)+".........."
 					+ "</p>"
-					+"<small><p>"
+					+"<small>"
+					+"<p>"
 						+data.DATA[i].date
 						+"&nbsp;&nbsp;&nbsp;"
+						+data.DATA[i].domain.substring(0,23)
+						+"&nbsp;&nbsp;&nbsp;"
 						+privacy
-					+"</p></small>"
+					+"</p>"
+					+"</small></b>"
 					+ "</li>";
 			
 	}			
@@ -74,7 +78,30 @@ function displayData(data) {
 	}
 	
 	/*When user select on combobox to change amount of rows to display.*/
-	$("#limit_row").change(function(){
+	function limitRow(){
+		var limit=$("#limit_row").val();
+		//alert(limit);
+		
+		clearMemo();
+		$.ajax({
+					type : "GET",
+					url : domain+"/user/list/"+limit,
+					dataType : 'json',
+					data : null,
+					success : function(data) {
+						//alert("Success :" + data);
+						displayData(data);
+					},
+					error : function(data) {
+						alert("Unsuccess: " + data.MESSAGE);
+						console.log("ERROR..." + data);
+					}
+				});
+		/*change button to update*/
+		$("#btnsave").text("Save");
+		$("#btnsave").attr("onclick","saveMemo()");
+	}
+	/*$("#limit_row").change(function(){
 		var limit=$("#limit_row").val();
 		alert(limit);
 		
@@ -93,10 +120,10 @@ function displayData(data) {
 						console.log("ERROR..." + data);
 					}
 				});
-		/*change button to update*/
+		change button to update
 		$("#btnsave").text("Save");
 		$("#btnsave").attr("onclick","saveMemo()");
-	});
+	});*/
 	
 	function clearMemo(){
 		CKEDITOR.instances.editor1.setData("");
