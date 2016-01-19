@@ -192,8 +192,8 @@ Date.prototype.format = function(mask, utc) {
             var showHide = '<div id="qn_sh"><span id="show-hide">KhmerAcademy Memo</span><span style="font-weight:bold;color:red;" id="logout">Log out</span></div>';
             var divNotes = '<div id="notes"></div>';
             // var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
-            var saveImg = '<span style="position:absolute;bottom:6px;right:-4px;cursor:pointer;" id="myimg"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/save.png"  class="memo-img img-hover"></span>';
-            var notesInp = '<p style="position:relative;"><textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 150px" id="mytext"></textarea></p>';
+            var saveImg = '<span style="position:absolute;bottom:6px;right:-4px;cursor:pointer;" id="myimg"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/save.png"  class="memo-img img-hover"></span>';
+            var notesInp = '<p style="position:relative;"><textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px" id="mytext"></textarea></p>';
             // var titleInp = '<p><input type="text" name="txttitle" id="txttitle" placeholder="Your title..." style="font-weight:bolder"></p>';
             $(showHide).appendTo(this.$el);
             $(divNotes).appendTo(this.$el);
@@ -201,9 +201,10 @@ Date.prototype.format = function(mask, utc) {
             $(notesInp).appendTo(this.$el.find('#notes'));
             $(saveImg).appendTo(this.$el.find('#notes p'));
             $('#logout').click(function() {
-            	Cookies.get('LOGGED'); // => 'value'
-            	Cookies.remove('LOGGED', { path: '' });
-            	alert(Cookies.get('LOGGED'))
+                Cookies.get('LOGGED'); // => 'value'
+                Cookies.remove('LOGGED', {
+                    path: ''
+                });
                 $('#qn > #qn_sh,#notes').remove();
                 _this.login();
                 $('.qn_container #notes,.qn_container #username-password').show();
@@ -211,41 +212,63 @@ Date.prototype.format = function(mask, utc) {
             //          $('.qn_container #notes,.qn_container #username-password').hide();
             // CHECK EXISTING NOTES IN localStorage
             if (this.config.storage === true) {
-                /*$.getJSON('http://192.168.178.186:8080/HRD_MEMO/admin/memo/1', function(json) {
-                        // LOAD THE NOTES
-                            $.each(json.RESPONSE_DATA, function(index, obj) {
-                                $('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
-                                $('<span class="close"></span>').prependTo('#' + obj.id);
-                                var qnText = obj.content;
-                                if (isURL(qnText)) {
-                                    $('#' + obj.id).addClass('quicknote-bword');
-                                }
-                            });
-                     });*/
-            	var url= window.location.href;
-            	var memo={
-            			"fullDomain":url,
-            			"id":1
-            	};
+                var url = window.location.href;
+                var memo = {
+                    "fullDomain": url,
+                    "id": 2
+                };
                 $.ajax({
                     type: "POST",
-                    url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo",
+                    url: "http://localhost:8080/HRD_MEMO/plugin/memo",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    data:JSON.stringify(memo),
+                    data: JSON.stringify(memo),
                     success: function(json) {
+                    	var cb = '';
+                    	cb+='<section class="chat-container">';
+                    	cb+='<ol class="chat-box">';
                         $.each(json.RESPONSE_DATA, function(index, obj) {
-                            var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png"  style="margin-right:5px;" class="memo-img">';
-                            $('<span class="quicknote" id="' + obj.id + '"></span>').css({
-                                display: 'table'
-                            }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
-                            $('<span class="close"></span>').prependTo('#' + obj.id);
-                            $(imgPath).prependTo('#' + obj.id);
+                        	var dateString = obj.date;
+                        	var currentTime = new Date(parseInt(dateString ));
+                        	var month = currentTime.getMonth() + 1;
+                        	var day = currentTime.getDate();
+                        	var year = currentTime.getFullYear();
+                        	var date = day + "/" + month + "/" + year;
+                        		if(obj.userid==Cookies.getJSON('LOGGED').userid){
+                        	    
+                        	        cb+='<li class="another" id="'+obj.id+'">';
+                        	            cb+='<div class="avatar-icon">';
+                        	                cb+='<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/Icon1.png">';
+                        	            cb+='</div>';
+                        	            cb+='<div class="messages">';
+                        	                cb+='<p>'+obj.content+'</p>';
+                        	                cb+='<time datetime="2009-11-13T20:00">'+date+'</time>';
+                        	            cb+='</div>';
+                        	        cb+='</li>';
+                        	    
+                        	        $('<span class="close"></span>').prependTo('#' + obj.id);
+                        		}else{
+                        		cb+='<li class="me" id="'+obj.id+'">';
+                	            cb+='<div class="avatar-icon">';
+                	                cb+='<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/icon2.png">';
+                	            cb+='</div>';
+                	            cb+='<div class="messages">';
+                	                cb+='<p>'+obj.content+'</p>';
+                	                cb+='<time datetime="2009-11-13T20:00">'+date+'</time>';
+                	            cb+='</div>';
+                	        cb+='</li>';
+                        		}
+                	        $('<span class="close"></span>').prependTo('#' + obj.id);
+                            
+                            
                             var qnText = obj.content;
                             if (isURL(qnText)) {
                                 $('#' + obj.id).addClass('quicknote-bword');
                             }
                         });
+                        cb+='</ol>';
+                    	cb+='</section>';
+                    	$(cb).appendTo('.qn_container #notes');
                     }
                 });
             }
@@ -297,13 +320,16 @@ Date.prototype.format = function(mask, utc) {
                         e.preventDefault();
                         $
                             .ajax({
-                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/login",
+                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/login",
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
                                     if (data.MESSAGE == "SUCCESS") {
-                                    	Cookies.set('LOGGED', data.EMAIL, { expires: 1 , path: ''});
-                                       console.log(Cookies.get('LOGGED'));
+                                        Cookies.set('LOGGED', {"userid":data.USERID,"email":data.EMAIL}, {
+                                            expires: 1,
+                                            path: ''
+                                        });
+                                        console.log(Cookies.getJSON('LOGGED').userid);
                                         //location.reload();
                                         $('#qn > #qn_sh,#username-password').remove();
                                         _this.appendElem();
@@ -339,7 +365,7 @@ Date.prototype.format = function(mask, utc) {
                     var now = new Date();
                     //                      alert(now.format())
                     var timePath = '<span style="position:absolute;top:5px;right:5px;color:white">' + now.format() + '</span>';
-                    var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
+                    var imgPath = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
                     // CREATE NOTES
                     $('<span class="quicknote" id="qn_' + uniqid + '"></span>').css({
                         display: 'table'

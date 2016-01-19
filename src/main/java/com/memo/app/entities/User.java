@@ -3,6 +3,7 @@ package com.memo.app.entities;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ public class User {
 	private String password;
 	private String gender;
 	private String email;
-	@Transient
+	@Column(name="userimageurl")
 	private String image;
 	@Transient
 	private boolean ismemoenable;
