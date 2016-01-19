@@ -15,17 +15,18 @@ pageEncoding="ISO-8859-1"%>
 	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
-	<div class='row' style="height: 45px;">
+	<div class='row col s12' style="height: 45px; text-align: center;">
+	<p id="error" style="margin: auto; color:white; background: #FF1744; height: 100%; display:none;"></p>
 		<div class="fixed-action-btn horizontal">
 			<a class="btn-floating"> <i class="large material-icons">mode_edit</i>
 			</a>
 			<ul>
 				<li><a class="btn-floating red menu-btn" id="btn-active-memo"><i
-					class="material-icons">comment</i></a></li>
+					class="material-icons" style="font-size: 20px;">comment</i></a></li>
 					<li><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
-						class="material-icons">lock_open</i></a></li>
+						class="material-icons" style="font-size: 20px;">lock_open</i></a></li>
 				<li><a class="btn-floating green menu-btn" id="btn-active-register"><i
-						class="material-icons">open_in_browser</i></a></li>
+						class="material-icons" style="font-size: 20px;">open_in_browser</i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -88,7 +89,7 @@ pageEncoding="ISO-8859-1"%>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">vpn_key</i> <input
-						id="loginpassword" type="password" class="validate"> <label
+						id="loginpassword" type="password" class="validate" maxlength="10"> <label
 						for="loginpassword">Password</label>
 				</div>
 			</div>
@@ -126,7 +127,7 @@ pageEncoding="ISO-8859-1"%>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
-							<input id="password" type="password" class="validate"> <label
+							<input id="password" type="password" class="validate" maxlength="10"> <label
 							for="password">Password</label>
 						</div>
 					</div>
@@ -211,6 +212,7 @@ addEventListener("message",handlingMsg,true);
 	}
 	//sign up user
 	function signUpUser(){
+		if($("#name").val()!=""&&validateEmail($("#email").val())==true&&$("#password").val()!=""){
 		var json={
 				username:$("#name").val(),
 				email:$("#email").val(),
@@ -219,17 +221,36 @@ addEventListener("message",handlingMsg,true);
 				image:'Male-icon.png'
 		};
 				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),url);
+		}else{
+			if($("#name").val()==""||$("#email").val()==""||$("#password").val()==""){
+				$("#error").html("<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid input eg.blank name,email,pssword field..!</span>");
+				$("#error").slideDown().delay(3000).slideUp();
+			}else if(validateEmail($("#email").val())==false){
+				$("#error").html("<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid email..!</span>");
+				$("#error").slideDown().delay(1500).slideUp();
+			}
+		}
 	}
 	//login memo
 	function loginMemo(){
-	var json={
+	if(validateEmail($("#loginemail").val())==true&&$("#loginpassword").val()!=""){
+	 var json={
 				email:$("#loginemail").val(),
 				password:$("#loginpassword").val()
 		};
-				parent.postMessage("login#"+JSON.stringify(json, null, '\t'),url);
+				parent.postMessage("login#"+JSON.stringify(json, null, '\t'),url); 
+		}else{
+			if(validateEmail($("#loginemail").val())==false){
+				$("#error").html("<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid email..!</span>");
+				$("#error").slideDown().delay(1500).slideUp();
+			}
+		}
 	}
+
 	//save memo
 	$("#btn-save-memo").click(function() {
+		if($("#descmemo").val()!=""){
+		$("#descmemo").css('border','2px solid #009688');
 		var ismpublic="";
 		var pbl=document.getElementById("public");
 			if(pbl.checked){
@@ -244,7 +265,17 @@ addEventListener("message",handlingMsg,true);
 		 $("#descmemo").val("");
 		 $("#descmemo").focus();
 				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),url);
+		}else{
+			$("#descmemo").css('border','2px solid #D50000');
+			 $("#descmemo").focus();
+		}
 	});
 	$("#descmemo").val("");
+	
+	function validateEmail(email) {
+	    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	}
+	
 </script>
 </html>

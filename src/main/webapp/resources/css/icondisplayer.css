@@ -8,16 +8,17 @@
 .chip {
   display: block;
   font-size: 14px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.6);
+  font-weight: bolder;
+  color:black;
   line-height: 25px;
   padding: 0 12px;
-  border-radius: 16px;
-  background-color: #e4e4e4;
+  background-color: #FAFAFA;
   width:"100%";
   white-space:normal;
+  border-left:3px solid #009688;
   word-wrap: break-word;
-  margin: 3px auto;
+  box-shadow:2px 2px 3px #E0E0E0;
+  margin: 3px;
   display:table;
 }
 .chip i.material-icons {
