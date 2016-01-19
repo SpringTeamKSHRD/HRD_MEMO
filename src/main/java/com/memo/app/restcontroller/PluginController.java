@@ -61,7 +61,7 @@ public class PluginController {
 		} else {
 			map.put("MESSAGE", "MEMO HAS NOT BEEN CREATED.");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 	

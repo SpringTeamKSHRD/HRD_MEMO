@@ -58,9 +58,9 @@ public class MemoDaoImpl implements MemoDao{
 	@Override
 	public boolean insertMemo(Memo memo) {
 		System.out.println("insert memo dao.");
-		String sql="INSERT INTO memo.tbmemo(userid,title,content,domain,url,date,isenable,ispublic ) VALUES(?,?,?,?,?,?,?,?)";
+		String sql="INSERT INTO memo.tbmemo(userid,title,content,domain,url,isenable,ispublic ) VALUES(?,?,?,?,?,?,?)";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),memo.getDomain(),
-								  memo.getUrl(),memo.getDate(),memo.isIsenable(),memo.isIspublic()};
+								  memo.getUrl(),memo.isIsenable(),memo.isIspublic()};
 		try{
 			int i=jdbcTemplate.update(sql,obj);
 			if(i>0) return true;

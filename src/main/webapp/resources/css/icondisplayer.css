@@ -11,15 +11,18 @@
   font-weight: bolder;
   color:black;
   line-height: 25px;
-  padding: 0 12px;
+  padding:0px 3px;
   background-color: #FAFAFA;
   width:"100%";
   white-space:normal;
   border-left:3px solid #009688;
+  border-bottom:1px solid #009688;
   word-wrap: break-word;
-  box-shadow:2px 2px 3px #E0E0E0;
+  box-shadow:2px 2px 4px #E0E0E0;
   margin: 3px;
   display:table;
+  word-break:break-all;
+  margin-left: 15px;
 }
 .chip i.material-icons {
   cursor: pointer;
@@ -27,4 +30,18 @@
   font-size: 16px;
   line-height: 32px;
   padding-left: 8px;
+}
+.memo_img_wrapper{
+	margin: 0px;
+	padding:2px 0px 2px 0px;
+    width: 100%;
+    background: #009688;
+    height: 30px;
+}
+.user-memo-img{
+	width: 30px;
+	height: 30px;
+	border-radius:90%;
+	background: white;
+	display: inline;
 }

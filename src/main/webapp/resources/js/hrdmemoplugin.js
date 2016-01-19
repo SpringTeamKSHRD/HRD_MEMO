@@ -28,10 +28,9 @@ wrapper.style.overflow="hidden";
 wrapper.appendChild(ifrm_hrdmemo);
 //create description panel
 var desc_panel=document.createElement("DIV");
-desc_panel.style.width="95%";
+desc_panel.style.width="98%";
 desc_panel.style.height="auto";
 desc_panel.style.padding="5px";
-desc_panel.style.marginLeft="63px";
 wrapper.appendChild(desc_panel);
 
 var title = document.getElementsByTagName("title")[0].innerHTML;
@@ -69,15 +68,15 @@ function signUpUser(data){
 		}
 	});
 }
-var title = document.getElementsByTagName("title")[0].innerHTML;
-var url=location.href;
-var domain=location.hostname;
+var memo_title = document.getElementsByTagName("title")[0].innerHTML;
+var memo_url=location.href;
+var memo_domain=location.hostname;
 //user save memo
 function saveMemo(data){
 	var json=JSON.parse(data);
 	createDescribeBox(json.content);
-	json.titlememo=title;
-	json.domain=domain;
+	/*json.title=memo_title;
+	json.domain=memo_domain;
 	json.url=url;
 	json.userid=2;
 	json.isenable=true;
@@ -87,14 +86,20 @@ function saveMemo(data){
 		contentType: 'application/json;charset=utf-8',
         data:JSON.stringify(json),
 		success : function(data) {
-			alert(data.MESSAGE);
+			createDescribeBox(json.content);
 		},
 		error : function(data) {
 		}
-	});
+	});*/
 }
 function createDescribeBox(text){
 	var desc=document.createElement("P");
+	var memo_img_wraper=document.createElement("DIV");
+	memo_img_wraper.setAttribute("class","memo_img_wrapper");
+	var user_memo_img=document.createElement("img");
+	user_memo_img.setAttribute('class','user-memo-img');
+	user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/Male-icon.png');
+	memo_img_wraper.appendChild(user_memo_img);
 	desc.setAttribute('class','chip');
 	var close=document.createElement("i");
 	close.setAttribute('class','material-icons');
@@ -109,6 +114,7 @@ function createDescribeBox(text){
 	var report_text=document.createTextNode("assignment");
 	report.appendChild(report_text);
 	var desc_text=document.createTextNode(text);
+	desc.appendChild(memo_img_wraper);
 	desc.appendChild(desc_text);
 	desc.appendChild(close);
 	desc.appendChild(report);
@@ -128,7 +134,7 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 });
 //Send current url to child
 function sendDomain(){
-	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(url,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 }
 addEventListener('load',sendDomain,true);
 //report memo
