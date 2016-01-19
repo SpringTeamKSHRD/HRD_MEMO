@@ -39,11 +39,12 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<Memo> listMemo(int limit, int page) {
-		//System.out.println("list memo with pagination."+limit);
+		System.out.println("list memo with pagination."+limit);
 		/*if(page<=0) page=1;
 		int offset = limit * page - limit;*/
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
+					+"WHERE isenable=true "
 					+"ORDER BY id DESC "
 					+"LIMIT ? OFFSET ?";
 		try{
@@ -88,10 +89,9 @@ public class MemoDaoImpl implements MemoDao{
 	@Override
 	public boolean deleteMemo(int id) {
 		System.out.println("delete memo dao.");
-		String sql = "DELETE FROM memo.tbmemo"
-					 +"WHERE id=?;";
+		String sql = "UPDATE memo.tbmemo SET isenable=? WHERE id=?";
 		try{
-			int i = jdbcTemplate.update(sql, id);
+			int i = jdbcTemplate.update(sql, new Object[]{false,id});
 			if (i > 0) return true;
 		}catch(Exception e){
 			e.printStackTrace();

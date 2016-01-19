@@ -38,7 +38,7 @@
 					<div class="col s12 m6 l4">
 						<div class="input-field col s12">
 						    <select id="searching">
-							      <!-- <option value="" disabled selected>Choose your option</option> -->
+							      <option value="" disabled selected>Filter memo here.</option> 
 							      <option value="1">Website</option>
 							      <option value="2">Privacy</option>
 							      <option value="3">Date</option>
@@ -57,7 +57,7 @@
 				<!-- Empty Area -->
 				<div class="row">
 					<div class="col s12 m6 l3">
-					 
+					 	
 					</div>
 				</div>
 			</div>
@@ -91,8 +91,18 @@
 						</div>
 						</div>
 					</div>
+					<!-- List Tile Memo -->
+					<div class="row">
+				        <div class="col s12 m12">
+				          <div class="card teal lighten-1">
+				            <div class="card-content white-text center">
+				            	<span>List Memo</span>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
 					<div id="listmemo" style="max-height:500px; overflow-y:scroll">
-					
+						
 					</div>					
 				</div>
 				<!-- pagination -->

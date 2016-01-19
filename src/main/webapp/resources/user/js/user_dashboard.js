@@ -24,7 +24,12 @@ function loadPage(){
 
 /* list data */
 function displayData(data) {
-	var contents = "<ul class='collection highlight'>";
+	var contents = "<ul class='collection highlight'>"
+				 	+"<li>"
+				 		/*+"<p class='listmemo active'>"
+				 			+"List Memos"
+				 		+"</p>"*/
+				 	+"</li>";
 	var privacy;
 
 	for (var i = 0; i < data.DATA.length; i++) {
@@ -37,9 +42,10 @@ function displayData(data) {
 					+ "</span>"
 					+ "<b><span class='title'>"
 						+ data.DATA[i].title
-					+ "</span></b><br/><br/>"
+					+ "</span>"
+					+"<a><i class='material-icons right reddel' onclick='deletememo("+data.DATA[i].id+")'>delete</i></a>"
 					+ "<p>"
-						+ data.DATA[i].content.substring(0, 30)
+						+ data.DATA[i].content.substring(0, 30)+".........."
 					+ "</p>"
 					+"<small><p>"
 						+data.DATA[i].date
@@ -53,9 +59,26 @@ function displayData(data) {
 	contents += "</ul>";
 	$("#listmemo").html(contents);
 }
+	/* delete memo*/
+	function deletememo(id){
+		//alert("delete id "+id);
+		$.ajax({
+			type : "DELETE",
+			url : domain+"/user/"+id,
+			success : function(data) {
+				alert("Success :" + data.MESSAGE);
+				loadPage();
+			},
+			error : function(data) {
+				alert("Unsuccess: " + data.MESSAGE);
+				console.log("ERROR..." + data);
+			}
+		});	
+	}
+	
 	/*When user select on combobox to change amount of rows to display.*/
 	$("#limit_row").change(function(){
-		var limit=$("#limit_row").val(); //alert(limit);
+		var limit=$("#limit_row").val(); alert(limit);
 		
 		clearMemo();
 		$.ajax({
@@ -65,7 +88,7 @@ function displayData(data) {
 					data : null,
 					success : function(data) {
 						//alert("Success :" + data);
-						displayData(data);
+						loadPage();
 					},
 					error : function(data) {
 						alert("Unsuccess: " + data.MESSAGE);

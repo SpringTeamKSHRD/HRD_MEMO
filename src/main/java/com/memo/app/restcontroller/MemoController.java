@@ -154,6 +154,21 @@ public class MemoController {
 		}
 	}
 	
+	// update memo
+		@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+		public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable("id") int id) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if (memoService.deleteMemo(id)) {
+				map.put("MESSAGE", "MEMO HAS BEEN DELETED.");
+				map.put("STATUS", HttpStatus.FOUND.value());
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("MESSAGE", "MEMO HAS NOT BEEN DELETED.");
+				map.put("STATUS", HttpStatus.NOT_FOUND.value());
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			}
+		}
+	
 	
 	
 }

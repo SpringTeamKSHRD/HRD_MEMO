@@ -106,7 +106,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 					displayData(data);
 				},
 				error : function(data) {
-					alert("Unsuccess: " + data.MESSAGE);
+					//alert("Unsuccess: " + data.MESSAGE);
 					console.log("ERROR..." + data);
 				}
 			});
