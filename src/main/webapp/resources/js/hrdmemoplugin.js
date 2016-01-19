@@ -4,6 +4,7 @@ $('head').append("<link rel='stylesheet' href='https://fonts.googleapis.com/icon
 $('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
 $('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
 $('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
+$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/dragbox.js/></script>");
 //iframe wrapper
 var wrapper=document.getElementById("hrd_memo_pess");
 var ifrm_hrdmemo = document.createElement("IFRAME");
@@ -94,12 +95,23 @@ function saveMemo(data){
 }
 function createDescribeBox(text){
 	var desc=document.createElement("P");
+	//create image and data wrapper
 	var memo_img_wraper=document.createElement("DIV");
 	memo_img_wraper.setAttribute("class","memo_img_wrapper");
 	var user_memo_img=document.createElement("img");
 	user_memo_img.setAttribute('class','user-memo-img');
 	user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/Male-icon.png');
 	memo_img_wraper.appendChild(user_memo_img);
+	//create date label
+	var memo_date_label=document.createElement('small');
+	memo_date_label.style.color="white";
+	memo_date_label.style.float="right";
+	var today = new Date();
+	var memo_date_time='Date :'+today.getDate()+'/'+today.getMonth()+1+'/'+today.getFullYear()+'    Time:'+today.getHours()+':'+today.getMinutes();
+	var memo_desc_date=document.createTextNode(memo_date_time);
+	memo_date_label.appendChild(memo_desc_date);
+	memo_img_wraper.appendChild(memo_date_label);
+	///
 	desc.setAttribute('class','chip');
 	var close=document.createElement("i");
 	close.setAttribute('class','material-icons');
@@ -157,3 +169,4 @@ hrd_memo_websocket.onmessage=function(message){
 function sendReportNotify(){
 	hrd_memo_websocket.send("report");
 }
+$("#hrd_memo_pess").dragable();
