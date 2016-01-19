@@ -2,9 +2,12 @@ package com.memo.app.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name="tbmemo",schema="memo")
@@ -14,11 +17,15 @@ public class Memo {
 	private int userid;
 	private String title;
 	private String content;
-	private String domain;
+	@Column(name="domain_name")
+	private String domainName;
 	private String url;
 	private Date date;
 	private boolean isenable = true;
 	private boolean ispublic;
+	@Formula(value="domain_name || url")
+	private String fullDomain;
+
 	public int getId() {
 		return id;
 	}
@@ -44,10 +51,10 @@ public class Memo {
 		this.content = content;
 	}
 	public String getDomain() {
-		return domain;
+		return domainName;
 	}
-	public void setDomain(String domain) {
-		this.domain = domain;
+	public void setDomain(String domainName) {
+		this.domainName = domainName;
 	}
 	public String getUrl() {
 		return url;
@@ -73,10 +80,16 @@ public class Memo {
 	public void setIspublic(boolean ispublic) {
 		this.ispublic = ispublic;
 	}
+	public String getFullDomain() {
+		return fullDomain;
+	}
+	public void setFullDomain(String fullDomain) {
+		this.fullDomain = fullDomain;
+	}
 	@Override
 	public String toString() {
 		return "Memo [id=" + id + ", userid=" + userid + ", title=" + title + ", content=" + content + ", domain="
-				+ domain + ", url=" + url + ", date=" + date + ", isenable=" + isenable + ", ispublic=" + ispublic
+				+ domainName + ", url=" + url + ", date=" + date + ", isenable=" + isenable + ", ispublic=" + ispublic
 				+ "]";
 	}
 	

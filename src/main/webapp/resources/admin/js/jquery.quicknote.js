@@ -110,6 +110,22 @@ dateFormat.i18n = {
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     ]
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // For convenience...
 Date.prototype.format = function(mask, utc) {
     return dateFormat(this, mask, utc);
@@ -133,7 +149,7 @@ Date.prototype.format = function(mask, utc) {
             if (Storage === void(0)) {
                 this.config.storage = false;
             }
-            if (typeof $.session.get('email') === 'undefined') {
+            if (typeof Cookies.get('LOGGED') === 'undefined') {
                 this.login();
                 //              this.init();
             } else {
@@ -176,7 +192,7 @@ Date.prototype.format = function(mask, utc) {
             var showHide = '<div id="qn_sh"><span id="show-hide">KhmerAcademy Memo</span><span style="font-weight:bold;color:red;" id="logout">Log out</span></div>';
             var divNotes = '<div id="notes"></div>';
             // var notesInp = '<p><input type="text" name="qn_input" maxlength="500" placeholder="Your notes..."></p>';
-            var saveImg = '<span style="position:absolute;bottom:6px;right:-4px;cursor:pointer;" id="myimg"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/save.png"  class="memo-img img-hover"></span>';
+            var saveImg = '<span style="position:absolute;bottom:6px;right:-4px;cursor:pointer;" id="myimg"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/save.png"  class="memo-img img-hover"></span>';
             var notesInp = '<p style="position:relative;"><textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 150px" id="mytext"></textarea></p>';
             // var titleInp = '<p><input type="text" name="txttitle" id="txttitle" placeholder="Your title..." style="font-weight:bolder"></p>';
             $(showHide).appendTo(this.$el);
@@ -185,14 +201,17 @@ Date.prototype.format = function(mask, utc) {
             $(notesInp).appendTo(this.$el.find('#notes'));
             $(saveImg).appendTo(this.$el.find('#notes p'));
             $('#logout').click(function() {
-                $.session.remove('email');
+            	Cookies.get('LOGGED'); // => 'value'
+            	Cookies.remove('LOGGED', { path: '' });
+            	alert(Cookies.get('LOGGED'))
                 $('#qn > #qn_sh,#notes').remove();
                 _this.login();
+                $('.qn_container #notes,.qn_container #username-password').show();
             });
             //          $('.qn_container #notes,.qn_container #username-password').hide();
             // CHECK EXISTING NOTES IN localStorage
             if (this.config.storage === true) {
-                /*$.getJSON('http://localhost:8080/HRD_MEMO/admin/memo/1', function(json) {
+                /*$.getJSON('http://192.168.178.186:8080/HRD_MEMO/admin/memo/1', function(json) {
                         // LOAD THE NOTES
                             $.each(json.RESPONSE_DATA, function(index, obj) {
                                 $('<span class="quicknote" id="' + obj.id + '"></span>').css({ display: 'table' }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
@@ -203,14 +222,20 @@ Date.prototype.format = function(mask, utc) {
                                 }
                             });
                      });*/
+            	var url= window.location.href;
+            	var memo={
+            			"fullDomain":url,
+            			"id":1
+            	};
                 $.ajax({
-                    method: "GET",
-                    url: "http://localhost:8080/HRD_MEMO/plugin/memo/1",
-                    dataType: "JSON",
-                    /*data:{id:1},*/
+                    type: "POST",
+                    url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data:JSON.stringify(memo),
                     success: function(json) {
                         $.each(json.RESPONSE_DATA, function(index, obj) {
-                            var imgPath = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/avatar.png"  style="margin-right:5px;" class="memo-img">';
+                            var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png"  style="margin-right:5px;" class="memo-img">';
                             $('<span class="quicknote" id="' + obj.id + '"></span>').css({
                                 display: 'table'
                             }).stop().fadeIn('fast').appendTo('.qn_container #notes').text(obj.content);
@@ -255,8 +280,8 @@ Date.prototype.format = function(mask, utc) {
             var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
             var usernameInput = '<p><input type="email" name="email" id="email" maxlength="500" placeholder="E-mail" required></p>';
             var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
-            var submitBtn = '<input type="submit" name="btnLogin" class="memo-btn memo-btn-primary memo-btn-sm" value="Login" id="logBtn">';
-            var regBtn = '<input type="submit" name="btnReg" class="memo-btn memo-btn-success memo-btn-sm" value="Register" id="regBtn">';
+            var submitBtn = '<input type="submit" name="btnLogin" class="qn_memo_button qn_memo_button-flat-primary" value="Login" id="logBtn" style>';
+            var regBtn = '<input type="submit" name="btnReg" class="qn_memo_button qn_memo_button-flat-highlight" value="Register" id="regBtn">';
             $(showHide).appendTo(this.$el);
             $(divUserPass).appendTo(this.$el);
             $(loginForm).appendTo(this.$el.find('#username-password'));
@@ -272,12 +297,13 @@ Date.prototype.format = function(mask, utc) {
                         e.preventDefault();
                         $
                             .ajax({
-                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/login",
+                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/login",
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
-                                    if (data.RESPONSE_DATA == true) {
-                                        $.session.set("email", data.EMAIL);
+                                    if (data.MESSAGE == "SUCCESS") {
+                                    	Cookies.set('LOGGED', data.EMAIL, { expires: 1 , path: ''});
+                                       console.log(Cookies.get('LOGGED'));
                                         //location.reload();
                                         $('#qn > #qn_sh,#username-password').remove();
                                         _this.appendElem();
@@ -313,7 +339,7 @@ Date.prototype.format = function(mask, utc) {
                     var now = new Date();
                     //                      alert(now.format())
                     var timePath = '<span style="position:absolute;top:5px;right:5px;color:white">' + now.format() + '</span>';
-                    var imgPath = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
+                    var imgPath = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/avatar.png" width="25px" heigh="25px" style="margin-right:5px;" class="memo-img">';
                     // CREATE NOTES
                     $('<span class="quicknote" id="qn_' + uniqid + '"></span>').css({
                         display: 'table'

@@ -23,28 +23,29 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<Memo> listById(int id) {
+	public List<Memo> listByIdAndURL(int id,String url) {
 		Session sess=sf.getCurrentSession();
 		Criteria cr = sess.createCriteria(Memo.class);
-				cr.add(Restrictions.eq("userid",id));
+				cr.add(Restrictions.eq("fullDomain", url));
+				cr.add(Restrictions.disjunction()
+						.add(Restrictions.eq("ispublic", true))
+						.add(Restrictions.eq("userid",id)));
 		return cr.list();
 	}
 
 	@Override
 	@Transactional
-	public Boolean login(String email, String password) {
+	public User login(String email, String password) {
 		Session ses= sf.getCurrentSession();
 		Criteria cr =  ses.createCriteria(User.class);
-						User user=  (User) cr.add(Restrictions.eq("email", email))
-						.uniqueResult();
+		User user=  (User) cr.add(Restrictions.eq("email", email)).uniqueResult();
 		if(user!=null){
 			if(new BCryptPasswordEncoder().matches(password, user.getPassword())){
-				
-				return true;
+				return user;
 			}
-			return false;
+			return null;
 		}
-		return false;
+		return null;
 	}
 
 }
