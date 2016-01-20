@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 
@@ -15,6 +16,7 @@ public class Memo {
 	@Id
 	private int id;
 	private int userid;
+	@Transient
 	private String userimage;
 	private String title;
 	private String content;

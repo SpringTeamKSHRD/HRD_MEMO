@@ -89,7 +89,7 @@
 
 #notes > span,
 #username-password > span,
-#notes p,
+#notes>p:first-child,
 #username-password p {
     font-family: 'Open Sans', sans, arial;
     right: 0;
@@ -97,35 +97,35 @@
     text-align: left;
 }
 
-#notes p,
+#notes>p:first-child,
 #username-password p,
-#notes p textarea,
+#notes>p:first-child textarea,
 #username-password p input {
     font-size: .9em;
     width: 100%;
 }
 
-#notes p,
+#notes>p:first-child,
 #username-password p {
     margin: 5px auto 0 auto;
     /*padding: 2px;*/
 }
 
-#notes p textarea,
+#notes>p:first-child textarea,
 #username-password p input {
     width: 100%;
     color: #6d6d6d;
     border: 1px solid #ccc;
 }
 
-#notes p textarea:focus,
+#notes>p:first-child textarea:focus,
 #username-password p input:focus {
     border-color: #ccc;
     box-shadow: 0;
 }
 
 .quicknote,
-#notes p textarea,
+#notes>p:first-child textarea,
 #username-password p input {
     position: relative;
     height: auto;
@@ -403,6 +403,8 @@
         padding: 10px;
         border-radius: 2px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        max-width: 85%;
+   		word-break: break-all;
     }
     
     .messages p {

@@ -16,7 +16,7 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 	private IEmebededMemoRepo embededMemoRepo;
 	
 	@Override
-	public List<Memo> listMemoByUserIdAndURL(int id,String url) {
+	public String listMemoByUserIdAndURL(int id,String url) {
 		return embededMemoRepo.listByIdAndURL(id,url);
 	}
 
