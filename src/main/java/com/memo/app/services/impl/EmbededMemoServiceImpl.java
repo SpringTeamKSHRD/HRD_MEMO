@@ -25,4 +25,10 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 		return embededMemoRepo.login(email, password);
 	}
 
+	@Override
+	public Boolean addMemo(Memo m) {
+		
+		return embededMemoRepo.insert(m);
+	}
+
 }

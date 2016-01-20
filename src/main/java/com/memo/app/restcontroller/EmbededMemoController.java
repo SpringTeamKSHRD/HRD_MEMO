@@ -44,7 +44,7 @@ public class EmbededMemoController {
 	}*/
 
 	@RequestMapping(value ="", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
-	public @ResponseBody String listArticle(@RequestBody Memo memo) {
+	public @ResponseBody String listMemo(@RequestBody Memo memo) {
 		System.out.println("list memo");
 		String list = embededMemoService.listMemoByUserIdAndURL(memo.getId(),memo.getFullDomain());
 		System.out.println(list);
@@ -78,5 +78,22 @@ public class EmbededMemoController {
 		return null;
 	}
 	
+	
+	@RequestMapping(value ="/add", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
+		System.out.println("add memo");
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());			
+			map.put("RESPONSE_DATA", embededMemoService.addMemo(memo));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			map.put("MESSAGE", "LIST EMPTY");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());			
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

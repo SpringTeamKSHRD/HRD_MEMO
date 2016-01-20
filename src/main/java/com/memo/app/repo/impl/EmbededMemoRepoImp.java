@@ -59,4 +59,12 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 		return null;
 	}
 
+	@Override
+	public Boolean insert(Memo m) {
+		Session sess = sf.getCurrentSession();
+		sess.persist(m);
+		return true;
+			
+	}
+
 }
