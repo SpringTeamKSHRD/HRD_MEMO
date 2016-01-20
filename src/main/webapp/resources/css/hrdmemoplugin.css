@@ -41,3 +41,10 @@
 	width: 30px;
 	height: 30px;
 }
+.hrd_memo_pess{
+	position: fixed;
+	width: 300px;
+	right: 0px;
+	top: 0px;
+	height: auto;
+}

@@ -32,12 +32,12 @@ pageEncoding="ISO-8859-1"%>
 	</div>
 	<!--Memo Form-->
 	<div class="row" style="margin-top: 5px;">
-		<form class="col s12" id="hrd-memo-frm">
-			<div class="row">
-				<div class="col s12" id="img_desc_wrapper">
-					<table>
+		<form class="col s12" id="hrd-memo-frm" style="padding:0px; margin: 0px;">
+			<div class="row" style="padding:0px; margin: 0px;">
+				<div class="col s12" id="img_desc_wrapper" style="padding:0px; margin: 0px;">
+					<table style="padding:0px; margin: 0px;">
 						<tr style="padding: 0px;">
-							<td style="width: 50px; padding: 0px; margin: 0px;"><img alt=""
+							<td style="width: 60px; padding: 0px; margin: 0px; text-align: right;"><img alt=""
 								src="resources/Male-icon.png"
 								style="width: 45px; height: 59px; border: 1px solid gray; padding: 2px;">
 							</td>
@@ -50,7 +50,7 @@ pageEncoding="ISO-8859-1"%>
 				</div>
 			</div>
 			<div class="row" style="margin-top: 2px;">
-				<table>
+				<table style="padding:0px;">
 					<tr style="padding: 0px;">
 						<td style="width: 50px; padding: 0px;"></td>
 						<td style="padding: 0px;">
@@ -58,7 +58,7 @@ pageEncoding="ISO-8859-1"%>
 								<input type="checkbox" class="filled-in" id="public" />
 								<label for="public">Public</label>
 							</div>
-							<div class="input-field col s11" style="text-align: right;">
+							<div class="input-field col s11" style="text-align: right; padding: 0px;">
 								<button class="btn waves-effect" type="button" 
 										style="padding: 0px 5px; height: 30px;" 
 										id='btn-save-memo'>Save</button>
@@ -132,13 +132,13 @@ pageEncoding="ISO-8859-1"%>
 						</div>
 					</div>
 					<div class='row'>
-						<div class='col s6'>
+						<div class='col s7'>
 							<input class="with-gap" name="gender" type="radio" value="male" id="male" checked/>
 							<label for="male">Male</label>
 							<input class="with-gap" name="gender" type="radio" value="female" id='female'/>
 							<label for="female">Female</label>
 						</div>
-						<div class='col s6'>
+						<div class='col s5'>
 							<button class="btn waves-effect waves-light" onclick="signUpUser()" type="button"
 							name="action" style="padding-top: 0px; float: right;">
 							<i class="material-icons">send</i>
@@ -156,7 +156,6 @@ var obj=null;
 function handlingMsg(e){
 	var parentData=e.data.split("#");
 	url=parentData[0];
-	alert(parentData[0]);
 	obj=JSON.parse(parentData[1]);
 	if(obj==null){
 		$("#btn-memo-nemu1").css('display','none');

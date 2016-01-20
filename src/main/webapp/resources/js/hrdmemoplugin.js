@@ -23,7 +23,10 @@ ifrm_hrdmemo.setAttribute('scrolling','no');
 ifrm_hrdmemo.style.overflow="hidden";
 //wrapper style
 wrapper.style.height="auto";
-wrapper.style.width="100%";
+wrapper.style.width="330px";
+wrapper.style.right="2px";
+wrapper.style.position="fixed";
+wrapper.style.top="0px";
 wrapper.style.margin="0px";
 wrapper.style.padding="0px";
 wrapper.style.overflow="hidden";
@@ -31,9 +34,10 @@ wrapper.appendChild(ifrm_hrdmemo);
 //create description panel
 var desc_panel=document.createElement("DIV");
 desc_panel.style.width="98%";
-desc_panel.style.height="auto";
+desc_panel.style.maxHeight="500px";
 desc_panel.style.padding="5px";
 desc_panel.style.overflow="auto";
+
 wrapper.appendChild(desc_panel);
 
 //get memory
@@ -211,7 +215,9 @@ function createDescribeBox(text,title,image,userid,memoid){
 	var memo_footer=document.createElement("P");
 	memo_footer.setAttribute('class','mymemo-footer');
 	memo_footer.appendChild(memo_date_label);
-	desc.appendChild(memo_img_wraper);
+	if(userid!=memo_frm_id){
+		desc.appendChild(memo_img_wraper);
+	}
 	desc.appendChild(desc_text);
 	if(userid==memo_frm_id){
 		desc.appendChild(close);
