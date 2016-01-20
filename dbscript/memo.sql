@@ -198,11 +198,6 @@ ALTER TABLE "memo"."tbmessage" ADD PRIMARY KEY ("id");
 ALTER TABLE "memo"."tbreport" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
--- Foreign Key structure for table "memo"."tbhistory"
--- ----------------------------
-ALTER TABLE "memo"."tbhistory" ADD FOREIGN KEY ("memoid") REFERENCES "memo"."tbmemo" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
 -- Foreign Key structure for table "memo"."tbmemo"
 -- ----------------------------
 ALTER TABLE "memo"."tbmemo" ADD FOREIGN KEY ("userid") REFERENCES "public"."tbluser" ("userid") ON DELETE NO ACTION ON UPDATE NO ACTION;
