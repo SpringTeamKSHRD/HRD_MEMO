@@ -19,7 +19,7 @@
   word-wrap: break-word;
   box-shadow:1px 1px 4px gray;
   margin: 5px;
-  display:table;
+   display:table;
   word-break:break-all;
   margin-left: 15px;
 }

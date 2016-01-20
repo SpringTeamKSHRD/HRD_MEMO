@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class PluginController {
 	private MemoServiceImpl memoDao;
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
-	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user){
+	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user,HttpServletResponse respone){
 	  Map<String,Object> map=new HashMap<String,Object>();
 	  if(userDao.saveUser(user)==true){
 		  map.put("MESSAGE","USER HAS BEEN SIGN UP");
@@ -97,7 +98,7 @@ public class PluginController {
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}
 	}
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable("id") int id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (memoDao.deleteMemo(id)) {

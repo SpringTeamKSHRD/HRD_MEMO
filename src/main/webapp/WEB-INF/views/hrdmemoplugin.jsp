@@ -6,26 +6,26 @@ pageEncoding="ISO-8859-1"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<link rel='stylesheet' type='text/css'
-	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
-	<div class='row col s12' style="height: 45px; text-align: center;">
+	<div class='row col s12' style="height: 60px; text-align: center;">
 	<p id="error" style="margin: auto; color:white; background: #FF1744; height: 100%; display:none;"></p>
 		<div class="fixed-action-btn horizontal">
 			<a class="btn-floating btn-large"> <i class="large material-icons">mode_edit</i>
 			</a>
 			<ul>
-				<li><a class="btn-floating red menu-btn" id="btn-active-memo"><i
+				<li id="btn-memo-nemu1"><a class="btn-floating red menu-btn" id="btn-active-memo"><i
 					class="material-icons" style="font-size: 20px;">comment</i></a></li>
-					<li><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
+					<li id="btn-memo-nemu2"><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
 						class="material-icons" style="font-size: 20px;">lock_open</i></a></li>
-				<li><a class="btn-floating green menu-btn" id="btn-active-register"><i
+				<li id="btn-memo-nemu3"><a class="btn-floating green menu-btn" id="btn-active-register"><i
 						class="material-icons" style="font-size: 20px;">open_in_browser</i></a></li>
 			</ul>
 		</div>
@@ -149,19 +149,20 @@ pageEncoding="ISO-8859-1"%>
 		</div>
 		<!--Register Form  -->
 </body>
-<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
+<link rel="stylesheet" href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
 var url="";
 var obj=null;
 function handlingMsg(e){
 	var parentData=e.data.split("#");
 	url=parentData[0];
+	alert(parentData[0]);
 	obj=JSON.parse(parentData[1]);
 	if(obj==null){
-		$("#btn-active-memo").css('display','none');
+		$("#btn-memo-nemu1").css('display','none');
 	}else{
-		$("#btn-active-login").css('display','none');
-		$("#btn-active-register").css('display','none');
+		$("#btn-memo-nemu3").css('display','none');
+		$("#btn-memo-nemu2").css('display','none');
 	}
 }
 addEventListener("message",handlingMsg,true);
@@ -170,11 +171,11 @@ addEventListener("message",handlingMsg,true);
 		display1=true;
 		display2=true;
 						if(display==true){
-							iframeSizeMemoPanel('150px');
+							iframeSizeMemoPanel('160px');
 							display=false;
 						}else{
 							display=true;
-							iframeSizeMemoPanel('55px');	
+							iframeSizeMemoPanel('60px');	
 						}
 						$("#hrd-login-frm").css('display','none');
 						$("#hrd-register-frm").css('display','none');
@@ -185,11 +186,11 @@ addEventListener("message",handlingMsg,true);
 		display=true;
 		display2=true;
 				if(display1==true){
-					iframeSizeLoginPanel('280px');
+					iframeSizeLoginPanel('290px');
 					display1=false;
 				}else{
 					display1=true;
-					iframeSizeLoginPanel('55px');
+					iframeSizeLoginPanel('60px');
 				}
 				$("#hrd-memo-frm").css('display','none');
 				$("#hrd-register-frm").css('display','none');
@@ -204,7 +205,7 @@ addEventListener("message",handlingMsg,true);
 					display2=false;
 				}else{
 					display2=true;
-					iframeSizeRegisterPanel('55px');
+					iframeSizeRegisterPanel('60px');
 				}
 				$("#hrd-login-frm").css('display','none');
 				$("#hrd-memo-frm").css('display','none');
@@ -230,6 +231,11 @@ addEventListener("message",handlingMsg,true);
 				image:'Male-icon.png'
 		};
 				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),url);
+				$("#btn-memo-nemu1").css('display','block');
+				$("#btn-memo-nemu3").css('display','none');
+				$("#btn-memo-nemu2").css('display','none');
+				$("#hrd-register-frm").slideToggle(500);
+				$("#hrd-memo-frm").slideToggle(500);
 		}else{
 			if($("#name").val()==""||$("#email").val()==""||$("#password").val()==""){
 				$("#error").html("<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid input eg.blank name,email,pssword field..!</span>");
