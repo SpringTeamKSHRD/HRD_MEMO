@@ -6,13 +6,13 @@ pageEncoding="ISO-8859-1"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<link rel='stylesheet' type='text/css'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 	<script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
 	<div class='row col s12' style="height: 60px; text-align: center;">
@@ -21,9 +21,11 @@ pageEncoding="ISO-8859-1"%>
 			<a class="btn-floating btn-large"> <i class="large material-icons">mode_edit</i>
 			</a>
 			<ul>
+				<li id="btn-memo-nemu1"><a class="btn-floating green menu-btn" id="btn-active-panel"><i
+					class="material-icons" style="font-size: 20px;">swap_vert</i></a></li>
 				<li id="btn-memo-nemu1"><a class="btn-floating red menu-btn" id="btn-active-memo"><i
 					class="material-icons" style="font-size: 20px;">comment</i></a></li>
-					<li id="btn-memo-nemu2"><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
+				<li id="btn-memo-nemu2"><a class="btn-floating yellow darken-1 menu-btn" id="btn-active-login"><i
 						class="material-icons" style="font-size: 20px;">lock_open</i></a></li>
 				<li id="btn-memo-nemu3"><a class="btn-floating green menu-btn" id="btn-active-register"><i
 						class="material-icons" style="font-size: 20px;">open_in_browser</i></a></li>
@@ -149,7 +151,7 @@ pageEncoding="ISO-8859-1"%>
 		</div>
 		<!--Register Form  -->
 </body>
-<link rel="stylesheet" href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
+<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
 var url="";
 var obj=null;
@@ -170,11 +172,11 @@ addEventListener("message",handlingMsg,true);
 		display1=true;
 		display2=true;
 						if(display==true){
-							iframeSizeMemoPanel('160px');
+							iframeSizePanel('160px');
 							display=false;
 						}else{
 							display=true;
-							iframeSizeMemoPanel('60px');	
+							iframeSizePanel('60px');	
 						}
 						$("#hrd-login-frm").css('display','none');
 						$("#hrd-register-frm").css('display','none');
@@ -185,11 +187,11 @@ addEventListener("message",handlingMsg,true);
 		display=true;
 		display2=true;
 				if(display1==true){
-					iframeSizeLoginPanel('290px');
+					iframeSizePanel('290px');
 					display1=false;
 				}else{
 					display1=true;
-					iframeSizeLoginPanel('60px');
+					iframeSizePanel('60px');
 				}
 				$("#hrd-memo-frm").css('display','none');
 				$("#hrd-register-frm").css('display','none');
@@ -200,23 +202,21 @@ addEventListener("message",handlingMsg,true);
 		display1=true;
 		display=true;
 				if(display2==true){
-					iframeSizeRegisterPanel('350px');
+					iframeSizePanel('350px');
 					display2=false;
 				}else{
 					display2=true;
-					iframeSizeRegisterPanel('60px');
+					iframeSizePanel('60px');
 				}
 				$("#hrd-login-frm").css('display','none');
 				$("#hrd-memo-frm").css('display','none');
 				$("#hrd-register-frm").slideToggle(10);
 			});
-	function iframeSizeMemoPanel(height){
-		parent.postMessage('size#'+height,url);
-	}
-	function iframeSizeLoginPanel(height){
-		parent.postMessage('size#'+height,url);
-	}
-	function iframeSizeRegisterPanel(height){
+	//Toggle descpanel
+	$("#btn-active-panel").click(function(){
+		parent.postMessage('animate#ok',url);
+	});
+	function iframeSizePanel(height){
 		parent.postMessage('size#'+height,url);
 	}
 	//sign up user
@@ -245,6 +245,7 @@ addEventListener("message",handlingMsg,true);
 			}
 		}
 	}
+	
 	//login memo
 	function loginMemo(){
 	if(validateEmail($("#loginemail").val())==true&&$("#loginpassword").val()!=""){
