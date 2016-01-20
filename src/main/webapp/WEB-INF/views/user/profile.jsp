@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->	
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css"/>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
@@ -61,50 +64,69 @@
 				  <!-- Body Form -->
 				  <div class="panel-body">
 					<div class="row">
-						<div class="col-xs-12 col-md-6 col-lg-1">
+						<div class="col-xs-6 col-md-2 col-lg-1">
 						</div>
-						<div class="col-xs-12 col-md-6 col-lg-6">
+						<div class="col-xs-12 col-md-3 col-lg-6">
 							<form action="#">
+								<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Username</label>
-									<input type="text" class="form-control" id="exampleInputEmail1" placeholder="username">
+									<label>Username</label>
+									<input type="text" class="form-control" id="username" value="${sessionScope['USER'].username}">
 								</div>
-								<label>Gender</label><br/>
-								<label class="radio-inline">
-								  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Male
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Female
-								</label> 
+								<c:choose>
+								    <c:when test="${sessionScope['USER'].gender =='female'}">								    
+								        <label>Gender</label><br/>						
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="male" value="male" > Male
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="female" value="female" checked> Female
+										</label> 
+								    </c:when>    
+								    <c:otherwise>
+								        <label>Gender</label><br/>								       
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> Male
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="female" value="female"> Female
+										</label> 
+								    </c:otherwise>
+								</c:choose>
+								
 								<br/><br/>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Email</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="email">
+									<label>Email</label>
+									<input type="email" class="form-control" id="email" value="${sessionScope['USER'].email}">
 								</div>
 								<div class="form-group">
 									<label>Date of Birth</label><br/>
-									<input type="date"/>
+									<input type="date" id="dob" value="${sessionScope['USER'].dob}"/>
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Password</label>
-									<input type="password" class="form-control" id="exampleInputEmail1" placeholder="username">
+									<label>New Password</label>
+									<input type="password" class="form-control" id="password" value="${sessionScope['USER'].password}">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Confirm Password</label>
-									<input type="password" class="form-control" id="exampleInputEmail1" placeholder="username">
+									<label>Confirm Password</label>
+									<input type="password" class="form-control" id="conf_password" value="${sessionScope['USER'].password}">
 								</div>
 								<!-- Button -->
 								<!-- Success button with label -->
-								<button type="button" class="btn btn-labeled btn-success"><span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Update</button>
+								<button type="button" class="btn btn-labeled btn-success" onclick="updateUser()">
+									<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Update
+								</button>
 
 								<!-- Danger button with label -->
-								<button type="button" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancel</button>
+								<button type="button" class="btn btn-labeled btn-danger" onlcick="cancelUser()">
+									<span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancel
+								</button>
 							</form>
 						</div>
-						<div class="col-xs-12 col-md-6 col-lg-1">
+						<div class="col-xs-6 col-md-2 col-lg-1">
 						</div>
 						<!-- Change Picture -->
-						<div class="col-xs-12 col-md-6 col-lg-4">
+						<div class="col-xs-12 col-md-3 col-lg-4">
 							<br/>
 							<div class="fileinput fileinput-new" data-provides="fileinput">
 							  <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
@@ -123,7 +145,6 @@
 			</div>
 		</div>
 	</div>
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 </body>
 </html>

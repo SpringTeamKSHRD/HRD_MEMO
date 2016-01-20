@@ -67,7 +67,7 @@ public class UserDaoRepoImpl implements UserDao {
 	public List<User> getUserList() {
 		try{
 		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
-				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid";
+				 + "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid";
 		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
 		return users;
 		}catch(Exception ex){
@@ -113,7 +113,7 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public User getUserDialInfo(String emial) {
-		String sql="SELECT userid,username,gender,email,userimageurl FROM public.tbluser WHERE email LIKE ?";
+		String sql="SELECT userid,username,gender,email,dateofbirth,userimageurl FROM public.tbluser WHERE email LIKE ?";
 		User user=jdbcTemplate.queryForObject(sql,new Object[]{emial},new RowMapper<User>(){
 			@Override
 			public User mapRow(ResultSet rs, int i) throws SQLException {
@@ -122,7 +122,8 @@ public class UserDaoRepoImpl implements UserDao {
 				user.setUsername(rs.getString(2));
 				user.setGender(rs.getString(3));
 				user.setEmail(rs.getString(4));
-				user.setImage(rs.getString(5));
+				user.setDob(rs.getDate(5));
+				user.setImage(rs.getString(6));
 				return user;
 			}
 		});

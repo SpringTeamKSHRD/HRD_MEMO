@@ -20,6 +20,8 @@ public class User {
 	private String password;
 	private String gender;
 	private String email;
+	@Column(name="dateofbirth")
+	private Date dob;
 	@Column(name="userimageurl")
 	private String image;
 	@Transient
@@ -28,7 +30,14 @@ public class User {
 	private String type;
 	@Transient
 	private Date registerdate;
-
+	
+	
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
 	public String getType() {
 		return type;
 	}
