@@ -67,7 +67,7 @@
 						<div class="col-xs-6 col-md-2 col-lg-1">
 						</div>
 						<div class="col-xs-12 col-md-3 col-lg-6">
-							<form action="#">
+							<form action="#" method="POST" enctype="multipart/form-data">
 								<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 								<div class="form-group">
 									<label>Username</label>
@@ -77,19 +77,19 @@
 								    <c:when test="${sessionScope['USER'].gender =='female'}">								    
 								        <label>Gender</label><br/>						
 										<label class="radio-inline">
-										  <input type="radio" name="inlineRadioOptions" id="male" value="male" > Male
+										  <input type="radio" name="gender" value="male" > Male
 										</label>
 										<label class="radio-inline">
-										  <input type="radio" name="inlineRadioOptions" id="female" value="female" checked> Female
+										  <input type="radio" name="gender" value="female" checked> Female
 										</label> 
 								    </c:when>    
 								    <c:otherwise>
 								        <label>Gender</label><br/>								       
 										<label class="radio-inline">
-										  <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> Male
+										  <input type="radio" name="gender" value="male" checked> Male
 										</label>
 										<label class="radio-inline">
-										  <input type="radio" name="inlineRadioOptions" id="female" value="female"> Female
+										  <input type="radio" name="gender" value="female"> Female
 										</label> 
 								    </c:otherwise>
 								</c:choose>
@@ -99,18 +99,19 @@
 									<label>Email</label>
 									<input type="email" class="form-control" id="email" value="${sessionScope['USER'].email}">
 								</div>
+								<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
+								<div class="form-group">
+									<label>Phone Number</label>
+									<input type="text" class="form-control" id="phone" value="${sessionScope['USER'].phone}">
+								</div>
 								<div class="form-group">
 									<label>Date of Birth</label><br/>
 									<input type="date" id="dob" value="${sessionScope['USER'].dob}"/>
 								</div>
-								<div class="form-group">
-									<label>New Password</label>
+								<%-- <div class="form-group">
+									<label>Current Password</label>
 									<input type="password" class="form-control" id="password" value="${sessionScope['USER'].password}">
-								</div>
-								<div class="form-group">
-									<label>Confirm Password</label>
-									<input type="password" class="form-control" id="conf_password" value="${sessionScope['USER'].password}">
-								</div>
+								</div> --%>
 								<!-- Button -->
 								<!-- Success button with label -->
 								<button type="button" class="btn btn-labeled btn-success" onclick="updateUser()">
@@ -118,7 +119,7 @@
 								</button>
 
 								<!-- Danger button with label -->
-								<button type="button" class="btn btn-labeled btn-danger" onlcick="cancelUser()">
+								<button type="button" class="btn btn-labeled btn-danger" onclick="cancelUser()">
 									<span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancel
 								</button>
 							</form>
@@ -127,17 +128,23 @@
 						</div>
 						<!-- Change Picture -->
 						<div class="col-xs-12 col-md-3 col-lg-4">
+						
 							<br/>
-							<div class="fileinput fileinput-new" data-provides="fileinput">
-							  <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
-								<img data-src="holder.js/100%x100%" alt="">
-							  </div>
-							  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-							  <div>
-								<span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-								<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-							  </div>
-							</div>
+								<div class="fileinput fileinput-new" data-provides="fileinput">
+								  <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
+									<img src="${pageContext.request.contextPath}/resources/image/sona.jpg"/>
+								  </div>
+								 <!--  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+								  	
+								  </div> -->
+								  <div>
+									<span class="btn btn-default btn-file">
+									<span class="fileinput-new">Select image</span>
+									<span class="fileinput-exists">Change</span>
+									<input type="file" id="image"></span>
+									<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+								  </div>
+								</div>
 						</div>
 					</div>	
 				  </div>

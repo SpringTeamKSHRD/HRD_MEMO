@@ -63,4 +63,10 @@ public class UserServiceImpl implements UserService {
 		return userdao.getUserDialInfo(email);
 	}
 
+	@Override
+	public boolean updateUser1(User user) {
+		return userdao.updateUser1(user);
+	}
+	
+
 }

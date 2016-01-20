@@ -59,5 +59,11 @@ public class HUserRepoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public boolean updateUser1(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

@@ -13,5 +13,8 @@ public interface UserDao {
 	public List<User> searchUser(int id);
 	public String getEmail(String email);
 	public User getUserDialInfo(String emial);
+	
+	//ky sona
+	public boolean updateUser1(User user);
 
 }

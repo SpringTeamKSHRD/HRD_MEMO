@@ -38,10 +38,9 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public int updateUser(User user) {
-
 		String password = new BCryptPasswordEncoder().encode(user.getPassword());
-		String sql = "UPDATE tbuser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
-		Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), user.getImage(),
+		String sql = "UPDATE tbluser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
+		Object[] obj = new Object[] { user.getUsername(), user.getPassword(), user.getGender(), user.getEmail(), user.getImage(),
 				user.getUserid() };
 		try {
 			return jdbcTemplate.update(sql, obj);
@@ -49,7 +48,7 @@ public class UserDaoRepoImpl implements UserDao {
 			System.out.println(ex.getMessage());
 		}
 		return 0;
-	}
+	}	
 
 	@Override
 	public int changeUserEnable(int id) {
@@ -113,20 +112,37 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public User getUserDialInfo(String emial) {
-		String sql="SELECT userid,username,gender,email,dateofbirth,userimageurl FROM public.tbluser WHERE email LIKE ?";
+		
+		String sql="SELECT userid,username,password,gender,email,phonenumber,dateofbirth,userimageurl FROM public.tbluser WHERE email LIKE ?";
 		User user=jdbcTemplate.queryForObject(sql,new Object[]{emial},new RowMapper<User>(){
 			@Override
 			public User mapRow(ResultSet rs, int i) throws SQLException {
 				User user=new User();
 				user.setUserid(rs.getInt(1));
 				user.setUsername(rs.getString(2));
-				user.setGender(rs.getString(3));
-				user.setEmail(rs.getString(4));
-				user.setDob(rs.getDate(5));
-				user.setImage(rs.getString(6));
+				user.setPassword(rs.getString(3));
+				user.setGender(rs.getString(4));
+				user.setEmail(rs.getString(5));
+				user.setPhone(rs.getString(6));
+				user.setDob(rs.getDate(7));
+				user.setImage(rs.getString(8));
 				return user;
 			}
 		});
 		return user;
+	}
+
+	@Override
+	public boolean updateUser1(User user) {
+		System.out.println(user.getPhone());
+		String sql = "UPDATE tbluser SET username=?,gender=?,phonenumber=?,email=?,userimageurl=? WHERE userid=?";
+		Object[] obj = new Object[] { user.getUsername(), user.getGender(), user.getPhone(),user.getEmail(), user.getImage(),user.getUserid() };
+		try {
+			int i=jdbcTemplate.update(sql, obj);
+			if(i>0) return true;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return false;
 	}
 }

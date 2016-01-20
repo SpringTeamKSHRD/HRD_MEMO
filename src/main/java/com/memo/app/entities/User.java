@@ -22,6 +22,8 @@ public class User {
 	private String email;
 	@Column(name="dateofbirth")
 	private Date dob;
+	@Column(name="phonenumber")
+	private String phone;
 	@Column(name="userimageurl")
 	private String image;
 	@Transient
@@ -31,7 +33,12 @@ public class User {
 	@Transient
 	private Date registerdate;
 	
-	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public Date getDob() {
 		return dob;
 	}
