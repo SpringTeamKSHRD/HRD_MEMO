@@ -33,9 +33,9 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 						.add(Restrictions.eq("ispublic", true))
 						.add(Restrictions.eq("userid",id)));
 		return cr.list();*/
-		String sql="select array_to_json(array_agg(row_to_json(t))) from (SELECT * FROM public.tbluser U INNER JOIN memo.tbmemo M ON u.userid = M .userid WHERE ( concat (M .domain_name, M .url) = ? AND u.userid = ? ) OR ( concat (M .domain_name, M .url) = ? AND M .ispublic = TRUE )) t";
+		String sql="select array_to_json(array_agg(row_to_json(t))) from (SELECT u.*,m.id,m.userid,m.content,m.title,m.domain_name,m.url,m.isenable,m.ispublic,to_char(m.date, 'MM-DD-YYYY HH24:MI:SS') as date FROM public.tbluser U INNER JOIN memo.tbmemo M ON u.userid = M .userid WHERE ( concat (M .domain_name, M .url) = ? AND u.userid = ? ) OR ( concat (M .domain_name, M .url) = ? AND M .ispublic = TRUE )order by m.userid=? desc ) t";
 		try {
-			String result= jdbcTemplate.queryForObject(sql,new Object[]{url,id,url}, String.class);
+			String result= jdbcTemplate.queryForObject(sql,new Object[]{url,id,url,id}, String.class);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,6 +60,7 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 	}
 
 	@Override
+	@Transactional
 	public Boolean insert(Memo m) {
 		Session sess = sf.getCurrentSession();
 		sess.persist(m);

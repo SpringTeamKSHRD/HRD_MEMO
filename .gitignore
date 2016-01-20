@@ -53,3 +53,9 @@ $RECYCLE.BIN/
 *.lnk
 
 src/main/java/com/ams/app/configuration/WebConfig.java
+
+.classpath
+
+src/main/webapp/resources/admin/js/memo.min.js
+
+src/main/webapp/WEB-INF/views/admin/test_memo.jsp

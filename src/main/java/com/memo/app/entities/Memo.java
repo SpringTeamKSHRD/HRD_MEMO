@@ -4,16 +4,23 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name="tbmemo",schema="memo")
 public class Memo {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int userid;
 	@Transient
@@ -23,12 +30,14 @@ public class Memo {
 	@Column(name="domain_name")
 	private String domainName;
 	private String url;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="date",insertable=false,nullable=false)
 	private Date date;
 	private boolean isenable = true;
 	private boolean ispublic;
 	@Formula(value="domain_name || url")
 	private String fullDomain;
-
+	
 	public int getId() {
 		return id;
 	}

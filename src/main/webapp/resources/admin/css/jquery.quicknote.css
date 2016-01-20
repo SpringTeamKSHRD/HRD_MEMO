@@ -36,7 +36,7 @@
     -moz-border-radius: 5px 5px 0 0;
     border-radius: 5px 5px 0 0;
     /* background: #313a39; */
-    background: #50a253;
+    background: #0B710F;
     
 }
 
@@ -222,12 +222,14 @@
 }
 
 #div-btn #logBtn {
-    min-width: 145px;
+    min-width: 143px;
+    height: 30px;
 }
 
 #div-btn #regBtn {
-    min-width: 145px;
+    min-width: 143px;
     margin-right: 0px;
+    height: 30px;
 }
 
 .memo-img {
