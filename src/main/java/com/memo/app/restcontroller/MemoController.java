@@ -36,7 +36,7 @@ public class MemoController {
 	@Autowired
 	private UserService userService;
 	
-	// insert memo 
+	// insert user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user) {
 			System.out.println("update user memo controller.");		
@@ -52,7 +52,23 @@ public class MemoController {
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 			}
 		}
-		
+	
+		// update user password
+					@RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
+					public ResponseEntity<Map<String, Object>> updateUserPassword(@RequestBody User user) {
+						System.out.println("update user password memo controller.");				
+						Map<String, Object> map = new HashMap<String, Object>();
+							
+						if (userService.updateUserPassword(user)) {			
+							map.put("MESSAGE", "USER PASSWORD HAS BEEN UPDATED.");
+							map.put("STATUS", HttpStatus.CREATED.value());
+							return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
+						} else {
+							map.put("MESSAGE", "USER PASSWORD HAS NOT BEEN UPDATED.");
+							map.put("STATUS", HttpStatus.NOT_FOUND.value());
+							return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+						}
+					}
 	// list memo with limiting amount of rows
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
