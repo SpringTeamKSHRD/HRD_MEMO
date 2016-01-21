@@ -62,19 +62,28 @@ function displayData(data) {
 }
 	/* delete memo*/
 	function deletememo(id){
-		//alert("delete id "+id);
-		$.ajax({
-			type : "DELETE",
-			url : domain+"/user/"+id,
-			success : function(data) {
-				alert("Success :" + data.MESSAGE);
-				loadPage();
-			},
-			error : function(data) {
-				alert("Unsuccess: " + data.MESSAGE);
-				console.log("ERROR..." + data);
-			}
-		});	
+		//alert("delete memo function.");
+		swal({   title: "Are you sure?",
+				 text: "You will not be able to recover this memo file!",
+				 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",
+				 confirmButtonText: "Yes, delete it!",
+				 closeOnConfirm: false },
+				 function(){
+					 
+					 $.ajax({
+							type : "DELETE",
+							url : domain+"/user/"+id,
+							success : function(data) {
+								swal("Deleted!", "Your memo file has been deleted.", "success");
+								//alert("Success :" + data.MESSAGE);
+								loadPage();
+							},
+							error : function(data) {
+								alert("Unsuccess: " + data.MESSAGE);
+								console.log("ERROR..." + data);
+							}
+						});	    
+		});
 	}
 	
 	/*When user select on combobox to change amount of rows to display.*/

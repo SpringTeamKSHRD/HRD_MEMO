@@ -17,6 +17,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
 	<!-- CK editor -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/ckeditor/ckeditor.js"></script>
+	<!-- Sweet Alert --> 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 </head>
 <body >
 	<!-- Navbar goes here -->
@@ -183,7 +185,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
-	<!-- Bootpag -->
-	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/bootpag/bootpag.js"></script> --%>
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
 </html>

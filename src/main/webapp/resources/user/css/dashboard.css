@@ -5,3 +5,4 @@ span.listmemo{
 	text-align:center;
 	color:red;
 }
+li a i{ cursor: pointer; cursor: hand; }
