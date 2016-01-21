@@ -50,4 +50,30 @@ function uploadImage() {
 			alert("success uploading.");
 		}
 	});
-}  
+} 
+
+function updateUserPwd(){
+	alert($("#password").val()+"\n"+$("#old_pwd").val()+$("#new_pwd").val()+$("#con_pwd").val());
+	json = {userid : parseInt($("#userid").val()),
+			password : $("#password").val(),
+			oldpwd : $("#old_pwd").val(),
+			newpwd : $("#new_pwd").val(),
+			conpwd : $("#con_pwd").val()
+		   };
+	
+
+	$.ajax({
+		type : "POST",
+		url : domain + "/user/updatepassword",
+		data : JSON.stringify(json),
+		contentType: 'application/json',
+		success : function(data) {
+			alert("Success :" + data.MESSAGE);
+			//loadPage();
+		},
+		error : function(data) {
+			alert("Unsuccess: " + data.MESSAGE);
+			console.log("ERROR..." + data);
+		}
+	});
+}

@@ -110,29 +110,6 @@ function displayData(data) {
 		$("#btnsave").text("Save");
 		$("#btnsave").attr("onclick","saveMemo()");
 	}
-	/*$("#limit_row").change(function(){
-		var limit=$("#limit_row").val();
-		alert(limit);
-		
-		clearMemo();
-		$.ajax({
-					type : "GET",
-					url : domain+"/user/list/"+limit,
-					dataType : 'json',
-					data : null,
-					success : function(data) {
-						//alert("Success :" + data);
-						loadPage();
-					},
-					error : function(data) {
-						alert("Unsuccess: " + data.MESSAGE);
-						console.log("ERROR..." + data);
-					}
-				});
-		change button to update
-		$("#btnsave").text("Save");
-		$("#btnsave").attr("onclick","saveMemo()");
-	});*/
 	
 	function clearMemo(){
 		CKEDITOR.instances.editor1.setData("");

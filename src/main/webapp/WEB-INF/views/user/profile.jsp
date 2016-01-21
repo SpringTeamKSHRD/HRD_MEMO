@@ -42,7 +42,7 @@
 			  <ul class="dropdown-menu">
 				<li><a href="#">Action</a></li>
 				<li><a href="#">Another action</a></li>
-				<li><a href="#">Something else here</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#myModal">Change password</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="#">Separated link</a></li>
 			  </ul>
@@ -54,6 +54,40 @@
 	</nav>
 	<!-- Body here -->
 	<div class="container"> <br/><br/><br/>
+		<input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/>
+		<!-- Modal Structure -->
+			<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Change Password</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<div class="form-group">
+					    <label>Old Password</label>
+					    <input type="password" class="form-control" id="old_pwd" placeholder="Password">
+					</div>
+					<div class="form-group">
+					    <label>New Password</label>
+					    <input type="password" class="form-control" id="new_pwd" placeholder="Password">
+					</div>
+					<div class="form-group">
+					    <label>Confirm Password</label>
+					    <input type="password" class="form-control" id="con_pwd" placeholder="Password">
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-success" onclick="updateUserPwd()">Update</button>
+			        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+		<!-- ./close modal  -->
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">

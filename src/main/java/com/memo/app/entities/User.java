@@ -32,7 +32,32 @@ public class User {
 	private String type;
 	@Transient
 	private Date registerdate;
+	@Transient
+	private String oldpwd;
+	@Transient
+	private String newpwd;
+	@Transient
+	private String conpwd;
 	
+	
+	public String getOldpwd() {
+		return oldpwd;
+	}
+	public void setOldpwd(String oldpwd) {
+		this.oldpwd = oldpwd;
+	}
+	public String getNewpwd() {
+		return newpwd;
+	}
+	public void setNewpwd(String newpwd) {
+		this.newpwd = newpwd;
+	}
+	public String getConpwd() {
+		return conpwd;
+	}
+	public void setConpwd(String conpwd) {
+		this.conpwd = conpwd;
+	}
 	public String getPhone() {
 		return phone;
 	}

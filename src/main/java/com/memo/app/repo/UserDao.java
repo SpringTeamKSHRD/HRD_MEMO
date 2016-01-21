@@ -16,5 +16,6 @@ public interface UserDao {
 	
 	//ky sona
 	public boolean updateUser1(User user);
+	public boolean updateUserPassword(User user);
 
 }

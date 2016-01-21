@@ -69,6 +69,11 @@ public class UserServiceImpl implements UserService {
 	public boolean updateUser1(User user) {
 		return userdao.updateUser1(user);
 	}
+
+	@Override
+	public boolean updateUserPassword(User user) {
+		return userdao.updateUserPassword(user);
+	}
 	
 
 }

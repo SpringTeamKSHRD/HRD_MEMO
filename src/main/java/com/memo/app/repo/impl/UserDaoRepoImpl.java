@@ -146,4 +146,34 @@ public class UserDaoRepoImpl implements UserDao {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean updateUserPassword(User user) {
+		System.out.println("update user password dao");		
+		/*System.out.println(user.getPassword());
+		System.out.println(user.getOldpwd());
+		System.out.println(user.getNewpwd());
+		System.out.println(user.getConpwd());*/
+		if(new BCryptPasswordEncoder().matches(user.getOldpwd(),user.getPassword())){
+			System.out.println("old password matched.");
+			if(user.getNewpwd().equals(user.getConpwd())){
+				String npwd=new BCryptPasswordEncoder().encode(user.getNewpwd());
+				String sql = "UPDATE public.tbluser SET password=? WHERE userid=?";
+				Object[] obj = new Object[] { npwd, user.getUserid() };
+				
+				try {
+					int i=jdbcTemplate.update(sql, obj);
+					if(i>0) return true;
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			}else{
+				return false;
+			}
+		}
+		else{
+			System.out.println("old password did not match!");
+		}
+		return false;
+	}
 }
