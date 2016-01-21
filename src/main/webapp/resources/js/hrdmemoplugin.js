@@ -46,7 +46,7 @@ try {
 retrievedObject =JSON.parse(Cookies.get('MEMO'));
 }
 catch(err) {
-    retrievedObject=null;
+    retrievedObject="";
     alert("error");
 }
 if(retrievedObject!=null)

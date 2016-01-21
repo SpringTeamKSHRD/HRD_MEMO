@@ -157,7 +157,8 @@ var url="";
 function handlingMsg(e){
 	var parentData=e.data.split("#");
 	url=parentData[0];
-	if(parentData[1]==null){
+	alert(parentData[1]);
+	if(parentData[1]==""){
 		$("#btn-memo-nemu1").css('display','none');
 		$("#btn-memo-nemu4").css('display','none');
 	}else{
