@@ -47,9 +47,8 @@ retrievedObject =JSON.parse(Cookies.get('MEMO'));
 }
 catch(err) {
     retrievedObject="";
-    alert("error");
 }
-if(retrievedObject!=null)
+if(retrievedObject!="")
 var memo_frm_id=retrievedObject.userid;
 var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 var memo_url=location.href;
@@ -94,6 +93,7 @@ function signUpUser(data){
 			//localStorage.setItem('memory', JSON.stringify(data.DATA));
 			Cookies.set('MEMO', JSON.stringify(data.DATA));
 			retrievedObject=JSON.parse(Cookies.get('MEMO'));
+			 memo_frm_id=retrievedObject.userid;
 		},
 		error : function(data) {
 			alert(data.MESSAGE);
@@ -107,8 +107,7 @@ function saveMemo(data){
 	json.domain=memo_domain;
 	json.url=memo_url;
 	json.isenable=true;
-	json.userid=memo_frm_id;
-	alert(memo_frm_id);
+	json.userid=retrievedObject.userid;
 	$.ajax({
 		type : "POST",
 		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/savememo",
@@ -116,9 +115,9 @@ function saveMemo(data){
         data:JSON.stringify(json),
 		success : function(data) {
 			createDescribeBox(json.content,json.title);
-			$("#hrdmemo_iframe").fadeOut(5000);
-			$("#btn-act-desc").fadeIn(500);
 			pluginGetMemo();
+			$("#hrdmemo_iframe").slideUp(2000);
+			$("#btn-act-desc").fadeIn(500);
 		},
 		error : function(data) {
 		}
@@ -128,7 +127,7 @@ function saveMemo(data){
 function pluginGetMemo(){
 	var json=new Object();
 	json.url=memo_url;
-	json.userid=memo_frm_id;
+	json.userid=retrievedObject.userid;
 	$.ajax({
 		type : "POST",
 		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/plugingetmemo",
