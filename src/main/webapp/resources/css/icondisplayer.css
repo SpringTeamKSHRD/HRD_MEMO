@@ -13,7 +13,7 @@
   line-height: 20px;
   padding:0px 3px;
   background-color: #FAFAFA;
-  width:300px;
+  width:290px;
   white-space:normal;
   border-left:3px solid #1976D2;
   word-wrap: break-word;
@@ -51,7 +51,6 @@
 }
 #btn-act-desc{
 	border: none;
-	padding: 10px;
 	background: #009688;
 	border-radius:90%;
 	position: fixed;
@@ -59,4 +58,22 @@
 	bottom: 10px;
 	color:white;
 	box-shadow:-1px 2px 3px gray;
+	padding: 10px;
+}
+#my-rp-popup{
+	width: 200px;
+	padding: 10px;
+	font-size: 15px;
+	background: #2196F3;
+	position: fixed;
+	top: 5px;
+	left: 45%;
+	color: white;
+	font-weight: bold;
+	margin:0px;
+	display: none;
+	border-radius:0px 0px 5px 5px;
+	box-shadow:1px 2px 4px gray;
+	/* word-break:none;
+	ord-wrap:none; */
 }

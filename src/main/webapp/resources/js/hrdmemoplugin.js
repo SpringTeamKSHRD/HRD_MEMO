@@ -1,18 +1,18 @@
 //add css to iclude iframe
-$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/dragbox.js'></script>");
-$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
+$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/dragbox.js'></script>");
+$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
 $('head').append("<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'/>");
-$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
-$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
-$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
-
+$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
+$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
+$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
+//iframe wrapper
 var wrapper=document.getElementById("hrd_memo_pess");
 var ifrm_hrdmemo = document.createElement("IFRAME");
-ifrm_hrdmemo.setAttribute("src", "http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
+ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 ifrm_hrdmemo.setAttribute("id", "hrdmemo_iframe");
 ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 ifrm_hrdmemo.style.width ="100%";
-ifrm_hrdmemo.style.height ="70px";
+ifrm_hrdmemo.style.height ="50px";
 ifrm_hrdmemo.style.position="relative";
 ifrm_hrdmemo.style.overflow="hidden";
 ifrm_hrdmemo.style.margin="0px";
@@ -23,7 +23,7 @@ ifrm_hrdmemo.setAttribute('scrolling','no');
 ifrm_hrdmemo.style.overflow="hidden";
 //wrapper style
 wrapper.style.height="auto";
-wrapper.style.width="330px";
+wrapper.style.width="0";
 wrapper.style.right="2px";
 wrapper.style.position="absolute";
 wrapper.style.top="0px";
@@ -34,50 +34,48 @@ wrapper.appendChild(ifrm_hrdmemo);
 //create description panel
 var desc_panel=document.createElement("DIV");
 desc_panel.setAttribute("class","mem_desc_panel");
-desc_panel.style.width="98%";
+desc_panel.style.width="100%";
 desc_panel.style.maxHeight="500px";
-desc_panel.style.padding="5px";
-desc_panel.style.overflow="auto";
+desc_panel.style.padding="0px";
+desc_panel.style.overflow="none";
+desc_panel.style.margin="0px";
 desc_panel.style.position="relative";
 wrapper.appendChild(desc_panel);
-var retrievedObject=null;
+
 //get memory
+var retrievedObject="";
 try {
-retrievedObject =JSON.parse(Cookies.get('MEMO'));
-}
-catch(err) {
+		retrievedObject = JSON.parse(Cookies.get('MEMO')); 
+		
+}catch(err) {
     retrievedObject="";
 }
-if(retrievedObject!="")
-var memo_frm_id=retrievedObject.userid;
+/*alert(retrievedObject);*/
+var memo_frm_id;
+if(retrievedObject!=""){
+memo_frm_id=retrievedObject.userid;
+}
 var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 var memo_url=location.href;
 var memo_domain=location.hostname;
-var myedit_memo=false;
 
 function handlingMsg(e){
-	if(e.origin=="http://192.168.178.123:8080"){
+	if(e.origin=="http://localhost:8080"){
 		var datas = e.data.split("#");
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
-			ifrm_hrdmemo.style.display='block';
-			$("#btn-act-desc").fadeOut(500);
-			/*if(memo_frm_id!=null||memo_frm_id==""&&myedit_memo==false){
+			if(memo_frm_id!=null||memo_frm_id==""){
 				pluginGetMemo();
-				myedit_memo=false;
-				}*/
+				}
 		}else if(datas[0]=='signup'){
 			signUpUser(datas[1]);
 			//alert(datas[1]);
 		}else if(datas[0]=='login'){
-			alert(datas[1]);
+			//alert(datas[1]);
+			userLogin(datas[1]);
 		}else if(datas[0]=='savememo'){
 			saveMemo(datas[1]);
 			//alert(datas[1]);
-		}else if(datas[0]=="animate"){
-			$(".mem_desc_panel").slideToggle();
-		}else if(datas[0]=="updatesuccess"){
-			pluginGetMemo();
 		}
 	}
 }
@@ -86,14 +84,33 @@ addEventListener("message",handlingMsg,true);
 function signUpUser(data){
 	$.ajax({
 		type : "POST",
-		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/signup",
+		url : "http://localhost:8080/HRD_MEMO/plugin/signup",
 		contentType: 'application/json;charset=utf-8',
         data:data,
 		success : function(data) {
 			//localStorage.setItem('memory', JSON.stringify(data.DATA));
-			Cookies.set('MEMO', JSON.stringify(data.DATA));
-			retrievedObject=JSON.parse(Cookies.get('MEMO'));
-			 memo_frm_id=retrievedObject.userid;
+			Cookies.set('MEMO',JSON.stringify(data.DATA));
+			retrievedObject=Cookies.getJSON('MEMO');
+			memo_frm_id=retrievedObject.userid;
+		},
+		error : function(data) {
+			alert(data.MESSAGE);
+		}
+	});
+}
+//user login
+function userLogin(data){
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:8080/HRD_MEMO/plugin/pluginlogin",
+        data:JSON.parse(data),
+		success : function(data){
+			Cookies.set('MEMO',JSON.stringify(data.DATA));
+			retrievedObject=Cookies.getJSON('MEMO');
+			alert(data.STATUS);
+			memo_frm_id=retrievedObject.userid;
+			document.getElementById("hrdmemo_iframe")
+			.contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+data.STATUS,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 		},
 		error : function(data) {
 			alert(data.MESSAGE);
@@ -107,17 +124,16 @@ function saveMemo(data){
 	json.domain=memo_domain;
 	json.url=memo_url;
 	json.isenable=true;
-	json.userid=retrievedObject.userid;
+	json.userid=memo_frm_id;
 	$.ajax({
 		type : "POST",
-		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/savememo",
+		url : "http://localhost:8080/HRD_MEMO/plugin/savememo",
 		contentType: 'application/json;charset=utf-8',
         data:JSON.stringify(json),
 		success : function(data) {
 			createDescribeBox(json.content,json.title);
+			$("#hrdmemo_iframe").slideUp(1000);
 			pluginGetMemo();
-			$("#hrdmemo_iframe").slideUp(2000);
-			$("#btn-act-desc").fadeIn(500);
 		},
 		error : function(data) {
 		}
@@ -127,10 +143,10 @@ function saveMemo(data){
 function pluginGetMemo(){
 	var json=new Object();
 	json.url=memo_url;
-	json.userid=retrievedObject.userid;
+	json.userid=memo_frm_id;
 	$.ajax({
 		type : "POST",
-		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/plugingetmemo",
+		url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemo",
 		contentType: 'application/json;charset=utf-8',
         data:JSON.stringify(json),
 		success : function(data) {
@@ -155,9 +171,15 @@ function listMemoDescriptionBox(data){
 	}
 	if(isIhave==true){
 		ifrm_hrdmemo.style.display='none';
-		$("#btn-act-desc").fadeIn(500);
+		//$("#btn-act-desc").fadeIn(500);
 		isIhave=false;
 	}
+}
+//user report
+var us_rpid=0,mm_rpid=0;
+function reportMemo(rpid,mmid){
+	us_rpid=rpid;
+	mm_rpid=mmid;
 }
 $(document).on('click.chip', '.chip .material-icons', function (e) {
 	if($(this).text()==='delete'){
@@ -167,6 +189,7 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 	else if($(this).text()==='assignment'){
 			alertify.prompt("Enter your report to this memo", function (e, str) {
 			    if (e&&str!=""){
+			    	pluginUserReport(us_rpid, mm_rpid, str);
 			        sendReportNotify();
 			    }
 				}, "");
@@ -176,21 +199,40 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 function pluginDeleteMemo(id){
 	$.ajax({
 		type : "GET",
-		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/"+id,
+		url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
 		success : function(data) {
 			pluginGetMemo();
 			if(isIhave==false){
 			ifrm_hrdmemo.style.display='block';
-			$("#btn-act-desc").fadeOut(500);
 			}
 		},
 		error : function(data) {
 		}
 	});
 }
-function getToEdit(id){
-	myedit_memo=true;
-	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+id,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
+//user report
+function pluginUserReport(reporterid,memoid,description){
+	var json={
+			reporterid:reporterid,
+			memoid:memoid,
+			description:description
+	};
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:8080/HRD_MEMO/plugin/report",
+		contentType: 'application/json;charset=utf-8',
+        data:JSON.stringify(json),
+		success : function(data) {
+			$("#my-rp-popup").text("YOU REPORT SUCCESSED");
+			$("#my-rp-popup").fadeIn(200)
+			 .delay(1500).fadeOut(500);
+		},
+		error : function(data) {
+			$("#my-rp-popup").text("YOU REPORT FIALED");
+			$("#my-rp-popup").fadeIn(200)
+							 .delay(1500).fadeOut(500);
+		}
+	});
 }
 //create description box
 function createDescribeBox(text,title,image,userid,memoid){
@@ -200,7 +242,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	memo_img_wraper.setAttribute("class","memo_img_wrapper");
 	var user_memo_img=document.createElement("img");
 	user_memo_img.setAttribute('class','user-memo-img');
-	user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/'+image);
+	user_memo_img.setAttribute('src','http://localhost:8080/HRD_MEMO/resources/'+image);
 	memo_img_wraper.appendChild(user_memo_img);
 	//create title 
 	var memo_title_label=document.createElement('small');
@@ -232,6 +274,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	close.appendChild(close_text);
 	var report=document.createElement("i");
 	report.setAttribute('class','material-icons');
+	report.setAttribute('onclick','reportMemo('+memo_frm_id+','+memoid+')');
 	report.setAttribute('title','report');
 	report.style.color="#FFC107";
 	var report_text=document.createTextNode("assignment");
@@ -239,7 +282,6 @@ function createDescribeBox(text,title,image,userid,memoid){
 	var desc_text=document.createTextNode(text);
 	//create edit text
 	var edit=document.createElement("i");
-	edit.setAttribute('onclick','getToEdit('+memoid+')');
 	edit.setAttribute('class','material-icons');
 	edit.setAttribute('title','edit');
 	edit.style.color="#00E676";
@@ -264,12 +306,12 @@ function createDescribeBox(text,title,image,userid,memoid){
 
 //Send current url to child
 function sendDomain(){
-	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 }
 
 addEventListener('load',sendDomain,true);
 //report memo
-var hrd_notify_url="ws://192.168.178.123:8080/HRD_MEMO/memo/usernotification";
+var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 
 var messages=document.getElementById("messages");
@@ -301,15 +343,26 @@ var btn_desc_img=document.createElement("i");
 btn_desc_img.setAttribute('class','material-icons');
 activate_desc_memo.setAttribute('title','active memo panel');
 btn_desc_img.style.fontSize="25px";
-var act_btn_text=document.createTextNode("swap_vert");
+var act_btn_text=document.createTextNode("swap_horiz");
 btn_desc_img.appendChild(act_btn_text);
 activate_desc_memo.appendChild(btn_desc_img);
 $('body').append(activate_desc_memo);
+var my_memo_hide=true;
 $("#btn-act-desc").click(function(){
-	$(".mem_desc_panel").slideToggle();
+	if(my_memo_hide==true){
+	$("#hrd_memo_pess").animate({width: 310, marginLeft: 0}, {duration: 500});
+	my_memo_hide=false;
+	}else{
+		my_memo_hide=true;
+		$("#hrd_memo_pess").animate({width: 0, marginLeft: 0}, {duration: 500});
+	}
 });
-$("#btn-act-desc").css('display','none');
+$("#btn-act-desc").css('display','block');
 
+//CREATE REPORT ALERT
+var my_rp_popup=document.createElement("P");
+my_rp_popup.setAttribute("id","my-rp-popup");
+$('body').append(my_rp_popup);
 
 
 

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
+import com.memo.app.services.impl.EmbededMemoServiceImpl;
 import com.memo.app.services.impl.MemoServiceImpl;
 import com.memo.app.services.impl.ReportServiceImpl;
 import com.memo.app.services.impl.UserServiceImpl;
@@ -39,6 +40,8 @@ public class PluginController {
 	private ReportServiceImpl reportDao;
 	@Autowired
 	private MemoServiceImpl memoDao;
+	@Autowired
+	private EmbededMemoServiceImpl embedDao;
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user,HttpServletResponse respone){
@@ -85,8 +88,8 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-	@RequestMapping(value="/report", method = RequestMethod.POST)
-	public ResponseEntity<Map<String,Object>> userReport(Report rp){
+	@RequestMapping(value="/report", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String,Object>> userReport(@RequestBody Report rp){
 		Map<String,Object> map=new HashMap<String,Object>();
 		if(reportDao.saveReport(rp)==true){
 			map.put("MESSAGE","REPORT HAS BEEN SENT");
@@ -135,11 +138,28 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
 			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			map.put("STATUS", true);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-
+	@RequestMapping(value = "/pluginlogin", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> userPluginLogin(@RequestParam("email") String email,@RequestParam("password") String password) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user=embedDao.memoLogin(email, password);
+		System.out.println(user);
+		if (user!=null) {	
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("STATUS","true");
+			map.put("DATA",user);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
 	///Elit Code
 	@RequestMapping(value="/memo", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(
