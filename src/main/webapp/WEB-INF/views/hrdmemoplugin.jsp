@@ -6,13 +6,13 @@ pageEncoding="ISO-8859-1"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<link rel='stylesheet' type='text/css'
-	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 	<script
-	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
 	<div class='row col s12' style="height: 60px; text-align: center;">
@@ -151,15 +151,13 @@ pageEncoding="ISO-8859-1"%>
 		</div>
 		<!--Register Form  -->
 </body>
-<link rel="stylesheet" href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
+<link rel="stylesheet" href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css"/>
 <script type="text/javascript">
 var url="";
-var obj=null;
 function handlingMsg(e){
 	var parentData=e.data.split("#");
 	url=parentData[0];
-	obj=JSON.parse(parentData[1]);
-	if(obj==null){
+	if(parentData[1]==null){
 		$("#btn-memo-nemu1").css('display','none');
 		$("#btn-memo-nemu4").css('display','none');
 	}else{
@@ -281,7 +279,6 @@ addEventListener("message",handlingMsg,true);
 				ismpublic=false;
 			}
 		 var json={
-				userid:obj.userid,
 				content:$("#descmemo").val(),
 				ispublic:ismpublic
 				};
@@ -302,7 +299,7 @@ addEventListener("message",handlingMsg,true);
 	function getEditMemo(id){
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				$("#btn-save-memo").text("Edit");
@@ -320,7 +317,7 @@ addEventListener("message",handlingMsg,true);
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {

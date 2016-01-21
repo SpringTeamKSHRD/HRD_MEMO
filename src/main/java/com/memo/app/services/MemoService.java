@@ -20,5 +20,6 @@ public interface MemoService {
 	public int countColumn(Object column_name,Object value);
 	//Phalleak
 	public List<Memo> pluginGetMemo(int userid,String url);
+	public boolean updateMemoContent(Memo memo);
 	
 }

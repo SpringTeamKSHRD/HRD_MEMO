@@ -111,8 +111,36 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+	@RequestMapping(value = "/toedit/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> toEditMemo(@PathVariable("id") int id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Memo memo=memoDao.getMemo(id);
+		if (memo!=null) {
+			map.put("MESSAGE", "MEMO HAS BEEN DELETED.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",memo );
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN DELETED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	@RequestMapping(value = "/editmemocontent", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> updateMemoContent(@RequestBody Memo memo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (memoDao.updateMemoContent(memo)==true) {	
+			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.CREATED.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
 
-	
+	///Elit Code
 	@RequestMapping(value="/memo", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(
 			@RequestParam("domain") String domain,

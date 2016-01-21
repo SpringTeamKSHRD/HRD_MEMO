@@ -243,5 +243,18 @@ public class MemoDaoImpl implements MemoDao{
 		}
 		return null;
 	}
-	
+	@Override
+	public boolean updateMemoContent(Memo memo) {
+		System.out.println("update memo dao.");
+		String sql="UPDATE memo.tbmemo SET content=? "
+								      +"WHERE id=?;";
+		Object[] obj=new Object[]{memo.getContent(),memo.getId()};
+		try{
+			int i=jdbcTemplate.update(sql,obj);
+			if(i>0) return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

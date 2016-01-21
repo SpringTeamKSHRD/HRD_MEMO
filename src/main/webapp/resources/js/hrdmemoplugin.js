@@ -1,14 +1,14 @@
 //add css to iclude iframe
-$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/dragbox.js'></script>");
-$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
+$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/dragbox.js'></script>");
+$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
 $('head').append("<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'/>");
-$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
-$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
-$('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
-//iframe wrapper
+$('head').append("<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
+$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
+$('head').append("<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
+
 var wrapper=document.getElementById("hrd_memo_pess");
 var ifrm_hrdmemo = document.createElement("IFRAME");
-ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin");
+ifrm_hrdmemo.setAttribute("src", "http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 ifrm_hrdmemo.setAttribute("id", "hrdmemo_iframe");
 ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 ifrm_hrdmemo.style.width ="100%";
@@ -25,7 +25,7 @@ ifrm_hrdmemo.style.overflow="hidden";
 wrapper.style.height="auto";
 wrapper.style.width="330px";
 wrapper.style.right="2px";
-wrapper.style.position="fixed";
+wrapper.style.position="absolute";
 wrapper.style.top="0px";
 wrapper.style.margin="0px";
 wrapper.style.padding="0px";
@@ -40,19 +40,24 @@ desc_panel.style.padding="5px";
 desc_panel.style.overflow="auto";
 desc_panel.style.position="relative";
 wrapper.appendChild(desc_panel);
-
+var retrievedObject=null;
 //get memory
-var retrievedObject = localStorage.getItem('memory');
-var memo_obj=JSON.parse(retrievedObject);
-if(memo_obj!=null)
-var memo_frm_id=memo_obj.userid;
+try {
+retrievedObject =JSON.parse(Cookies.get('MEMO'));
+}
+catch(err) {
+    retrievedObject=null;
+    alert("error");
+}
+if(retrievedObject!=null)
+var memo_frm_id=retrievedObject.userid;
 var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 var memo_url=location.href;
 var memo_domain=location.hostname;
 var myedit_memo=false;
 
 function handlingMsg(e){
-	if(e.origin=="http://localhost:8080"){
+	if(e.origin=="http://192.168.178.123:8080"){
 		var datas = e.data.split("#");
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
@@ -82,11 +87,13 @@ addEventListener("message",handlingMsg,true);
 function signUpUser(data){
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8080/HRD_MEMO/plugin/signup",
+		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/signup",
 		contentType: 'application/json;charset=utf-8',
         data:data,
 		success : function(data) {
-			localStorage.setItem('memory', JSON.stringify(data.DATA));
+			//localStorage.setItem('memory', JSON.stringify(data.DATA));
+			Cookies.set('MEMO', JSON.stringify(data.DATA));
+			retrievedObject=JSON.parse(Cookies.get('MEMO'));
 		},
 		error : function(data) {
 			alert(data.MESSAGE);
@@ -100,9 +107,11 @@ function saveMemo(data){
 	json.domain=memo_domain;
 	json.url=memo_url;
 	json.isenable=true;
+	json.userid=memo_frm_id;
+	alert(memo_frm_id);
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8080/HRD_MEMO/plugin/savememo",
+		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/savememo",
 		contentType: 'application/json;charset=utf-8',
         data:JSON.stringify(json),
 		success : function(data) {
@@ -122,7 +131,7 @@ function pluginGetMemo(){
 	json.userid=memo_frm_id;
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemo",
+		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/plugingetmemo",
 		contentType: 'application/json;charset=utf-8',
         data:JSON.stringify(json),
 		success : function(data) {
@@ -155,7 +164,6 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 	if($(this).text()==='delete'){
 		 $(this).parent().remove();
 	}else if($(this).text()=='mode_edit'){
-		alert( $(this).parent().text());
 	}
 	else if($(this).text()==='assignment'){
 			alertify.prompt("Enter your report to this memo", function (e, str) {
@@ -169,7 +177,7 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 function pluginDeleteMemo(id){
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
+		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/"+id,
 		success : function(data) {
 			pluginGetMemo();
 			if(isIhave==false){
@@ -183,7 +191,7 @@ function pluginDeleteMemo(id){
 }
 function getToEdit(id){
 	myedit_memo=true;
-	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+id,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+id,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 }
 //create description box
 function createDescribeBox(text,title,image,userid,memoid){
@@ -193,7 +201,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	memo_img_wraper.setAttribute("class","memo_img_wrapper");
 	var user_memo_img=document.createElement("img");
 	user_memo_img.setAttribute('class','user-memo-img');
-	user_memo_img.setAttribute('src','http://localhost:8080/HRD_MEMO/resources/'+image);
+	user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/'+image);
 	memo_img_wraper.appendChild(user_memo_img);
 	//create title 
 	var memo_title_label=document.createElement('small');
@@ -257,12 +265,12 @@ function createDescribeBox(text,title,image,userid,memoid){
 
 //Send current url to child
 function sendDomain(){
-	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject,"http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 }
 
 addEventListener('load',sendDomain,true);
 //report memo
-var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+var hrd_notify_url="ws://192.168.178.123:8080/HRD_MEMO/memo/usernotification";
 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 
 var messages=document.getElementById("messages");

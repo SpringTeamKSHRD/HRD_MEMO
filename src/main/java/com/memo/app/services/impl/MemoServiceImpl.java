@@ -79,4 +79,8 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	public List<Memo> pluginGetMemo(int userid, String url) {
 		return memoDao.pluginGetMemo(userid, url);
 	}	
+	@Override
+	public boolean updateMemoContent(Memo memo) {
+		return memoDao.updateMemoContent(memo);
+	}	
 }

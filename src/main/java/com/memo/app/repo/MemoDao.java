@@ -21,4 +21,5 @@ public interface MemoDao {
 	public int countPublicMemo(int userid);
 	//PHALLEAK
 	public List<Memo> pluginGetMemo(int userid,String url);
+	public boolean updateMemoContent(Memo memo);
 }
