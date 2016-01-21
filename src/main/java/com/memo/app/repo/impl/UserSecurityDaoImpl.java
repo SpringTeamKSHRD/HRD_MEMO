@@ -71,28 +71,4 @@ public class UserSecurityDaoImpl implements UserSecurityConfigDao {
 			}
 		return null;
 	}
-
-	@Override
-	public UserSecurConfig loadUserById(int id) {
-		String sql = "SELECT userid,email,password,ismemoenabled FROM public.tbluser WHERE userid=?";
-
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setInt(1,id);
-			ResultSet rs = ps.executeQuery();
-			UserSecurConfig user = null;
-			if (rs.next()) {
-				user = new UserSecurConfig();
-				user.setId(rs.getInt(1));
-				user.setUsername(rs.getString(2));
-				user.setPassword(rs.getString(3));
-				user.setEnabled(rs.getBoolean(4));
-				user.setRoles(this.findUserRoleByUserId(user.getId()));
-			}
-			return user;
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-		}
-		return null;
-	}
 }

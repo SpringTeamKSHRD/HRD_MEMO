@@ -40,7 +40,7 @@ public class UserDaoRepoImpl implements UserDao {
 	public int updateUser(User user) {
 		String password = new BCryptPasswordEncoder().encode(user.getPassword());
 		String sql = "UPDATE tbluser SET username=?,password=?,gender=?,email=?,userimageurl=? WHERE userid=?";
-		Object[] obj = new Object[] { user.getUsername(), user.getPassword(), user.getGender(), user.getEmail(), user.getImage(),
+		Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), user.getImage(),
 				user.getUserid() };
 		try {
 			return jdbcTemplate.update(sql, obj);
@@ -52,7 +52,6 @@ public class UserDaoRepoImpl implements UserDao {
 
 	@Override
 	public int changeUserEnable(int id) {
-
 		String sql = "UPDATE tbuser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
 		try {
 			return jdbcTemplate.update(sql, id);

@@ -55,8 +55,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of tbluser
 -- ----------------------------
-INSERT INTO "public"."tbluser" VALUES ('1', 'admin@gmail.com', '$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2', 'admin', 'male', '2013-04-18', '12345678', '2015-01-13 16:45:23', 'avatar.jpg', '5', null, '36', '12', E'1', 't');
-INSERT INTO "public"."tbluser" VALUES ('2', 'user@gmail.com', '$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2', 'user', 'male', '2016-01-05', '1234123412', '2016-01-05 17:12:08', 'avatar.jpg', '2', null, '36', '12', E'1', 't');
+INSERT INTO "public"."tbluser" VALUES ('1', 'admin@gmail.com', '$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2', 'admin', 'male', '2013-04-18', '12345678', '2015-01-13 16:45:23', 'avatar.png', '5', null, '36', '12', E'1', 't');
+INSERT INTO "public"."tbluser" VALUES ('2', 'user@gmail.com', '$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2', 'user', 'male', '2016-01-05', '1234123412', '2016-01-05 17:12:08', 'avatar.png', '2', null, '36', '12', E'1', 't');
 
 -- ----------------------------
 -- Table structure for tblusertype

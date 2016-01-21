@@ -10,7 +10,7 @@ import com.memo.app.entities.UserSecurConfig;
 import com.memo.app.repo.impl.UserSecurityDaoImpl;
 
 @Service
-public class UserDetailServiceImpl  implements UserDetailsService{
+public class UserSecurityServiceImpl  implements UserDetailsService{
 
 	@Autowired
 	UserSecurityDaoImpl userDaoImpl;

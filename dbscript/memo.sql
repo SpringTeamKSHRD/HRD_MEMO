@@ -70,9 +70,9 @@ DROP TABLE IF EXISTS "memo"."tbhistory" CASCADE;
 CREATE TABLE "memo"."tbhistory" (
 "id" int8 DEFAULT nextval('"memo".tbhistory_id_seq'::regclass) NOT NULL,
 "memoid" int4 NOT NULL,
-"title" varchar COLLATE "default" NOT NULL,
+"title" varchar COLLATE "default",
 "content" varchar COLLATE "default",
-"date" timestamp(6) NOT NULL
+"date" timestamp(6) 
 )
 WITH (OIDS=FALSE)
 
@@ -94,7 +94,7 @@ CREATE TABLE "memo"."tbmemo" (
 "title" varchar COLLATE "default",
 "domain" varchar COLLATE "default",
 "url" varchar COLLATE "default" NOT NULL,
-"date" timestamp(6) NOT NULL,
+"date" timestamp(6),
 "isenable" bool DEFAULT true NOT NULL,
 "ispublic" bool DEFAULT false NOT NULL
 )

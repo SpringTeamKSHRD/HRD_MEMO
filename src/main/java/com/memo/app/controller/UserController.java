@@ -20,7 +20,7 @@ public class UserController {
 	public String getUserListMemo(){
 		return "user/listmemo";
 	}
-	@RequestMapping(value="usernotification")
+	@RequestMapping(value="/usernotification")
 	public String getNotifationPage(){
 		return "user/usernotification";
 	}

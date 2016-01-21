@@ -7,7 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.memo.app.services.impl.UserDetailServiceImpl;
+import com.memo.app.services.impl.UserSecurityServiceImpl;
 
 @Controller /*
 			 * Indicates that an annotated class is a "Controller" of Spring
@@ -19,9 +19,9 @@ import com.memo.app.services.impl.UserDetailServiceImpl;
  * applied on the class level and also on the method level.
  */
 public class Main {
-//asdfasdf
+
 	@Autowired
-	UserDetailServiceImpl userDetailsService;
+	UserSecurityServiceImpl userDetailsService;
 	/*
 	 * @Autowired, @Inject, and @Resource tell the application context to inject
 	 * the beans.
