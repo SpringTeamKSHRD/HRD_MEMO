@@ -6,4 +6,6 @@ public interface IEmebededMemoRepo {
 	public String listByIdAndURL(int id,String url);
 	public User login(String email,String password);
 	public Boolean insert(Memo m);
+	public Boolean delete(int id);
+	public Boolean update(Memo m);
 }

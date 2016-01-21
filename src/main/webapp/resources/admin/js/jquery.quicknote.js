@@ -111,25 +111,27 @@ dateFormat.i18n = {
     ]
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // For convenience...
 Date.prototype.format = function(mask, utc) {
     return dateFormat(this, mask, utc);
 };;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (function($, window, document, undefined) {
     'use strict';
     var QuickNote = function(el, options) {
@@ -137,6 +139,7 @@ Date.prototype.format = function(mask, utc) {
         this.$el = $(el);
         this.options = options;
     };
+    
     QuickNote.prototype = {
         defaults: {
             theme: 'dark',
@@ -149,9 +152,10 @@ Date.prototype.format = function(mask, utc) {
             if (Storage === void(0)) {
                 this.config.storage = false;
             }
+            var loading ='<div id="loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+       	 	$(loading).appendTo(this.$el);
             
             if (typeof Cookies.get('LOGGED') === 'undefined') {
-            	
                 this.login();
                 //              this.init();
             } else {
@@ -171,6 +175,54 @@ Date.prototype.format = function(mask, utc) {
             } else {
                 return false;
             }
+        },
+//        showLoading:function(){
+//        	var loading ='<div id="loading" style="position:absolute;top:50%;right:40%"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+//        	 $(loading).appendTo(this.$el);
+//        },
+        deleteMemo:function(id){
+        	var _this=this;
+        	$('#loading').show();
+        	$.ajax({
+                type: "DELETE",
+                url: "http://localhost:8080/HRD_MEMO/plugin/memo/"+id,
+                success: function(json) {
+                	$('#loading').hide();
+                   if(json.RESPONSE_DATA){
+//                	   $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                	   $('#qn').empty();
+                	   _this.appendElem();
+                   }else{
+                	   console.log(json.RESPONSE_DATA);
+                   }
+                }
+            });
+        },
+        updateMemo:function(){
+        	
+        	$('#loading').show();
+        	var memo={
+                    "id":118,
+                    "content":$("#notes textarea[name$='qn_input']").val(),
+                    "ispublic":$('#ispublic').val()
+                    }
+        	$.ajax({
+                type: "PUT",
+                url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(memo),
+                success: function(json) {
+                	$('#loading').hide();
+                   if(json.RESPONSE_DATA){
+//                	   $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                	   $('#qn').empty();
+                	   _this.appendElem();
+                   }else{
+                	   console.log(json.RESPONSE_DATA);
+                   }
+                }
+            });
         },
         appendElem: function() {
             var isURL = this.isURL;
@@ -195,15 +247,26 @@ Date.prototype.format = function(mask, utc) {
             } else if (this.config.pos == 'right') {} else {
                 console.log('Error: Position >> ' + this.config.pos + ' not found.');
             }
-            // ALREADY LOGGED IN            
-            var showHide = '<div id="qn_sh"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" alt="Logout"/></div>';
-            var divNotes = '<div id="notes"></div>';
-            var saveImg = '<span style="position:absolute;bottom:6px;right:-4px;cursor:pointer;" id="myimg"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/save.png"  class="memo-img img-hover"></span>';
-            var notesInp = '<p style="position:relative;"><textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px" id="mytext"></textarea></p>';
+            // ALREADY LOGGED IN     
+                       
+            var dl='';    
+            dl+='<div  style="position:absolute;bottom:4px;right:50px;margin-right:10px;height:22px;">';
+            dl+='<select class="uibutton" id="ispublic">';
+            	dl+='<option value="true">Public</option>';
+            	dl+='<option value="false"selected>Only Me</option>';
+            dl+='</select>';
+            dl+='</div>';
+            dl+='</div>';
+        
+            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
+            var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
+            var saveBtn ='<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
+            var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
             $(showHide).appendTo(this.$el);
             $(divNotes).appendTo(this.$el);
             $(notesInp).appendTo(this.$el.find('#notes'));
-            $(saveImg).appendTo(this.$el.find('#notes p'));
+            $(saveBtn).appendTo(this.$el.find('#notes'));
+            $(dl).appendTo(this.$el.find('#notes'));
             $('#logout').click(function() {
                 Cookies.get('LOGGED'); // => 'value'
                 Cookies.remove('LOGGED', {
@@ -228,13 +291,20 @@ Date.prototype.format = function(mask, utc) {
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(memo),
                     success: function(json) {
+                    	console.log(json)
+                    	$('#loading').hide();
                         var cb = '';
                         cb += '<section class="chat-container">';
                         cb += '<ol class="chat-box">';
                         $.each(json, function(index, obj) {
+                        	var deleted ="";
+                        	var update="";
                             if (obj.userid == Cookies.getJSON('LOGGED').userid) {
                             	$('#qn > #notes').remove();
                                 cb += '<li class="another" id="' + obj.id + '">';
+                                cb+='<input type="hidden" id="ispublic" value="'+obj.ispublic+'"/>';
+                                update = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/edit.png" width="14px" heigh="14px" class="btnUpdateMemo" id="'+obj.id+'" style="cursor:pointer" title="Update Memo" />'
+                                deleted = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="'+obj.id+'" style="cursor:pointer" title="Delete Memo" />'
                             } else {
                                 cb += '<li class="me" id="' + obj.id + '" >';
                             }
@@ -243,13 +313,12 @@ Date.prototype.format = function(mask, utc) {
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p>' + obj.content + '</p>';
-                            cb += '<time datetime="2009-11-13T20:00">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="11px" heigh="11px"/> </time>';
+                            cb += '<time datetime="2009-11-13T20:00">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+update+"&nbsp;&nbsp;"+deleted+' </time>';
                             cb += '</div>';
                             /*  cb+='<span class="close"></span>';*/
                             cb += '</li>';
 
-                            $('<span class="close"></span>').prependTo('#' + obj.id);
-                            var qnText = obj.content;
+                             var qnText = obj.content;
                             if (isURL(qnText)) {
                                 $('#' + obj.id).addClass('quicknote-bword');
                             }
@@ -257,8 +326,65 @@ Date.prototype.format = function(mask, utc) {
                         cb += '</ol>';
                         cb += '</section>';
                         $(cb).appendTo('.qn_container');
+                        
+                        /*$(document).on('click',".btnDeleteMemo", function(){*/
+                        $('.btnDeleteMemo').click(function(){
+                            var r = confirm("Are you sure want to delete ?");
+                            if (r == true) {
+                            	var id = $(this).attr('id');
+                            	_this.deleteMemo(id);
+                            } 
+                        	
+                        });
+                        
+                        $('.btnUpdateMemo').click(function(){
+                        	var updateText=$('li.another div.messages > p').text();
+                        	var ispublic=$('li.another input[type=hidden]').val();
+                        	$('#qn').empty();
+                        	var dl='';    
+                            dl+='<div  style="position:absolute;bottom:4px;right:170px;margin-right:10px;height:22px;">';
+                            dl+='<select class="uibutton" id="ispublic">';
+                            	if(ispublic=="false"){
+                            		dl+='<option value="true">Public</option>';
+                                	dl+='<option value="false" selected>Only Me</option>';
+                            	}else{
+                            		dl+='<option value="true" selected>Public</option>';
+                                	dl+='<option value="false">Only Me</option>';
+                            	}
+                            	
+                            dl+='</select>';
+                            dl+='</div>';
+                            dl+='</div>';
+                        	                        
+                            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
+                            var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
+                            var cancelBtn ='<button class="uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
+                            var saveBtn ='<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
+                            var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext">'+updateText+'</textarea>';
+                            $(showHide).appendTo('#qn');
+                            $(divNotes).appendTo('#qn');
+                            $(notesInp).appendTo('#notes');
+                            $(saveBtn).appendTo('#notes');
+                            $(dl).appendTo('#notes');
+                            $(cancelBtn).appendTo('#notes');
+                            $('#mytext').focus();
+                            
+                        	// BUTTON SAVE CLICKED
+                            $('#btnUpdate').click(function(){
+                            	_this.updateMemo();
+                            });
+                            
+                            // BUTTON CANCEL CLICKED
+                            $('#btnCancel').click(function(){
+                            	$('#qn').empty();
+                            	_this.appendElem();
+                            });
+                        });
                     }
+                    
                 });
+                
+                
             }
         },
         login: function() {
@@ -305,6 +431,7 @@ Date.prototype.format = function(mask, utc) {
             $("#frmLogin")
                 .submit(
                     function(e) {
+                    	$('#loading').show();
                         e.preventDefault();
                         $
                             .ajax({
@@ -312,6 +439,7 @@ Date.prototype.format = function(mask, utc) {
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
+                                	$('#loading').hide();
                                     if (data.MESSAGE == "SUCCESS") {
                                         Cookies.set('LOGGED', {
                                             "userid": data.USERID,
@@ -344,6 +472,7 @@ Date.prototype.format = function(mask, utc) {
                 $('#alert').remove();
             });
         },
+        
         completeNote: function() {
         	var _this = this;
             var storage = this.config.storage;
@@ -352,7 +481,7 @@ Date.prototype.format = function(mask, utc) {
             //     // RETURN KEY PRESSED
             //     if (e.which == 13 || e.keyCode == 13) {
             //            $('#myimg').click(function(e) {
-            this.$el.on('click', '#notes #myimg', function(e) {
+            this.$el.on('click', '#notes #btnSave', function(e) {
                 // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
             	
             	var url = window.location.pathname.replace("/HRD_MEMO",'');
@@ -362,14 +491,15 @@ Date.prototype.format = function(mask, utc) {
                     "content":$("#notes textarea[name$='qn_input']").val(),
                     "domainName":domainName,
                     "url":url,
-                    "ispublic":true
+                    "ispublic":$('#ispublic').val()
+                    
                 }
                 if ($("#notes textarea[name$='qn_input']").val()) {
                     //                    // SAVE TO localStorage
                     //                    if (storage === true) {
                     //                        
                     //                    }
-
+                	$('#loading').show();
                     $.ajax({
                             type: "POST",
                             url: "http://localhost:8080/HRD_MEMO/plugin/memo/add",
@@ -378,9 +508,9 @@ Date.prototype.format = function(mask, utc) {
                             data: JSON.stringify(memo),
                             success:function(data){
                             	if(data.RESPONSE_DATA){
+                            		$('#loading').hide();
                             		$('#qn').empty();
                             		_this.appendElem();
-                            		
                             	}
                             },
                             error:function(data){

@@ -1,5 +1,7 @@
 package com.memo.app.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,17 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 	public Boolean addMemo(Memo m) {
 		
 		return embededMemoRepo.insert(m);
+	}
+
+	@Override
+	public Boolean deleteMemo(int id) {
+		return embededMemoRepo.delete(id);
+		
+	}
+
+	@Override
+	public Boolean updateMemo(Memo m) {
+		return embededMemoRepo.update(m);
 	}
 
 }

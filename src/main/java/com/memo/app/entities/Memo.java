@@ -28,6 +28,7 @@ public class Memo {
 	@Column(name="domain_name")
 	private String domainName;
 	private String url;
+	@Transient
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date",insertable=false,nullable=false)
 	private Date date;

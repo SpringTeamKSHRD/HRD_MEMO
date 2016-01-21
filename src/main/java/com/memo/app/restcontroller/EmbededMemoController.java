@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +43,7 @@ public class EmbededMemoController {
 		}
 	}*/
 
-	@RequestMapping(value ="", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	@RequestMapping(value ="", method = RequestMethod.POST,consumes="application/json")
 	public @ResponseBody String listMemo(@RequestBody Memo memo) {
 		System.out.println("list memo");
 		String list = embededMemoService.listMemoByUserIdAndURL(memo.getId(),memo.getFullDomain());
@@ -94,5 +95,43 @@ public class EmbededMemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+	@RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable int id) {
+		System.out.println("delete memo");
+		System.out.println(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());			
+			map.put("RESPONSE_DATA", embededMemoService.deleteMemo(id));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			map.put("MESSAGE", "LIST EMPTY");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());			
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value ="/update", method = RequestMethod.PUT)
+	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo m) {
+		System.out.println("update memo");
+		System.out.println(m.getContent());
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());			
+			map.put("RESPONSE_DATA", embededMemoService.updateMemo(m));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			map.put("MESSAGE", "LIST EMPTY");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());			
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+
 
 }

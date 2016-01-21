@@ -2,6 +2,8 @@ package com.memo.app.repo;
 
 import java.util.List;
 
+import org.postgresql.translation.messages_bg;
+
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
 
@@ -22,4 +24,5 @@ public interface MemoDao {
 	//PHALLEAK
 	public List<Memo> pluginGetMemo(int userid,String url);
 	public boolean updateMemoContent(Memo memo);
+	
 }
