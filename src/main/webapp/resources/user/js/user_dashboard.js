@@ -112,7 +112,7 @@ function displayData(data) {
 	}
 	
 	function clearMemo(){
-		CKEDITOR.instances.editor1.setData("");
+		$("#cont_memo").val("");
 		$(".titlememo").val("");
 	}
 	

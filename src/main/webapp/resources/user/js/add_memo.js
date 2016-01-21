@@ -2,12 +2,12 @@ var domain=window.location.origin+"/HRD_MEMO";
 
 function saveMemo(){
 	
-	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
+	var data=$("#cont_memo").val();
 	var ispublic;
 	
 	if($("#privacy").val()==0) ispublic=false;
 	else ispublic=true;
-	//alert("data : "+$('#userid').val()+$('.titlememo').val()+$("select[name='privacy'] option:selected").val()+data);
+	
 	json = {userid : parseInt($('#userid').val()),
 			title : $('.titlememo').val(),
 			content : data,
@@ -27,7 +27,6 @@ function saveMemo(){
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
 			loadPage();
-			//uploadImage();
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);

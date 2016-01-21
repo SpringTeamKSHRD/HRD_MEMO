@@ -4,7 +4,7 @@ function editmemo(id) {
 	//alert("detail memo id "+id);
 	var value1="Private";
 	var value2="Public";
-	var data = CKEDITOR.instances.editor1.getData(); //alert(data);
+	var data=$("#cont_memo").val();
 	 
 	 	$.ajax({
 		type : "GET",
@@ -40,8 +40,7 @@ function editmemo(id) {
 			    // trigger event
 			    $selectDropdown.trigger('contentChanged');
 			}
-			
-			CKEDITOR.instances.editor1.setData(data.DATA.content);
+			$("#cont_memo").val(data.DATA.content);
 			//change button to update
 			$("#btnsave").text("Update");
 			$("#btnsave").attr("onclick","updateMemo("+id+")");

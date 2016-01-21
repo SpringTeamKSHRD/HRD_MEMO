@@ -2,7 +2,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 
 function updateMemo(id){
 	//alert("id for update."+id);
-	var data = CKEDITOR.instances.editor1.getData(); //data which get from ckeditor
+	var data=$("#cont_memo").val();
 	var ispublic;
 	
 	if($("#privacy").val()==0) ispublic=false;
@@ -27,7 +27,6 @@ function updateMemo(id){
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
 			loadPage();
-			//uploadImage();
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);
