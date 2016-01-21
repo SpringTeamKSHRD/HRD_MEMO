@@ -49,15 +49,19 @@ var memo_frm_id=memo_obj.userid;
 var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 var memo_url=location.href;
 var memo_domain=location.hostname;
+var myedit_memo=false;
 
 function handlingMsg(e){
 	if(e.origin=="http://localhost:8080"){
 		var datas = e.data.split("#");
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
-			if(memo_frm_id!=null||memo_frm_id==""){
+			ifrm_hrdmemo.style.display='block';
+			$("#btn-act-desc").fadeOut(500);
+			/*if(memo_frm_id!=null||memo_frm_id==""&&myedit_memo==false){
 				pluginGetMemo();
-				}
+				myedit_memo=false;
+				}*/
 		}else if(datas[0]=='signup'){
 			signUpUser(datas[1]);
 			//alert(datas[1]);
@@ -68,6 +72,8 @@ function handlingMsg(e){
 			//alert(datas[1]);
 		}else if(datas[0]=="animate"){
 			$(".mem_desc_panel").slideToggle();
+		}else if(datas[0]=="updatesuccess"){
+			pluginGetMemo();
 		}
 	}
 }
@@ -149,7 +155,7 @@ $(document).on('click.chip', '.chip .material-icons', function (e) {
 	if($(this).text()==='delete'){
 		 $(this).parent().remove();
 	}else if($(this).text()=='mode_edit'){
-		
+		alert( $(this).parent().text());
 	}
 	else if($(this).text()==='assignment'){
 			alertify.prompt("Enter your report to this memo", function (e, str) {
@@ -174,6 +180,10 @@ function pluginDeleteMemo(id){
 		error : function(data) {
 		}
 	});
+}
+function getToEdit(id){
+	myedit_memo=true;
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+id,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 }
 //create description box
 function createDescribeBox(text,title,image,userid,memoid){
@@ -222,6 +232,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	var desc_text=document.createTextNode(text);
 	//create edit text
 	var edit=document.createElement("i");
+	edit.setAttribute('onclick','getToEdit('+memoid+')');
 	edit.setAttribute('class','material-icons');
 	edit.setAttribute('title','edit');
 	edit.style.color="#00E676";

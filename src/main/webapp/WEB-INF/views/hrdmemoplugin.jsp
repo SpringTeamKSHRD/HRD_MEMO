@@ -21,7 +21,7 @@ pageEncoding="ISO-8859-1"%>
 			<a class="btn-floating btn-large"> <i class="large material-icons">mode_edit</i>
 			</a>
 			<ul>
-				<li id="btn-memo-nemu1"><a class="btn-floating green menu-btn" id="btn-active-panel"><i
+				<li id="btn-memo-nemu4"><a class="btn-floating green menu-btn" id="btn-active-panel"><i
 					class="material-icons" style="font-size: 20px;">swap_vert</i></a></li>
 				<li id="btn-memo-nemu1"><a class="btn-floating red menu-btn" id="btn-active-memo"><i
 					class="material-icons" style="font-size: 20px;">comment</i></a></li>
@@ -62,7 +62,7 @@ pageEncoding="ISO-8859-1"%>
 							</div>
 							<div class="input-field col s11" style="text-align: right; padding: 0px;">
 								<button class="btn waves-effect" type="button" 
-										style="padding: 0px 5px; height: 30px;" 
+										style="padding: 0px 5px; height: 30px;" onclick="defaultBtnSaveMemo()"
 										id='btn-save-memo'>Save</button>
 							</div>
 						</td>
@@ -161,9 +161,15 @@ function handlingMsg(e){
 	obj=JSON.parse(parentData[1]);
 	if(obj==null){
 		$("#btn-memo-nemu1").css('display','none');
+		$("#btn-memo-nemu4").css('display','none');
 	}else{
 		$("#btn-memo-nemu3").css('display','none');
 		$("#btn-memo-nemu2").css('display','none');
+	}
+	if(parentData[2]!=null){
+		getEditMemo(parentData[2])
+		iframeSizePanel('160px');
+		$("#hrd-memo-frm").slideDown(10);
 	}
 }
 addEventListener("message",handlingMsg,true);
@@ -213,7 +219,7 @@ addEventListener("message",handlingMsg,true);
 				$("#hrd-register-frm").slideToggle(10);
 			});
 	//Toggle descpanel
-	$("#btn-active-panel").click(function(){
+	$("#btn-memo-nemu4").click(function(){
 		parent.postMessage('animate#ok',url);
 	});
 	function iframeSizePanel(height){
@@ -231,6 +237,7 @@ addEventListener("message",handlingMsg,true);
 		};
 				parent.postMessage("signup#"+JSON.stringify(json, null, '\t'),url);
 				$("#btn-memo-nemu1").css('display','block');
+				$("#btn-memo-nemu4").css('display','block');
 				$("#btn-memo-nemu3").css('display','none');
 				$("#btn-memo-nemu2").css('display','none');
 				$("#hrd-register-frm").slideToggle(500);
@@ -263,7 +270,7 @@ addEventListener("message",handlingMsg,true);
 	}
 
 	//save memo
-	$("#btn-save-memo").click(function() {
+	function defaultBtnSaveMemo() {
 		if($("#descmemo").val()!=""){
 		$("#descmemo").css('border','2px solid #009688');
 		var ismpublic="";
@@ -283,14 +290,49 @@ addEventListener("message",handlingMsg,true);
 				parent.postMessage("savememo#"+JSON.stringify(json, null, '\t'),url);
 		}else{
 			$("#descmemo").css('border','2px solid #D50000');
-			 $("#descmemo").focus();
+			$("#descmemo").focus();
 		}
-	});
+	}
 	$("#descmemo").val("");
 	
 	function validateEmail(email) {
 	    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(email);
+	}
+	function getEditMemo(id){
+		$.ajax({
+			type : "GET",
+			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
+			success : function(data) {
+				$("#descmemo").val(data.DATA.content);
+				$("#btn-save-memo").text("Edit");
+				$("#btn-save-memo").attr("onclick","updateMemoContent("+id+")");
+			},
+			error : function(data) {
+			}
+		});
+	}
+	
+	function updateMemoContent(id){
+		var json={
+				id:id,
+				content:$("#descmemo").val()
+		};
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
+			contentType: 'application/json;charset=utf-8',
+	        data:JSON.stringify(json),
+			success : function(data) {
+				$("#btn-save-memo").text("Save");
+				$("#btn-save-memo").attr("onclick","defaultBtnSaveMemo()");
+				iframeSizePanel('60px');
+				$("#hrd-memo-frm").slideUp(10);
+				parent.postMessage("updatesuccess#update",url);
+			},
+			error : function(data) {
+			}
+		});
 	}
 </script>
 </html>
