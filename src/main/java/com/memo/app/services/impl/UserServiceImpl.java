@@ -44,8 +44,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserList() {
-		return userdao.getUserList();
+	public List<User> getUserList(Integer limit, Integer page, boolean ismemoenabled){
+		if(limit > 100) limit = 100;
+		int offset = limit * page - limit;
+		return userdao.getUserList(limit,offset,ismemoenabled);
 	}
 
 	@Override

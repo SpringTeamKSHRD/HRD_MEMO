@@ -8,7 +8,7 @@ public interface UserService {
 	public boolean saveUser(User user);
 	public boolean updateUser(User user);
 	public boolean changeUserEnable(int id);
-	public List<User> getUserList();
+	public List<User> getUserList(Integer limit, Integer page, boolean ismemoenabled);
 	public List<User> searchUser(String name);
 	public List<User> searchUser(int id);
 	public User getUserByEmail(String email);

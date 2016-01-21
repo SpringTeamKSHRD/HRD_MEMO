@@ -62,13 +62,15 @@ public class UserDaoRepoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> getUserList() {
+	public List<User> getUserList(int limit, int offset, boolean ismemoenabled) {
 		try{
-		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
-				 + "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid";
-		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename "
+				 + "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
+				+ "where us.ismemoenabled = ? ORDER BY us.userid limit ? offset ? ";
+		List<User> users = jdbcTemplate.query(sql,  new Object[] { ismemoenabled, limit, offset },new UserRowMapper());
 		return users;
 		}catch(Exception ex){
+			ex.printStackTrace();
 			System.out.println("UserDaoRepoImpl error getUsertList()");
 		}
 		return null;

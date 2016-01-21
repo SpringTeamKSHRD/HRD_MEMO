@@ -8,7 +8,7 @@ public interface UserDao {
 	public int saveUser(User user);
 	public int updateUser(User user);
 	public int changeUserEnable(int id);
-	public List<User> getUserList();
+	public List<User> getUserList(int limit, int offset, boolean ismemoenabled);
 	public List<User> searchUser(String email);
 	public List<User> searchUser(int id);
 	public String getEmail(String email);
