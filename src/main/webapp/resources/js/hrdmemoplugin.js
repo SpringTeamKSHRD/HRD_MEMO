@@ -80,6 +80,7 @@ function handlingMsg(e){
 			//alert(datas[1]);
 		}else if(datas[0]=="updatesuccess"){
 			pluginGetMemo();
+			$("#hrd_memo_pess").slideUp(1000);
 			document.getElementById("my_delete_btn").style.display="block";
 		}
 	}
@@ -201,6 +202,7 @@ function pluginDeleteMemo(id){
 		type : "GET",
 		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/"+id,
 		success : function(data) {
+			$("#hrdmemo_iframe").css({'height':'105px','display':'block'}).animate({width: 320, marginLeft: 0}, {duration: 500});
 			pluginGetMemo();
 		},
 		error : function(data) {
