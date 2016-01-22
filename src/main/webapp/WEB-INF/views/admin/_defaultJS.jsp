@@ -32,9 +32,9 @@
 	  		$("#unreported-list").hide();
 	  		$(".label-warning").hide();
 	  	}
-	  	$("#unreported-list").html(result.unreportedlist);
+/* 	  	$("#unreported-list").html(result.unreportedlist);
 	  	$(".label-warning").html(result.unreportedlist);
-	  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported.");
+	  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported."); */
 	</script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the

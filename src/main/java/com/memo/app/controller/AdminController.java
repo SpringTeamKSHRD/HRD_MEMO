@@ -1,7 +1,5 @@
 package com.memo.app.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,28 +8,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.memo.app.entities.User;
 import com.memo.app.services.IDashboardService;
-import com.memo.app.services.impl.UserServiceImpl;
+import com.memo.app.services.UserService;
 
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
 	
 	@Autowired
-	private UserServiceImpl userDao;
+	private UserService userDao;
 	
 	@Autowired
 	private IDashboardService dashboard;
 	
 	@ModelAttribute
 	public void commonObject(Model model){
-		model.addAttribute("dashboard",dashboard.getDashboardInfo());
+
 	}
 	
-	@RequestMapping("")
 	public String dashboard(ModelMap m) {
-		this.putTogether(m, "Dashboard", "Control Panel");
+		m.addAttribute("dashboard",dashboard.getDashboardInfo());
+		this.pageDescription(m, "Dashboard", "Control Panel");
 		return "admin/dashboard";
 	}
 	
@@ -42,30 +39,30 @@ public class AdminController {
 			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") Boolean ismemoenabled
 			) {
 		
-		System.out.println(limit);
-		System.out.println(page);
-		System.out.println(ismemoenabled);
-		this.putTogether(m, "listUser", "List All Users");
-		List<User> lstUser = userDao.getUserList(limit, page, ismemoenabled);
-		m.addAttribute("listUser", lstUser);
-		System.out.println(lstUser.size());
+		this.pageDescription(m, "listUser", "List All Users");
+		m.addAttribute("listUser", userDao.getUserList(limit, page, ismemoenabled));
 		return "admin/users";
 	}
 	
 	@RequestMapping("/memos")
 	public String memo(ModelMap m) {
-		this.putTogether(m, "Memos", "List All Memos");
+		this.pageDescription(m, "Memos", "List All Memos");
 		return "admin/memos";
 	}
 	
-	@RequestMapping("/adminnotification")
+	@RequestMapping("/reports")
+	public String report(ModelMap m) {
+		this.pageDescription(m, "Report", "List All Reports");
+		return "admin/report";
+	}
+	
+/*	@RequestMapping("/adminnotification")
 	public String getNotifationPage(){
 		return "admin/adminnotification";
-	}
+	}*/
 
-	public void putTogether(ModelMap m,String pageTitle,String pageDesc){
+	public void pageDescription(ModelMap m,String pageTitle,String pageDesc){
 		m.addAttribute("pageTitle",pageTitle);
 		m.addAttribute("pageDesc",pageDesc);
-		//m.addAttribute("active",pageTitle);
 	}
 }

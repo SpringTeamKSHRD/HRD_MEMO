@@ -63,26 +63,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <%@ include file="_footer.jsp"%>
 <%-- <%@ include file="_controlSideBar.jsp"%> --%>
-
-
 <%@ include file="_defaultJS.jsp"%>
-<script
-	src="${pageContext.request.contextPath}/resources/admin/js/dataTables.bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/admin/js/jquery.dataTables.min.js"></script>
-<script>
-	$(function() {
-		$('#tbl-user').DataTable({
-			  "processing": true,
-		        "serverSide": true,
-			"paging" : true,
-			"lengthChange" : false,
-			"searching" : false,
-			"ordering" : true,
-			"info" : true,
-			"autoWidth" : false
-		});
-	});
-</script>
 </body>
 </html>
