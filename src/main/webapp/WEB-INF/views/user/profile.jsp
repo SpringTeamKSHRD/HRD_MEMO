@@ -35,19 +35,20 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
 			<li><a href="#">Notification</a></li>
+			<li>
+	      		<img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
+	      	</li>
 			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
-				<li><a href="#">Action</a></li>
-				<li><a href="#">Another action</a></li>
-				<li><a href="#" data-toggle="modal" data-target="#myModal">Change password</a></li>
+				<li><a href="#!" data-toggle="modal" data-target="#myModal">Change password</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="#">Separated link</a></li>
 			  </ul>
 			</li>
-			<li><a href="#">About</a></li>
+			<li><a href="#!">About</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
@@ -142,12 +143,6 @@
 									<label>Date of Birth</label><br/>
 									<input type="date" id="dob" value="${sessionScope['USER'].dob}"/>
 								</div>
-								<%-- <div class="form-group">
-									<label>Current Password</label>
-									<input type="password" class="form-control" id="password" value="${sessionScope['USER'].password}">
-								</div> --%>
-								<!-- Button -->
-								<!-- Success button with label -->
 								<button type="button" class="btn btn-labeled btn-success" onclick="updateUser()">
 									<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Update
 								</button>
@@ -162,23 +157,19 @@
 						</div>
 						<!-- Change Picture -->
 						<div class="col-xs-12 col-md-3 col-lg-4">
-						
 							<br/>
-								<div class="fileinput fileinput-new" data-provides="fileinput">
-								  <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
-									<img src="${pageContext.request.contextPath}/resources/image/sona.jpg"/>
-								  </div>
-								 <!--  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
-								  	
-								  </div> -->
-								  <div>
-									<span class="btn btn-default btn-file">
-									<span class="fileinput-new">Select image</span>
-									<span class="fileinput-exists">Change</span>
-									<input type="file" id="image"></span>
-									<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-								  </div>
+							<div class="fileinput fileinput-new" data-provides="fileinput">
+								<input type="text" id="origin_img" value="${sessionScope['USER'].image}" hidden="true"/>
+								<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
+									<img src="${pageContext.request.contextPath}/resources/image/${sessionScope['USER'].image}"/>
 								</div>
+								  <div>
+								    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span>
+								    <span class="fileinput-exists">Change</span>
+								    <input type="file" id="image"></span> <!-- file image is here -->
+								    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+								  </div>
+							</div>
 						</div>
 					</div>	
 				  </div>

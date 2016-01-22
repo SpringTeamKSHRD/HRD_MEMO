@@ -1,16 +1,14 @@
 var domain=window.location.origin+"/HRD_MEMO";
-loadPage();
-
-function loadPage(){
-	
-}
+var img;
 
 function updateUser(){
+	//alert($("#origin_img").val());
 	json = {userid : parseInt($("#userid").val()),
 			username : $("#username").val(),
 			gender : $("input[type='radio'][name='gender']:checked").val(),
 			phone : $("#phone").val(),
-			email : $("#email").val()	
+			email : $("#email").val(),
+			image : img
 		   };
 
 	$.ajax({
@@ -30,12 +28,12 @@ function updateUser(){
 	});
 }
 
-function cancelUser(){
-	alert("cancel");
-}
-
+$("#image").change(function() {
+	img=$("#image").val().split("\\").pop();
+	alert(img);
+});
 function uploadImage() {
-	alert("upload image.");
+	//alert("upload image.");
 	var data1;
     data1 = new FormData($(this)[0]);
     data1.append('file', $('#image')[0].files[0]);
@@ -76,4 +74,7 @@ function updateUserPwd(){
 			console.log("ERROR..." + data);
 		}
 	});
+}
+function cancelUser(){
+	alert("cancel");
 }

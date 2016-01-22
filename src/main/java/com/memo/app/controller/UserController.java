@@ -28,4 +28,5 @@ public class UserController {
 	public String getUserProfile(){
 		return "user/profile";
 	}
+	
 }

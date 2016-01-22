@@ -26,7 +26,7 @@ function loadPage(){
 /* list data */
 function displayData(data) {
 	//alert("display data.");
-	var contents = "<ul class='collection highlight'>";
+	var contents = "<ul class='collection'>";
 	var privacy;
 
 	for (var i = 0; i < data.DATA.length; i++) {
@@ -114,5 +114,6 @@ function displayData(data) {
 	}
 	
 	function cancelMemo(){
+		clearMemo();
 		loadPage();
 	}

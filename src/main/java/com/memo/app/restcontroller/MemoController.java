@@ -39,7 +39,7 @@ public class MemoController {
 	// insert user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user) {
-			System.out.println("update user memo controller.");		
+			//System.out.println("update user memo controller.");		
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			if (userService.updateUser1(user)) {			
@@ -53,22 +53,23 @@ public class MemoController {
 			}
 		}
 	
-		// update user password
-					@RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
-					public ResponseEntity<Map<String, Object>> updateUserPassword(@RequestBody User user) {
-						System.out.println("update user password memo controller.");				
-						Map<String, Object> map = new HashMap<String, Object>();
+			// update user password
+			@RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
+			public ResponseEntity<Map<String, Object>> updateUserPassword(@RequestBody User user) {
+				System.out.println("update user password memo controller.");				
+				Map<String, Object> map = new HashMap<String, Object>();
 							
-						if (userService.updateUserPassword(user)) {			
-							map.put("MESSAGE", "USER PASSWORD HAS BEEN UPDATED.");
-							map.put("STATUS", HttpStatus.CREATED.value());
-							return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
-						} else {
-							map.put("MESSAGE", "USER PASSWORD HAS NOT BEEN UPDATED.");
-							map.put("STATUS", HttpStatus.NOT_FOUND.value());
-							return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-						}
-					}
+				if (userService.updateUserPassword(user)) {			
+					map.put("MESSAGE", "USER PASSWORD HAS BEEN UPDATED.");
+					map.put("STATUS", HttpStatus.CREATED.value());
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
+				} else {
+					map.put("MESSAGE", "USER PASSWORD HAS NOT BEEN UPDATED.");
+					map.put("STATUS", HttpStatus.NOT_FOUND.value());
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+				}
+			}
+			
 	// list memo with limiting amount of rows
 	@RequestMapping(value = { "/list/{limit}","/list/{limit}/{page}"}, method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
@@ -115,7 +116,6 @@ public class MemoController {
 		System.out.println("detail controller");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Memo memo = memoService.getMemo(id);
-		System.out.println(memo.getContent());
 		if (memo != null) {
 			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
 			map.put("STATUS", HttpStatus.FOUND.value());
@@ -249,6 +249,7 @@ public class MemoController {
 					map.put("MESSAGE","UPLOAD IMAGE SUCCESS");
 					map.put("STATUS", HttpStatus.OK.value());
 					map.put("IMAGE", request.getContextPath() + "/images/" + filename);
+					map.put("IMG_NAME",filename);
 					return new ResponseEntity<Map<String,Object>>
 										(map, HttpStatus.OK);
 				}catch(Exception e){
