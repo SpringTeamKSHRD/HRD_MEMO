@@ -13,13 +13,12 @@
   line-height: 20px;
   padding:0px 3px;
   background-color: #FAFAFA;
-  width:290px;
+  width:295px;
   white-space:normal;
-  border-left:3px solid #1976D2;
-  border-right:3px solid #1976D2;
+  border-left:3px solid #B0BEC5;
   word-wrap: break-word;
   box-shadow:1px 1px 4px gray;
-  margin: 5px;
+  margin: 0px;
    display:table;
   word-break:break-all;
   margin-left: 15px;
@@ -35,7 +34,6 @@
 	margin: 0px;
 	padding:2px;
     width: 100%;
-    background: #1976D2;
     height: 30px;
 }
 .user-memo-img{

@@ -58,15 +58,22 @@ memo_frm_id=retrievedObject.userid;
 var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 var memo_url=location.href;
 var memo_domain=location.hostname;
+var myedit_memo=false;
 
 function handlingMsg(e){
 	if(e.origin=="http://localhost:8080"){
 		var datas = e.data.split("#");
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
-			if(memo_frm_id!=null||memo_frm_id==""){
+			ifrm_hrdmemo.style.display='block';
+			if(isIhave==true){
+				ifrm_hrdmemo.style.display='none';
+				isIhave=false;
+			}
+			/*if(memo_frm_id!=null||memo_frm_id==""&&myedit_memo==false){
 				pluginGetMemo();
-				}
+				myedit_memo=false;
+			}*/
 		}else if(datas[0]=='signup'){
 			signUpUser(datas[1]);
 			//alert(datas[1]);
@@ -76,6 +83,13 @@ function handlingMsg(e){
 		}else if(datas[0]=='savememo'){
 			saveMemo(datas[1]);
 			//alert(datas[1]);
+		}else if(datas[0]=="updatesuccess"){
+			pluginGetMemo();
+			document.getElementById("my_delete_btn").style.display="block";
+			if(isIhave==true){
+				ifrm_hrdmemo.style.display='none';
+				isIhave=false;
+			}
 		}
 	}
 }
@@ -168,11 +182,6 @@ function listMemoDescriptionBox(data){
 			isIhave=true;
 		}
 		createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id);
-	}
-	if(isIhave==true){
-		ifrm_hrdmemo.style.display='none';
-		//$("#btn-act-desc").fadeIn(500);
-		isIhave=false;
 	}
 }
 //user report
@@ -267,6 +276,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	desc.setAttribute('class','chip');
 	var close=document.createElement("i");
 	close.setAttribute('class','material-icons');
+	close.setAttribute('id','my_delete_btn');
 	close.setAttribute('title','close');
 	close.style.color="red";
 	close.setAttribute('onclick','pluginDeleteMemo('+memoid+')');
@@ -283,6 +293,7 @@ function createDescribeBox(text,title,image,userid,memoid){
 	//create edit text
 	var edit=document.createElement("i");
 	edit.setAttribute('class','material-icons');
+	edit.setAttribute('onclick','getToEdit('+memoid+')');
 	edit.setAttribute('title','edit');
 	edit.style.color="#00E676";
 	var edit_text=document.createTextNode("mode_edit");
@@ -296,12 +307,20 @@ function createDescribeBox(text,title,image,userid,memoid){
 	if(userid==memo_frm_id){
 		desc.appendChild(close);
 		desc.appendChild(edit);
+		memo_img_wraper.style.background="#009688";
 	}
 	if(userid!=memo_frm_id){
 		desc.appendChild(report);
+		memo_img_wraper.style.background="#B0BEC5";
 	}
 	desc.appendChild(memo_footer);
 	desc_panel.appendChild(desc);
+}
+//get edit id
+function getToEdit(id){
+	myedit_memo=true;
+	document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+true+"#"+id,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
+	document.getElementById("my_delete_btn").style.display="none";
 }
 
 //Send current url to child
