@@ -11,4 +11,5 @@ public interface IEmbededMemoService {
 	public Boolean addMemo(Memo m);
 	public Boolean deleteMemo(int id);
 	public Boolean updateMemo(Memo m);
+	public Boolean RegisterUser(User m);
 }

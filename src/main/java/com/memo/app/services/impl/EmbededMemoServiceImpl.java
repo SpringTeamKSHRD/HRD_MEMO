@@ -42,4 +42,9 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 		return embededMemoRepo.update(m);
 	}
 
+	@Override
+	public Boolean RegisterUser(User m) {
+		return embededMemoRepo.register(m);
+	}
+
 }
