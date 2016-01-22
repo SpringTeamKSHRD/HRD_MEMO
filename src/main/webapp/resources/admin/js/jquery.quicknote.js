@@ -152,6 +152,8 @@ Date.prototype.format = function(mask, utc) {
             if (Storage === void(0)) {
                 this.config.storage = false;
             }
+//            alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
+            
             var loading ='<div id="loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
        	 	$(loading).appendTo(this.$el);
             
@@ -379,8 +381,10 @@ Date.prototype.format = function(mask, utc) {
                             $('#btnUpdate').click(function(){
 //                            	that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
                             	$('#loading').show();
-                            	var url = window.location.pathname.replace("/HRD_MEMO",'');
-                            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+//                            	var url = window.location.pathname.replace("/HRD_MEMO",'');
+//                            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+                            	var domainName=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+                            	var url=window.location.pathname;
                             	var memo={
                             			"userid":Cookies.getJSON('LOGGED').userid,
                                         "id":memoid,
@@ -521,7 +525,9 @@ Date.prototype.format = function(mask, utc) {
                 // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
             	
             	var url = window.location.pathname.replace("/HRD_MEMO",'');
-            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+//            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+            	var domainName=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+            	var url=window.location.pathname;
                 var memo={
                     "userid":Cookies.getJSON('LOGGED').userid,
                     "content":$("#notes textarea[name$='qn_input']").val(),
