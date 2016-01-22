@@ -246,9 +246,9 @@ public class MemoDaoImpl implements MemoDao{
 	@Override
 	public boolean updateMemoContent(Memo memo) {
 		System.out.println("update memo dao.");
-		String sql="UPDATE memo.tbmemo SET content=? "
+		String sql="UPDATE memo.tbmemo SET content=?,ispublic=? "
 								      +"WHERE id=?;";
-		Object[] obj=new Object[]{memo.getContent(),memo.getId()};
+		Object[] obj=new Object[]{memo.getContent(),memo.isIspublic(),memo.getId()};
 		try{
 			int i=jdbcTemplate.update(sql,obj);
 			if(i>0) return true;

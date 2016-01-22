@@ -2,8 +2,6 @@ package com.memo.app.repo;
 
 import java.util.List;
 
-import org.postgresql.translation.messages_bg;
-
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
 

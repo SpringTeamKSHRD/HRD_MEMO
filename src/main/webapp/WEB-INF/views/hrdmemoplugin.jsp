@@ -6,15 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
-<body>
+<body  style='width:100%; margin: 0px;'>
 	<div class='row col s12' style="height: 60px; text-align: center;" id="all-menu-btn-panel">
 		<p id="error"
 			style="margin: auto; color: white; background: #FF1744; height: 100%; display: none;"></p>
@@ -36,20 +36,18 @@
 		</div>
 	</div>
 	<!--Memo Form-->
-	<div class="row" style="margin-top: 5px;">
+	<div class="row" style="margin: 0px;">
 		<form class="col s12" id="hrd-memo-frm"
-			style="margin: 0px; padding: 0px;">
-			<div class="row" style="margin-top: 2px;">
-				<div class="input-field col s12"
+			style="margin: 0px; padding: 0px; position: fixed; top: 0px; right: 0px;">
+				<div class="input-field row col s12"
 					style="text-align: right; padding: 0px;">
 					<textarea
-						style="width:304px; max-height: 60px; height: 60px; border: 2px solid #009688;"
+						style="max-width:100%; max-height: 65px; height: 60px;margin:0px; border: 2px solid black; float: right;"
 						id="descmemo">
 					</textarea>
-				</div>
 			</div>
 			<div class="row" style="margin-top: 2px;">
-				<div class="input-field col s3" style="padding-left: 4px;">
+				<div class="input-field col s3" style="padding-left: 0px;">
 					<input type="checkbox" class="filled-in" id="public" /> <label
 						for="public">Public</label>
 				</div>
@@ -145,14 +143,14 @@
 	<!--Register Form  -->
 </body>
 <link rel="stylesheet"
-	href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css" />
+	href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css" />
 <script type="text/javascript">
 	var display = true;
 	$("#btn-active-memo").click(function() {
 		display1 = true;
 		display2 = true;
 		if (display == true) {
-			iframeSizePanel('160px');
+			iframeSizePanel('105px');
 			display = false;
 		} else {
 			display = true;
@@ -208,12 +206,9 @@
 			};
 			parent.postMessage("signup#" + JSON.stringify(json, null, '\t'),
 					url);
-			$("#btn-memo-nemu1").css('display', 'block');
-			$("#btn-memo-nemu4").css('display', 'block');
-			$("#btn-memo-nemu3").css('display', 'none');
-			$("#btn-memo-nemu2").css('display', 'none');
-			$("#hrd-register-frm").slideToggle(500);
-			$("#hrd-memo-frm").slideToggle(500);
+			username : $("#name").val("");
+			email : $("#email").val("");
+			password : $("#password").val("");
 		} else {
 			if ($("#name").val() == "" || $("#email").val() == ""
 					|| $("#password").val() == "") {
@@ -284,7 +279,7 @@
 	function getEditMemo(id) {
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/" + id,
+			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/" + id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				$("#btn-save-memo").text("Edit");
@@ -303,7 +298,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType : 'application/json;charset=utf-8',
 			data : JSON.stringify(json),
 			success : function(data) {
@@ -320,9 +315,12 @@
 	function getEditMemo(id){
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/"+id,
+			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
+				if(data.DATA.ispublic==true){
+					$("#public").attr('checked','checked');
+				}
 				$("#btn-save-memo").text("Edit");
 				$("#btn-save-memo").attr("onclick","updateMemoContent("+id+")");
 			},
@@ -332,13 +330,20 @@
 	}
 	
 	function updateMemoContent(id){
+		var pbl = document.getElementById("public");
+		if (pbl.checked) {
+			ismpublic = true;
+		} else {
+			ismpublic = false;
+		}
 		var json={
 				id:id,
-				content:$("#descmemo").val()
+				content:$("#descmemo").val(),
+				ispublic:ismpublic
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -356,24 +361,37 @@
 	function handlingMsg(e) {
 		var parentData = e.data.split("#");
 		url = parentData[0];
+		//cookies
 		if (parentData[1] == "") {
+			alert("i true1");
 			$("#btn-memo-nemu1").css('display', 'none');
 		} else {
+			alert("i true2");
 			$("#all-menu-btn-panel").css('display', 'none');
 			iframeSizePanel('105px');
 			$("#hrd-memo-frm").css('display', 'block');
 		}
+		//login true
 		if(parentData[2]=='true'){
 			$("#frm-login-wrapper").fadeOut(500);
 			$("#login-label").css('background','white');
 		}
+		//to edit
 		if(parentData[3]!=null){
 			$("#hrd-memo-frm").css("display","block");
 			iframeSizePanel('105px');
 			getEditMemo(parentData[3])
 		}
+		//success delete
 		if(parentData[4]!=null){
 			$("#hrd-memo-frm").css("display","block");
+		}
+		//success signup
+		if(parentData[5]!=null){
+			$("#all-menu-btn-panel").css('display', 'none');
+			iframeSizePanel('105px');
+			$("#hrd-memo-frm").css('display', 'block');
+			$("#hrd-register-frm").slideToggle(500);
 		}
 	}
 	addEventListener("message", handlingMsg, true);

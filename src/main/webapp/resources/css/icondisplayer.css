@@ -13,13 +13,13 @@
   line-height: 20px;
   padding:0px 3px;
   background-color: #FAFAFA;
-  width:295px;
+  width:300px;
   white-space:normal;
-  border-left:3px solid #B0BEC5;
+  border-left:2px solid #B0BEC5;
   word-wrap: break-word;
   box-shadow:1px 1px 4px gray;
-  margin: 3px;
-   display:table;
+  margin: 5px 0px 0px 0px;
+  display:table;
   word-break:break-all;
   margin-left: 15px;
 }
@@ -50,7 +50,7 @@
 }
 #btn-act-desc{
 	border: none;
-	background: #009688;
+	background: red;
 	border-radius:90%;
 	position: fixed;
 	right: 10px;
@@ -63,7 +63,7 @@
 	width: 200px;
 	padding: 20px;
 	font-size: 15px;
-	background: #2196F3;
+	background: #009688;
 	position: fixed;
 	top: 5px;
 	left: 2px;

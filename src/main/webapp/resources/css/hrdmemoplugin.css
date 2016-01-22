@@ -29,6 +29,8 @@
 
 #hrd-memo-frm {
 	display: none; 
+	 width:310px;
+	 height: auto;
 }
 
 #hrd-login-frm ,#hrd-register-frm{
@@ -49,7 +51,7 @@
 .hrd_memo_pess{
 	position: fixed;
 	width: 300px;
-	right: 0px;
-	top: 0px;
+	left: 0px;
+	bottom: 0px;
 	height: auto;
 }
