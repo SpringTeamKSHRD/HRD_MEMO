@@ -15,7 +15,7 @@
 	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
-	<div class='row col s12' style="height: 60px; text-align: center;">
+	<div class='row col s12' style="height: 60px; text-align: center;" id="all-menu-btn-panel">
 		<p id="error"
 			style="margin: auto; color: white; background: #FF1744; height: 100%; display: none;"></p>
 		<div class="fixed-action-btn horizontal click-to-toggle">
@@ -56,7 +56,7 @@
 				<div class="input-field col s9"
 					style="text-align: right; padding: 0px;">
 					<button class="btn waves-effect" type="button"
-						style="padding: 0px 5px; height: 30px;"
+						style="padding: 0px 5px; height: 30px; position: fixed; bottom: 2px; right: 2px;"
 						onclick="defaultBtnSaveMemo()" id='btn-save-memo'>Save</button>
 				</div>
 			</div>
@@ -154,16 +154,18 @@
 		if (parentData[1] == "") {
 			$("#btn-memo-nemu1").css('display', 'none');
 		} else {
-			$("#btn-memo-nemu3").css('display', 'none');
-			$("#btn-memo-nemu2").css('display', 'none');
-		}
-		if (parentData[2] != null) {
-			getEditMemo(parentData[2])
-			iframeSizePanel('160px');
-			$("#hrd-memo-frm").slideDown(10);
+			$("#all-menu-btn-panel").css('display', 'none');
+			iframeSizePanel('105px');
+			$("#hrd-memo-frm").css('display', 'block');
 		}
 		if(parentData[2]==true){
-			alert("true");
+			iframeSizePanel('170px');
+			$("#hrd-login-frm").slideToggle(1000);
+		}
+		if(parentData[3]!=null){
+			$("#hrd-memo-frm").css("display","block");
+			iframeSizePanel('105px');
+			getEditMemo(parentData[3])
 		}
 	}
 	addEventListener("message", handlingMsg, true);
@@ -332,6 +334,42 @@
 				iframeSizePanel('60px');
 				$("#hrd-memo-frm").slideUp(10);
 				parent.postMessage("updatesuccess#update", url);
+			},
+			error : function(data) {
+			}
+		});
+	}
+	function getEditMemo(id){
+		$.ajax({
+			type : "GET",
+			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
+			success : function(data) {
+				$("#descmemo").val(data.DATA.content);
+				$("#btn-save-memo").text("Edit");
+				$("#btn-save-memo").attr("onclick","updateMemoContent("+id+")");
+			},
+			error : function(data) {
+			}
+		});
+	}
+	
+	function updateMemoContent(id){
+		var json={
+				id:id,
+				content:$("#descmemo").val()
+		};
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
+			contentType: 'application/json;charset=utf-8',
+	        data:JSON.stringify(json),
+			success : function(data) {
+				$("#btn-save-memo").text("Save");
+				$("#btn-save-memo").attr("onclick","defaultBtnSaveMemo()");
+				iframeSizePanel('0px');
+				$("#hrd-memo-frm").slideUp(1000);
+				$("#descmemo").val("");
+				parent.postMessage("updatesuccess#update",url);
 			},
 			error : function(data) {
 			}

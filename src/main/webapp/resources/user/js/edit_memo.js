@@ -4,7 +4,7 @@ function editmemo(id) {
 	//alert("detail memo id "+id);
 	var value1="Private";
 	var value2="Public";
-	var data=$("#cont_memo").val();
+	var data=$("#cont_memo").val("");
 	 
 	 	$.ajax({
 		type : "GET",
