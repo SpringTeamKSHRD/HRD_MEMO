@@ -113,7 +113,7 @@ function userLogin(data){
 			.contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+data.STATUS,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 		},
 		error : function(data) {
-			alert(data.MESSAGE);
+			alert("Login Failed..!");
 		}
 	});
 }
