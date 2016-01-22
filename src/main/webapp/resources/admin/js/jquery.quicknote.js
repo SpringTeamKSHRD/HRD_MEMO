@@ -186,7 +186,7 @@ Date.prototype.format = function(mask, utc) {
         	var _this=this;
         	$('#loading').show();
         	$.ajax({
-                type: "DELETE",
+                type: "POST",
                 url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/"+id,
                 success: function(json) {
                 	$('#loading').hide();
@@ -211,7 +211,7 @@ Date.prototype.format = function(mask, utc) {
                     }
         	console.log(memo);
         	$.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/update",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
@@ -395,7 +395,7 @@ Date.prototype.format = function(mask, utc) {
                                         }
                             	console.log(memo);
                             	$.ajax({
-                                    type: "PUT",
+                                    type: "POST",
                                     url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/update",
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",

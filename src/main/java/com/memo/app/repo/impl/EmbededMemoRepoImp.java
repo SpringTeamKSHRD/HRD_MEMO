@@ -1,5 +1,6 @@
 package com.memo.app.repo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -39,14 +40,14 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 				+ " 		 ,m.userid "
 				+ "			 ,m.content "
 				+ "			 ,m.title "
-				+ "			 ,m.domain_name "
+				+ "			 ,m.domain "
 				+ "			 ,m.url,m.isenable "
 				+ "			 ,m.ispublic"
 				+ "			 ,to_char(m.date, 'MM-DD-YYYY HH24:MI:SS') as date "
 				+ "		FROM public.tbluser U INNER JOIN memo.tbmemo M ON u.userid = M .userid "
-				+ "WHERE ( concat (M .domain_name, M .url) = ? "
+				+ "WHERE ( concat (M .domain, M .url) = ? "
 				+ "AND u.userid = ? AND m.isenable=true) "
-				+ "OR ( concat (M .domain_name, M .url) = ? AND M .ispublic = TRUE AND m.isenable=true) "
+				+ "OR ( concat (M .domain, M .url) = ? AND M .ispublic = TRUE AND m.isenable=true) "
 				+ "ORDER by m.userid=? desc ) t";
 		try {
 			String result= jdbcTemplate.queryForObject(sql,new Object[]{url,id,url,id}, String.class);
@@ -90,6 +91,7 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 	@Override
 	@Transactional
 	public Boolean delete(int id) {
+		System.out.println("0l0");
 		try {
 			Session sess= sf.getCurrentSession();
 			Memo memo = sess.load(Memo.class, id);
@@ -108,6 +110,7 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 	public Boolean update(Memo m) {
 		try {
 			Session sess= sf.getCurrentSession();
+			m.setDate(new Date());
 			sess.update(m);
 			return true;
 		} catch (Exception e) {

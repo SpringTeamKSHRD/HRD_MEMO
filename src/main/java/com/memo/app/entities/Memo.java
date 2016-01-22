@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.DynamicUpdate;
+
 import org.hibernate.annotations.Formula;
 
 @Entity
@@ -26,16 +26,15 @@ public class Memo {
 	private String userimage;
 	private String title;
 	private String content;
-	@Column(name="domain_name")
+	@Column(name="domain")
 	private String domainName;
 	private String url;
-	@Transient
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date",insertable=false,nullable=false)
 	private Date date;
 	private boolean isenable = true;
 	private boolean ispublic;
-	@Formula(value="domain_name || url")
+	@Formula(value="domain || url")
 	private String fullDomain;
 	
 	public int getId() {

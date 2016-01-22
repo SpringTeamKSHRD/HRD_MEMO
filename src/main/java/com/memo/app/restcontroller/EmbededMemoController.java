@@ -95,7 +95,7 @@ public class EmbededMemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-	@RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value ="/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable int id) {
 		System.out.println("delete memo");
 		System.out.println(id);
@@ -114,7 +114,7 @@ public class EmbededMemoController {
 		}
 	}
 	
-	@RequestMapping(value ="/update", method = RequestMethod.PUT,consumes="application/json")
+	@RequestMapping(value ="/update", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
 	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo m) {
 		System.out.println("update memo");
 		System.out.println(m.getContent());
