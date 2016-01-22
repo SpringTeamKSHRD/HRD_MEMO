@@ -80,7 +80,7 @@ function handlingMsg(e){
 			//alert(datas[1]);
 		}else if(datas[0]=="updatesuccess"){
 			pluginGetMemo();
-			$("#hrd_memo_pess").slideUp(1000);
+			$("#hrdmemo_iframe").slideUp(1000);
 			document.getElementById("my_delete_btn").style.display="block";
 		}
 	}
@@ -173,7 +173,14 @@ var isIhave=false;
 function listMemoDescriptionBox(data){
 	removeAllChild();
 	for(var i=0;i<data.DATA.length;i++){
-		createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id);
+		if(data.DATA[i].userid==memo_frm_id){
+			isIhave=true;
+		}
+		createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id,data.DATA[i].date);
+	}
+	if(isIhave==true){
+		$("#hrdmemo_iframe").css('display','none');
+		isIhave=false;
 	}
 }
 //user report
@@ -202,6 +209,7 @@ function pluginDeleteMemo(id){
 		type : "GET",
 		url : "http://192.168.178.123:8080/HRD_MEMO/plugin/"+id,
 		success : function(data) {
+			document.getElementById("hrdmemo_iframe").contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+false+"#"+null+"#"+"success","http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 			$("#hrdmemo_iframe").css({'height':'105px','display':'block'}).animate({width: 320, marginLeft: 0}, {duration: 500});
 			pluginGetMemo();
 		},
@@ -234,7 +242,7 @@ function pluginUserReport(reporterid,memoid,description){
 	});
 }
 //create description box
-function createDescribeBox(text,title,image,userid,memoid){
+function createDescribeBox(text,title,image,userid,memoid,date){
 	var desc=document.createElement("P");
 	//create image and data wrapper
 	var memo_img_wraper=document.createElement("DIV");
@@ -258,9 +266,9 @@ function createDescribeBox(text,title,image,userid,memoid){
 	memo_date_label.style.color="gray";
 	memo_date_label.style.float="right";
 	memo_date_label.style.margin="0px";
-	var today = new Date();
-	var memo_date_time='Date :'+today.getDate()+'/'+today.getMonth()+1+'/'+today.getFullYear()+'    Time:'+today.getHours()+':'+today.getMinutes();
-	var memo_desc_date=document.createTextNode(memo_date_time);
+	//var today = new Date();
+	//var memo_date_time='Date :'+today.getDate()+'/'+today.getMonth()+1+'/'+today.getFullYear()+'    Time:'+today.getHours()+':'+today.getMinutes();
+	var memo_desc_date=document.createTextNode(date);
 	memo_date_label.appendChild(memo_desc_date);
 	///
 	desc.setAttribute('class','chip');

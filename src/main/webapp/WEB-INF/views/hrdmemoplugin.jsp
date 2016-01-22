@@ -64,10 +64,10 @@
 	</div>
 	<!--End memo form  -->
 	<!--Login Form  -->
-	<div class="row">
-		<form class="col s12" id="hrd-login-frm">
+	<div class="row" id="frm-login-wrapper">
+		<form id="hrd-login-frm">
 			<div class='row'>
-				<div class="card-panel teal"
+				<div class="card-panel teal" id="login-label"
 					style="padding: 10px; font-size: 17px; color: white; font-weight: bold;">
 					<i class="material-icons">lock</i>
 				</div>
@@ -147,28 +147,6 @@
 <link rel="stylesheet"
 	href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css" />
 <script type="text/javascript">
-	var url = "";
-	function handlingMsg(e) {
-		var parentData = e.data.split("#");
-		url = parentData[0];
-		if (parentData[1] == "") {
-			$("#btn-memo-nemu1").css('display', 'none');
-		} else {
-			$("#all-menu-btn-panel").css('display', 'none');
-			iframeSizePanel('105px');
-			$("#hrd-memo-frm").css('display', 'block');
-		}
-		if(parentData[2]==true){
-			$("#hrd-login-frm").css('display', 'none');
-			iframeSizePanel('105px');
-		}
-		if(parentData[3]!=null){
-			$("#hrd-memo-frm").css("display","block");
-			iframeSizePanel('105px');
-			getEditMemo(parentData[3])
-		}
-	}
-	addEventListener("message", handlingMsg, true);
 	var display = true;
 	$("#btn-active-memo").click(function() {
 		display1 = true;
@@ -367,7 +345,6 @@
 				$("#btn-save-memo").text("Save");
 				$("#btn-save-memo").attr("onclick","defaultBtnSaveMemo()");
 				iframeSizePanel('0px');
-				$("#hrd-memo-frm").slideUp(1000);
 				$("#descmemo").val("");
 				parent.postMessage("updatesuccess#update",url);
 			},
@@ -375,5 +352,30 @@
 			}
 		});
 	}
+	var url = "";
+	function handlingMsg(e) {
+		var parentData = e.data.split("#");
+		url = parentData[0];
+		if (parentData[1] == "") {
+			$("#btn-memo-nemu1").css('display', 'none');
+		} else {
+			$("#all-menu-btn-panel").css('display', 'none');
+			iframeSizePanel('105px');
+			$("#hrd-memo-frm").css('display', 'block');
+		}
+		if(parentData[2]=='true'){
+			$("#frm-login-wrapper").fadeOut(500);
+			$("#login-label").css('background','white');
+		}
+		if(parentData[3]!=null){
+			$("#hrd-memo-frm").css("display","block");
+			iframeSizePanel('105px');
+			getEditMemo(parentData[3])
+		}
+		if(parentData[4]!=null){
+			$("#hrd-memo-frm").css("display","block");
+		}
+	}
+	addEventListener("message", handlingMsg, true);
 </script>
 </html>
