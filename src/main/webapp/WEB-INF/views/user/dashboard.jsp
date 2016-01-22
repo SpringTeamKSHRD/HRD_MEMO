@@ -20,18 +20,43 @@
 </head>
 <body >
 	<!-- Navbar goes here -->
-	<div class="navbar-fixed">
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+	  <li><a href="#!">Change Password</a></li>
+	  <li><a href="profile.jsp">Personal Information</a></li>
+	  <li class="divider"></li>
+	  <li><a href="#!">Log out</a></li>
+	</ul>
+	<nav>
+	  <div class="nav-wrapper teal">
+	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	    <ul class="right hide-on-med-and-down">
+	      <li><a href="badges.html">Home</a></li>
+	      <li><a href="sass.html">Notification</a></li>
+	      <li>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      </li>
+	      <!-- Dropdown Trigger -->
+	      <li>
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      </li>	      
+	    </ul>
+	  </div>
+	</nav>
+        
+	<%-- <div class="navbar-fixed">
 		<nav>
-			<div class="nav-wrapper teal lighten-2">
+			<div class="nav-wrapper teal">
 				<a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 				<ul class="right hide-on-med-and-down">
 				  <li><a href="#">Notification</a></li>
-				  <li><a href="#"><%-- <img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" width="5%" height="5%"/> --%>Ky Sona</a></li>
+				  <li><a href="#"><img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" width="5%" height="5%"/>Ky Sona</a></li>
 				  <li><a href="#">About us</a></li>
 				</ul>
 			</div>
 		</nav>
-	</div>
+	</div> --%>
 	<div class="container-fluid">
 		<!-- Page Layout body here -->
 		<div class="row">
@@ -132,7 +157,7 @@
 				<div>
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<textarea id="cont_memo" style="width:100%; height:300px;">
+							<textarea class="z-depth-1" id="cont_memo" style="width:100%; height:300px;">
 							
 							</textarea>
 						</div>

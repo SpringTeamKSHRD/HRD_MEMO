@@ -34,17 +34,14 @@ function displayData(data) {
 		else privacy="Public";
 		contents += "<li class='collection-item avatar' onclick='editmemo("+data.DATA[i].id+")'>"
 					+ "<a><i class='material-icons'>room</i></a>"
-					+ "<b><span class='title'>"
-						+ data.DATA[i].id
-					+ "</span>"
-					+ "<span class='title'>"
+					+ "<b>&nbsp;&nbsp;<span class='title'>"
 						+ data.DATA[i].title
-					+ "</span>"
+					+ "</span></b>"
 					+"<a><i class='material-icons right reddel' onclick='deletememo("+data.DATA[i].id+")'>delete</i></a>"
 					+ "<p>"
 						+ data.DATA[i].content.substring(0, 30)+".........."
 					+ "</p>"
-					+"<small>"
+					+"<b><small>"
 					+"<p>"
 						+data.DATA[i].date
 						+"&nbsp;&nbsp;&nbsp;"
