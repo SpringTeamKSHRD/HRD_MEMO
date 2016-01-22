@@ -8,4 +8,5 @@ public interface IEmebededMemoRepo {
 	public Boolean insert(Memo m);
 	public Boolean delete(int id);
 	public Boolean update(Memo m);
+	public Boolean register(User u);
 }

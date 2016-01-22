@@ -119,4 +119,17 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 		return false;
 	}
 
+	@Override
+	@Transactional
+	public Boolean register(User m) {
+		try {
+			Session sess = sf.getCurrentSession();
+			sess.persist(m);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

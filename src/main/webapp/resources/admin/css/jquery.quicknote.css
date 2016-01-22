@@ -229,12 +229,12 @@ textarea{
     background: #F7F7F7;
 }
 
-#div-btn #logBtn {
+#div-btn #logBtn,#div-btn #btnRegOk {
     min-width: 143px;
     height: 30px;
 }
 
-#div-btn #regBtn {
+#div-btn #regBtn,#div-btn #btnRegCancel {
     min-width: 143px;
     margin-right: 0px;
     height: 30px;
@@ -418,13 +418,14 @@ textarea{
     }
     
     .messages p {
+    	font-family:arial;
         font-size: 0.8rem;
         margin: 0 0 0.2rem 0;
     }
     
     .messages time {
-        font-size: 0.7rem;
-        color: #ccc;
+        font-size: 0.6rem;
+        color: #565555;
     }
     
     .setting {
