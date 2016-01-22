@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.Report;
 import com.memo.app.repo.impl.ReportDaoImpl;
-import com.memo.app.services.ReportSevice;
+import com.memo.app.services.ReportService;
 
 @Service
 @Lazy
-public class ReportServiceImpl implements ReportSevice {
+public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ReportDaoImpl reportDao;
 

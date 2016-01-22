@@ -44,7 +44,7 @@ public class ReportDaoImpl implements ReportDao {
 					+ "FROM memo.tbreport rp "
 					+ "INNER JOIN public.tbluser us "
 					+ "ON rp.reporterid=us.userid "
-					+ "INNER JOIN(SELECT mm.id as mmid,mm.titlememo as title,mm.content as content,"
+					+ "INNER JOIN(SELECT mm.id as mmid,mm.title as title,mm.content as content,"
 						+ "us.userid as ownermemo_id,"
 						+ "us.username as ownermemo_name,us.userimageurl as ownermemo_image"
 						+ ",date(mm.date) as memo_date "

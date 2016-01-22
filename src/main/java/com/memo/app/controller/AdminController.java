@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.services.IDashboardService;
+import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
 @Controller
@@ -21,11 +23,15 @@ public class AdminController {
 	@Autowired
 	private IDashboardService dashboard;
 	
+	@Autowired
+	private ReportService reportDao;
+	
 	@ModelAttribute
-	public void commonObject(Model model){
-
+	public void commonObject(Model m){
+		m.addAttribute("notification", reportDao.getReportNotification());		
 	}
 	
+	@RequestMapping("")
 	public String dashboard(ModelMap m) {
 		m.addAttribute("dashboard",dashboard.getDashboardInfo());
 		this.pageDescription(m, "Dashboard", "Control Panel");
@@ -39,7 +45,7 @@ public class AdminController {
 			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") Boolean ismemoenabled
 			) {
 		
-		this.pageDescription(m, "listUser", "List All Users");
+		this.pageDescription(m, "Users", "List All Users");
 		m.addAttribute("listUser", userDao.getUserList(limit, page, ismemoenabled));
 		return "admin/users";
 	}
@@ -53,7 +59,15 @@ public class AdminController {
 	@RequestMapping("/reports")
 	public String report(ModelMap m) {
 		this.pageDescription(m, "Report", "List All Reports");
+		m.addAttribute("listReport", reportDao.getAllReport());
 		return "admin/report";
+	}
+	
+	@RequestMapping("/report/{id}")
+	public String reportDetail(ModelMap m, @PathVariable("id") Integer id) {
+		this.pageDescription(m, "Report", "Report Detail");
+		m.addAttribute("listReport", reportDao.getReportDetail(id));
+		return "admin/report_detail";
 	}
 	
 /*	@RequestMapping("/adminnotification")

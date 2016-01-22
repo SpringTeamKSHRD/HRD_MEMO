@@ -27,12 +27,12 @@
 		}
 		
 		/* sideBarMenu and header NOTIFICATION*/
-		var result = ${dashboard};
+/*		var result = ${dashboard};
 	  	if(result.unreportedlist==0){
 	  		$("#unreported-list").hide();
 	  		$(".label-warning").hide();
 	  	}
-/* 	  	$("#unreported-list").html(result.unreportedlist);
+ 	  	$("#unreported-list").html(result.unreportedlist);
 	  	$(".label-warning").html(result.unreportedlist);
 	  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported."); */
 	</script>

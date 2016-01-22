@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      <!--
   BODY TAG OPTIONS:
   =================
@@ -83,18 +85,24 @@
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning" id="notifcation">0</span>
+                  <span class="label label-warning" id="notifcation">${fn:length(notification)}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- <li class="header">You have 10 notifications</li> -->
                   <li>
                     <!-- Inner Menu: contains the notifications -->
                     <ul class="menu">
-                      <li><!-- start notification -->
-                        <a href="#">
-                          <i class="fa fa-sticky-note-o text-aqua" id="notification-text"></i>
-                        </a>
-                      </li><!-- end notification -->
+                    <!-- start notification -->
+                    <c:forEach var="report" items="${notification}">
+    	                <li>
+		                    <a href="${pageContext.request.contextPath}/admin/report/${report.id}">
+		                    	<img src="/HRD_MEMO/resources/admin/imgs/${report.reporterimage}" alt="User Image" style ="float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;">
+			                    ${report.reportername}
+			                    <span class="label pull-right" style="color:#444444;">${report.reportdate}</span>			                    
+		                    </a>
+	                    </li>
+                    </c:forEach>
+                    <!-- end notification -->
                     </ul>
                   </li>
                   <li class="footer"><a href="#">View all</a></li>

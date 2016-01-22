@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" 
-           uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>    
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -88,6 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 /*   var result = ${dashboard}; 
  * ${dashboard} get from _defaultJs.jsp 
  */
+ 	var result = ${dashboard};
     $("#total-user").html(result.totaluser);
     $("#total-memo").html(result.totalmemo);
     $("#total-site").html(result.totalsite);

@@ -108,4 +108,13 @@ public class Report {
 	public void setMemocontent(String memocontent) {
 		this.memocontent = memocontent;
 	}
+	@Override
+	public String toString() {
+		return "Report [id=" + id + ", reporterid=" + reporterid + ", reportername=" + reportername + ", reporterimage="
+				+ reporterimage + ", memoid=" + memoid + ", memo=" + memo + ", ownermemoid=" + ownermemoid
+				+ ", ownermemoname=" + ownermemoname + ", ownermemoimage=" + ownermemoimage + ", reportdate="
+				+ reportdate + ", isblock=" + isblock + ", description=" + description + ", memodate=" + memodate
+				+ ", memotitle=" + memotitle + ", memocontent=" + memocontent + "]";
+	}
+	
 }
