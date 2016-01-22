@@ -43,7 +43,7 @@
 				<div class="input-field col s12"
 					style="text-align: right; padding: 0px;">
 					<textarea
-						style="width:297px; max-height: 60px; height: 60px; border: 2px solid #009688;"
+						style="width:304px; max-height: 60px; height: 60px; border: 2px solid #009688;"
 						id="descmemo">
 					</textarea>
 				</div>

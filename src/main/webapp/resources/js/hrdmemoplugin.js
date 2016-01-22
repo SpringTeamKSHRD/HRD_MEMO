@@ -350,7 +350,7 @@ $('body').append(activate_desc_memo);
 var my_memo_hide=true;
 $("#btn-act-desc").click(function(){
 	if(my_memo_hide==true){
-	$("#hrd_memo_pess").animate({width: 310, marginLeft: 0}, {duration: 500});
+	$("#hrd_memo_pess").animate({width: 320, marginLeft: 0}, {duration: 500});
 	my_memo_hide=false;
 	}else{
 		my_memo_hide=true;
