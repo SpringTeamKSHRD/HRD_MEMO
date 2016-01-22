@@ -114,7 +114,7 @@ public class EmbededMemoController {
 		}
 	}
 	
-	@RequestMapping(value ="/update", method = RequestMethod.PUT)
+	@RequestMapping(value ="/update", method = RequestMethod.PUT,consumes="application/json")
 	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo m) {
 		System.out.println("update memo");
 		System.out.println(m.getContent());
