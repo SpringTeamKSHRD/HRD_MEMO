@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
-	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
+	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.min.css' />
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
-	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
+	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.min.js'></script>
 </head>
 <body>
 	<div class='row col s12' style="height: 60px; text-align: center;" id="all-menu-btn-panel">
@@ -145,7 +145,7 @@
 	<!--Register Form  -->
 </body>
 <link rel="stylesheet"
-	href="http://localhost:8080/HRD_MEMO/resources/css/hrdmemoplugin.css" />
+	href="http://192.168.178.123:8080/HRD_MEMO/resources/css/hrdmemoplugin.css" />
 <script type="text/javascript">
 	var url = "";
 	function handlingMsg(e) {
@@ -159,8 +159,8 @@
 			$("#hrd-memo-frm").css('display', 'block');
 		}
 		if(parentData[2]==true){
-			iframeSizePanel('170px');
-			$("#hrd-login-frm").slideToggle(1000);
+			$("#hrd-login-frm").css('display', 'none');
+			iframeSizePanel('105px');
 		}
 		if(parentData[3]!=null){
 			$("#hrd-memo-frm").css("display","block");
@@ -306,7 +306,7 @@
 	function getEditMemo(id) {
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/" + id,
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/" + id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				$("#btn-save-memo").text("Edit");
@@ -325,7 +325,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType : 'application/json;charset=utf-8',
 			data : JSON.stringify(json),
 			success : function(data) {
@@ -342,7 +342,7 @@
 	function getEditMemo(id){
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				$("#btn-save-memo").text("Edit");
@@ -360,7 +360,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
