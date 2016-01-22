@@ -1,8 +1,8 @@
 //add css to iclude iframe
-$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/dragbox.js'></script>");
 $('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>");
 $('head').append("<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'/>");
 $('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/alertify.min.js'></script>");
+$('head').append("<script src='http://localhost:8080/HRD_MEMO/resources/js/shortcutkey.js'></script>");
 $('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css'/>");
 $('head').append("<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css'/>");
 //iframe wrapper
@@ -66,10 +66,6 @@ function handlingMsg(e){
 		if(datas[0]=='size'){
 			ifrm_hrdmemo.style.height=datas[1];
 			ifrm_hrdmemo.style.display='block';
-			if(isIhave==true){
-				ifrm_hrdmemo.style.display='none';
-				isIhave=false;
-			}
 			/*if(memo_frm_id!=null||memo_frm_id==""&&myedit_memo==false){
 				pluginGetMemo();
 				myedit_memo=false;
@@ -86,10 +82,6 @@ function handlingMsg(e){
 		}else if(datas[0]=="updatesuccess"){
 			pluginGetMemo();
 			document.getElementById("my_delete_btn").style.display="block";
-			if(isIhave==true){
-				ifrm_hrdmemo.style.display='none';
-				isIhave=false;
-			}
 		}
 	}
 }
@@ -125,6 +117,7 @@ function userLogin(data){
 			memo_frm_id=retrievedObject.userid;
 			document.getElementById("hrdmemo_iframe")
 			.contentWindow.postMessage(memo_url+"#"+retrievedObject+"#"+data.STATUS,"http://localhost:8080/HRD_MEMO/hrdmemoplugin");
+			pluginGetMemo();
 		},
 		error : function(data) {
 			alert("Login Failed..!");
@@ -150,6 +143,9 @@ function saveMemo(data){
 			pluginGetMemo();
 		},
 		error : function(data) {
+			$("#my-rp-popup").text("YOU CAN ONLY ONE MEMO ONE ARTICLE");
+			$("#my-rp-popup").fadeIn(200)
+							 .delay(1500).fadeOut(500);
 		}
 	});
 }
@@ -178,9 +174,6 @@ var isIhave=false;
 function listMemoDescriptionBox(data){
 	removeAllChild();
 	for(var i=0;i<data.DATA.length;i++){
-		if(data.DATA[i].userid==memo_frm_id){
-			isIhave=true;
-		}
 		createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id);
 	}
 }
@@ -211,9 +204,6 @@ function pluginDeleteMemo(id){
 		url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
 		success : function(data) {
 			pluginGetMemo();
-			if(isIhave==false){
-			ifrm_hrdmemo.style.display='block';
-			}
 		},
 		error : function(data) {
 		}
@@ -383,5 +373,13 @@ var my_rp_popup=document.createElement("P");
 my_rp_popup.setAttribute("id","my-rp-popup");
 $('body').append(my_rp_popup);
 
-
+Mousetrap.bind('ctrl+m', function(e) {
+	if(my_memo_hide==true){
+		$("#hrd_memo_pess").animate({width: 320, marginLeft: 0}, {duration: 500});
+		my_memo_hide=false;
+		}else{
+			my_memo_hide=true;
+			$("#hrd_memo_pess").animate({width: 0, marginLeft: 0}, {duration: 500});
+		}
+});
 

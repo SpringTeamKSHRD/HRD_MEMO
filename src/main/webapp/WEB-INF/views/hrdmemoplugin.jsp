@@ -56,7 +56,7 @@
 				<div class="input-field col s9"
 					style="text-align: right; padding: 0px;">
 					<button class="btn waves-effect" type="button"
-						style="padding: 0px 5px; height: 30px;"
+						style="padding: 0px 5px; height: 30px; position: fixed; bottom: 2px; right: 2px;"
 						onclick="defaultBtnSaveMemo()" id='btn-save-memo'>Save</button>
 				</div>
 			</div>
@@ -155,16 +155,16 @@
 			$("#btn-memo-nemu1").css('display', 'none');
 		} else {
 			$("#all-menu-btn-panel").css('display', 'none');
-			iframeSizePanel('100px');
+			iframeSizePanel('105px');
 			$("#hrd-memo-frm").css('display', 'block');
 		}
 		if(parentData[2]==true){
-			iframeSizePanel('160px');
+			iframeSizePanel('170px');
 			$("#hrd-login-frm").slideToggle(1000);
 		}
 		if(parentData[3]!=null){
 			$("#hrd-memo-frm").css("display","block");
-			iframeSizePanel('100px');
+			iframeSizePanel('105px');
 			getEditMemo(parentData[3])
 		}
 	}
