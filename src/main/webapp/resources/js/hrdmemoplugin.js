@@ -1,4 +1,5 @@
 //add css to iclude iframe
+$('head').append("<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>");
 $('head').append("<script type='text/javascript' src='http://localhost:8080/HRD_MEMO/resources/js/iframeResizer.min.js'></script>");
 $('head').append("<script type='text/javascript' src='http://localhost:8080/HRD_MEMO/resources/js/shortcutkey.js'></script>");
 //iframe wrapper
@@ -37,13 +38,25 @@ iFrameResize({
         .iFrameResizer.sendMessage( messageData.height+"#"+location.hostname+"#"+location.href+"#"+memo_title);
 	}
 });
-var activate_desc_memo=document.createElement("BUTTON");
+var activate_desc_memo=document.createElement("P");
 activate_desc_memo.setAttribute("id","btn-act-desc");
+activate_desc_memo.setAttribute("title","Memo");
 activate_desc_memo.style.position="fixed";
+activate_desc_memo.style.background="#009688";
+activate_desc_memo.style.padding="15px";
+activate_desc_memo.style.borderRadius="90%";
+activate_desc_memo.style.boxShadow="-1px 2px 3px gray";
+activate_desc_memo.style.fontSize="14px";
+activate_desc_memo.style.fontWeight="bold";
+activate_desc_memo.style.cursor="pointer";
+activate_desc_memo.style.color="white";
+activate_desc_memo.style.width="20px";
+activate_desc_memo.style.height="20px";
 activate_desc_memo.style.right="5px";
 activate_desc_memo.style.bottom="5px";
-var act_btn_text=document.createTextNode("Memo");
-activate_desc_memo.appendChild(act_btn_text);
+activate_desc_memo.innerHTML=" <i class='large material-icons'>mode_edit</i>";
+/*var act_btn_text=document.createTextNode("Memo");
+activate_desc_memo.appendChild(act_btn_text);*/
 $('body').append(activate_desc_memo);
 var my_memo_hide=true;
 $("#btn-act-desc").click(function(){

@@ -504,13 +504,7 @@
 	function handleKeyPress(e){
 		 var key=e.keyCode || e.which;
 		  if (key==13){
-			  if(isEdit==false){
 		   	    saveMemo();
-			  }
-			  else if(isEdit==true){
-				updateMemoContent(editMemoId);
-				isEdit=false;
-			  }
 		  }
 	}
 	//passwor login textbox enter event
