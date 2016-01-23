@@ -109,7 +109,7 @@
 		</form>
 	</div>
 	<!--End memo form  -->
-	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px; max-height: 500px; height: 500px; overflow-y:auto; overflow-x:hidden;">
+	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; max-height: 515px; height: 500px; overflow-y:auto; overflow-x:hidden;">
 	</div>
 	</div>
 	<style>
@@ -265,12 +265,17 @@
 	//editmemo
 	//click on decription button
 	$(document).on('click.chip', '.chip .material-icons', function (e) {
-		if($(this).text()==='assignment'){
-				alertify.prompt("Enter your report to this memo", function (e, str) {
-				    if (e&&str!=""){
-				    	pluginUserReport(us_rpid,mm_rpid,str);
-				    }
-					}, "");
+				if($(this).text()==='assignment'){
+					    alertify.prompt("Enter your report to this memo", function (e, str) {
+					    if (e&&str!=""){
+					    	pluginUserReport(us_rpid,mm_rpid,str);
+					    }
+						}, "");
+			    }else if($(this).text()==='delete'){
+			    	 var desc_boxh=$(this).parent().height();
+			    	if ('parentIFrame' in window) 
+			    		window.parentIFrame.size(cur_h-desc_boxh);
+			    	return false;
 			    }
 	});
 	//user report
@@ -482,6 +487,7 @@
 	        data:JSON.stringify(json),
 			success : function(data) {
 				pluginGetMemo();
+				$("#frm-memo-wrapper").slideUp(1000);
 				$("#btn-save-memo").html("<i class='material-icons'>input</i>");
 				$("#btn-save-memo").attr("onclick","saveMemo()");
 				$("#descmemo").val("");
@@ -500,6 +506,7 @@
 								 .delay(1500).fadeOut(500);
 			}
 		});
+		ismpublic = false;
 	}
 	//textarea enter event
 	function handleKeyPress(e){
@@ -546,8 +553,7 @@
 		alwaysVisible: false,
 	              size:'5px',
 	              height:'500px',
-	              position: 'left',
-	               color: 'red'
+	               color: '#009688'
 	});
 	</script>
 </body>

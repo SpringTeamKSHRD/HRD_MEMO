@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <link rel='stylesheet' type='text/css'
-	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.min.css' />
+	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.css' />
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js'></script>
+	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.js'></script>
 <title>Login</title>
 <style>
 * {
