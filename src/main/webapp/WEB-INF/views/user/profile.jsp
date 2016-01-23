@@ -38,7 +38,7 @@
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
 			<li><a href="#">Notification</a></li>
 			<li>
-	      		<img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
+	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
 			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
@@ -161,7 +161,7 @@
 							<div class="fileinput fileinput-new" data-provides="fileinput">
 								<input type="text" id="origin_img" value="${sessionScope['USER'].image}" hidden="true"/>
 								<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
-									<img src="${pageContext.request.contextPath}/resources/image/${sessionScope['USER'].image}"/>
+									<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}"/>
 								</div>
 								  <div>
 								    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span>

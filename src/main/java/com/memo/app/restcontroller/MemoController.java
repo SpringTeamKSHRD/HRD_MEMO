@@ -231,7 +231,7 @@ public class MemoController {
 					byte[] bytes = file.getBytes();
 
 					// creating the directory to store file
-					String savePath = request.getSession().getServletContext().getRealPath("/resources/image/");
+					String savePath = request.getSession().getServletContext().getRealPath("/resources/user/image/");
 					System.out.println(savePath);
 					File path = new File(savePath);
 					if(!path.exists()){
