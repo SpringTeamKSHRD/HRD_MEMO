@@ -1,7 +1,6 @@
 package com.memo.app.repo.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,52 +20,45 @@ import com.memo.app.repo.IEmebededMemoRepo;
 public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 	@Autowired
 	private SessionFactory sf;
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Override
-	public String listByIdAndURL(int id,String url) {
-		/*Session sess=sf.getCurrentSession();
-		Criteria cr = sess.createCriteria(Memo.class);
-				cr.add(Restrictions.eq("fullDomain", url));
-				cr.add(Restrictions.disjunction()
-						.add(Restrictions.eq("ispublic", true))
-						.add(Restrictions.eq("userid",id)));
-		return cr.list();*/
-		String sql="SELECT array_to_json(array_agg(row_to_json(t))) "
-				+ "FROM (SELECT u.* "
-				+ "			 ,m.id "
-				+ " 		 ,m.userid "
-				+ "			 ,m.content "
-				+ "			 ,m.title "
-				+ "			 ,m.domain "
-				+ "			 ,m.url,m.isenable "
-				+ "			 ,m.ispublic"
+	public String listByIdAndURL(int id, String url) {
+		/*
+		 * Session sess=sf.getCurrentSession(); Criteria cr =
+		 * sess.createCriteria(Memo.class); cr.add(Restrictions.eq("fullDomain",
+		 * url)); cr.add(Restrictions.disjunction()
+		 * .add(Restrictions.eq("ispublic", true))
+		 * .add(Restrictions.eq("userid",id))); return cr.list();
+		 */
+		String sql = "SELECT array_to_json(array_agg(row_to_json(t))) " + "FROM (SELECT u.* " + "			 ,m.id "
+				+ " 		 ,m.userid " + "			 ,m.content " + "			 ,m.title " + "			 ,m.domain "
+				+ "			 ,m.url,m.isenable " + "			 ,m.ispublic"
 				+ "			 ,to_char(m.date, 'MM-DD-YYYY HH24:MI:SS') as date "
 				+ "		FROM public.tbluser U INNER JOIN memo.tbmemo M ON u.userid = M .userid "
-				+ "WHERE ( concat (M .domain, M .url) = ? "
-				+ "AND u.userid = ? AND m.isenable=true) "
+				+ "WHERE ( concat (M .domain, M .url) = ? " + "AND u.userid = ? AND m.isenable=true) "
 				+ "OR ( concat (M .domain, M .url) = ? AND M .ispublic = TRUE AND m.isenable=true) "
 				+ "ORDER by m.userid=? desc ) t";
 		try {
-			String result= jdbcTemplate.queryForObject(sql,new Object[]{url,id,url,id}, String.class);
+			String result = jdbcTemplate.queryForObject(sql, new Object[] { url, id, url, id }, String.class);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	@Override
 	@Transactional
 	public User login(String email, String password) {
-		Session ses= sf.getCurrentSession();
-		Criteria cr =  ses.createCriteria(User.class);
-		User user=  (User) cr.add(Restrictions.eq("email", email)).uniqueResult();
-		if(user!=null){
-			if(new BCryptPasswordEncoder().matches(password, user.getPassword())){
+		Session ses = sf.getCurrentSession();
+		Criteria cr = ses.createCriteria(User.class);
+		User user = (User) cr.add(Restrictions.eq("email", email)).uniqueResult();
+		if (user != null) {
+			if (new BCryptPasswordEncoder().matches(password, user.getPassword())) {
 				return user;
 			}
 			return null;
@@ -85,15 +77,14 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 			e.printStackTrace();
 		}
 		return false;
-			
+
 	}
 
 	@Override
 	@Transactional
 	public Boolean delete(int id) {
-		System.out.println("0l0");
 		try {
-			Session sess= sf.getCurrentSession();
+			Session sess = sf.getCurrentSession();
 			Memo memo = sess.load(Memo.class, id);
 			memo.setIsenable(false);
 			sess.update(memo);
@@ -102,14 +93,14 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 			e.printStackTrace();
 		}
 		return false;
-		
+
 	}
 
 	@Override
 	@Transactional
 	public Boolean update(Memo m) {
 		try {
-			Session sess= sf.getCurrentSession();
+			Session sess = sf.getCurrentSession();
 			m.setDate(new Date());
 			sess.update(m);
 			return true;
@@ -121,15 +112,36 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 
 	@Override
 	@Transactional
-	public Boolean register(User m) {
+	public User register(User m) {
 		try {
 			Session sess = sf.getCurrentSession();
+			m.setPassword(new BCryptPasswordEncoder().encode(m.getPassword()));
+			if (m.getImage() == null) {
+				if (m.getGender().equals("female")) {
+					m.setImage("girl-avatar.png");
+				} else {
+					m.setImage("boy-avatar.png");
+				}
+			}
+
 			sess.persist(m);
-			return true;
+			return m;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public Boolean isExistEmail(String email) {
+		Session ses = sf.getCurrentSession();
+		Criteria cr = ses.createCriteria(User.class);
+		cr.add(Restrictions.eq("email", email));
+		if (cr.uniqueResult() != null)
+			return true;
+		else
+			return false;
 	}
 
 }

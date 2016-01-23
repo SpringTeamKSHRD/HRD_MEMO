@@ -43,8 +43,13 @@ public class EmbededMemoServiceImpl implements IEmbededMemoService {
 	}
 
 	@Override
-	public Boolean RegisterUser(User m) {
+	public User RegisterUser(User m) {
 		return embededMemoRepo.register(m);
+	}
+
+	@Override
+	public Boolean isExistedEmail(String email) {
+		return embededMemoRepo.isExistEmail(email);
 	}
 
 }

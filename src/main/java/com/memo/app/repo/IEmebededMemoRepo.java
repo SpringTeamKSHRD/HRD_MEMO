@@ -8,5 +8,6 @@ public interface IEmebededMemoRepo {
 	public Boolean insert(Memo m);
 	public Boolean delete(int id);
 	public Boolean update(Memo m);
-	public Boolean register(User u);
+	public User register(User u);
+	public Boolean isExistEmail(String email);
 }

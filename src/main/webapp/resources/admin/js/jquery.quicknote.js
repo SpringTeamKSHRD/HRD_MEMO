@@ -139,7 +139,7 @@ Date.prototype.format = function(mask, utc) {
         this.$el = $(el);
         this.options = options;
     };
-    
+
     QuickNote.prototype = {
         defaults: {
             theme: 'dark',
@@ -152,16 +152,16 @@ Date.prototype.format = function(mask, utc) {
             if (Storage === void(0)) {
                 this.config.storage = false;
             }
-//            alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
-            
-            var loading ='<div id="loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
-       	 	$(loading).appendTo(this.$el);
-            
+            //            alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
+
+            var loading = '<div id="loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+            $(loading).appendTo(this.$el);
+
             if (typeof Cookies.get('LOGGED') === 'undefined') {
                 this.login();
                 //              this.init();
             } else {
-                if ("km" != Cookies.getJSON('LOGGED').lang ) {
+                if ("km" != Cookies.getJSON('LOGGED').lang) {
                     this.login();
                 } else {
                     this.appendElem();
@@ -178,68 +178,69 @@ Date.prototype.format = function(mask, utc) {
                 return false;
             }
         },
-//        showLoading:function(){
-//        	var loading ='<div id="loading" style="position:absolute;top:50%;right:40%"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
-//        	 $(loading).appendTo(this.$el);
-//        },
-        deleteMemo:function(id){
-        	var _this=this;
-        	$('#loading').show();
-        	$.ajax({
+        //        showLoading:function(){
+        //          var loading ='<div id="loading" style="position:absolute;top:50%;right:40%"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+        //           $(loading).appendTo(this.$el);
+        //        },
+        deleteMemo: function(id) {
+            var _this = this;
+            $('#loading').show();
+            $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/HRD_MEMO/plugin/memo/"+id,
+                url: "http://localhost:8080/HRD_MEMO/plugin/memo/" + id,
                 success: function(json) {
-                	$('#loading').hide();
-                   if(json.RESPONSE_DATA){
-//                	   $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
-                	   $('#qn').empty();
-                	   _this.appendElem();
-                	   $('#mytext').focus();
-                   }else{
-                	   console.log(json.RESPONSE_DATA);
-                   }
+                    $('#loading').hide();
+                    if (json.RESPONSE_DATA) {
+                        //                     $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                        $('#qn').empty();
+                        _this.appendElem();
+                        $('#mytext').focus();
+                    } else {
+                        console.log(json.RESPONSE_DATA);
+                    }
                 }
             });
         },
-        updateMemo:function(id,content,ispublic){
-        	$('#loading').show();
-        	var memo={
-        			"userid":Cookies.getJSON('LOGGED').userid,
-                    "id":id,
-                    "content":content,
-                    "ispublic":ispublic
-                    }
-        	console.log(memo);
-        	$.ajax({
+        updateMemo: function(id, content, ispublic) {
+            $('#loading').show();
+            var memo = {
+                "userid": Cookies.getJSON('LOGGED').userid,
+                "id": id,
+                "content": content,
+                "ispublic": ispublic
+            }
+            console.log(memo);
+            $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(memo),
                 success: function(json) {
-                   if(json.RESPONSE_DATA){
-                	   $('#loading').hide();
-//                	   $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
-                	   $('#qn').empty();
-                	   _this.appendElem();
-                   }else{
-                	   console.log(json.RESPONSE_DATA);
-                   }
+                    if (json.RESPONSE_DATA) {
+                        $('#loading').hide();
+                        //                     $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                        $('#qn').empty();
+                        _this.appendElem();
+                    } else {
+                        console.log(json.RESPONSE_DATA);
+                    }
                 }
             });
         },
-        register:function(){
-        	$('#qn').empty();
-        	// SIGN UP FORM         
+        register: function() {
+        	var _this=this;
+            $('#qn').empty();
+            // SIGN UP FORM         
             var showHide = '<div id="qn_sh" ><span id="show-hide">KhmerAcademy Memo</span></div>';
-            var loginForm = '<form id="frmLogin" method="post"></form>';
+            var loginForm = '<form id="frmRegister" method="post"></form>';
             var divUserPass = '<div id="username-password"></div>';
             var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
-            var usernameInput='<p><input type="text" name="username" id="username" maxlength="500" placeholder="Full Name..." required></p>'
-            var genderInput='<p><select id="gender" class="uibutton" name="gender" style="width:100%;border-radius:5px">'+
-            				'<option value="male">Male</option>'+
-            				'<option value="female">Female</option>'+
-            	'</select></p>';
+            var usernameInput = '<p><input type="text" name="username" id="username" maxlength="500" placeholder="Full Name..." required></p>'
+            var genderInput = '<p><select id="gender" class="uibutton" name="gender" style="width:100%;border-radius:5px">' +
+                '<option value="male">Male</option>' +
+                '<option value="female">Female</option>' +
+                '</select></p>';
             var emailInput = '<p><input type="email" name="email" id="email" maxlength="500" placeholder="E-mail" required></p>';
             var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
             var okBtn = '<input type="submit" name="btnRegOk" class="uibutton confirm" value="Ok" id="btnRegOk">';
@@ -247,14 +248,90 @@ Date.prototype.format = function(mask, utc) {
             $(showHide).appendTo(this.$el);
             $(divUserPass).appendTo(this.$el);
             $(loginForm).appendTo(this.$el.find('#username-password'));
-            $(usernameInput).appendTo(this.$el.find('#frmLogin'));
-            $(genderInput).appendTo(this.$el.find('#frmLogin'));
-            $(emailInput).appendTo(this.$el.find('#frmLogin'));
-            $(passwordInput).appendTo(this.$el.find('#frmLogin'));
-            $(divBtn).appendTo(this.$el.find('#frmLogin'));
+            $(usernameInput).appendTo(this.$el.find('#frmRegister'));
+            $(genderInput).appendTo(this.$el.find('#frmRegister'));
+            $(emailInput).appendTo(this.$el.find('#frmRegister'));
+            $(passwordInput).appendTo(this.$el.find('#frmRegister'));
+            $(divBtn).appendTo(this.$el.find('#frmRegister'));
             $(okBtn).appendTo(this.$el.find('#div-btn'));
             $(cancelBtn).appendTo(this.$el.find('#div-btn'));
-        	
+
+
+            $('#email').focus(function(e) {
+                $(this).css('borderColor', '');
+            });
+            $('input[type="text"]').focus(function(e) {
+                $('#warning').remove();
+            });;
+            //SIGN UP BUTTON CANCEL ACTION
+            $('#btnRegCancel').click(function(e){
+            	$('#qn').empty();
+                _this.login();
+                $('.qn_container #notes,.qn_container #username-password').show();
+            });
+
+
+            //SIGN UP BUTTON OK ACTION
+            $("#frmRegister")
+                .submit(
+                    function(e) {
+                        $('#loading').show();
+                        e.preventDefault();
+                        $
+                            .ajax({
+                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/validate",
+                                type: "POST",
+                                data: {
+                                    email: $('#email').val()
+                                },
+                                success: function(data) {
+                                    if (data.RESPONSE_DATA == true) {
+                                        $('#warning').remove();
+                                        $('#loading').hide();
+                                        $('#email').css({
+                                            borderColor: 'red'
+                                        });
+                                        $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="warning">Email already existed !</span>')
+                                    } else {
+                                    	console.log(data)
+                                        $
+                                            .ajax({
+                                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/register",
+                                                type: "POST",
+                                                data: $("#frmRegister").serialize(),
+                                                success: function(data) {
+                                                    if (data.MESSAGE == "SUCCESS") {
+                                                    	$('#loading').hide();
+                                                        Cookies.set('LOGGED', {
+                                                            "userid": data.USERID,
+                                                            "email": data.EMAIL,
+                                                            "lang": "km",
+                                                            "imageUrl": data.IMAGE_URL
+                                                        }, {
+                                                            expires: 1,
+                                                            path: ''
+                                                        });
+                                                        console.log(Cookies.getJSON('LOGGED').lang);
+                                                        $('#qn > #qn_sh,#username-password').remove();
+                                                        _this.appendElem();
+                                                        $('#mytext').focus();
+                                                    } else {
+                                                        $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
+                                                        $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="alert">something went wrong !</span>')
+                                                    }
+                                                },
+                                                error: function(data) {
+                                                    alert(data.RESPONSE_DATA);
+                                                }
+                                            });
+                                    }
+                                },
+                                error: function(data) {
+                                    alert(data.RESPONSE_DATA);
+                                }
+                            });
+                    });
+
         },
         appendElem: function() {
             var isURL = this.isURL;
@@ -280,19 +357,19 @@ Date.prototype.format = function(mask, utc) {
                 console.log('Error: Position >> ' + this.config.pos + ' not found.');
             }
             // ALREADY LOGGED IN     
-                       
-            var dl='';    
-            dl+='<div  style="position:absolute;bottom:4px;right:50px;margin-right:10px;height:22px;">';
-            dl+='<select class="uibutton" id="ispublic">';
-            	dl+='<option value="true">Public</option>';
-            	dl+='<option value="false"selected>Only Me</option>';
-            dl+='</select>';
-            dl+='</div>';
-            dl+='</div>';
-        
+
+            var dl = '';
+            dl += '<div  style="position:absolute;bottom:4px;right:50px;margin-right:10px;height:22px;">';
+            dl += '<select class="uibutton" id="ispublic">';
+            dl += '<option value="true">Public</option>';
+            dl += '<option value="false"selected>Only Me</option>';
+            dl += '</select>';
+            dl += '</div>';
+            dl += '</div>';
+
             var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
-            var saveBtn ='<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
+            var saveBtn = '<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
             $(showHide).appendTo(this.$el);
             $(divNotes).appendTo(this.$el);
@@ -316,8 +393,8 @@ Date.prototype.format = function(mask, utc) {
                     "fullDomain": url,
                     "id": Cookies.getJSON('LOGGED').userid
                 };
-                if($('.chat-container').length==true){
-                	$('#loading').show();
+                if ($('.chat-container').length == true) {
+                    $('#loading').show();
                 }
                 $.ajax({
                     type: "POST",
@@ -326,34 +403,34 @@ Date.prototype.format = function(mask, utc) {
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(memo),
                     success: function(json) {
-                    	console.log(json)
-                    	$('#loading').hide();
+                        console.log(json)
+                        $('#loading').hide();
                         var cb = '';
                         cb += '<section class="chat-container">';
                         cb += '<ol class="chat-box">';
                         $.each(json, function(index, obj) {
-                        	var deleted ="";
-                        	var update="";
+                            var deleted = "";
+                            var update = "";
                             if (obj.userid == Cookies.getJSON('LOGGED').userid) {
-                            	$('#qn > #notes').remove();
+                                $('#qn > #notes').remove();
                                 cb += '<li class="another" id="' + obj.id + '">';
-                                cb+='<input type="hidden" id="ispublic" value="'+obj.ispublic+'"/>';
-                                update = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/edit.png" width="14px" heigh="14px" class="btnUpdateMemo" id="'+obj.id+'" style="cursor:pointer" title="Update Memo" />'
-                                deleted = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="'+obj.id+'" style="cursor:pointer" title="Delete Memo" />'
+                                cb += '<input type="hidden" id="ispublic" value="' + obj.ispublic + '"/>';
+                                update = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/edit.png" width="14px" heigh="14px" class="btnUpdateMemo" id="' + obj.id + '" style="cursor:pointer" title="Update Memo" />'
+                                deleted = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="' + obj.id + '" style="cursor:pointer" title="Delete Memo" />'
                             } else {
                                 cb += '<li class="me" id="' + obj.id + '" >';
                             }
                             cb += '<div class="avatar-icon">';
-                            cb += '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '">';
+                            cb += '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '" title="'+obj.username+'">';
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';
-                            cb += '<time datetime="2009-11-13T20:00" style="font-size:9px">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+update+"&nbsp;&nbsp;"+deleted+' </time>';
+                            cb += '<time datetime="2009-11-13T20:00" style="font-size:9px">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + update + "&nbsp;&nbsp;" + deleted + ' </time>';
                             cb += '</div>';
                             /*  cb+='<span class="close"></span>';*/
                             cb += '</li>';
 
-                             var qnText = obj.content;
+                            var qnText = obj.content;
                             if (isURL(qnText)) {
                                 $('#' + obj.id).addClass('quicknote-bword');
                             }
@@ -361,42 +438,42 @@ Date.prototype.format = function(mask, utc) {
                         cb += '</ol>';
                         cb += '</section>';
                         $(cb).appendTo('.qn_container');
-                        
+
                         /*$(document).on('click',".btnDeleteMemo", function(){*/
-                        $('.btnDeleteMemo').click(function(){
+                        $('.btnDeleteMemo').click(function() {
                             var r = confirm("Are you sure want to delete ?");
                             if (r == true) {
-                            	var id = $(this).attr('id');
-                            	_this.deleteMemo(id);
-                            } 
-                        	
+                                var id = $(this).attr('id');
+                                _this.deleteMemo(id);
+                            }
+
                         });
-                        
-                        $('.btnUpdateMemo').click(function(){
-                        	var updateText=$('li.another div.messages > p').text();
-                        	var ispublic=$('li.another input[type=hidden]').val();
-                        	var memoid = $('li.another').attr('id');
-                        	$('#qn').empty();
-                        	var dl='';    
-                            dl+='<div  style="position:absolute;bottom:4px;right:170px;margin-right:10px;height:22px;">';
-                            dl+='<select class="uibutton" id="ispublic">';
-                            	if(ispublic=="false"){
-                            		dl+='<option value="true">Public</option>';
-                                	dl+='<option value="false" selected>Only Me</option>';
-                            	}else{
-                            		dl+='<option value="true" selected>Public</option>';
-                                	dl+='<option value="false">Only Me</option>';
-                            	}
-                            	
-                            dl+='</select>';
-                            dl+='</div>';
-                            dl+='</div>';
-                        	                        
+
+                        $('.btnUpdateMemo').click(function() {
+                            var updateText = $('li.another div.messages > p').text();
+                            var ispublic = $('li.another input[type=hidden]').val();
+                            var memoid = $('li.another').attr('id');
+                            $('#qn').empty();
+                            var dl = '';
+                            dl += '<div  style="position:absolute;bottom:4px;right:170px;margin-right:10px;height:22px;">';
+                            dl += '<select class="uibutton" id="ispublic">';
+                            if (ispublic == "false") {
+                                dl += '<option value="true">Public</option>';
+                                dl += '<option value="false" selected>Only Me</option>';
+                            } else {
+                                dl += '<option value="true" selected>Public</option>';
+                                dl += '<option value="false">Only Me</option>';
+                            }
+
+                            dl += '</select>';
+                            dl += '</div>';
+                            dl += '</div>';
+
                             var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
                             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
-                            var cancelBtn ='<button class="uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
-                            var saveBtn ='<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
-                            var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext">'+updateText+'</textarea>';
+                            var cancelBtn = '<button class="uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
+                            var saveBtn = '<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
+                            var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext">' + updateText + '</textarea>';
                             $(showHide).appendTo('#qn');
                             $(divNotes).appendTo('#qn');
                             $(notesInp).appendTo('#notes');
@@ -404,54 +481,54 @@ Date.prototype.format = function(mask, utc) {
                             $(dl).appendTo('#notes');
                             $(cancelBtn).appendTo('#notes');
                             $('#mytext').focus();
-                            
-                        	// BUTTON UPDATE CLICKED
-                            $('#btnUpdate').click(function(){
-//                            	that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
-                            	$('#loading').show();
-//                            	var url = window.location.pathname.replace("/HRD_MEMO",'');
-//                            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
-                            	var domainName=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-                            	var url=window.location.pathname;
-                            	var memo={
-                            			"userid":Cookies.getJSON('LOGGED').userid,
-                                        "id":memoid,
-                                        "content":$("#notes textarea[name$='qn_input']").val(),
-                                        "ispublic":$("#ispublic").val(),
-                                        "domainName":domainName,
-                                        "url":url
-                                        }
-                            	console.log(memo);
-                            	$.ajax({
+
+                            // BUTTON UPDATE CLICKED
+                            $('#btnUpdate').click(function() {
+                                //                              that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
+                                $('#loading').show();
+                                //                              var url = window.location.pathname.replace("/HRD_MEMO",'');
+                                //                              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+                                var domainName = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+                                var url = window.location.pathname;
+                                var memo = {
+                                    "userid": Cookies.getJSON('LOGGED').userid,
+                                    "id": memoid,
+                                    "content": $("#notes textarea[name$='qn_input']").val(),
+                                    "ispublic": $("#ispublic").val(),
+                                    "domainName": domainName,
+                                    "url": url
+                                }
+                                console.log(memo);
+                                $.ajax({
                                     type: "POST",
                                     url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",
                                     data: JSON.stringify(memo),
                                     success: function(json) {
-                                       if(json.RESPONSE_DATA){
-                                    	   $('#loading').hide();
-//                                    	   $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
-                                    	   $('#qn').empty();
-                                    	   _this.appendElem();
-                                       }else{
-                                    	   console.log(json.RESPONSE_DATA);
-                                       }
+                                        if (json.RESPONSE_DATA) {
+                                            $('#loading').hide();
+                                            //                                         $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                                            $('#qn').empty();
+                                            _this.appendElem();
+                                        } else {
+                                            console.log(json.RESPONSE_DATA);
+                                        }
                                     }
                                 });
                             });
-                            
+
                             // BUTTON CANCEL CLICKED
-                            $('#btnCancel').click(function(){
-                            	$('#qn').empty();
-                            	_this.appendElem();
+                            $('#btnCancel').click(function() {
+                                $('#qn').empty();
+                                _this.appendElem();
                             });
                         });
                     }
-                    
+
                 });
-                
-                
+
+
             }
         },
         login: function() {
@@ -498,7 +575,7 @@ Date.prototype.format = function(mask, utc) {
             $("#frmLogin")
                 .submit(
                     function(e) {
-                    	$('#loading').show();
+                        $('#loading').show();
                         e.preventDefault();
                         $
                             .ajax({
@@ -506,7 +583,7 @@ Date.prototype.format = function(mask, utc) {
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
-                                	$('#loading').hide();
+                                    $('#loading').hide();
                                     if (data.MESSAGE == "SUCCESS") {
                                         Cookies.set('LOGGED', {
                                             "userid": data.USERID,
@@ -535,15 +612,15 @@ Date.prototype.format = function(mask, utc) {
                 e.preventDefault();
                 /* var win = window.open("http://www.khmeracademy.org", '_blank');
                 win.focus();*/
-            	_this.register();
+                _this.register();
             });
             $('#email').focus(function(event) {
                 $('#alert').remove();
             });
         },
-        
+
         completeNote: function() {
-        	var _this = this;
+            var _this = this;
             var storage = this.config.storage;
             var isURL = this.isURL;
             // this.$el.on('keypress', '#notes input', function(e) {
@@ -552,42 +629,42 @@ Date.prototype.format = function(mask, utc) {
             //            $('#myimg').click(function(e) {
             this.$el.on('click', '#notes #btnSave', function(e) {
                 // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
-            	
-            	var url = window.location.pathname.replace("/HRD_MEMO",'');
-//            	var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
-            	var domainName=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-            	var url=window.location.pathname;
-                var memo={
-                    "userid":Cookies.getJSON('LOGGED').userid,
-                    "content":$("#notes textarea[name$='qn_input']").val(),
-                    "domainName":domainName,
-                    "url":url,
-                    "ispublic":$('#ispublic').val()
-                    
+
+                var url = window.location.pathname.replace("/HRD_MEMO", '');
+                //              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
+                var domainName = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+                var url = window.location.pathname;
+                var memo = {
+                    "userid": Cookies.getJSON('LOGGED').userid,
+                    "content": $("#notes textarea[name$='qn_input']").val(),
+                    "domainName": domainName,
+                    "url": url,
+                    "ispublic": $('#ispublic').val()
+
                 }
                 if ($("#notes textarea[name$='qn_input']").val()) {
                     //                    // SAVE TO localStorage
                     //                    if (storage === true) {
                     //                        
                     //                    }
-                	$('#loading').show();
+                    $('#loading').show();
                     $.ajax({
-                            type: "POST",
-                            url: "http://localhost:8080/HRD_MEMO/plugin/memo/add",
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(memo),
-                            success:function(data){
-                            	if(data.RESPONSE_DATA){
-                            		$('#loading').hide();
-                            		$('#qn').empty();
-                            		_this.appendElem();
-                            	}
-                            },
-                            error:function(data){
-                            	
+                        type: "POST",
+                        url: "http://localhost:8080/HRD_MEMO/plugin/memo/add",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(memo),
+                        success: function(data) {
+                            if (data.RESPONSE_DATA) {
+                                $('#loading').hide();
+                                $('#qn').empty();
+                                _this.appendElem();
                             }
-                        });
+                        },
+                        error: function(data) {
+
+                        }
+                    });
 
 
                 } else {

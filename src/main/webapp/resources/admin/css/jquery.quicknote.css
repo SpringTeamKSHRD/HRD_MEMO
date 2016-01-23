@@ -366,7 +366,7 @@ textarea{
     .chat-box .avatar-icon img {
         display: block;
         width: 100%;
-        background-color: #1469A6;
+        /* background-color: #1469A6; */
     }
     
     .another .avatar-icon:after {
