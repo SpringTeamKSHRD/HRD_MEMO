@@ -488,6 +488,7 @@
 				$("#public").prop('checked','');
 				$(".my_delete_btn").fadeIn();
 				$("#my-rp-popup").text("YOU UPDATE SUCCESSED");
+				$("#my-rp-popup").css("background","#009688");
 				$("#my-rp-popup").css("width","100%");
 				$("#my-rp-popup").fadeIn(200)
 								 .delay(2000).fadeOut(500);
