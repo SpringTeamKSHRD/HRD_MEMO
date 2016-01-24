@@ -1,14 +1,23 @@
 package com.memo.app.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.memo.app.entities.Report;
 import com.memo.app.services.IDashboardService;
 import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
@@ -28,7 +37,7 @@ public class AdminController {
 	
 	@ModelAttribute
 	public void commonObject(Model m){
-		m.addAttribute("notification", reportDao.getReportNotification());		
+				
 	}
 	
 	@RequestMapping("")
@@ -70,9 +79,21 @@ public class AdminController {
 		return "admin/report_detail";
 	}
 	
-	@RequestMapping("/adminnotification")
-	public String getNotifationPage(){
-		return "admin/adminnotification";
+	@RequestMapping(value = "/getnotification", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getMemo() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Report> reports=new ArrayList<Report>();
+		reports=reportDao.getReportNotification();
+		if (!reports.isEmpty()) {	
+			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+			map.put("STATUS", HttpStatus.OK.value());
+			map.put("DATA",reports);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "REPORT NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
 	}
 
 	public void pageDescription(ModelMap m,String pageTitle,String pageDesc){

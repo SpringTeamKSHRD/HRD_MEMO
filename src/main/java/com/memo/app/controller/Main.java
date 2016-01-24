@@ -50,14 +50,4 @@ public class Main {
 	public String testMemo() {
 		return "admin/test_memo";
 	}
-	
-	@RequestMapping(value = "/plugin", method = RequestMethod.GET)
-	public String plugin() {
-		return "plugin/plugin";
-	}
-	
-	@RequestMapping(value = "/plugin/login", method = RequestMethod.GET)
-	public String pluginLogin() {
-		return "plugin/login";
-	}
 }

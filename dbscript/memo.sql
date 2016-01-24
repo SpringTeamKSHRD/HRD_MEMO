@@ -134,7 +134,7 @@ CREATE TABLE "memo"."tbreport" (
 "reporterid" int4 NOT NULL,
 "memoid" int4 NOT NULL,
 "description" varchar COLLATE "default",
-"date" timestamp(6) NOT NULL,
+"date" timestamp(6),
 "isblocked" bool DEFAULT false NOT NULL
 )
 WITH (OIDS=FALSE)

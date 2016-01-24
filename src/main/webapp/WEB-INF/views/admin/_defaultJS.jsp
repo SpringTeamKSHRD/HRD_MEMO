@@ -27,14 +27,45 @@
 		}
 		
 		/* sideBarMenu and header NOTIFICATION*/
-/*		var result = ${dashboard};
-	  	if(result.unreportedlist==0){
-	  		$("#unreported-list").hide();
-	  		$(".label-warning").hide();
-	  	}
- 	  	$("#unreported-list").html(result.unreportedlist);
-	  	$(".label-warning").html(result.unreportedlist);
-	  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported."); */
+		/*	var result = ${dashboard};
+	  		if(result.unreportedlist==0){
+	  			$("#unreported-list").hide();
+	  			$(".label-warning").hide();
+	  		}
+	 	  	$("#unreported-list").html(result.unreportedlist);
+		  	$(".label-warning").html(result.unreportedlist);
+		  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported."); 
+		 */
+		/* list notification from api*/
+		function listnotification(){
+		$.ajax({
+			url: "http://localhost:8080/HRD_MEMO/admin/getnotification",
+			type: "get",
+			success: function (response) {
+				$("#notifcationcount").html(response['DATA'].length);
+				$(".menu").html("");
+				jQuery.each(response['DATA'], function() {
+					$(".menu").append(
+						"<li><a href='${pageContext.request.contextPath}/admin/report/"+this.id+"'>"+
+						"<img src='/HRD_MEMO/resources/admin/imgs/"+this.reporterimage+"' alt='User Image'"+
+						"style ='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+
+						this.reportername+"<span class='label pull-right' style='color:#444444;'>"+this.reportdate+"</span>"+
+						"</a></li>"
+					);
+				});
+			}
+		});
+		}
+		listnotification();
+		/* notification socket*/
+	     var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+	     var websocket=new WebSocket(url);	     
+	     websocket.onmessage=function(message){	    	  
+	    	 if(message.data==="report"){  
+	    			alert("New Report");
+	    		 listnotification();			
+	    	 }
+	     }  
 	</script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the
