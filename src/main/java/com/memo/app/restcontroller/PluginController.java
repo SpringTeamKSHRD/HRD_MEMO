@@ -73,7 +73,6 @@ public class PluginController {
 	}
 	@RequestMapping(value = "/plugingetmemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> getMemo(@RequestBody Memo memo) {
-		System.out.println(memo.getUserid()+" "+memo.getUrl());
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Memo> memos=new ArrayList<Memo>();
 		memos=memoDao.pluginGetMemo(memo.getUserid(),memo.getUrl());

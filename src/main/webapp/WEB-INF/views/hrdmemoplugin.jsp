@@ -87,7 +87,7 @@
   </div>
 	<!--Memo Form-->
 	<div class="row" style="margin: 0px; padding: 0px;" id="frm-memodesc-panel">
-	<div class="row" style="margin: 0px; padding: 5px; background:#B2DFDB; box-shadow:0px 2px 4px gray; " id="frm-memo-wrapper">
+	<div class="row" style="margin: 0px; padding: 5px; background:#FAFAFA; box-shadow:1px 2px 3px gray; " id="frm-memo-wrapper">
 		<form class="col s12" id="hrd-memo-frm" style="margin: 0px; padding: 0px;">
 				<div class="input-field row col s12"
 					style="text-align: right; padding: 0px; margin: 0px 0px 2px 0px;">
@@ -123,21 +123,24 @@
 	<script type="text/javascript">
 	
 	//my variable
-	var retrievedObject=null;
+		var retrievedObject="";
 	 var desc_panel=document.getElementById("mydespanel");
 	var cur_h=0,domain="",url="",title="";
 	//retriev object
-	var retrievedObject="";
-	try {
-			retrievedObject = JSON.parse(Cookies.get('MEMO')); 
-			
-	}catch(err) {
-	    retrievedObject="";
-	}
-	if(retrievedObject==""){
-		$("#frm-memodesc-panel").css('display','none');
-	}else{
-		$("#frm-loginreg-wrapper").css('display','none');
+	function initailizePage(){
+		try {
+				retrievedObject = JSON.parse(Cookies.get('MEMO')); 
+				
+		}catch(err) {
+		    retrievedObject="";
+		}
+		if(retrievedObject==""){
+			$("#frm-loginreg-wrapper").css('display','block');
+			$("#frm-memodesc-panel").css('display','none');
+		}else{
+			$("#frm-loginreg-wrapper").css('display','none');
+			$("#frm-memodesc-panel").css('display','block');
+		}
 	}
 	//Recieve data from parent
 	var first=true;
@@ -153,6 +156,7 @@
 				pluginGetMemo();
 				first=false;
 				}
+				initailizePage();
 			}
 		}
 	//create description box
@@ -232,7 +236,7 @@
 		}
 	}
 	function listMemoDescriptionBox(data){
-	   // var ihave=false;
+	    var ihave=false;
 		removeAllChild();
 		for(var i=0;i<data.DATA.length;i++){
 			if(data.DATA[i].userid==retrievedObject.userid){
@@ -269,6 +273,7 @@
 					    alertify.prompt("Enter your report to this memo", function (e, str) {
 					    if (e&&str!=""){
 					    	pluginUserReport(us_rpid,mm_rpid,str);
+					    	sendReportNotify('report');
 					    }
 						}, "");
 			    }else if($(this).text()==='delete'){
@@ -281,6 +286,7 @@
 	//user report
 	var us_rpid=0,mm_rpid=0;
 	function reportMemo(rpid,mmid){
+		initailizePage();
 		us_rpid=rpid;
 		mm_rpid=mmid;
 	}
@@ -310,6 +316,7 @@
 	}
 	//save memo
 	function saveMemo(){
+		initailizePage();
 		if ($("#descmemo").val() != "") {
 			$("#descmemo").css('border', '2px solid #009688');
 		var ismpublic=false;
@@ -337,9 +344,12 @@
 					createDescribeBox(json.content,json.title);
 					$("#descmemo").val("");
 					$("#descmemo").focus();
-					$("#public").attr('checked','');
+					$("#public").prop('checked','');
 					pluginGetMemo();
 					$("#frm-memo-wrapper").fadeOut(500);
+					if(ismpublic==true){
+						sendReportNotify("public");
+					}
 				},
 				error : function(data) {
 					$("#my-rp-popup").text("YOU CAN ONLY ONE MEMO ONE ARTICLE");
@@ -389,6 +399,7 @@
 		} else {
 			if (validateEmail($("#loginemail").val()) == false) {
 				$("#my-rp-popup").text("INVALID EMAIL");
+				$("#my-rp-popup").css("width","100%");
 				$("#my-rp-popup").css('background','red');
 				$("#my-rp-popup").fadeIn(200)
 								 .delay(1500).fadeOut(500);
@@ -422,7 +433,7 @@
 					password : $("#password").val("");
 				},
 				error : function(data) {
-					$("#my-rp-popup").text("YOU SUGNUP FIALED");
+					$("#my-rp-popup").text("YOUR EMAIL IS EXIST");
 					$("#my-rp-popup").css("width","100%");
 					$("#my-rp-popup").css('background','red');
 					$("#my-rp-popup").fadeIn(200)
@@ -432,15 +443,17 @@
 		} else {
 			if ($("#name").val() == "" || $("#email").val() == ""
 					|| $("#password").val() == "") {
-				$("#error")
-						.html(
-								"<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid input eg.blank name,email,pssword field..!</span>");
-				$("#error").slideDown().delay(3000).slideUp();
+				$("#my-rp-popup").text("YOU INVALID INFO..!");
+				$("#my-rp-popup").css("width","100%");
+				$("#my-rp-popup").css('background','red');
+				$("#my-rp-popup").fadeIn(200)
+								 .delay(1500).fadeOut(500);
 			} else if (validateEmail($("#email").val()) == false) {
-				$("#error")
-						.html(
-								"<i style='margin-top: 10px; font-size: 17px; padding:0;' class='material-icons'>info</i>&nbsp;&nbsp;<span style='padding-bottom:10px;'>Invalid email..!</span>");
-				$("#error").slideDown().delay(1500).slideUp();
+				$("#my-rp-popup").text("INVALID EMAIL..!");
+				$("#my-rp-popup").css("width","100%");
+				$("#my-rp-popup").css('background','red');
+				$("#my-rp-popup").fadeIn(200)
+								 .delay(1500).fadeOut(500);
 			}
 		}
 	}
@@ -449,12 +462,14 @@
 	var isEdit=false;
 	var editMemoId=0;
 	function getEditMemo(id){
+		initailizePage();
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
-				if(data.DATA.ispublic==true){
+				var p=data.DATA.ispublic;
+				if(p==true){
 					$("#public").prop('checked','checked');
 				}
 				$("#frm-memo-wrapper").slideDown(500);
@@ -498,6 +513,7 @@
 				$("#my-rp-popup").css("width","100%");
 				$("#my-rp-popup").fadeIn(200)
 								 .delay(2000).fadeOut(500);
+					sendReportNotify("public");
 			},
 			error : function(data) {
 				$("#my-rp-popup").text("UPDATE FAILED");
@@ -531,12 +547,13 @@
 	}
 	//delete memo
 	function pluginDeleteMemo(id){
+		initailizePage();
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
 			success : function(data) {
 				$("#frm-memo-wrapper").slideDown(500);
-				pluginGetMemo();
+					sendReportNotify("public");
 			},
 			error : function(data) {
 			}
@@ -557,6 +574,26 @@
 	});
 	</script>
 </body>
+<script type="text/javascript">
+//Live life
+var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+var hrd_memo_websocket=new WebSocket(hrd_notify_url);
+hrd_memo_websocket.onopen=function(message){
+}
+hrd_memo_websocket.onclose=function(message){
+	 websocket.close();
+}
+hrd_memo_websocket.onmessage=function(message){
+	 if(message.data==="response"){
+		 
+	 }else if(message.data==="public"){
+		 pluginGetMemo();
+	 }
+}
+function sendReportNotify(message){
+	hrd_memo_websocket.send(message);
+}
+</script>
 <link rel='stylesheet'
 	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css' />
 <link rel='stylesheet'

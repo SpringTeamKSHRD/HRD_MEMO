@@ -70,10 +70,10 @@ public class AdminController {
 		return "admin/report_detail";
 	}
 	
-/*	@RequestMapping("/adminnotification")
+	@RequestMapping("/adminnotification")
 	public String getNotifationPage(){
 		return "admin/adminnotification";
-	}*/
+	}
 
 	public void pageDescription(ModelMap m,String pageTitle,String pageDesc){
 		m.addAttribute("pageTitle",pageTitle);
