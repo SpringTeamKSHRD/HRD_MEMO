@@ -91,8 +91,7 @@
 		<form class="col s12" id="hrd-memo-frm" style="margin: 0px; padding: 0px;">
 				<div class="input-field row col s12"
 					style="text-align: right; padding: 0px; margin: 0px 0px 2px 0px;">
-					<textarea id="descmemo" style="max-height:100px; height: 70px; width: 100%; 
-					max-width: 100%; border: 2px solid gray; background: white;" 
+					<textarea id="descmemo"
 					placeholder="//MEMO HERE AND PRESS A+M TO SWAP" onkeypress="handleKeyPress(event)">
 					</textarea>
 			</div>
@@ -110,7 +109,6 @@
 	</div>
 	<!--End memo form  -->
 	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; max-height: 515px; height: 500px; overflow-y:auto; overflow-x:hidden;">
-	</div>
 	</div>
 	<style>
 		*{
@@ -165,6 +163,7 @@
 		//create image and data wrapper
 		var memo_img_wraper=document.createElement("DIV");
 		memo_img_wraper.setAttribute("class","memo_img_wrapper");
+		memo_img_wraper.setAttribute("title",title);
 		var user_memo_img=document.createElement("img");
 		user_memo_img.setAttribute('class','user-memo-img');
 		user_memo_img.setAttribute('src','http://localhost:8080/HRD_MEMO/resources/'+image);
@@ -184,7 +183,12 @@
 		memo_date_label.style.color="gray";
 		memo_date_label.style.float="right";
 		memo_date_label.style.margin="0px";
-		var memo_desc_date=document.createTextNode(date);
+		if(userid==retrievedObject.userid){
+			var memo_desc_date=document.createTextNode("owner     Date: "+date);
+		}else{
+			var memo_desc_date=document.createTextNode("public      Date: "+date);
+		}
+		
 		memo_date_label.appendChild(memo_desc_date);
 		///
 		desc.setAttribute('class','chip');
@@ -572,6 +576,13 @@
 	              height:'500px',
 	               color: '#009688'
 	});
+	 //on keyup textarea auto increase height
+    $("#descmemo").keyup(function() {
+      //default height
+      $(this).css('height', '70px');
+      //change height
+      $(this).css('height', ($(this).prop('scrollHeight')) + "px");
+    });
 	</script>
 </body>
 <script type="text/javascript">
