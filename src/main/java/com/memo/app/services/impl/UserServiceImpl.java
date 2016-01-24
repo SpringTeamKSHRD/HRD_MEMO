@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.User;
-import com.memo.app.repo.impl.UserDaoRepoImpl;
+import com.memo.app.repo.UserDao;
 import com.memo.app.services.UserService;
 
 @Service
 @Lazy
 public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserDaoRepoImpl userdao;
+	private UserDao userdao;
 
 	@Override
 	public boolean saveUser(User user) {
@@ -44,8 +44,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserList(Integer limit, Integer page, boolean ismemoenabled){
+	public List<User> getUserList(int limit, int page, boolean ismemoenabled){
+		//maximum 100 rows
 		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
 		int offset = limit * page - limit;
 		return userdao.getUserList(limit,offset,ismemoenabled);
 	}
@@ -75,5 +81,4 @@ public class UserServiceImpl implements UserService {
 		return userdao.updateUserPassword(user);
 	}
 	
-
 }

@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 
 @Entity
 @Table(name="tbluser",schema="public")

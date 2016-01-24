@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.Report;
-import com.memo.app.repo.impl.ReportDaoImpl;
+import com.memo.app.repo.ReportDao;
 import com.memo.app.services.ReportService;
 
 @Service
 @Lazy
 public class ReportServiceImpl implements ReportService {
 	@Autowired
-	private ReportDaoImpl reportDao;
+	private ReportDao reportDao;
 
 	@Override
 	public boolean saveReport(Report rp) {
@@ -48,8 +48,16 @@ public class ReportServiceImpl implements ReportService {
 		return reportDao.numberReport();
 	}
 	@Override
-	public List<Report> getAllReport() {
-		return reportDao.getAllReport();
+	public List<Report> getAllReport(int limit, int page, boolean isblocked){
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		return reportDao.getAllReport(limit,offset,isblocked);
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.Message;
-import com.memo.app.repo.impl.MessageDaoImpl;
+import com.memo.app.repo.MessageDao;
 import com.memo.app.services.MessageService;
 
 @Service
@@ -15,7 +15,7 @@ import com.memo.app.services.MessageService;
 public class MessageServiceImpl implements MessageService{
 	
 	@Autowired
-	private MessageDaoImpl messageDao;
+	private MessageDao messageDao;
 
 	@Override
 	public boolean saveMessage(List<Message> messages) {

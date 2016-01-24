@@ -7,7 +7,7 @@ import com.memo.app.entities.Memo;
 
 public interface MemoService {
 	public List<Memo> listMemo();
-	public List<Memo> listMemo(int limit, int page);	
+	public List<Memo> listMemo(int limit, int page, boolean isenabled);	
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);
 	public boolean deleteMemo(int id);

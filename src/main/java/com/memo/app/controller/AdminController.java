@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.entities.Report;
 import com.memo.app.services.IDashboardService;
+import com.memo.app.services.MemoService;
 import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
@@ -34,6 +35,9 @@ public class AdminController {
 	@Autowired
 	private ReportService reportDao;
 	
+	@Autowired
+	private MemoService memoDao;
+	
 	@ModelAttribute
 	public void commonObject(Model m){
 				
@@ -48,10 +52,9 @@ public class AdminController {
 	
 	@RequestMapping("/users")
 	public String users(ModelMap m,
-			@RequestParam(value = "limit", required = false, defaultValue = "15") Integer limit,
-			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") Boolean ismemoenabled
-			) {
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled) {
 		
 		this.pageDescription(m, "Users", "List All Users");
 		m.addAttribute("listUser", userDao.getUserList(limit, page, ismemoenabled));
@@ -59,15 +62,24 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/memos")
-	public String memo(ModelMap m) {
+	public String memo(ModelMap m,
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled){
+		
 		this.pageDescription(m, "Memos", "List All Memos");
+		m.addAttribute("listMemo", memoDao.listMemo(limit, page, isenabled));
 		return "admin/memos";
 	}
 	
 	@RequestMapping("/reports")
-	public String report(ModelMap m) {
+	public String report(ModelMap m,
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "isblocked", required = false,  defaultValue = "false") boolean isblocked){
+		
 		this.pageDescription(m, "Report", "List All Reports");
-		m.addAttribute("listReport", reportDao.getAllReport());
+		m.addAttribute("listReport", reportDao.getAllReport(limit, page, isblocked));
 		return "admin/report";
 	}
 	

@@ -15,12 +15,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.memo.app.repo.impl.UserDaoRepoImpl;
+import com.memo.app.repo.impl.UserDaoImpl;
 
 @Component("ajaxAuthenticationSuccessHandler")
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	@Autowired
-	private UserDaoRepoImpl userDao;
+	private UserDaoImpl userDao;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)

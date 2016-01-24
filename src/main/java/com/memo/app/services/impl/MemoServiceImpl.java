@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
-import com.memo.app.repo.impl.MemoDaoImpl;
+import com.memo.app.repo.MemoDao;
+import com.memo.app.services.MemoService;
 
 @Service
 @Lazy
-public class MemoServiceImpl implements com.memo.app.services.MemoService{
+public class MemoServiceImpl implements MemoService{
 	@Autowired
-	private MemoDaoImpl memoDao;
+	private MemoDao memoDao;
 
 	@Override
 	public List<Memo> listMemo() {
@@ -21,8 +22,17 @@ public class MemoServiceImpl implements com.memo.app.services.MemoService{
 	}
 
 	@Override
-	public List<Memo> listMemo(int limit, int page) {
-		return memoDao.listMemo(limit, page);
+	public List<Memo> listMemo(int limit, int page, boolean isenabled){
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		//filter only memo that is public
+		return memoDao.listMemo(limit, offset, isenabled, true);
 	}
 	
 	@Override

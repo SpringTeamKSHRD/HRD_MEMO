@@ -15,7 +15,7 @@ import com.memo.app.entities.User;
 import com.memo.app.repo.UserDao;
 
 @Repository
-public class UserDaoRepoImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

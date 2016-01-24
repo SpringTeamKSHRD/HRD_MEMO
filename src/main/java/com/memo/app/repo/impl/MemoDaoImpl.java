@@ -8,8 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.memo.app.RowMapper.AdminMemoRowMapper;
 import com.memo.app.RowMapper.HistoryMemoRowMapper;
-import com.memo.app.RowMapper.MemoRowMapper;
+import com.memo.app.RowMapper.UserMemoRowMapper;
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
 import com.memo.app.repo.MemoDao;
@@ -33,7 +34,7 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo";
 		try{
-			return jdbcTemplate.query(sql, new MemoRowMapper());
+			return jdbcTemplate.query(sql, new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -41,21 +42,18 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	
 	@Override
-	public List<Memo> listMemo(int limit, int page) {
-		System.out.println("list memo with amount of rows: "+limit);
-		/*if(page<=0) page=1;
-		int offset = limit * page - limit;*/
-		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM memo.tbmemo "
-					+"WHERE isenable=true "
-					+"ORDER BY id DESC "
-					+"LIMIT ? OFFSET ?";
+	public List<Memo> listMemo(int limit, int offset, boolean isenabled, boolean ispublic){		
+		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "+
+					"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "+
+					"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "+
+					"WHERE m.isenable= ? AND m.ispublic=? "+
+					"ORDER BY id DESC LIMIT ? OFFSET ?";
 		try{
-			return jdbcTemplate.query(sql, new Object[]{limit,0},new MemoRowMapper());
+			return jdbcTemplate.query(sql, new Object[]{isenabled,ispublic,limit,offset},new AdminMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-		return null;
+			return null;
+		}		
 	}
 	
 	@Override
@@ -109,7 +107,7 @@ public class MemoDaoImpl implements MemoDao{
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
 		try{
-			return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new MemoRowMapper());
+			return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -123,7 +121,7 @@ public class MemoDaoImpl implements MemoDao{
 					+" WHERE "+column_name
 					+" LIKE ?";
 		try{
-			return jdbcTemplate.query(sql, new Object[]{value+"%"},new MemoRowMapper());
+			return jdbcTemplate.query(sql, new Object[]{value+"%"},new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -152,7 +150,7 @@ public class MemoDaoImpl implements MemoDao{
 				  +"WHERE date BETWEEN '"+sd+"' AND '"+ed+"'"
 				  +" ORDER BY title";
 		try{
-			return jdbcTemplate.query(sql,new MemoRowMapper());
+			return jdbcTemplate.query(sql,new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -195,7 +193,7 @@ public class MemoDaoImpl implements MemoDao{
 						"AND userid = ? " +
 						"AND isenable = TRUE ";
 		try{
-			return jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new MemoRowMapper());
+			return jdbcTemplate.queryForObject(sql,new Object[]{domain,url,userid},new UserMemoRowMapper());
 		}catch(Exception e){
 		}
 		return null;
@@ -208,7 +206,7 @@ public class MemoDaoImpl implements MemoDao{
 					+" FROM memo.tbmemo "
 					+" WHERE ispublic=?";
 		try{
-			return jdbcTemplate.query(sql,new Object[]{privacy},new MemoRowMapper());
+			return jdbcTemplate.query(sql,new Object[]{privacy},new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}

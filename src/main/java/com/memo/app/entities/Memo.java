@@ -23,6 +23,7 @@ public class Memo {
 	private int id;
 	private int userid;
 	@Transient
+	private String username;
 	private String userimage;
 	private String title;
 	private String content;
@@ -96,8 +97,7 @@ public class Memo {
 	}
 	public void setFullDomain(String fullDomain) {
 		this.fullDomain = fullDomain;
-	}
-	
+	}	
 	public String getUserimage() {
 		return userimage;
 	}
@@ -110,11 +110,10 @@ public class Memo {
 	public void setDomainName(String domainName) {
 		this.domainName = domainName;
 	}
-	@Override
-	public String toString() {
-		return "Memo [id=" + id + ", userid=" + userid + ", title=" + title + ", content=" + content + ", domain="
-				+ domainName + ", url=" + url + ", date=" + date + ", isenable=" + isenable + ", ispublic=" + ispublic
-				+ "]";
+	public String getUsername() {
+		return username;
 	}
-	
+	public void setUsername(String username) {
+		this.username = username;
+	}	
 }

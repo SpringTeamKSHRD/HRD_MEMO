@@ -1,7 +1,5 @@
 package com.memo.app.services;
 
-import java.util.List;
-
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.User;
 

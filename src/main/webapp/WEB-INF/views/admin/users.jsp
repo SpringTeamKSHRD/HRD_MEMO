@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
 	<meta charset="utf-8">
@@ -11,15 +7,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<title>${pageTitle }| Memo</title>
 	<%@ include file="_defaultCss.jsp"%>
 </head>
+<body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box">
-			<!-- <div class="box-header">
-				<h3 class="box-title">Data Table With Full Features</h3>
-			</div> -->
-			<!-- /.box-header -->
 			<div class="box-body">
 				<div class="row">
 					<div class="col-sm-12">
@@ -59,9 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- /.box -->
 </div>
 <!-- /.col -->
-
 <%@ include file="_footer.jsp"%>
-<%-- <%@ include file="_controlSideBar.jsp"%> --%>
 <%@ include file="_defaultJS.jsp"%>
 <script>
 jQuery(document).ready(function($) {

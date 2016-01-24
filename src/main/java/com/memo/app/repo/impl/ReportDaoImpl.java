@@ -76,12 +76,13 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public List<Report> getAllReport() {
+	public List<Report> getAllReport(int limit, int offset, boolean isblocked){
 		String sql="SELECT	memo.tbreport.ID, memo.tbmemo.title, "+
-				"memo.tbreport.description, memo.tbreport.DATE, memo.tbreport.isblocked "+
+				"memo.tbreport.description, memo.tbreport.DATE "+
 				"FROM memo.tbmemo "+
-				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid ";
-		List<Report> reports=jdbcTemplate.query(sql,new ReportListRowMapper());
+				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid "+
+				"where isblocked=? limit ? offset ?";
+		List<Report> reports=jdbcTemplate.query(sql, new Object[]{isblocked,limit,offset},new ReportListRowMapper());
 		return reports;
 	}
 	

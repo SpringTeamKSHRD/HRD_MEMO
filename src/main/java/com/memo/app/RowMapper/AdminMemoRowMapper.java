@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.memo.app.entities.Memo;
 
-public class MemoRowMapper implements RowMapper<Memo>{
+public class AdminMemoRowMapper implements RowMapper<Memo>{
 
 	@Override
 	public Memo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -22,7 +22,9 @@ public class MemoRowMapper implements RowMapper<Memo>{
 		memo.setUrl(rs.getString(6));
 		memo.setDate(rs.getDate(7));
 		memo.setIsenable(rs.getBoolean(8));
-		memo.setIspublic(rs.getBoolean(9));		
+		memo.setIspublic(rs.getBoolean(9));	
+		memo.setUsername(rs.getString(10));
+		memo.setUserimage(rs.getString(11));
 		return memo;
 	}
 

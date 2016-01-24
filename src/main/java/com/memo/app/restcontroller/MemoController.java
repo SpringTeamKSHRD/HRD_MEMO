@@ -78,9 +78,9 @@ public class MemoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (pathVariables.containsKey("limit") && pathVariables.containsKey("page")) {
 			memos = (ArrayList<Memo>) memoService.listMemo(Integer.parseInt(pathVariables.get("limit")),
-					Integer.parseInt(pathVariables.get("page")));
+					Integer.parseInt(pathVariables.get("page")), true);
 		} else if (pathVariables.containsKey("limit")) {
-			memos = (ArrayList<Memo>) memoService.listMemo(Integer.parseInt(pathVariables.get("limit")), 0);
+			memos = (ArrayList<Memo>) memoService.listMemo(Integer.parseInt(pathVariables.get("limit")), 0, true);
 		}
 		if (memos.isEmpty()) {
 			map.put("MESSAGE", "MEMOS ARE NOT FOUND.");
