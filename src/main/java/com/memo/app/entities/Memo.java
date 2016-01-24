@@ -24,6 +24,7 @@ public class Memo {
 	private int userid;
 	@Transient
 	private String username;
+	@Transient
 	private String userimage;
 	private String title;
 	private String content;
@@ -31,7 +32,7 @@ public class Memo {
 	private String domainName;
 	private String url;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="date",insertable=false,nullable=false)
+	@Column(name="date",insertable=false,nullable=true)
 	private Date date;
 	private boolean isenable = true;
 	private boolean ispublic;
