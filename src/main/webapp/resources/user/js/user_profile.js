@@ -3,12 +3,10 @@ var img="";
 
 function updateUser(){
 	if(img==""){
-		//alert("did not change profile.");
 		img=$("#origin_img").val();
 		alert(img);
 		updateUserInfo();
 	}else{
-		//alert("changed profile.");
 		uploadImage();	
 	}
 	img="";
@@ -48,7 +46,7 @@ function updateUserInfo(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			alert("Success :" + data.MESSAGE);
+			swal("Success!", "Your profile has been updated.", "success");
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);
@@ -70,7 +68,6 @@ function updateUserPwd(){
 			conpwd : $("#con_pwd").val()
 		   };
 	
-
 	$.ajax({
 		type : "POST",
 		url : domain + "/user/updatepassword",

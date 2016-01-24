@@ -1,7 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
-function saveMemo(){
-	
+function saveMemo(){	
 	var data=$("#cont_memo").val();
 	var ispublic;
 	
@@ -25,7 +24,7 @@ function saveMemo(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			alert("Success :" + data.MESSAGE);
+			swal("Success","Your memo has been saved.","success");
 			loadPage();
 		},
 		error : function(data) {

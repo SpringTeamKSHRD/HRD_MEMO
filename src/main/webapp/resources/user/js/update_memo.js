@@ -1,7 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
 function updateMemo(id){
-	//alert("id for update."+id);
 	var data=$("#cont_memo").val();
 	var ispublic;
 	
@@ -25,7 +24,7 @@ function updateMemo(id){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			alert("Success :" + data.MESSAGE);
+			swal("Success","Your memo has been updated.","success");
 			loadPage();
 		},
 		error : function(data) {

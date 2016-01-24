@@ -50,11 +50,9 @@ var domain=window.location.origin+"/HRD_MEMO";
 				type : "GET",
 				url : domain+"/user/privacy/"+ispublic,
 				success : function(data) {
-					//alert("Success :" + data);
 					displayData(data);
 				},
 				error : function(data) {
-					//alert("Unsuccess: " + data.MESSAGE);
 					console.log("ERROR..." + data);
 				}
 			});	
@@ -63,57 +61,47 @@ var domain=window.location.origin+"/HRD_MEMO";
 	}
 	
 	function filterByTitle(){
-		//alert("hello");
 		var title=$("#search_title").val();
 		$.ajax({
 			type : "GET",
 			url : domain+"/user/filter/title/"+title,
 			success : function(data) {
-				//alert("Success :" + data);
 				displayData(data);
 			},
 			error : function(data) {
-				//alert("Unsuccess: " + data.MESSAGE);
 				console.log("ERROR..." + data);
 			}
 		});
 	}
 	
 	function filterByWebsite(){
-		//alert(website);
 		var website=$("#search_website").val(); 
 		$.ajax({
 			type : "GET",
 			url : domain+"/user/filter/domain/"+website,
 			success : function(data) {
-				//alert("Success :" + data);
 				displayData(data);
 			},
 			error : function(data) {
-				//alert("Unsuccess: " + data.MESSAGE);
 				console.log("ERROR..." + data);
 			}
 		});
 	}
 	
 	function filterByDate(){
-		//alert("start date :"+$("#s_date").val()+" And end date: "+$("#e_date").val()); alert(typeof($("#s_date")));
 		var sd=$("#s_date").val();
 		var ed=$("#e_date").val();
-		//alert("start date :"+sd+" And end date: "+ed);
+		
 		if(sd!=null || ed!=null){
-			//alert("send to server.")
 			$.ajax({
 				type : "GET",
 				url : domain+"/user/filterdate/"+sd+"/"+ed,
 				dataType : 'json',
 				data : null,
 				success : function(data) {
-					//alert("Success :" + data);
 					displayData(data);
 				},
 				error : function(data) {
-					//alert("Unsuccess: " + data.MESSAGE);
 					console.log("ERROR..." + data);
 				}
 			});

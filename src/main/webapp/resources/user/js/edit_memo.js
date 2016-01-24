@@ -1,7 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
 function editmemo(id) {
-	//alert("detail memo id "+id);
 	var value1="Private";
 	var value2="Public";
 	var data=$("#cont_memo").val("");
@@ -10,9 +9,9 @@ function editmemo(id) {
 		type : "GET",
 		url : domain+"/user/"+ id,
 		success : function(data) {
-			//alert(data.DATA.ispublic);
 			$("#userid").val(data.DATA.userid);
 			$(".titlememo").val(data.DATA.title);
+			$("#cont_memo").val(data.DATA.content);
 			
 			if(data.DATA.ispublic==false){
 				// clear contents
@@ -40,7 +39,7 @@ function editmemo(id) {
 			    // trigger event
 			    $selectDropdown.trigger('contentChanged');
 			}
-			$("#cont_memo").val(data.DATA.content);
+		
 			//change button to update
 			$("#btnsave").text("Update");
 			$("#btnsave").attr("onclick","updateMemo("+id+")");

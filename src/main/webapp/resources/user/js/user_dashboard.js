@@ -2,7 +2,6 @@ var domain=window.location.origin+"/HRD_MEMO";
 loadPage();
 
 function loadPage(){
-	//alert("loadpage.");
 	clearMemo();
 	$.ajax({
 				type : "GET",
@@ -10,7 +9,6 @@ function loadPage(){
 				dataType : 'json',
 				data : null,
 				success : function(data) {
-					//alert("Success :" + data);
 					displayData(data);
 				},
 				error : function(data) {
@@ -25,7 +23,6 @@ function loadPage(){
 
 /* list data */
 function displayData(data) {
-	//alert("display data.");
 	var contents = "<ul class='collection'>";
 	var privacy;
 
@@ -59,7 +56,6 @@ function displayData(data) {
 }
 	/* delete memo*/
 	function deletememo(id){
-		//alert("delete memo function.");
 		swal({   title: "Are you sure?",
 				 text: "You will not be able to recover this memo file!",
 				 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",
@@ -72,7 +68,6 @@ function displayData(data) {
 							url : domain+"/user/"+id,
 							success : function(data) {
 								swal("Deleted!", "Your memo file has been deleted.", "success");
-								//alert("Success :" + data.MESSAGE);
 								loadPage();
 							},
 							error : function(data) {
@@ -85,9 +80,7 @@ function displayData(data) {
 	
 	/*When user select on combobox to change amount of rows to display.*/
 	function limitRow(){
-		var limit=$("#limit_row").val();
-		//alert(limit);
-		
+		var limit=$("#limit_row").val();		
 		clearMemo();
 		$.ajax({
 					type : "GET",
@@ -95,7 +88,6 @@ function displayData(data) {
 					dataType : 'json',
 					data : null,
 					success : function(data) {
-						//alert("Success :" + data);
 						displayData(data);
 					},
 					error : function(data) {

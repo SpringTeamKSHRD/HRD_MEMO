@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +18,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
 	<!-- Sweet Alert --> 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
+	<!--Import jQuery before materialize.js-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 </head>
 <body >
 	<!-- Navbar goes here -->
@@ -178,8 +182,6 @@
 		<!-- ./Page Layout body here -->
 	</div>
     <!-- ./Container --> 
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Dashboard Script -->
