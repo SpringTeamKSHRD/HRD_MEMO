@@ -4,6 +4,7 @@ $('head').append("<script type='text/javascript' src='http://localhost:8080/HRD_
 $('head').append("<script type='text/javascript' src='http://localhost:8080/HRD_MEMO/resources/js/shortcutkey.js'></script>");
 //iframe wrapper
 var wrapper=document.getElementById("hrd_memo_pess");
+//create iframe
 var ifrm_hrdmemo = document.createElement("IFRAME");
 ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin");
 ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
@@ -17,6 +18,7 @@ ifrm_hrdmemo.style.margin="0px";
 ifrm_hrdmemo.style.padding="0px 0px 5px 0px";
 ifrm_hrdmemo.style.border ="none";
 ifrm_hrdmemo.setAttribute('scrolling','no');
+
 //wrapper style
 wrapper.style.height="97%";
 wrapper.style.width="0px";
@@ -56,11 +58,9 @@ activate_desc_memo.style.width="35px";
 activate_desc_memo.style.right="0px";
 activate_desc_memo.style.top="43%";
 activate_desc_memo.style.margin="0px";
-activate_desc_memo.style.padding="7px 5px";
+activate_desc_memo.style.padding="5px";
 activate_desc_memo.style.textAlign="center";
 activate_desc_memo.innerHTML=" <i class='large material-icons'>description</i>";
-/*var act_btn_text=document.createTextNode("Memo");
-activate_desc_memo.appendChild(act_btn_text);*/
 $('body').append(activate_desc_memo);
 var my_memo_hide=true;
 $("#btn-act-desc").click(function(){
@@ -90,6 +90,7 @@ Mousetrap.bind('a+m', function(e) {
 			$("#hrd_memo_pess").animate({width: 0, marginLeft: 0,padding:0}, {duration: 300});
 		}
 });
+
 
 
 

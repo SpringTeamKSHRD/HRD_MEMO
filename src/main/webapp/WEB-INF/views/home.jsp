@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
-<script src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
-<script src='http://localhost:8080/HRD_MEMO/resources/js/shortcutkey.js'></script>
 </head>
 <body>
 	<div id="hrd_memo_pess">
