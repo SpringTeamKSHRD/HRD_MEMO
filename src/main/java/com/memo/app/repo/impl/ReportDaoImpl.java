@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.memo.app.RowMapper.ReportDetailRowMapper;
+import com.memo.app.RowMapper.ReportListRowMapper;
 import com.memo.app.RowMapper.ReportNotificRowMapper;
-import com.memo.app.RowMapper.ReportRowMapper;
 import com.memo.app.entities.Report;
 import com.memo.app.repo.ReportDao;
 
@@ -54,7 +55,7 @@ public class ReportDaoImpl implements ReportDao {
 						+ "ON m_u.mmid=rp.memoid "
 						+ "WHERE rp.id=?";
 		Object[] obj=new Object[]{id};
-		Report report=jdbcTemplate.queryForObject(sql,obj,new ReportRowMapper());
+		Report report=jdbcTemplate.queryForObject(sql,obj,new ReportDetailRowMapper());
 		return report;
 	}
 
@@ -76,11 +77,11 @@ public class ReportDaoImpl implements ReportDao {
 
 	@Override
 	public List<Report> getAllReport() {
-		String sql="SELECT rp.id,rp.reporterid,us.username,us.userimageurl,date(rp.date) "
-				+ "FROM memo.tbreport rp "
-				+ "INNER JOIN public.tbluser us "
-				+ "ON	rp.reporterid=us.userid";
-		List<Report> reports=jdbcTemplate.query(sql,new ReportNotificRowMapper());
+		String sql="SELECT	memo.tbreport.ID, memo.tbmemo.title, "+
+				"memo.tbreport.description, memo.tbreport.DATE, memo.tbreport.isblocked "+
+				"FROM memo.tbmemo "+
+				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid ";
+		List<Report> reports=jdbcTemplate.query(sql,new ReportListRowMapper());
 		return reports;
 	}
 	

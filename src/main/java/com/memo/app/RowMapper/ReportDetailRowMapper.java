@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.memo.app.entities.Report;
-public class ReportRowMapper implements RowMapper<Report> {
+public class ReportDetailRowMapper implements RowMapper<Report> {
 
 	@Override
 	public Report mapRow(ResultSet rs, int value) throws SQLException {

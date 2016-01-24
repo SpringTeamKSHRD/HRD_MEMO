@@ -1,6 +1,5 @@
 package com.memo.app.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,27 +72,35 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/report/{id}")
-	public String reportDetail(ModelMap m, @PathVariable("id") Integer id) {
-		this.pageDescription(m, "Report", "Report Detail");
-		m.addAttribute("listReport", reportDao.getReportDetail(id));
-		return "admin/report_detail";
-	}
-	
-	@RequestMapping(value = "/getnotification", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> getMemo() {
+	public ResponseEntity<Map<String, Object>> reportDetail(ModelMap m, 
+			@PathVariable("id") Integer id) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Report> reports=new ArrayList<Report>();
-		reports=reportDao.getReportNotification();
-		if (!reports.isEmpty()) {	
+		Report rp = reportDao.getReportDetail(id);
+		HttpStatus status = HttpStatus.OK;
+		if (rp instanceof Report) {	
 			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
-			map.put("STATUS", HttpStatus.OK.value());
-			map.put("DATA",reports);
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			map.put("DATA", rp);
 		} else {
 			map.put("MESSAGE", "REPORT NOT FOUND.");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			status = HttpStatus.NOT_FOUND;
 		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
+	@RequestMapping(value = "/notification", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getReportNotification() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Report> reports=reportDao.getReportNotification();
+		HttpStatus status = HttpStatus.OK;
+		if (!reports.isEmpty()) {	
+			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+			map.put("DATA",reports);
+		} else {
+			map.put("MESSAGE", "REPORT NOT FOUND.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 
 	public void pageDescription(ModelMap m,String pageTitle,String pageDesc){
