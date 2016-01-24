@@ -33,7 +33,7 @@
 	      <li><a href="#!">Home</a></li>
 	      <li><a href="#!">Notification</a></li>
 	      <li>
-	      	<img src="${pageContext.request.contextPath}/resources/user/image/avatar.jpg" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>

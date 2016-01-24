@@ -3,20 +3,18 @@ var img="";
 
 function updateUser(){
 	if(img==""){
-		alert("did not change profile.");
+		//alert("did not change profile.");
 		img=$("#origin_img").val();
 		alert(img);
-		updateUserInfo(); // to update user information not include with upload photo
-	}else{
-		alert("changed profile.");
-		uploadImage();
 		updateUserInfo();
+	}else{
+		//alert("changed profile.");
+		uploadImage();	
 	}
 	img="";
 }
 
 function uploadImage() {
-	//alert("upload image.");
 	var data1;
     data1 = new FormData($(this)[0]);
     data1.append('file', $('#image')[0].files[0]);
@@ -29,15 +27,13 @@ function uploadImage() {
 		data : data1,
 		success:function(data){	
 			img=data.IMG_NAME;
-			alert("success uploading."+img);
-			
+			updateUserInfo();
 		}
 	});
 } 
 
 //to update user information not include with upload photo
 function updateUserInfo(){
-	alert("update user info: "+img);
 	json = {userid : parseInt($("#userid").val()),
 			username : $("#username").val(),
 			gender : $("input[type='radio'][name='gender']:checked").val(),
@@ -82,7 +78,6 @@ function updateUserPwd(){
 		contentType: 'application/json',
 		success : function(data) {
 			alert("Success :" + data.MESSAGE);
-			//loadPage();
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);
