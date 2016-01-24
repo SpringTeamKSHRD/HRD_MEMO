@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</div>
 					<div class="col-sm-9" style="padding-right:0px">
 						<label for="date">Report Date</label>
-						<input type="date" class="form-control" id="reportdate" readonly>
+						<input type="text" class="form-control" id="reportdate" readonly>
 					</div>
 					<div class="clearfix "></div>
 				</div>		
@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</div>
 					<div class="col-sm-9" style="padding-right:0px">
 						<label for="title">Written On</label>
-						<input type="date" class="form-control" id="memodate" readonly>				
+						<input type="text" class="form-control" id="memodate" readonly>				
 					</div>
 					<div class="clearfix "></div>
 				</div>		
@@ -100,17 +100,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="form-group" style="margin: 0px;">
 					<div class="col-sm-4" style="padding-left:0px">
 						<label for="reportby">Report By</label>		
-						<a id="reportbylink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;">
-							<img id="reportbyimg" src="" alt="User Image" 
-							style="float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;">N/A
-						</a>
+						<a id="reportbylink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
 					</div>
 					<div class="col-sm-4">
 						<label for="owner">Owner</label>		
-						<a id="ownerlink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;">
-							<img id="ownerimg" src="" alt="User Image" 
-							style="float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;">N/A
-						</a>
+						<a id="ownerlink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
 					</div>
 					<div class="col-sm-4" style="padding-right:0px">
 						<label for="owner">Block</label>		
@@ -134,29 +128,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
 var path="${pageContext.request.contextPath}";
 var imagepath=path+"/resources/admin/imgs/";
+function showDetail(id){
+	$.ajax({
+		url: path+"/admin/report/"+id,
+		type: "get",
+		success: function (response) {
+			var data = response['DATA'];
+			$("#reportid").val(data.id);
+			$("#reportdate").val(data.reportdate==null?"N/A":data.reportdate);
+			$("#reportdescription").val(data.description);
+			$("#memoid").val(data.memoid);
+			$("#memodate").val(data.memodate==null?"N/A":data.memodate);
+			$("#memotitle").val(data.memotitle);
+			$("#memocontent").val(data.memocontent);
+			$("#reportbylink").attr('href', path+"/admin/user/"+data.reporterid);
+			$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.reportername);
+			$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
+			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.ownermemoname);
+		}
+	});    	
+	$('#myModal').modal('show');
+}
+function ParamToJson() {            
+    var pairs = location.search.slice(1).split('&');    
+    var result = {};
+    pairs.forEach(function(pair) {
+        pair = pair.split('=');
+        result[pair[0]] = decodeURIComponent(pair[1] || '');
+    });
+    return JSON.parse(JSON.stringify(result));
+}
 jQuery(document).ready(function($) {
+	if(!isNaN(ParamToJson().id)){
+		showDetail(ParamToJson().id);
+	}
     $(".clickable-row").click(function() {
-		$.ajax({
-			url: path+"/admin/report/"+$(this).data("href"),
-			type: "get",
-			success: function (response) {
-				var data = response['DATA'];
-				$("#reportid").val(data.id);
-				$("#reportdate").val(data.reportdate);
-				$("#reportdescription").val(data.description);
-				$("#memoid").val(data.memoid);
-				$("#memodate").val(data.memodate);
-				$("#memotitle").val(data.memotitle);
-				$("#memocontent").val(data.memocontent);
-				$("#reportbylink").attr('href', path+"/admin/user/"+data.reporterid);
-				$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.reportername);
-				$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
-				$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.ownermemoname);
-			}
-		});    	
-    	$('#myModal').modal('show');
+    	showDetail($(this).data("href"));
     });
     $('#myModal').on('hidden.bs.modal', function () {
+    	$("#reportbylink").attr('href', '');
+    	$("#ownerlink").attr('href', '');
+    	$("#reportbylink").html('');
+    	$("#ownerlink").html('');
     	$("#formshow")[0].reset();
     })
 });
