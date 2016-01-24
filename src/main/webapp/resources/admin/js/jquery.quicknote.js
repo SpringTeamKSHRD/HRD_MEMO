@@ -362,7 +362,7 @@ Date.prototype.format = function(mask, utc) {
             dl += '<div  style="position:absolute;bottom:4px;right:50px;margin-right:10px;height:22px;">';
             dl += '<select class="uibutton" id="ispublic">';
             dl += '<option value="true">Public</option>';
-            dl += '<option value="false"selected>Only Me</option>';
+            dl += '<option value="false"selected class="uibutton icon secure">Only Me </option>';
             dl += '</select>';
             dl += '</div>';
             dl += '</div>';
@@ -411,6 +411,7 @@ Date.prototype.format = function(mask, utc) {
                         $.each(json, function(index, obj) {
                             var deleted = "";
                             var update = "";
+                            var report='';
                             if (obj.userid == Cookies.getJSON('LOGGED').userid) {
                                 $('#qn > #notes').remove();
                                 cb += '<li class="another" id="' + obj.id + '">';
@@ -419,13 +420,14 @@ Date.prototype.format = function(mask, utc) {
                                 deleted = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="' + obj.id + '" style="cursor:pointer" title="Delete Memo" />'
                             } else {
                                 cb += '<li class="me" id="' + obj.id + '" >';
+                                report='<span style="position:relative;cursor:pointer" id="'+obj.userid+'" class="report"> Report <img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/report.png" width="9px" height="9px;" title="Report this memo"/></span>';
                             }
                             cb += '<div class="avatar-icon">';
                             cb += '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '" title="'+obj.username+'">';
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';
-                            cb += '<time datetime="2009-11-13T20:00" style="font-size:9px">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + update + "&nbsp;&nbsp;" + deleted + ' </time>';
+                            cb += '<time datetime="2009-11-13T20:00" style="font-size:9px">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+report + update + "&nbsp;&nbsp;" + deleted + ' </time>';
                             cb += '</div>';
                             /*  cb+='<span class="close"></span>';*/
                             cb += '</li>';
@@ -448,6 +450,18 @@ Date.prototype.format = function(mask, utc) {
                             }
 
                         });
+                        
+                        //REPORT MEMO
+                        $('.report').click(function() {
+                        	var r = confirm("Are you sure want to report this memo ?");
+                            if (r == true) {
+                            	var userid=$(this).attr('id');
+                            	var reporter=Cookies.getJSON('LOGGED').userid;
+                            	var content=$(this).parent().siblings().text();                            	
+                            	
+                            }
+                        });
+                        
 
                         $('.btnUpdateMemo').click(function() {
                             var updateText = $('li.another div.messages > p').text();
