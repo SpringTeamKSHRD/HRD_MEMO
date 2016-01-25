@@ -147,6 +147,11 @@ Date.prototype.format = function(mask, utc) {
             storage: true || false
         },
         init: function() {
+        	if (window.jQuery) {
+        		
+        			$('script[src="http://code.jquery.com/jquery-2.0.0.js"]').remove();
+        		
+        	}
             this.config = $.extend({}, this.defaults, this.options);
             // DETECTING localStorage
             if (Storage === void(0)) {
@@ -237,14 +242,14 @@ Date.prototype.format = function(mask, utc) {
             var divUserPass = '<div id="username-password"></div>';
             var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
             var usernameInput = '<p><input type="text" name="username" id="username" maxlength="500" placeholder="Full Name..." required></p>'
-            var genderInput = '<p><select id="gender" class="uibutton" name="gender" style="width:100%;border-radius:5px">' +
+            var genderInput = '<p><select id="gender" class="memo-uibutton" name="gender" style="width:100%;border-radius:5px">' +
                 '<option value="male">Male</option>' +
                 '<option value="female">Female</option>' +
                 '</select></p>';
             var emailInput = '<p><input type="email" name="email" id="email" maxlength="500" placeholder="E-mail" required></p>';
             var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
-            var okBtn = '<input type="submit" name="btnRegOk" class="uibutton confirm" value="Ok" id="btnRegOk">';
-            var cancelBtn = '<input type="button" name="btnRegCancel" class="uibutton" value="Cancel" id="btnRegCancel">';
+            var okBtn = '<input type="submit" name="btnRegOk" class="memo-uibutton confirm" value="Ok" id="btnRegOk">';
+            var cancelBtn = '<input type="button" name="btnRegCancel" class="memo-uibutton" value="Cancel" id="btnRegCancel">';
             $(showHide).appendTo(this.$el);
             $(divUserPass).appendTo(this.$el);
             $(loginForm).appendTo(this.$el.find('#username-password'));
@@ -360,16 +365,16 @@ Date.prototype.format = function(mask, utc) {
 
             var dl = '';
             dl += '<div  style="position:absolute;bottom:4px;right:50px;margin-right:10px;height:22px;">';
-            dl += '<select class="uibutton" id="ispublic">';
+            dl += '<select class="memo-uibutton" id="ispublic">';
             dl += '<option value="true">Public</option>';
-            dl += '<option value="false"selected class="uibutton icon secure">Only Me </option>';
+            dl += '<option value="false"selected class="memo-uibutton icon secure">Only Me </option>';
             dl += '</select>';
             dl += '</div>';
             dl += '</div>';
 
             var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
-            var saveBtn = '<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
+            var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
             $(showHide).appendTo(this.$el);
             $(divNotes).appendTo(this.$el);
@@ -507,7 +512,7 @@ Date.prototype.format = function(mask, utc) {
                             $('#qn').empty();
                             var dl = '';
                             dl += '<div  style="position:absolute;bottom:4px;right:170px;margin-right:10px;height:22px;">';
-                            dl += '<select class="uibutton" id="ispublic">';
+                            dl += '<select class="memo-uibutton" id="ispublic">';
                             if (ispublic == "false") {
                                 dl += '<option value="true">Public</option>';
                                 dl += '<option value="false" selected>Only Me</option>';
@@ -522,8 +527,8 @@ Date.prototype.format = function(mask, utc) {
 
                             var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
                             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
-                            var cancelBtn = '<button class="uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
-                            var saveBtn = '<button class="uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
+                            var cancelBtn = '<button class="memo-uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
+                            var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
                             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext">' + updateText + '</textarea>';
                             $(showHide).appendTo('#qn');
                             $(divNotes).appendTo('#qn');
@@ -612,8 +617,8 @@ Date.prototype.format = function(mask, utc) {
             var divBtn = '<div id="div-btn" class="memo-btn-group" style="margin-top:10px"></div>';
             var usernameInput = '<p><input type="email" name="email" id="email" maxlength="500" placeholder="E-mail" required></p>';
             var passwordInput = '<p><input type="password" name="password" id="password" maxlength="500" placeholder="Password" required></p>';
-            var submitBtn = '<input type="submit" name="btnLogin" class="uibutton confirm" value="Login" id="logBtn" style>';
-            var regBtn = '<input type="submit" name="btnReg" class="uibutton special" value="Register" id="regBtn">';
+            var submitBtn = '<input type="submit" name="btnLogin" class="memo-uibutton confirm" value="Login" id="logBtn" style>';
+            var regBtn = '<input type="submit" name="btnReg" class="memo-uibutton special" value="Register" id="regBtn">';
             $(showHide).appendTo(this.$el);
             $(divUserPass).appendTo(this.$el);
             $(loginForm).appendTo(this.$el.find('#username-password'));
@@ -767,3 +772,4 @@ Date.prototype.format = function(mask, utc) {
         });
     };
 })(jQuery, window, document);
+
