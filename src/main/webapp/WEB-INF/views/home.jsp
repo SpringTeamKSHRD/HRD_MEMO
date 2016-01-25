@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="hrd_memo_pess">
-		<p id="callback">
+		<!-- <p id="callback"> -->
 		</p>
 	</div> 
 </body>

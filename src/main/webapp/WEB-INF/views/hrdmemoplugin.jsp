@@ -281,6 +281,7 @@
 					    }
 						}, "");
 			    }else if($(this).text()==='delete'){
+			    	$(this).parent().remove();
 			    	 var desc_boxh=$(this).parent().height();
 			    	if ('parentIFrame' in window) 
 			    		window.parentIFrame.size(cur_h-desc_boxh);
