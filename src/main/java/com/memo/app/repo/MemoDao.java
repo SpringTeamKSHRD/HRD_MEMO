@@ -22,7 +22,8 @@ public interface MemoDao {
 	//SONA
 	public List<Memo> listMemo(boolean isenabled);
 	//PHALLEAK
-	public List<Memo> pluginGetMemo(int userid,String url);
+	public List<Memo> pluginGetMemoOwner(int userid,String url);
+	public List<Memo> pluginGetMemoPublic(int userid,String url);
 	public boolean updateMemoContent(Memo memo);
 	
 }

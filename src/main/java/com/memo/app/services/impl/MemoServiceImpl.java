@@ -86,8 +86,8 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<Memo> pluginGetMemo(int userid, String url) {
-		return memoDao.pluginGetMemo(userid, url);
+	public List<Memo> pluginGetMemoOwner(int userid, String url) {
+		return memoDao.pluginGetMemoOwner(userid, url);
 	}	
 	@Override
 	public boolean updateMemoContent(Memo memo) {
@@ -97,5 +97,10 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public List<Memo> listMemo(boolean isenabled) {
 		return memoDao.listMemo(isenabled);
+	}
+
+	@Override
+	public List<Memo> pluginGetMemoPulic(int userid,String url) {
+		return memoDao.pluginGetMemoPublic(userid,url);
 	}	
 }

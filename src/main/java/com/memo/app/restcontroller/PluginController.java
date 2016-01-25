@@ -65,11 +65,27 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-	@RequestMapping(value = "/plugingetmemo", method = RequestMethod.POST,headers = "Accept=application/json")
-	public ResponseEntity<Map<String, Object>> getMemo(@RequestBody Memo memo) {
+	@RequestMapping(value = "/plugingetmemoowner", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> getMemoOwner(@RequestBody Memo memo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Memo> memos=new ArrayList<Memo>();
-		memos=memoDao.pluginGetMemo(memo.getUserid(),memo.getUrl());
+		memos=memoDao.pluginGetMemoOwner(memo.getUserid(),memo.getUrl());
+		if (!memos.isEmpty()) {	
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("STATUS", HttpStatus.CREATED.value());
+			map.put("DATA",memos);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	@RequestMapping(value = "/plugingetmemopublic", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> getMemoPublic(@RequestBody Memo memo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Memo> memos=new ArrayList<Memo>();
+		memos=memoDao.pluginGetMemoPulic(memo.getUserid(),memo.getUrl());
 		if (!memos.isEmpty()) {	
 			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
 			map.put("STATUS", HttpStatus.CREATED.value());

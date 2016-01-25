@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
 	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.css' />
-
+	<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
@@ -87,35 +87,38 @@
   </div>
 	<!--Memo Form-->
 	<div class="row" style="margin: 0px; padding: 0px;" id="frm-memodesc-panel">
-	<div class="row" style="margin: 0px; padding: 5px; background:#FAFAFA; box-shadow:1px 2px 3px gray; " id="frm-memo-wrapper">
-		<form class="col s12" id="hrd-memo-frm" style="margin: 0px; padding: 0px;">
-				<div class="input-field row col s12"
-					style="text-align: right; padding: 0px; margin: 0px 0px 2px 0px;">
-					<textarea id="descmemo"
-					placeholder="//MEMO HERE AND PRESS A+M TO SWAP" onkeypress="handleKeyPress(event)">
-					</textarea>
-			</div>
-			<div class="row" style="padding: 0px; margin: 0px;">
-				<div class="input-field col s3" style="padding: 0px; margin: 0px;">
-					<input type="checkbox" class="filled-in" id="public"/><label
-						for="public">Public</label>
+		<div class="row" style="margin: 0px; padding: 5px; background:#FAFAFA; box-shadow:1px 2px 3px gray; " id="frm-memo-wrapper">
+			<form class="col s12" id="hrd-memo-frm" style="margin: 0px; padding: 0px;">
+					<div class="input-field row col s12"
+						style="text-align: right; padding: 0px; margin: 0px 0px 2px 0px;">
+						<textarea id="descmemo"
+						placeholder="//MEMO HERE AND PRESS A+M TO SWAP" onkeypress="handleKeyPress(event)">
+						</textarea>
 				</div>
-				<div class="input-field col s9"
-					style="text-align: right; padding: 0px; margin: 0px;">
-					<button class="btn waves-effect" type="button" id='btn-save-memo' onclick="saveMemo()"><i class="material-icons">input</i></button>
+				<div class="row" style="padding: 0px; margin: 0px;">
+					<div class="input-field col s3" style="padding: 0px; margin: 0px;">
+						<input type="checkbox" class="filled-in" id="public"/><label
+							for="public">Public</label>
+					</div>
+					<div class="input-field col s9"
+						style="text-align: right; padding: 0px; margin: 0px;">
+						<button class="btn waves-effect" type="button" id='btn-save-memo' onclick="saveMemo()"><i class="material-icons">input</i></button>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 	<!--End memo form  -->
-	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688;height: 100%; overflow-y:auto; overflow-x:hidden;">
+	<div class="row" style="margin: 0px; padding: 0px;">
+		<div class="switch col s6" style="margin: 5px 0px; text-align: left; color:red;">
+	    	<label>Owner<input type="checkbox" id="useropt"><span class="lever"></span>Public</label>
+	  	</div>
+	  	<div class="col s6 mysignout" style="margin: 5px 0px; text-align: right;">
+	    	<p style="cursor:pointer; margin:0px;  font-size: 8px;" title='signout' onclick="signOut();"><i class="material-icons">settings_power</i></p>
+	  	</div>
+  	</div>
+	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; overflow-y:auto; overflow-x:hidden;">
 	</div>
-	<style>
-		*{
-		padding: 0px;
-		margin: 0px;
-		}
-	</style>
+	</div>
 	<script type="text/javascript" src="http://localhost:8080/HRD_MEMO/resources/js/iframeResizer.contentWindow.min.js" defer></script>
 	<!-- my script -->
 	<script type="text/javascript">
@@ -151,7 +154,7 @@
 				url=getPdata[2];
 				title=getPdata[3];
 				if(first==true&&retrievedObject!==""){
-				pluginGetMemo();
+				pluginGetMemoOwner();
 				first=false;
 				}
 				initailizePage();
@@ -175,13 +178,15 @@
 		memo_title_label.style.margin="0px";
 		memo_title_label.style.paddingRight="10px";
 		memo_title_label.style.fontSize="14px";
-		var memo_desc_title=document.createTextNode(title);
+		var memo_desc_title=document.createTextNode(generateTitle(title));
 		memo_title_label.appendChild(memo_desc_title);
 		memo_img_wraper.appendChild(memo_title_label);
 		//create date label
 		var memo_date_label=document.createElement('small');
+
+		memo_date_label.style.width="100%";
 		memo_date_label.style.color="gray";
-		memo_date_label.style.float="right";
+		memo_date_label.style.float="left";
 		memo_date_label.style.margin="0px";
 		if(userid==retrievedObject.userid){
 			var memo_desc_date=document.createTextNode("owner     Date: "+date);
@@ -195,14 +200,16 @@
 		var close=document.createElement("i");
 		close.setAttribute('class','material-icons my_delete_btn');
 		close.setAttribute('title','close');
+		close.style.float="right";
 		close.style.color="red";
-		close.setAttribute('onclick','pluginDeleteMemo('+memoid+')');
+		close.setAttribute('onclick','toDelete('+memoid+')');
 		var close_text=document.createTextNode("delete");
 		close.appendChild(close_text);
 		var report=document.createElement("i");
 		report.setAttribute('class','material-icons');
 		report.setAttribute('onclick','reportMemo('+retrievedObject.userid+','+memoid+')');
 		report.setAttribute('title','report');
+		report.style.float="right";
 		report.style.color="#FFC107";
 		var report_text=document.createTextNode("assignment");
 		report.appendChild(report_text);
@@ -212,6 +219,7 @@
 		edit.setAttribute('class','material-icons');
 		edit.setAttribute('onclick','getEditMemo('+memoid+')');
 		edit.setAttribute('title','edit');
+		edit.style.float="right";
 		edit.style.color="#00E676";
 		var edit_text=document.createTextNode("mode_edit");
 		edit.appendChild(edit_text);
@@ -222,12 +230,12 @@
 		desc.appendChild(memo_img_wraper);
 		desc.appendChild(desc_text);
 		if(userid==retrievedObject.userid){
-			desc.appendChild(close);
-			desc.appendChild(edit);
+			memo_date_label.appendChild(close);
+			memo_date_label.appendChild(edit);
 			memo_img_wraper.style.background="#009688";
 		}
 		if(userid!=retrievedObject.userid){
-			desc.appendChild(report);
+			memo_date_label.appendChild(report);
 			memo_img_wraper.style.background="#B0BEC5";
 		}
 		desc.appendChild(memo_footer);
@@ -248,25 +256,45 @@
 			} 
 			createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id,data.DATA[i].date);
 		}
-		if(ihave==true){
+		/* if(ihave==true){
 			$("#frm-memo-wrapper").css('display','none');
 			ihave=false;
-		}
+		} */
 	}
-	//List Memo
-	function pluginGetMemo(){
+	//List Owner Memo
+	function pluginGetMemoOwner(){
 		var json=new Object();
 		json.url=url;
 		json.userid=retrievedObject.userid;
 		$.ajax({
 			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemo",
+			url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemoowner",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
 				listMemoDescriptionBox(data);
 			},
 			error : function(data) {
+				removeAllChild();
+			}
+		});
+	}
+	
+	//List Public Memo
+	function pluginGetMemoPulic(){
+		var json=new Object();
+		json.url=url;
+		json.userid=retrievedObject.userid;
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemopublic",
+			contentType: 'application/json;charset=utf-8',
+	        data:JSON.stringify(json),
+			success : function(data) {
+				listMemoDescriptionBox(data);
+			},
+			error : function(data) {
+				removeAllChild();
 			}
 		});
 	}
@@ -281,11 +309,15 @@
 					    }
 						}, "");
 			    }else if($(this).text()==='delete'){
-			    	$(this).parent().remove();
-			    	 var desc_boxh=$(this).parent().height();
-			    	if ('parentIFrame' in window) 
-			    		window.parentIFrame.size(cur_h-desc_boxh);
-			    	return false;
+			    	alertify.confirm("Do you want to delete?", function (e) {
+			    	    if (e) {
+			    	    	 pluginDeleteMemo(deleteId);
+			    	    	 $(this).parent().remove();
+			    	    	 alertify.success("Memo has been deleted");
+			    	    } else {
+			    	    	alertify.error("You canceled");
+			    	    }
+			    	});
 			    }
 	});
 	//user report
@@ -350,10 +382,10 @@
 					$("#descmemo").val("");
 					$("#descmemo").focus();
 					$("#public").prop('checked','');
-					pluginGetMemo();
-					$("#frm-memo-wrapper").fadeOut(500);
+					pluginGetMemoOwner();
+					//$("#frm-memo-wrapper").fadeOut(500);
 					if(ismpublic==true){
-						sendReportNotify("public");
+						//sendReportNotify("public");
 					}
 				},
 				error : function(data) {
@@ -385,11 +417,11 @@
 				url : "http://localhost:8080/HRD_MEMO/plugin/pluginlogin",
 		        data:json,
 				success : function(data){
-					Cookies.set('MEMO',JSON.stringify(data.DATA));
+					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
-					pluginGetMemo();
+					pluginGetMemoOwner();
 				},
 				error : function(data) {
 					$("#my-rp-popup").text("YOU LOGIN FIALED");
@@ -428,11 +460,11 @@
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
-					Cookies.set('MEMO',JSON.stringify(data.DATA));
+					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
-					pluginGetMemo();
+					pluginGetMemoOwner();
 					username : $("#name").val("");
 					email : $("#email").val("");
 					password : $("#password").val("");
@@ -506,8 +538,8 @@
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
-				pluginGetMemo();
-				$("#frm-memo-wrapper").slideUp(1000);
+				pluginGetMemoOwner();
+				//$("#frm-memo-wrapper").slideUp(1000);
 				$("#btn-save-memo").html("<i class='material-icons'>input</i>");
 				$("#btn-save-memo").attr("onclick","saveMemo()");
 				$("#descmemo").val("");
@@ -518,7 +550,7 @@
 				$("#my-rp-popup").css("width","100%");
 				$("#my-rp-popup").fadeIn(200)
 								 .delay(2000).fadeOut(500);
-					sendReportNotify("public");
+					//sendReportNotify("public");
 			},
 			error : function(data) {
 				$("#my-rp-popup").text("UPDATE FAILED");
@@ -551,18 +583,22 @@
 		  }
 	}
 	//delete memo
+	var deleteId=0;
 	function pluginDeleteMemo(id){
 		initailizePage();
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
 			success : function(data) {
-				$("#frm-memo-wrapper").slideDown(500);
-					sendReportNotify("public");
+				//$("#frm-memo-wrapper").slideDown(500);
+					//sendReportNotify("public");
 			},
 			error : function(data) {
 			}
 		});
+	}
+	function toDelete(id){
+		deleteId=id;
 	}
 	//CREATE REPORT ALERT
 	var my_rp_popup=document.createElement("P");
@@ -574,7 +610,7 @@
 	$('#mydespanel').slimScroll({
 		alwaysVisible: false,
 	              size:'5px',
-	              height:'90%',
+	              height:'500px',
 	               color: '#009688'
 	});
 	 //on keyup textarea auto increase height
@@ -584,31 +620,55 @@
       //change height
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
+	 function myDynamicHeight(){
+		 $("#mydespanel").css('height',window.innerHeight-($("#frm-memo-wrapper").height()+15)+'px');
+	 }
+	 addEventListener('resize', myDynamicHeight,false);
+	 addEventListener('load', myDynamicHeight,false);
+	//Live life
+	 var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
+	 hrd_memo_websocket.onopen=function(message){
+	 }
+	 hrd_memo_websocket.onclose=function(message){
+	 	hrd_memo_websocket.close();
+	 }
+	 hrd_memo_websocket.onmessage=function(message){
+	 	 if(message.data==="response"){
+	 		 
+	 	 }else if(message.data==="public"){
+	 		pluginGetMemoPulic();
+	 	 }
+	 }
+	 function sendReportNotify(message){
+			hrd_memo_websocket.send(message);
+	 }
+	 
+	 function generateTitle(title){
+		 var tl=title.length;
+		 if(tl>30){
+			 return title.substring(0, 30)+"...";
+		 }else{
+			 return title;
+		 }
+	}
+	 $("#useropt").change(function(){
+		 if(document.getElementById("useropt").checked){
+			 pluginGetMemoPulic();
+		 }else{
+			 pluginGetMemoOwner();
+		 }
+	 });
+	 function signOut(){
+		 Cookies.remove('MEMO');
+			$("#frm-memodesc-panel").fadeOut(300,function(){
+				$("#frm-loginreg-wrapper").fadeIn(300);
+			});
+	 }
 	</script>
 </body>
-<script type="text/javascript">
-//Live life
-var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
-var hrd_memo_websocket=new WebSocket(hrd_notify_url);
-hrd_memo_websocket.onopen=function(message){
-}
-hrd_memo_websocket.onclose=function(message){
-	 websocket.close();
-}
-hrd_memo_websocket.onmessage=function(message){
-	 if(message.data==="response"){
-		 
-	 }else if(message.data==="public"){
-		 pluginGetMemo();
-	 }
-}
-function sendReportNotify(message){
-	hrd_memo_websocket.send(message);
-}
-</script>
 <link rel='stylesheet'
 	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css' />
 <link rel='stylesheet'
 	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css' />
-	<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
 </html>

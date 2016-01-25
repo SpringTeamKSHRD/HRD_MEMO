@@ -215,12 +215,12 @@ public class MemoDaoImpl implements MemoDao{
 		return null;
 	}
 	@Override
-	public List<Memo> pluginGetMemo(int userid, String url) {
+	public List<Memo> pluginGetMemoOwner(int userid, String url) {
 		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl "
 				+ "FROM memo.tbmemo mm "
 				+ "INNER JOIN public.tbluser us ON mm.userid=us.userid "
-				+ "WHERE (mm.userid=? AND mm.url=? AND mm.isenable=true) OR (mm.ispublic=true AND mm.url=? AND mm.isenable=true) ORDER BY mm.id DESC";
-		Object[] obj=new Object[]{userid,url,url};
+				+ "WHERE (mm.userid=? AND mm.url=? AND mm.isenable=true) ORDER BY mm.id DESC";
+		Object[] obj=new Object[]{userid,url};
 		try{
 			List<Memo> memos=jdbcTemplate.query(sql,obj,new RowMapper<Memo>(){
 
@@ -270,5 +270,34 @@ public class MemoDaoImpl implements MemoDao{
 			e.printStackTrace();
 			return null;
 		}		
+	}
+	@Override
+	public List<Memo> pluginGetMemoPublic(int userid,String url) {
+		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl "
+				+ "FROM memo.tbmemo mm "
+				+ "INNER JOIN public.tbluser us ON mm.userid=us.userid "
+				+ "WHERE (mm.ispublic=true AND mm.url=? AND mm.isenable=true AND mm.userid <> ?) ORDER BY mm.id DESC";
+		Object[] obj=new Object[]{url,userid};
+		try{
+			List<Memo> memos=jdbcTemplate.query(sql,obj,new RowMapper<Memo>(){
+
+				@Override
+				public Memo mapRow(ResultSet rs, int i) throws SQLException {
+					Memo mm=new Memo();
+					mm.setId(rs.getInt(1));
+					mm.setUserid(rs.getInt(2));
+					mm.setTitle(rs.getString(3));
+					mm.setContent(rs.getString(4));
+					mm.setDate(rs.getDate(5));
+					mm.setIspublic(rs.getBoolean(6));
+					mm.setUserimage(rs.getString(7));
+					return mm;
+				}
+			});
+			return memos;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 }

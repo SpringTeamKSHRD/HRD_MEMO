@@ -10,7 +10,7 @@ ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin")
 ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 ifrm_hrdmemo.setAttribute('class','my-memo-class');
 ifrm_hrdmemo.style.width ="100%";
-ifrm_hrdmemo.style.height="100%";
+ifrm_hrdmemo.style.height="auot";
 ifrm_hrdmemo.style.position="relative";
 ifrm_hrdmemo.style.right="0px";
 ifrm_hrdmemo.style.top="0px";
@@ -20,7 +20,7 @@ ifrm_hrdmemo.style.border ="none";
 ifrm_hrdmemo.setAttribute('scrolling','no');
 
 //wrapper style
-wrapper.style.height="97%";
+wrapper.style.height="96%";
 wrapper.style.width="0px";
 wrapper.style.right="2px";
 wrapper.style.position="absolute";
@@ -41,6 +41,7 @@ iFrameResize({
 		memo_iframe_height=messageData.height;
         document.getElementsByClassName('my-memo-class')[0]
         .iFrameResizer.sendMessage( messageData.height+"#"+location.hostname+"#"+location.href+"#"+memo_title);
+        ifrm_hrdmemo.style.width ="100%";
 	}
 });
 var activate_desc_memo=document.createElement("P");

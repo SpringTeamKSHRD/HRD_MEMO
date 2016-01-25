@@ -21,7 +21,8 @@ public interface MemoService {
 	//Sona
 	public List<Memo> listMemo(boolean isenabled);
 	//Phalleak
-	public List<Memo> pluginGetMemo(int userid,String url);
+	public List<Memo> pluginGetMemoOwner(int userid,String url);
+	public List<Memo> pluginGetMemoPulic(int userid,String url);
 	public boolean updateMemoContent(Memo memo);
 	
 }
