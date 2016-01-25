@@ -77,9 +77,22 @@ function displayData(data) {
 						});	    
 		});
 	}
+	function listReport(){
+		alert("list report");
+		$(".report").attr("display","block");
+	}
 	
+	function clearMemo(){
+		$("#cont_memo").val("");
+		$(".titlememo").val("");
+	}
+	
+	function cancelMemo(){
+		clearMemo();
+		loadPage();
+	}
 	/*When user select on combobox to change amount of rows to display.*/
-	function limitRow(){
+	/*function limitRow(){
 		var limit=$("#limit_row").val();		
 		clearMemo();
 		$.ajax({
@@ -95,17 +108,7 @@ function displayData(data) {
 						console.log("ERROR..." + data);
 					}
 				});
-		/*change button to update*/
+		change button to update
 		$("#btnsave").text("Save");
 		$("#btnsave").attr("onclick","saveMemo()");
-	}
-	
-	function clearMemo(){
-		$("#cont_memo").val("");
-		$(".titlememo").val("");
-	}
-	
-	function cancelMemo(){
-		clearMemo();
-		loadPage();
-	}
+	}*/

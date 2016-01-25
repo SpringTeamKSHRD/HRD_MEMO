@@ -38,7 +38,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			<li><a href="#">Notification</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>

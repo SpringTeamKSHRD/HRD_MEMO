@@ -27,6 +27,7 @@ public class ReportDaoImpl implements ReportDao {
 
 	@Override
 	public List<Report> getReportNotification() {
+		System.out.println("get report notification dao.");
 		String sql="SELECT rp.id,rp.reporterid,us.username,us.userimageurl,date(rp.date) "
 				+ "FROM memo.tbreport rp "
 				+ "INNER JOIN public.tbluser us "

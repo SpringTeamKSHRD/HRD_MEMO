@@ -26,33 +26,16 @@
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Personal Information</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
 	  <li><a href="">Log out</a></li>
-	</ul>
-	<!-- Notification -->
-	<ul id="dropdown2" class="dropdown-content">
-	  <li><a href="#!">one</a></li>
-	  <li class="divider"></li>
-	  <li><a href="#!">two</a></li>
-	  <li class="divider"></li>
-	  <li><a href="#!">three</a></li>
-	</ul>
-        	
+	</ul>        	
 	<nav>
 	  <div class="nav-wrapper teal">
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 	    <ul class="right hide-on-med-and-down">
-	      <li><a href="#!">Home</a></li>
-	      <!-- Dropdown Trigger -->
-      	  <li>
-      	  	  <a class="dropdown-button" href="#!" data-activates="dropdown2">
-      	  	  	<span class="rig-wrap">
-      	  	  		<span class="badge new">7</span>
-      	  			<i class="material-icons">add_alert</i>
-      	  	  	</span>
-      	  	  </a>     
-      	  </li>
+	      <li><a href="">Home</a></li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
@@ -76,7 +59,7 @@
 					 <div class="collection">
 				        <a href="#!" class="collection-item active" style="text-align:center;">List MEMOs</a>
 				      </div>
-					<div id="listmemo"  style="overflow-y: scroll; height:700px;">
+					<div id="listmemo" style="overflow-y: scroll; height:700px;">
 						
 					</div>					
 				</div>
@@ -150,7 +133,7 @@
 						  <input type="text" class="browser-default" readonly="" value="www.khmeracademy.org.kh">
 						</div>						
 						<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
-						<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Clear</a>			
+						<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Cancel</a>			
 					</div>
 				<!-- ./ url here -->
 				<!-- Button Save and Cancel -->

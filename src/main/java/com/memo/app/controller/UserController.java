@@ -28,5 +28,10 @@ public class UserController {
 	public String getUserProfile(){
 		return "user/profile";
 	}
+	@RequestMapping(value="/userreport")
+	public String getUserReport(){
+		return "user/user_report";
+	}
+	
 	
 }

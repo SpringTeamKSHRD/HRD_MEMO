@@ -30,6 +30,9 @@ span.badge.new{
 	background-color:teal;
 	height:50px;
 }
-textarea{
-	
+.report{
+	width:500px;
+	height:500px;
+	background-color:yellow;
+	display:none;
 }

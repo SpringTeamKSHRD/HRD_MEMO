@@ -75,7 +75,8 @@ function updateUserPwd(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			alert("Success :" + data.MESSAGE);
+			swal("Success!", "Your password has been updated.", "success");
+			//alert("Success :" + data.MESSAGE);
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);

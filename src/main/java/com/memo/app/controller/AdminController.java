@@ -102,6 +102,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getReportNotification() {
+		System.out.println("notification controller.");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Report> reports=reportDao.getReportNotification();
 		HttpStatus status = HttpStatus.OK;

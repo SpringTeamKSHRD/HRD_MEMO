@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.MemoService;
+import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
 @RestController
@@ -41,7 +43,10 @@ public class MemoController {
 	@Autowired
 	private UserDaoImpl userDao;
 	
-	// insert user information 
+	@Autowired
+	private ReportService reportDao;
+	
+	// update user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user,HttpServletRequest request) {
 			//System.out.println("update user memo controller.");		
@@ -76,6 +81,22 @@ public class MemoController {
 					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 				}
 			}
+		// get notification
+			@RequestMapping(value = "/notification", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> getReportNotification() {
+				System.out.println("notification controller.");
+				Map<String, Object> map = new HashMap<String, Object>();
+				List<Report> reports=reportDao.getReportNotification();
+				HttpStatus status = HttpStatus.OK;
+				if (!reports.isEmpty()) {	
+					map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+					map.put("DATA",reports);
+				} else {
+					map.put("MESSAGE", "REPORT NOT FOUND.");
+					status = HttpStatus.NOT_FOUND;
+				}
+				return new ResponseEntity<Map<String, Object>>(map, status);
+			}	
 			
 	// list memo with limiting amount of rows
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
