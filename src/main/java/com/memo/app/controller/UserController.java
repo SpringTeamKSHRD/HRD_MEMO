@@ -8,7 +8,7 @@ public class UserController {
     
 	@RequestMapping(value="/user")
 	public String getUserDashBaord(){
-		return "user/userdashboard";
+		return "user/dashboard";
 	}
 	
 	@RequestMapping(value="/addmemo")

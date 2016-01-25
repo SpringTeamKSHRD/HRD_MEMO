@@ -4,10 +4,12 @@ var img="";
 function updateUser(){
 	if(img==""){
 		img=$("#origin_img").val();
-		alert(img);
+		//alert(img);
 		updateUserInfo();
+		swal("Success!", "Your profile has been updated.", "success");
 	}else{
-		uploadImage();	
+		uploadImage();
+		swal("Success!", "Your profile has been updated", "success");
 	}
 	img="";
 }
@@ -46,7 +48,6 @@ function updateUserInfo(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			swal("Success!", "Your profile has been updated.", "success");
 		},
 		error : function(data) {
 			alert("Unsuccess: " + data.MESSAGE);
@@ -60,7 +61,7 @@ $("#image").change(function() {
 });
 
 function updateUserPwd(){
-	alert($("#password").val()+"\n"+$("#old_pwd").val()+$("#new_pwd").val()+$("#con_pwd").val());
+	//alert($("#password").val()+"\n"+$("#old_pwd").val()+$("#new_pwd").val()+$("#con_pwd").val());
 	json = {userid : parseInt($("#userid").val()),
 			password : $("#password").val(),
 			oldpwd : $("#old_pwd").val(),

@@ -30,12 +30,29 @@
 	  <li class="divider"></li>
 	  <li><a href="">Log out</a></li>
 	</ul>
+	<!-- Notification -->
+	<ul id="dropdown2" class="dropdown-content">
+	  <li><a href="#!">one</a></li>
+	  <li class="divider"></li>
+	  <li><a href="#!">two</a></li>
+	  <li class="divider"></li>
+	  <li><a href="#!">three</a></li>
+	</ul>
+        	
 	<nav>
 	  <div class="nav-wrapper teal">
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="#!">Home</a></li>
-	      <li><a href="#!">Notification</a></li>
+	      <!-- Dropdown Trigger -->
+      	  <li>
+      	  	  <a class="dropdown-button" href="#!" data-activates="dropdown2">
+      	  	  	<span class="rig-wrap">
+      	  	  		<span class="badge new">7</span>
+      	  			<i class="material-icons">add_alert</i>
+      	  	  	</span>
+      	  	  </a>     
+      	  </li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
@@ -44,6 +61,7 @@
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
 	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>
+	      
 	      <li><a href="#!">About</a></li>	      
 	    </ul>
 	  </div>
@@ -123,7 +141,7 @@
 						<!-- <div class="col s12 m4 l4">
 							
 						</div> -->
-						<div class="col s12 m4 l2 right">
+						<div class="col s12 m12 l2 right">
 							<div class="input-field col s12">
 								<select id="privacy" >
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
@@ -133,7 +151,7 @@
 							    <label>Privacy</label>
 						    </div> 
 						</div>
-						<div class="col s12 m4 l10 right">
+						<div class="col s12 m12 l10 right">
 							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>
@@ -182,7 +200,7 @@
 		<!-- ./Page Layout body here -->
 	</div>
     <!-- ./Container --> 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Dashboard Script -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/delete_memo.js"></script>

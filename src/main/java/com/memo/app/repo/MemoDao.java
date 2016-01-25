@@ -19,6 +19,8 @@ public interface MemoDao {
 	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);
 	public int countPublicMemo(int userid);
+	//SONA
+	public List<Memo> listMemo(int limit,boolean isenabled);
 	//PHALLEAK
 	public List<Memo> pluginGetMemo(int userid,String url);
 	public boolean updateMemoContent(Memo memo);

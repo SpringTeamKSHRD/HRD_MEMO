@@ -10,6 +10,22 @@ li a i{ cursor: pointer; cursor: hand; }
 .title{
 	color:#004D40;
 }
+span.rig-wrap{
+	position: relative;
+	
+}
+
+span.badge.new{	
+	color: blue;
+	font-weight: bold;
+	position : absolute;
+	top: 22px;
+	left: 1px;
+	z-index : 1000;
+	
+	
+}
+
 textarea{
 	
 }

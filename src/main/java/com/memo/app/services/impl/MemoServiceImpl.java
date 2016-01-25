@@ -92,5 +92,10 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public boolean updateMemoContent(Memo memo) {
 		return memoDao.updateMemoContent(memo);
+	}
+
+	@Override
+	public List<Memo> listMemo(int limit, boolean isenabled) {
+		return memoDao.listMemo(limit, isenabled);
 	}	
 }

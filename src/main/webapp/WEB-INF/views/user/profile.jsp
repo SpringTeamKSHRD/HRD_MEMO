@@ -22,6 +22,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Sweet Alert --> 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!-- Own Style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/profile.css">
 </head>
@@ -178,5 +180,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>
 </html>

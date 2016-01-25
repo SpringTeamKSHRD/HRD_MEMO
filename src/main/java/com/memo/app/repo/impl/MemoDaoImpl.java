@@ -46,7 +46,7 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "+
 					"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "+
 					"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "+
-					"WHERE m.isenable= ? AND m.ispublic=? "+
+					"WHERE m.isenable=? AND m.ispublic=? "+
 					"ORDER BY id DESC LIMIT ? OFFSET ?";
 		try{
 			return jdbcTemplate.query(sql, new Object[]{isenabled,ispublic,limit,offset},new AdminMemoRowMapper());
@@ -147,8 +147,8 @@ public class MemoDaoImpl implements MemoDao{
 		System.out.println("filter date meo.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 				  +"FROM memo.tbmemo "
-				  +"WHERE date BETWEEN '"+sd+"' AND '"+ed+"'"
-				  +" ORDER BY title";
+				  +"WHERE date BETWEEN '"+sd+"' AND '"+ed+"' "
+				  +"ORDER BY date ASC";
 		try{
 			return jdbcTemplate.query(sql,new UserMemoRowMapper());
 		}catch(Exception e){
@@ -176,6 +176,7 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT COUNT(id)"
 				  +"FROM memo.tbmemo"
 				  +"WHERE userid=? AND ispublic=true";
+				
 		try{
 			return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
 		}catch(Exception e){
@@ -203,8 +204,9 @@ public class MemoDaoImpl implements MemoDao{
 	public List<Memo> filterMemoByPrivacy(boolean privacy) {
 		System.out.println("filter memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic"
-					+" FROM memo.tbmemo "
-					+" WHERE ispublic=?";
+					+" FROM memo.tbmemo"
+					+" WHERE ispublic=?"
+					+" ORDER BY title";
 		try{
 			return jdbcTemplate.query(sql,new Object[]{privacy},new UserMemoRowMapper());
 		}catch(Exception e){
@@ -254,5 +256,19 @@ public class MemoDaoImpl implements MemoDao{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	@Override
+	public List<Memo> listMemo(int limit, boolean isenabled) {
+		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "+
+				"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "+
+				"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "+
+				"WHERE m.isenable=? "+
+				"ORDER BY id DESC LIMIT ? OFFSET 0";
+		try{
+			return jdbcTemplate.query(sql, new Object[]{isenabled,limit},new AdminMemoRowMapper());
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
 	}
 }
