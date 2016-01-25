@@ -291,7 +291,7 @@ Date.prototype.format = function(mask, utc) {
                                         $('#email').css({
                                             borderColor: 'red'
                                         });
-                                        $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="warning">Email already existed !</span>')
+                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="warning">Email already existed !</span>')
                                     } else {
                                     	console.log(data)
                                         $
@@ -317,7 +317,7 @@ Date.prototype.format = function(mask, utc) {
                                                         $('#mytext').focus();
                                                     } else {
                                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
-                                                        $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="alert">something went wrong !</span>')
+                                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">something went wrong !</span>')
                                                     }
                                                 },
                                                 error: function(data) {
@@ -479,7 +479,7 @@ Date.prototype.format = function(mask, utc) {
                                                     	 $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;text-transform:lowercase" id="alert">memo has been reported to administrator !</span>');
                                                      } else {
                                                     	 $('#loading').hide();
-                                                         $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="alert">something went wrong !</span>');
+                                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">something went wrong !</span>');
                                                      }
                                                  },
                                                  error: function(data) {
@@ -651,7 +651,7 @@ Date.prototype.format = function(mask, utc) {
                                         $('#mytext').focus();
                                     } else {
                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
-                                        $("#qn_sh").append('<span style="color:red;text-decoration:none;" id="alert">Invalid username or password !</span>')
+                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">Invalid username or password !</span>')
                                     }
                                 },
                                 error: function(data) {
