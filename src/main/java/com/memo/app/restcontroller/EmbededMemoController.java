@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.services.IEmbededMemoService;
 
@@ -24,6 +26,12 @@ import com.memo.app.services.IEmbededMemoService;
 public class EmbededMemoController {
 	@Autowired
 	private IEmbededMemoService embededMemoService;
+	
+	/*@Autowired private String urlMemo;
+	
+	public void commonObject(Model m){
+		 m.addAttribute("URL",urlMemo);
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody String listMemo(@RequestBody Memo memo) {
@@ -136,6 +144,24 @@ public class EmbededMemoController {
 		}
 	}
 
+	@RequestMapping(value = "/memoexisted/{memoid}", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> validateReportedMemo(@PathVariable("memoid") int memoid) {
+		System.out.println("check existed reportedmemo");
+		System.out.println(embededMemoService.isReportedMemo(memoid));
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());
+			map.put("RESPONSE_DATA", embededMemoService.isReportedMemo(memoid));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			map.put("MESSAGE", "LIST EMPTY");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> registerUser(@ModelAttribute User temp) {
 		System.out.println("register new user");
@@ -161,6 +187,24 @@ public class EmbededMemoController {
 			}
 		}
 		return null;
+	}
+	
+	@RequestMapping(value = "/report", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> reportMemo(@RequestBody Report temp) {
+		System.out.println("report memo");
+		System.out.println(embededMemoService.insertReport(temp));
+		Map<String, Object> map = new HashMap<String, Object>();
+			try {
+				map.put("RESPONSE_DATA",embededMemoService.insertReport(temp));
+				map.put("STATUS", HttpStatus.OK.value());
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				map.put("MESSAGE", "LIST EMPTY");
+				map.put("STATUS", HttpStatus.NOT_FOUND.value());
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			}
 
 	}
 

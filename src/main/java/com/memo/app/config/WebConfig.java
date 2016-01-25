@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.multipart.MultipartResolver;
@@ -27,6 +28,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @ComponentScan(basePackages = "com.memo.app")
 public class WebConfig extends WebMvcConfigurerAdapter{
+	
+	@Autowired Environment environment;
+	
 	@Autowired
 	private DataSource dataSource;
 	/*
@@ -82,4 +86,10 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		multipartResolver.setMaxUploadSize(2097152);
 		return multipartResolver;
 	}
+	
+	@Bean
+	public String urlMemo(){
+		return environment.getProperty("MEMO.URL");
+	}
+
 }

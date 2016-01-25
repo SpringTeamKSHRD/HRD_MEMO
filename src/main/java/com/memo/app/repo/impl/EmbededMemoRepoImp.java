@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.repo.IEmebededMemoRepo;
 
@@ -123,7 +124,9 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 					m.setImage("boy-avatar.png");
 				}
 			}
-
+			m.setUsertypeid(2);
+			m.setUniversityid(36);
+			m.setDepartmentid(12);
 			sess.persist(m);
 			return m;
 		} catch (Exception e) {
@@ -142,6 +145,34 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	@Transactional
+	public Boolean isReported(int memoid) {
+		Session ses = sf.getCurrentSession();
+		Criteria cr = ses.createCriteria(Report.class);
+		cr.add(Restrictions.eq("memoid", memoid));
+		if (cr.uniqueResult() != null)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	@Transactional
+	public Boolean insertReport(Report rp) {
+		try {
+			Session sess = sf.getCurrentSession();
+			rp.setIsblock(false);
+			rp.setDescription("Bad memo");
+			rp.setReportdate(new Date());
+			sess.saveOrUpdate(rp);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.memo.app.services;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 
 public interface IEmbededMemoService {
@@ -11,4 +12,6 @@ public interface IEmbededMemoService {
 	public Boolean updateMemo(Memo m);
 	public User RegisterUser(User m);
 	public Boolean isExistedEmail(String email);
+	public Boolean isReportedMemo(int memoid);
+	public Boolean insertReport(Report rp);
 }
