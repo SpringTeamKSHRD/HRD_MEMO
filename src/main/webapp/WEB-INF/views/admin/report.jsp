@@ -92,11 +92,11 @@
 				<textarea class="form-control" style="height:150px;max-height:200px;resize:none;" id="memocontent" readonly></textarea>
 			</div>
 			<div class="form-group" style="margin: 0px;">
-				<div class="col-sm-4" style="padding-left:0px">
+				<div class="col-sm-6" style="padding-left:0px">
 					<label for="reportby">Report By</label>		
 					<a id="reportbylink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-6">
 					<label for="owner">Owner</label>		
 					<a id="ownerlink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
 				</div>			

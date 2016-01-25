@@ -73,32 +73,8 @@
 			<!-- Left Body Section -->
 			<div class="col s12 m4 l3 body_left"> <!-- Note that "m4 l3" was added -->
 				<div class="z-depth-1">
-					<!-- Number of rows to show in collection-->
-					<div class="row">
-						<div class="col s12 m6 l12 body_left"> <br/>
-							<div class="input-field col s12">
-							    <select id="limit_row" onchange="limitRow()">
-								      <!-- <option value="" disabled selected>Amount of row.</option> -->
-								      <option value="5">5</option>
-								      <option value="10">10</option>
-								      <option value="30">30</option>
-								      <option value="50">50</option>
-							    </select>
-							    <label>Number of rows</label>
-							</div>
-						</div>
-					</div>
-					<!-- List Tile Memo -->
-					<div class="row">
-				        <div class="col s12 m12">
-				          <div class="card teal lighten-1">
-				            <div class="card-content white-text center">
-				            	<span>List Memo</span>
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-					<div id="listmemo" style="max-height:670px; overflow-y:scroll">
+
+					<div id="listmemo" >
 						
 					</div>					
 				</div>
@@ -133,14 +109,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="row z-depth-1">
 			<form action="#" method="POST" enctype="multipart/form-data">
 				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
-				<div class="z-depth-1" >
+
 					<!-- List of components memo--> 
-					<div class="row">
-						<!-- <div class="col s12 m4 l4">
-							
-						</div> -->
+					<div class="row" style="margin:0px">
 						<div class="col s12 m12 l2 right">
 							<div class="input-field col s12">
 								<select id="privacy" >
@@ -148,51 +122,41 @@
 								      <option value="0">Private</option>
 								      <option value="1">Public</option>
 							    </select>
-							    <label>Privacy</label>
 						    </div> 
 						</div>
 						<div class="col s12 m12 l10 right">
-							<div class="row">
 								<div class="input-field col s12">
 								  <i class="material-icons prefix">mode_edit</i>
 								  <input id="icon_prefix" type="text" class=" titlememo validate">
 								  <label for="icon_prefix">Title Memo</label>
 								</div>
-							</div>
 						</div>
 					</div>
-				</div>
+
 				<!-- CK Editor -->
-				<br/>
-				<div>
-					<div class="row">
-						<div class="col s12 m12 l12">
-							<textarea class="z-depth-1" id="cont_memo" style="width:100%; height:300px;">
-							
+					<div class="row " style="margin:0px">
+						<div class="col s12 m12 l12" style="padding:15px;">
+							<textarea id="cont_memo" style="resize:none; width:100%; height:300px;padding:15px;">							
 							</textarea>
 						</div>
 					</div>
-				</div>
 				<!-- ./Textarea -->
 				<!-- url here -->
-				<div>
-					<div class="row">
-						  <label>Current URL</label>
-						  <select class="browser-default" disabled>
-						    <option value="www.khmeracademy.org.kh" disabled selected>www.khmeracademy.org.kh</option>
-						  </select>
-					</div> 
-				</div>
+					<div class="row " style="margin: 0 0 10px 0;">
+						<div class="col s6" style="margin-left: 15px;">
+						  <label class="active">Current URL</label>
+						  <input type="text" class="browser-default" readonly="" value="www.khmeracademy.org.kh">
+						</div>						
+						<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
+						<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Clear</a>			
+					</div>
 				<!-- ./ url here -->
 				<!-- Button Save and Cancel -->
 				<div>
-					<div class="row">
-						&nbsp;&nbsp;
-						<a class="waves-effect waves-light btn " id="btnsave" onclick="saveMemo()">Save</a> 
-						<a class="waves-effect waves-light btn " id="btncancel" onclick="cancelMemo()">Cancel</a>
-					</div>
+
 				</div>
 			</form>
+			</div>
 			</div>
 
 		</div>
