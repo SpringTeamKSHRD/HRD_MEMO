@@ -72,7 +72,7 @@ CREATE TABLE "memo"."tbhistory" (
 "memoid" int4 NOT NULL,
 "title" varchar COLLATE "default",
 "content" varchar COLLATE "default",
-"date" timestamp(6) 
+"date" timestamp(6) DEFAULT now()
 )
 WITH (OIDS=FALSE)
 
@@ -94,7 +94,7 @@ CREATE TABLE "memo"."tbmemo" (
 "title" varchar COLLATE "default",
 "domain" varchar COLLATE "default",
 "url" varchar COLLATE "default" NOT NULL,
-"date" timestamp(6),
+"date" timestamp(6) DEFAULT now(),
 "isenable" bool DEFAULT true NOT NULL,
 "ispublic" bool DEFAULT false NOT NULL
 )
@@ -134,7 +134,7 @@ CREATE TABLE "memo"."tbreport" (
 "reporterid" int4 NOT NULL,
 "memoid" int4 NOT NULL,
 "description" varchar COLLATE "default",
-"date" timestamp(6),
+"date" timestamp(6) DEFAULT now(),
 "isblocked" bool DEFAULT false NOT NULL
 )
 WITH (OIDS=FALSE)

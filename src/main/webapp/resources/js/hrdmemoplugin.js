@@ -10,7 +10,7 @@ ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin")
 ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 ifrm_hrdmemo.setAttribute('class','my-memo-class');
 ifrm_hrdmemo.style.width ="100%";
-ifrm_hrdmemo.style.height="auot";
+ifrm_hrdmemo.style.height="100%";
 ifrm_hrdmemo.style.position="relative";
 ifrm_hrdmemo.style.right="0px";
 ifrm_hrdmemo.style.top="0px";

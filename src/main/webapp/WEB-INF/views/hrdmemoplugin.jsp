@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
 	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.css' />
-	<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
+
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
@@ -108,7 +108,7 @@
 		</form>
 	</div>
 	<!--End memo form  -->
-	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; max-height: 515px; height: 500px; overflow-y:auto; overflow-x:hidden;">
+	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688;height: 100%; overflow-y:auto; overflow-x:hidden;">
 	</div>
 	<style>
 		*{
@@ -574,7 +574,7 @@
 	$('#mydespanel').slimScroll({
 		alwaysVisible: false,
 	              size:'5px',
-	              height:'500px',
+	              height:'90%',
 	               color: '#009688'
 	});
 	 //on keyup textarea auto increase height
@@ -610,4 +610,5 @@ function sendReportNotify(message){
 	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css' />
 <link rel='stylesheet'
 	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css' />
+	<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
 </html>
