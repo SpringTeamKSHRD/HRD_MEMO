@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
+
 
 @Entity
 @Table(name="tbluser",schema="public")
@@ -33,6 +35,27 @@ public class User {
 	private boolean ismemoenable;
 	@Transient
 	private String type;
+	private int usertypeid;
+	private int universityid;
+	public int getUniversityid() {
+		return universityid;
+	}
+	public void setUniversityid(int universityid) {
+		this.universityid = universityid;
+	}
+	public int getDepartmentid() {
+		return departmentid;
+	}
+	public void setDepartmentid(int departmentid) {
+		this.departmentid = departmentid;
+	}
+	private int departmentid;
+	public int getUsertypeid() {
+		return usertypeid;
+	}
+	public void setUsertypeid(int usertypeid) {
+		this.usertypeid = usertypeid;
+	}
 	@Transient
 	private Date registerdate;
 	@Transient

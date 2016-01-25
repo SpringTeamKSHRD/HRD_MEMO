@@ -1,22 +1,44 @@
 package com.memo.app.entities;
 
-import java.sql.Date;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name="tbreport",schema="memo")
 public class Report {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int reporterid;
+	@Transient
 	private String reportername;
+	@Transient
 	private String reporterimage;
 	private int memoid;
+	@Transient
 	private String memo;
+	@Transient
 	private int ownermemoid;
+	@Transient
 	private String ownermemoname;
+	@Transient
 	private String ownermemoimage;
+	@Column(name="date")
 	private Date reportdate;
-	private boolean isblock;
+	private boolean isblocked;
 	private String description;
+	@Transient
 	private Date memodate;
+	@Transient
 	private String memotitle;
+	@Transient
 	private String memocontent;
 	public int getId() {
 		return id;
@@ -43,10 +65,10 @@ public class Report {
 		this.reportdate = reportdate;
 	}
 	public boolean isIsblock() {
-		return isblock;
+		return isblocked;
 	}
-	public void setIsblock(boolean isblock) {
-		this.isblock = isblock;
+	public void setIsblock(boolean isblocked) {
+		this.isblocked = isblocked;
 	}
 	public String getMemo() {
 		return memo;
@@ -113,7 +135,7 @@ public class Report {
 		return "Report [id=" + id + ", reporterid=" + reporterid + ", reportername=" + reportername + ", reporterimage="
 				+ reporterimage + ", memoid=" + memoid + ", memo=" + memo + ", ownermemoid=" + ownermemoid
 				+ ", ownermemoname=" + ownermemoname + ", ownermemoimage=" + ownermemoimage + ", reportdate="
-				+ reportdate + ", isblock=" + isblock + ", description=" + description + ", memodate=" + memodate
+				+ reportdate + ", isblock=" + isblocked + ", description=" + description + ", memodate=" + memodate
 				+ ", memotitle=" + memotitle + ", memocontent=" + memocontent + "]";
 	}
 	
