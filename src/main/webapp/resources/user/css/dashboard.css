@@ -11,21 +11,25 @@ li a i{ cursor: pointer; cursor: hand; }
 	color:#004D40;
 }
 span.rig-wrap{
-	position: relative;
-	
+	position: relative;	
 }
-
+.card{
+	text-align:center;
+}
 span.badge.new{	
 	color: blue;
 	font-weight: bold;
 	position : absolute;
 	top: 22px;
 	left: 1px;
-	z-index : 1000;
-	
-	
+	z-index : 1000;	
 }
-
+.cap_list{
+	color:white;
+	text-align:center;
+	background-color:teal;
+	height:50px;
+}
 textarea{
 	
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.User;
+import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.MemoService;
 import com.memo.app.services.UserService;
 
@@ -36,15 +38,20 @@ public class MemoController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserDaoImpl userDao;
+	
 	// insert user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user) {
+		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user,HttpServletRequest request) {
 			//System.out.println("update user memo controller.");		
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			if (userService.updateUser1(user)) {			
 				map.put("MESSAGE", "USER HAS BEEN UPDATED.");
 				map.put("STATUS", HttpStatus.CREATED.value());
+				 request.getSession().setAttribute("USER",userDao.getUserDialInfo((SecurityContextHolder.getContext().getAuthentication().getName())));
+				    
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
 			} else {
 				map.put("MESSAGE", "USER HAS NOT BEEN UPDATED.");
@@ -71,13 +78,13 @@ public class MemoController {
 			}
 			
 	// list memo with limiting amount of rows
-	@RequestMapping(value = "/list/{limit}", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
 		System.out.println("list user controller."+pathVariables.get("limit"));
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		memos = (ArrayList<Memo>) memoService.listMemo(Integer.parseInt(pathVariables.get("limit")),true);
+		memos = (ArrayList<Memo>) memoService.listMemo(true);
 		if (memos.isEmpty()) {
 			map.put("MESSAGE", "MEMOS ARE NOT FOUND.");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());

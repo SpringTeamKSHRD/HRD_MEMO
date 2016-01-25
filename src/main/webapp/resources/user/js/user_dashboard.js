@@ -5,7 +5,7 @@ function loadPage(){
 	clearMemo();
 	$.ajax({
 				type : "GET",
-				url : domain+"/user/list/"+5,
+				url : domain+"/user/list/",
 				dataType : 'json',
 				data : null,
 				success : function(data) {
@@ -24,13 +24,13 @@ function loadPage(){
 /* list data */
 function displayData(data) {
 	var contents = "<ul class='collection'>";
+				 
 	var privacy;
-
 	for (var i = 0; i < data.DATA.length; i++) {
 		if(data.DATA[i].ispublic==false) privacy="Private";
 		else privacy="Public";
-		contents += "<li class='collection-item avatar' onclick='editmemo("+data.DATA[i].id+")'>"
-					+ "<a><i class='material-icons'>room</i></a>"
+		contents += "<li class='collection-item avatar' style='padding-left:30px;' onclick='editmemo("+data.DATA[i].id+")'>"
+					+ "<a><i class='material-icons'>assignment</i></a>"
 					+ "<b>&nbsp;&nbsp;<span class='title'>"
 						+ data.DATA[i].title
 					+ "</span></b>"

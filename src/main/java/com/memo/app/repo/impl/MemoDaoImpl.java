@@ -258,14 +258,14 @@ public class MemoDaoImpl implements MemoDao{
 		return false;
 	}
 	@Override
-	public List<Memo> listMemo(int limit, boolean isenabled) {
+	public List<Memo> listMemo(boolean isenabled) {
 		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "+
 				"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "+
 				"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "+
 				"WHERE m.isenable=? "+
-				"ORDER BY id DESC LIMIT ? OFFSET 0";
+				"ORDER BY id DESC";
 		try{
-			return jdbcTemplate.query(sql, new Object[]{isenabled,limit},new AdminMemoRowMapper());
+			return jdbcTemplate.query(sql, new Object[]{isenabled},new AdminMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

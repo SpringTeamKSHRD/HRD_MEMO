@@ -73,8 +73,10 @@
 			<!-- Left Body Section -->
 			<div class="col s12 m4 l3 body_left"> <!-- Note that "m4 l3" was added -->
 				<div class="z-depth-1">
-
-					<div id="listmemo" >
+					 <div class="collection">
+				        <a href="#!" class="collection-item active" style="text-align:center;">List MEMOs</a>
+				      </div>
+					<div id="listmemo"  style="overflow-y: scroll; height:700px;">
 						
 					</div>					
 				</div>

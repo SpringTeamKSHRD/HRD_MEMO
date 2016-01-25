@@ -20,7 +20,7 @@ public interface MemoDao {
 	public int countColumn(Object column_name,Object value);
 	public int countPublicMemo(int userid);
 	//SONA
-	public List<Memo> listMemo(int limit,boolean isenabled);
+	public List<Memo> listMemo(boolean isenabled);
 	//PHALLEAK
 	public List<Memo> pluginGetMemo(int userid,String url);
 	public boolean updateMemoContent(Memo memo);

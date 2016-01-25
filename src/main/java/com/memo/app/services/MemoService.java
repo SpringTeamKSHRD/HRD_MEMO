@@ -19,7 +19,7 @@ public interface MemoService {
 	public List<Memo> filterMemoByDate(Object sd,Object ed);
 	public int countColumn(Object column_name,Object value);
 	//Sona
-	public List<Memo> listMemo(int limit,boolean isenabled);
+	public List<Memo> listMemo(boolean isenabled);
 	//Phalleak
 	public List<Memo> pluginGetMemo(int userid,String url);
 	public boolean updateMemoContent(Memo memo);

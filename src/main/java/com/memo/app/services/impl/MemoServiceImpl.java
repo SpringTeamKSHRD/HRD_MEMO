@@ -95,7 +95,7 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<Memo> listMemo(int limit, boolean isenabled) {
-		return memoDao.listMemo(limit, isenabled);
+	public List<Memo> listMemo(boolean isenabled) {
+		return memoDao.listMemo(isenabled);
 	}	
 }
