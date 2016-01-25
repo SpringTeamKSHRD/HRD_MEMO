@@ -64,6 +64,36 @@ CREATE SEQUENCE "memo"."tbreport_id_seq"
 SELECT setval('"memo"."tbreport_id_seq"', 1, true);
 
 -- ----------------------------
+-- Sequence structure for tbldefaultmessage_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "memo"."tbldefaultmessage_id_seq" CASCADE;
+CREATE SEQUENCE "memo"."tbldefaultmessage_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+-- ----------------------------
+-- Table structure for tbldefaultmessage
+-- ----------------------------
+
+DROP TABLE IF EXISTS "memo"."tbldefaultmessage" CASCADE;
+CREATE TABLE "memo"."tbldefaultmessage" (
+"id" int4 DEFAULT nextval('"memo".tbldefaultmessage_id_seq'::regclass) NOT NULL,
+"messsage" varchar(100) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of tbldefaultmessage
+-- ----------------------------
+INSERT INTO "memo"."tbldefaultmessage" VALUES ('1', 'your memo has been block by admin');
+INSERT INTO "memo"."tbldefaultmessage" VALUES ('2', 'thanks you for your reporting');
+
+-- ----------------------------
 -- Table structure for tbhistory
 -- ----------------------------
 DROP TABLE IF EXISTS "memo"."tbhistory" CASCADE;
@@ -110,11 +140,12 @@ INSERT INTO "memo"."tbmemo" VALUES ('1', '1', 'sdfsdfsdfs', 'sdf', 'sdf', 'sdf',
 -- ----------------------------
 -- Table structure for tbmessage
 -- ----------------------------
-DROP TABLE IF EXISTS "memo"."tbmessage" CASCADE;
+DROP TABLE IF EXISTS "memo"."tbmessage";
 CREATE TABLE "memo"."tbmessage" (
 "id" int4 DEFAULT nextval('"memo".tbmessage_id_seq'::regclass) NOT NULL,
 "userid" int4 NOT NULL,
-"isviewed" bool DEFAULT false NOT NULL
+"isviewed" bool DEFAULT false NOT NULL,
+"message_id" int4 NOT NULL
 )
 WITH (OIDS=FALSE)
 
@@ -123,7 +154,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of tbmessage
 -- ----------------------------
-INSERT INTO "memo"."tbmessage" VALUES ('1', '1', 'f');
+INSERT INTO "memo"."tbmessage" VALUES ('1', '1', 'f', '1');
 
 -- ----------------------------
 -- Table structure for tbreport
@@ -149,10 +180,16 @@ INSERT INTO "memo"."tbreport" VALUES ('1', '1', '1', 'asdasdf', '2016-01-05 17:1
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
+ALTER SEQUENCE "memo"."tbldefaultmessage_id_seq" OWNED BY "memo"."tbldefaultmessage"."id";
 ALTER SEQUENCE "memo"."tbhistory_id_seq" OWNED BY "memo"."tbhistory"."id";
 ALTER SEQUENCE "memo"."tbmemo_id_seq" OWNED BY "memo"."tbmemo"."id";
 ALTER SEQUENCE "memo"."tbmessage_id_seq" OWNED BY "memo"."tbmessage"."id";
 ALTER SEQUENCE "memo"."tbreport_id_seq" OWNED BY "memo"."tbreport"."id";
+
+-- ----------------------------
+-- Primary Key structure for table tbldefaultmessage
+-- ----------------------------
+ALTER TABLE "memo"."tbldefaultmessage" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table tbhistory
@@ -206,6 +243,7 @@ ALTER TABLE "memo"."tbmemo" ADD FOREIGN KEY ("userid") REFERENCES "public"."tblu
 -- Foreign Key structure for table "memo"."tbmessage"
 -- ----------------------------
 ALTER TABLE "memo"."tbmessage" ADD FOREIGN KEY ("userid") REFERENCES "public"."tbluser" ("userid") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "memo"."tbmessage" ADD FOREIGN KEY ("message_id") REFERENCES "memo"."tbldefaultmessage" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Key structure for table "memo"."tbreport"

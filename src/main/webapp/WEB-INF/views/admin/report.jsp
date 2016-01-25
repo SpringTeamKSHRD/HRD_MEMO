@@ -56,7 +56,7 @@
       </div>
       <div class="modal-body">
 	    <form role="form" id="formshow">
-		<div class="box-body">
+		<div class="box-body" style="padding:0px;">
 			<div class="form-group">
 				<div class="col-sm-3" style="padding-left:0px">
 					<label for="id">Report ID</label>
@@ -99,12 +99,6 @@
 				<div class="col-sm-4">
 					<label for="owner">Owner</label>		
 					<a id="ownerlink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
-				</div>
-				<div class="col-sm-4" style="padding-right:0px">
-					<label for="owner">Block</label>		
-					<div style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;">
-						<input type="checkbox"> True/False
-					</div>				
 				</div>			
 				<div class="clearfix "></div>
 			</div>
@@ -112,7 +106,8 @@
 		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      	<button type="button" class="btn btn-primary" id="btnblock">Block</button>
+        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
