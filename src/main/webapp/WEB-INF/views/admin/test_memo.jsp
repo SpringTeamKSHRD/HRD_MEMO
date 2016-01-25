@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script>
+<!-- <script type="text/javascript" src = "http://code.jquery.com/jquery-2.0.0.js"></script> -->
+<script src="http://localhost:8080/HRD_MEMO/resources/admin/js/memo.min.js"></script>
 </body>
 </html>
