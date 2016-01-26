@@ -67,6 +67,7 @@ public class PluginController {
 	}
 	@RequestMapping(value = "/plugingetmemoowner", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> getMemoOwner(@RequestBody Memo memo) {
+		System.out.println("get owner");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Memo> memos=new ArrayList<Memo>();
 		memos=memoDao.pluginGetMemoOwner(memo.getUserid(),memo.getUrl());
@@ -83,6 +84,7 @@ public class PluginController {
 	}
 	@RequestMapping(value = "/plugingetmemopublic", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> getMemoPublic(@RequestBody Memo memo) {
+		System.out.println("get public");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Memo> memos=new ArrayList<Memo>();
 		memos=memoDao.pluginGetMemoPulic(memo.getUserid(),memo.getUrl());

@@ -37,14 +37,19 @@ public class MessageDaoImpl implements MessageDao {
 			});
 			return inserts;
 	}
+	//for user's report.
 	@Override
 	public List<Message> getUserMessage(int userid) {
-		String sql="SELECT msg.id,dmsg.message "
+		/*String sql="SELECT msg.id,dmsg.message "
 				+ "FROM memo.tbmessage msg "
 				+ "INNER JOIN memo.tbdefualtmessage dmsg "
 				+ "ON msg.messageid=dmsg.id "
-				+ "WHERE msg.isviewed=FALSE AND msg.userid=?";
-		List<Message> messages=jdbcTemplate.query(sql,new RowMapper<Message>(){
+				+ "WHERE msg.isviewed=FALSE AND msg.userid=?";*/
+		String sql="SELECT ms.id,dfm.messsage"
+				+" FROM memo.tbdefaultmessage dfm INNER JOIN memo.tbmessage ms"
+				+" ON dfm.id=ms.message_id"
+				+" WHERE userid=? AND isviewed=FALSE;";
+		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid},new RowMapper<Message>(){
 			@Override
 			public Message mapRow(ResultSet rs, int i) throws SQLException {
 				Message msg=new Message();
@@ -71,6 +76,17 @@ public class MessageDaoImpl implements MessageDao {
 			System.out.println(ex.getMessage());
 		}
 		return 0;
+	}
+	@Override
+	public boolean changeMessageIsViewed(int userid) {
+		String sql="UPDATE memo.tbmessage SET isviewed=TRUE WHERE userid=?;";
+		try{	
+			int i=jdbcTemplate.update(sql,userid);
+			if(i>0) return true;
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return false;	
 	}
 
 }

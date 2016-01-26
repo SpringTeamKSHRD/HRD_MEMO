@@ -45,4 +45,9 @@ public class MessageServiceImpl implements MessageService{
 		}
 	}
 
+	@Override
+	public boolean changeMessageIsViewed(int userid) {
+		return messageDao.changeMessageIsViewed(userid);
+	}
+
 }

@@ -15,6 +15,7 @@ public class Message {
 		this.isview = isview;
 		this.message = message;
 	}
+
 	public int getId() {
 		return id;
 	}

@@ -76,14 +76,24 @@ function updateUserPwd(){
 		contentType: 'application/json',
 		success : function(data) {
 			swal("Success!", "Your password has been updated.", "success");
+			clearModalPwd();
 			//alert("Success :" + data.MESSAGE);
 		},
 		error : function(data) {
-			alert("Unsuccess: " + data.MESSAGE);
+			//alert("Unsuccess: " + data.MESSAGE);
+			sweetAlert("Fail", "Your password has been not updated!", "error");
 			console.log("ERROR..." + data);
 		}
 	});
 }
+// cancel for user profile form
 function cancelUser(){
-	alert("cancel");
+	//alert("cancel");
+	sweetAlert("Opp...", "Cancel updated!", "error");
+}
+//clear modal change password 
+function clearModalPwd(){
+	$("#old_pwd").val("");
+	$("#new_pwd").val("");
+	$("#con_pwd").val("");
 }

@@ -22,7 +22,7 @@
 /* container dark */
 
 .qn_container {
-    z-index: 999;
+    z-index: 99999999;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -171,7 +171,7 @@ textarea{
     margin-top: 0;
 }
 
-.close:before {
+/* .close:before {
     content: 'x';
 }
 
@@ -189,7 +189,7 @@ textarea{
 .close:hover {
     cursor: pointer;
 }
-
+ */
 
 /* end notes */
 

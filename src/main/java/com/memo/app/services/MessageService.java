@@ -9,5 +9,7 @@ public interface MessageService {
 	public List<Message> getUserMessage(int userid);
 	public int getNumberMessage(int userid);
     public boolean changeIsView(int messageid);
+    //sona 
+    public boolean changeMessageIsViewed(int userid);
 
 }
