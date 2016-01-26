@@ -2,7 +2,7 @@ $(function(){
 	
 	//add css to iclude iframe
 		$('head').append("<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>");
-		//$('head').append("<script type='text/javascript' src='http://192.168.178.123:8080/HRD_MEMO/resources/js/shortcutkey.js'></script>");
+		$('head').append(" <script type='text/javascript' src='http://192.168.178.123:8080/HRD_MEMO/resources/js/iframeResizer.min.js'></script>");
 	//iframe wrapper
 		var wrapper=document.getElementById("hrd_memo_pess");
 	//create iframe
@@ -10,6 +10,7 @@ $(function(){
 		ifrm_hrdmemo.setAttribute("src", "http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin");
 	//ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 		ifrm_hrdmemo.setAttribute('class','my-memo-class');
+		ifrm_hrdmemo.setAttribute('id','IFRAME_MEMO_PESS');
 		ifrm_hrdmemo.style.width ="100%";
 		ifrm_hrdmemo.style.height="auot";
 		ifrm_hrdmemo.style.position="relative";
@@ -34,6 +35,7 @@ $(function(){
 		var iframe_memo_id="";
 		var memo_iframe_height=0;
 		var memo_title = document.getElementsByTagName("title")[0].innerHTML;
+		document.getElementById("IFRAME_MEMO_PESS").onload=function(){
 		iFrameResize({
 			sizeHeight:true,
 			autoResize:false,
@@ -50,6 +52,7 @@ $(function(){
 				ifrm_hrdmemo.style.height="100%";
 			}
 		});
+};
 		var activate_desc_memo=document.createElement("P");
 		activate_desc_memo.setAttribute("id","btn-act-desc");
 		activate_desc_memo.setAttribute("title","Memo");
