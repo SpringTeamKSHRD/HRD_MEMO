@@ -38,16 +38,17 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
 			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
+			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+			  	<li role="separator" class="divider"></li>
 				<li><a href="#!" data-toggle="modal" data-target="#myModal">Change password</a></li>
 				<li role="separator" class="divider"></li>
-				<li><a href="#">Separated link</a></li>
+				<li><a href="#">Log out</a></li>
 			  </ul>
 			</li>
 			<li><a href="#!">About</a></li>

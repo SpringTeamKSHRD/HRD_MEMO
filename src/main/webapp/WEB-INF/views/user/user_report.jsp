@@ -27,6 +27,7 @@
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
 	  <li><a href="">Log out</a></li>
@@ -53,36 +54,20 @@
 		<!-- Page Layout body here -->
 		<div class="row">
 			<div class="col s12 m12 l12">
-				<ul class="collection">
-				    <li class="collection-item avatar">
-				      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
-				      <span class="title">Nem Sopheak</span>
-				      <p> This is not a good memo.
-				      </p>
-				      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
-				    </li>
-				    <li class="collection-item avatar">
-				      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
-				      <span class="title">Chhorn Elit</span>
-				      <p>I hate it.
-				      </p>
-				      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
-				    </li>
-				    <li class="collection-item avatar">
-				      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
-				      <span class="title">Larch Phalleak</span>
-				      <p>I want admin remove it.
-				      </p>
-				      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
-				    </li>
-				    <li class="collection-item avatar">
-				      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
-				      <span class="title">Ky Sona</span>
-				      <p>I do not want to see it.
-				      </p>
-				      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
-				    </li>
-			  </ul>
+			<!-- Current user -->
+				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
+				<div id="list_report_area">
+				
+				</div>
+				<%-- <ul class="collection">
+					    <li class="collection-item avatar">
+					      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
+					      <span class="title">Nem Sopheak</span>
+					      <p> This is not a good memo.
+					      </p>
+					      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
+					    </li>
+				  </ul> --%>
 			</div>
 		</div>
 		<!-- ./close row body which contain body left and body right -->

@@ -6,6 +6,7 @@ public class Message {
 	private int messageid;
 	private boolean isview;
 	private String message;
+	
 	public int getId() {
 		return id;
 	}

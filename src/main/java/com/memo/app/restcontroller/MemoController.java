@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.Message;
 import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.MemoService;
+import com.memo.app.services.MessageService;
 import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
@@ -45,6 +47,9 @@ public class MemoController {
 	
 	@Autowired
 	private ReportService reportDao;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	// update user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
@@ -81,22 +86,24 @@ public class MemoController {
 					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 				}
 			}
-		// get notification
-			@RequestMapping(value = "/notification", method = RequestMethod.GET)
-			public ResponseEntity<Map<String, Object>> getReportNotification() {
-				System.out.println("notification controller.");
+		//get user's reports
+			@RequestMapping(value = "/report/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> listReport(@PathVariable("uid") int uid) {
+				System.out.println("list user report controller with userid="+uid);
+				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
-				List<Report> reports=reportDao.getReportNotification();
-				HttpStatus status = HttpStatus.OK;
-				if (!reports.isEmpty()) {	
-					map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
-					map.put("DATA",reports);
-				} else {
-					map.put("MESSAGE", "REPORT NOT FOUND.");
-					status = HttpStatus.NOT_FOUND;
+				
+				message =messageService.getUserMessage(uid);
+				if (message.isEmpty()) {
+					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
+					map.put("STATUS", HttpStatus.NOT_FOUND.value());
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 				}
-				return new ResponseEntity<Map<String, Object>>(map, status);
-			}	
+				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
+				map.put("STATUS", HttpStatus.OK.value());
+				map.put("DATA", message);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}
 			
 	// list memo with limiting amount of rows
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

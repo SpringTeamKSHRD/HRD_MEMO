@@ -27,6 +27,7 @@
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
 	  <li><a href="">Log out</a></li>
