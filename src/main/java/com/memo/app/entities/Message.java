@@ -5,7 +5,16 @@ public class Message {
 	private int  userid;
 	private int messageid;
 	private boolean isview;
-	private String message;
+	private String message;	
+	public Message(){}
+	public Message(int id, int userid, int messageid, boolean isview, String message) {
+		super();
+		this.id = id;
+		this.userid = userid;
+		this.messageid = messageid;
+		this.isview = isview;
+		this.message = message;
+	}
 	public int getId() {
 		return id;
 	}

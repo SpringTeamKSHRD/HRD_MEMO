@@ -1,5 +1,6 @@
 package com.memo.app.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.memo.app.entities.Message;
 import com.memo.app.entities.Report;
 import com.memo.app.services.IDashboardService;
 import com.memo.app.services.MemoService;
+import com.memo.app.services.MessageService;
 import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
@@ -38,19 +42,22 @@ public class AdminController {
 	@Autowired
 	private MemoService memoDao;
 	
+	@Autowired
+	private MessageService messageDao;
+	
 	@ModelAttribute
 	public void commonObject(Model m){
 				
 	}
 	
-	@RequestMapping("")
+	@RequestMapping(value="", method = RequestMethod.GET)
 	public String dashboard(ModelMap m) {
 		m.addAttribute("dashboard",dashboard.getDashboardInfo());
 		this.pageDescription(m, "Dashboard", "Control Panel");
 		return "admin/dashboard";
 	}
 	
-	@RequestMapping("/users")
+	@RequestMapping(value="/users", method = RequestMethod.GET)
 	public String users(ModelMap m,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
@@ -61,7 +68,7 @@ public class AdminController {
 		return "admin/users";
 	}
 	
-	@RequestMapping("/memos")
+	@RequestMapping(value="/memos", method = RequestMethod.GET)
 	public String memo(ModelMap m,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
@@ -72,7 +79,7 @@ public class AdminController {
 		return "admin/memos";
 	}
 	
-	@RequestMapping("/reports")
+	@RequestMapping(value="/reports", method = RequestMethod.GET)
 	public String report(ModelMap m,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
@@ -83,7 +90,7 @@ public class AdminController {
 		return "admin/report";
 	}
 	
-	@RequestMapping("/report/{id}")
+	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> reportDetail(ModelMap m, 
 			@PathVariable("id") Integer id) {
 		
@@ -100,9 +107,24 @@ public class AdminController {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
+	@RequestMapping(value = "/report/block", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> blockMemo(@RequestBody Report report) {		
+		List<Message> listMessage = new ArrayList<Message>();
+		listMessage.add(new Message(0,report.getOwnermemoid(),1,false,null));
+		listMessage.add(new Message(0,report.getReporterid(),2,false,null));
+		messageDao.saveMessage(listMessage);
+		reportDao.blockMemoReport(report.getId());
+		memoDao.deleteMemo(report.getMemoid());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.OK;
+		map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+
+	
 	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getReportNotification() {
-		System.out.println("notification controller.");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Report> reports=reportDao.getReportNotification();
 		HttpStatus status = HttpStatus.OK;

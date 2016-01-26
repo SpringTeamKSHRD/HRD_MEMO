@@ -51,7 +51,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         <h4 class="modal-title" id="myModalLabel">Report Detail</h4>
       </div>
       <div class="modal-body">
@@ -78,7 +78,7 @@
 					<input type="number" class="form-control" id="memoid" readonly>
 				</div>
 				<div class="col-sm-9" style="padding-right:0px">
-					<label for="title">Written On</label>
+					<label for="title">Written Date</label>
 					<input type="text" class="form-control" id="memodate" readonly>				
 				</div>
 				<div class="clearfix "></div>
@@ -115,14 +115,15 @@
 <%@ include file="_footer.jsp"%>
 <%@ include file="_defaultJS.jsp"%>
 <script>
+var data = {};
 var path="${pageContext.request.contextPath}";
 var imagepath=path+"/resources/admin/imgs/";
 function showDetail(id){
 	$.ajax({
 		url: path+"/admin/report/"+id,
 		type: "get",
-		success: function (response) {
-			var data = validateNullInJson(response['DATA']);
+		success: function (response) {			
+			data = validateNullInJson(response['DATA']);
 			$("#reportid").val(data.id);
 			$("#reportdate").val(data.reportdate);
 			$("#reportdescription").val(data.description);
@@ -134,6 +135,8 @@ function showDetail(id){
 			$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.reportername);
 			$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
 			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.ownermemoname);
+			if(ParamToJson().id==undefined) window.history.pushState(null,null,window.location.href+"?id="+data.id);
+			console.log(JSON.stringify(data));
 		}
 	});    	
 	$('#myModal').modal('show');
@@ -168,8 +171,22 @@ jQuery(document).ready(function($) {
     	$("#reportbylink").html('');
     	$("#ownerlink").html('');
     	$("#formshow")[0].reset();
+    	data={};
+    	if(ParamToJson().id) window.history.pushState(null,null,window.location.origin+window.location.pathname);
     })
+    $('#btnblock').click(function(){
+    	console.log(JSON.stringify(data));
+    	$.ajax({
+    		url: "http://localhost:8080/HRD_MEMO/admin/report/block",
+    		type: "POST",
+    		dataType : 'json',
+    		contentType: "application/json; charset=utf-8",
+    		data:JSON.stringify(data),
+    		success: function (response) {		}
+    	});  
+    });
 });
 </script>	
+<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script>
 </body>
 </html>
