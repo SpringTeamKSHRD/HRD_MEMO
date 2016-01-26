@@ -202,6 +202,7 @@
 		close.setAttribute('title','close');
 		close.style.float="right";
 		close.style.color="red";
+		close.style.marginRight="7px";
 		close.setAttribute('onclick','toDelete('+memoid+')');
 		var close_text=document.createTextNode("delete");
 		close.appendChild(close_text);
@@ -337,15 +338,10 @@
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
-				$("#my-rp-popup").text("YOU REPORT SUCCESSED");
-				$("#my-rp-popup").css("width","100%");
-				$("#my-rp-popup").fadeIn(200)
-				 .delay(1500).fadeOut(500);
+				 alertify.success("REPORT SUCCESSED..!");
 			},
 			error : function(data) {
-				$("#my-rp-popup").text("YOU REPORT FIALED");
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(1500).fadeOut(500);
+				 alertify.error("REPORT FAILED..!");
 			}
 		});
 	}
@@ -388,10 +384,7 @@
 					}
 				},
 				error : function(data) {
-					$("#my-rp-popup").text("YOU CAN ONLY ONE MEMO ONE ARTICLE");
-					$("#my-rp-popup").css("width","100%");
-					$("#my-rp-popup").fadeIn(200)
-									 .delay(2000).fadeOut(500);
+					 alertify.error("YOU MEMO ONLY ONE IN ONE ARTICLE..!");
 				}
 			});
 		} else {
@@ -423,22 +416,14 @@
 					pluginGetMemoOwner();
 				},
 				error : function(data) {
-					$("#my-rp-popup").text("YOU LOGIN FIALED");
-					$("#my-rp-popup").css("width","100%");
-					$("#my-rp-popup").css('background','red');
-					$("#my-rp-popup").fadeIn(200)
-									 .delay(1500).fadeOut(500);
+					 alertify.error("LOGIN FAILED..!");
 				}
 			});
 			$("#loginemail").val("");
 		$("#loginpassword").val("");
 		} else {
 			if (validateEmail($("#loginemail").val()) == false) {
-				$("#my-rp-popup").text("INVALID EMAIL");
-				$("#my-rp-popup").css("width","100%");
-				$("#my-rp-popup").css('background','red');
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(1500).fadeOut(500);
+				 alertify.error("INVALID EMAIL..!");
 			}
 		}
 	}
@@ -469,27 +454,15 @@
 					password : $("#password").val("");
 				},
 				error : function(data) {
-					$("#my-rp-popup").text("YOUR EMAIL IS EXIST");
-					$("#my-rp-popup").css("width","100%");
-					$("#my-rp-popup").css('background','red');
-					$("#my-rp-popup").fadeIn(200)
-									 .delay(1500).fadeOut(500);
+					 alertify.error("EMAIL IS EXIST");
 				}
 			});
 		} else {
 			if ($("#name").val() == "" || $("#email").val() == ""
 					|| $("#password").val() == "") {
-				$("#my-rp-popup").text("YOU INVALID INFO..!");
-				$("#my-rp-popup").css("width","100%");
-				$("#my-rp-popup").css('background','red');
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(1500).fadeOut(500);
+				alertify.error("INVALID INFO");
 			} else if (validateEmail($("#email").val()) == false) {
-				$("#my-rp-popup").text("INVALID EMAIL..!");
-				$("#my-rp-popup").css("width","100%");
-				$("#my-rp-popup").css('background','red');
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(1500).fadeOut(500);
+				 alertify.error("INVALID EMAIL");
 			}
 		}
 	}
@@ -546,29 +519,22 @@
 				$("#descmemo").val("");
 				$("#public").prop('checked','');
 				$(".my_delete_btn").fadeIn();
-				$("#my-rp-popup").text("YOU UPDATE SUCCESSED");
-				$("#my-rp-popup").css("background","#009688");
-				$("#my-rp-popup").css("width","100%");
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(2000).fadeOut(500);
+				alertify.success("Memo has been updated");
 					//sendReportNotify("public");
 			},
 			error : function(data) {
-				$("#my-rp-popup").text("UPDATE FAILED");
-				$("#my-rp-popup").css('background','red');
-				$("#my-rp-popup").fadeIn(200)
-								 .delay(1500).fadeOut(500);
+				 alertify.error("Memo has been update failed");
 			}
 		});
 		ismpublic = false;
 	}
-	//textarea enter event
+	/* //textarea enter event
 	function handleKeyPress(e){
 		 var key=e.keyCode || e.which;
 		  if (key==13){
 		   	    saveMemo();
 		  }
-	}
+	} */
 	//passwor login textbox enter event
 	function LoginhandleKeyPress(e){
 		 var key=e.keyCode || e.which;

@@ -1,5 +1,7 @@
 $(function(){
-	
+	var memo_wrapper_h = window.innerHeight;
+	 var windowScrollWidth = window.outerWidth-window.innerWidth;
+	 alert(windowScrollWidth);
 	//add css to iclude iframe
 		$('head').append("<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>");
 		$('head').append(" <script type='text/javascript' src='http://192.168.178.123:8080/HRD_MEMO/resources/js/iframeResizer.min.js'></script>");
@@ -22,9 +24,10 @@ $(function(){
 		ifrm_hrdmemo.setAttribute('scrolling','no');
 		
 	//wrapper style
-		wrapper.style.height="97%";
+		wrapper.style.height=memo_wrapper_h+"px";
 		wrapper.style.width="0px";
-		wrapper.style.right="2px";
+		wrapper.style.zIndex="999999";
+		wrapper.style.right=windowScrollWidth+2+'px';
 		wrapper.style.position="fixed";
 		wrapper.style.top="0px";
 		wrapper.style.background="#F5F5F5";
@@ -71,19 +74,20 @@ $(function(){
 		activate_desc_memo.style.padding="5px";
 		activate_desc_memo.style.textAlign="center";
 		activate_desc_memo.innerHTML=" <i class='large material-icons'>description</i>";
+		activate_desc_memo.style.zIndex="9999";
 		$('body').append(activate_desc_memo);
 		var my_memo_hide=true;
 		$("#btn-act-desc").click(function(){
 			if(my_memo_hide==true){
-				$("#btn-act-desc").animate({right: 355, marginLeft: 0,}, {duration: 300});
-				$("#hrd_memo_pess").animate({width: 341, marginLeft: 0,padding:5}, {duration: 300});
+				$("#btn-act-desc").animate({right: 346+windowScrollWidth, marginLeft: 0,}, {duration: 300});
+				$("#hrd_memo_pess").animate({width: 341+windowScrollWidth, marginLeft: 0,padding:5}, {duration: 300});
 				document.getElementsByClassName('my-memo-class')[0]
 				.iFrameResizer.sendMessage( memo_iframe_height+"#"+location.hostname+"#"+location.href+"#"+memo_title);
 				my_memo_hide=false;
 			}else{
 				my_memo_hide=true;
-				$("#btn-act-desc").animate({right:2, marginLeft: 0}, {duration: 300});
-				$("#hrd_memo_pess").animate({width: 0, marginLeft: 0,padding:0}, {duration: 300});
+				$("#btn-act-desc").animate({right:1+windowScrollWidth, marginLeft: 0}, {duration: 300});
+				$("#hrd_memo_pess").animate({width: 0-windowScrollWidth, marginLeft: 0,padding:0}, {duration: 300});
 			}
 		});
 		$("#btn-act-desc").css('display','block');
@@ -100,4 +104,12 @@ $(function(){
 				$("#hrd_memo_pess").animate({width: 0, marginLeft: 0,padding:0}, {duration: 300});
 			}
 		});*/
+		addEventListener('resize',MyMemoWrapperHeight(),true);
+		function MyMemoWrapperHeight(){
+			windowScrollWidth = window.outerWidth-window.innerWidth;
+			wrapper.style.height= window.innerHeight+"px";
+			wrapper.style.right=windowScrollWidth+2+'px';
+			activate_desc_memo.style.right=windowScrollWidth+1+"px";
+		}
+		
 });
