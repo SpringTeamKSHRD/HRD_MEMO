@@ -13,4 +13,5 @@ public interface IEmebededMemoRepo {
 	public Boolean isExistEmail(String email);
 	public Boolean isReported(int memoid);
 	public Boolean insertReport(Report rp);
+	public Boolean isMemoReported(int memoid);
 }

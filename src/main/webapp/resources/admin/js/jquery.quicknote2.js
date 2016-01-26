@@ -234,7 +234,7 @@
             dl += '</div>';
             dl += '</div>';
 
-            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:6px" title="Logout"/></div>';
+            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:8px" title="Logout"/></div>';
             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
             var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
