@@ -40,11 +40,6 @@ public class MessageDaoImpl implements MessageDao {
 	//for user's report.
 	@Override
 	public List<Message> getUserMessage(int userid) {
-		/*String sql="SELECT msg.id,dmsg.message "
-				+ "FROM memo.tbmessage msg "
-				+ "INNER JOIN memo.tbdefualtmessage dmsg "
-				+ "ON msg.messageid=dmsg.id "
-				+ "WHERE msg.isviewed=FALSE AND msg.userid=?";*/
 		String sql="SELECT ms.id,dfm.messsage"
 				+" FROM memo.tbdefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
@@ -79,7 +74,8 @@ public class MessageDaoImpl implements MessageDao {
 	}
 	@Override
 	public boolean changeMessageIsViewed(int userid) {
-		String sql="UPDATE memo.tbmessage SET isviewed=TRUE WHERE userid=?;";
+		String sql="UPDATE memo.tbmessage SET isviewed=TRUE"
+				+" WHERE isviewed=FALSE AND userid=?;";
 		try{	
 			int i=jdbcTemplate.update(sql,userid);
 			if(i>0) return true;
@@ -87,6 +83,24 @@ public class MessageDaoImpl implements MessageDao {
 			System.out.println(ex.getMessage());
 		}
 		return false;	
+	}
+	@Override
+	public List<Message> getOldMessage(int userid) {
+		String sql="SELECT ms.id,dfm.messsage"
+				+" FROM memo.tbdefaultmessage dfm INNER JOIN memo.tbmessage ms"
+				+" ON dfm.id=ms.message_id"
+				+" WHERE userid=? AND isviewed=TRUE;";
+		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid},new RowMapper<Message>(){
+			@Override
+			public Message mapRow(ResultSet rs, int i) throws SQLException {
+				Message msg=new Message();
+				msg.setId(rs.getInt(1));
+				msg.setMessage(rs.getString(2));
+				return msg;
+			}
+			
+		});
+		return messages;
 	}
 
 }

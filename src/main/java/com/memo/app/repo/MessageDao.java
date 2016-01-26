@@ -11,4 +11,5 @@ public interface MessageDao {
     public int changeIsView(int messageid);
     //sona
     public boolean changeMessageIsViewed(int userid);
+    public List<Message> getOldMessage(int userid);
 }

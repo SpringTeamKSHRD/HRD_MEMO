@@ -86,9 +86,9 @@ public class MemoController {
 					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 				}
 			}
-		//get user's reports
-			@RequestMapping(value = "/report/{uid}", method = RequestMethod.GET)
-			public ResponseEntity<Map<String, Object>> listReport(@PathVariable("uid") int uid) {
+		//get user new reports
+			@RequestMapping(value = "/newreport/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> listNewReport(@PathVariable("uid") int uid) {
 				System.out.println("list user report controller with userid="+uid);
 				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -106,7 +106,27 @@ public class MemoController {
 				map.put("TOTAL", total);
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			}
-			//set isview user's report
+			//get user old reports
+			@RequestMapping(value = "/oldreport/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> listOldReport(@PathVariable("uid") int uid) {
+				System.out.println("list user report controller with userid="+uid);
+				List<Message> message=new ArrayList<Message>();
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				message =messageService.getOldMessage(uid);
+				int total=messageService.getNumberMessage(uid);
+				if (message.isEmpty()) {
+					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
+					map.put("STATUS", HttpStatus.NOT_FOUND.value());
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+				}
+				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
+				map.put("STATUS", HttpStatus.OK.value());
+				map.put("DATA", message);
+				map.put("TOTAL", total);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}
+			//change status report to be viewed
 			@RequestMapping(value = "/changereport/{uid}", method = RequestMethod.GET)
 			public ResponseEntity<Map<String, Object>> changeStatusReport(@PathVariable("uid") int uid) {
 				System.out.println("change status user report controller with userid="+uid);

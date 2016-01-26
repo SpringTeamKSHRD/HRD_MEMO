@@ -50,4 +50,9 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.changeMessageIsViewed(userid);
 	}
 
+	@Override
+	public List<Message> getOldMessage(int userid) {
+		return messageDao.getOldMessage(userid);
+	}
+
 }

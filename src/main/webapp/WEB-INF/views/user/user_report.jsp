@@ -53,21 +53,25 @@
 	<div class="container">
 		<!-- Page Layout body here -->
 		<div class="row">
-			<div class="col s12 m12 l12">
 			<!-- Current user -->
-				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
-				<div id="list_report_area">
+			<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
+			<!-- List old report here -->
+			<div class="col s12 m12 l3 z-depth-1" style="margin-top:14px;">
+				<div class="collection">
+				     <a href="#!" class="collection-item active" style="text-align:center;">List old Reports</a>
+				</div>
+				<div id="list_old_report">
 				
 				</div>
-				<%-- <ul class="collection">
-					    <li class="collection-item avatar">
-					      <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" alt="" class="circle">
-					      <span class="title">Nem Sopheak</span>
-					      <p> This is not a good memo.
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="material-icons">textsms</i></a>
-					    </li>
-				  </ul> --%>
+			</div>
+			<!-- List new report here-->
+			<div class="col s12 m12 l9 z-depth-1">
+				<div class="collection">
+				    <a href="#!" class="collection-item active" style="text-align:center;">List new Reports</a>
+				</div>
+				<div id="list_new_report">
+				
+				</div>
 			</div>
 		</div>
 		<!-- ./close row body which contain body left and body right -->

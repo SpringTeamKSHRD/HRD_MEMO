@@ -11,5 +11,6 @@ public interface MessageService {
     public boolean changeIsView(int messageid);
     //sona 
     public boolean changeMessageIsViewed(int userid);
+    public List<Message> getOldMessage(int userid);
 
 }
