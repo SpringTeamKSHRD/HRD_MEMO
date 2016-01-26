@@ -543,7 +543,7 @@ Date.prototype.format = function(mask, utc) {
                                 var memo = {
                                     "userid": Cookies.getJSON('LOGGED').userid,
                                     "id": memoid,
-                                    "content": $("#notes textarea[name$='qn_input']").val(),
+                                    "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                                     "ispublic": $("#ispublic").val(),
                                     "domainName": domainName,
                                     "url": url
@@ -686,7 +686,7 @@ Date.prototype.format = function(mask, utc) {
                 var url = window.location.pathname;
                 var memo = {
                     "userid": Cookies.getJSON('LOGGED').userid,
-                    "content": $("#notes textarea[name$='qn_input']").val(),
+                    "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                     "domainName": domainName,
                     "url": url,
                     "ispublic": $('#ispublic').val()
@@ -730,7 +730,7 @@ Date.prototype.format = function(mask, utc) {
                 $('.qn_container #logout,.qn_container #notes,.qn_container .chat-container,.qn_container #username-password').slideToggle(100);
             });
             // CLICK TO CLOSE NOTES
-            this.$el.on('click', '#notes .close', function() {
+            /*this.$el.on('click', '#notes .close', function() {
                 $(this).each(function() {
                     $(this).parent('.quicknote').stop().fadeOut(100, function() {
                         var id = $(this).attr('id');
@@ -757,7 +757,7 @@ Date.prototype.format = function(mask, utc) {
                         $(this).remove();
                     });
                 });
-            });
+            });*/
         }
     };
     $.fn.quicknote = function(options) {
