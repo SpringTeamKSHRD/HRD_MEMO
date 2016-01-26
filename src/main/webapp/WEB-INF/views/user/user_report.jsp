@@ -26,11 +26,11 @@
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
-	  <li><a href="">Log out</a></li>
+	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul>        	
 	<nav>
 	  <div class="nav-wrapper teal">
@@ -81,6 +81,8 @@
 	<!-- Personal Information -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- Personal Information -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
+	<!-- User Report -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>

@@ -94,6 +94,7 @@ public class MemoController {
 				Map<String, Object> map = new HashMap<String, Object>();
 				
 				message =messageService.getUserMessage(uid);
+				int total=messageService.getNumberMessage(uid);
 				if (message.isEmpty()) {
 					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
 					map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -102,6 +103,22 @@ public class MemoController {
 				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
 				map.put("STATUS", HttpStatus.OK.value());
 				map.put("DATA", message);
+				map.put("TOTAL", total);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}
+			//set isview user's report
+			@RequestMapping(value = "/changereport/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> changeStatusReport(@PathVariable("uid") int uid) {
+				System.out.println("change status user report controller with userid="+uid);
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				if (!messageService.changeMessageIsViewed(uid)) {
+					map.put("MESSAGE", "MESSAGES HAS NOT BEEN CHANGE STATUS.");
+					map.put("STATUS", HttpStatus.NOT_FOUND.value());
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+				}
+				map.put("MESSAGE", "MESSAGES HAVE BEEN CHANGE STATUS.");
+				map.put("STATUS", HttpStatus.OK.value());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			}
 			

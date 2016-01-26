@@ -88,7 +88,8 @@ function updateUserPwd(){
 }
 // cancel for user profile form
 function cancelUser(){
-	alert("cancel");
+	//alert("cancel");
+	sweetAlert("Opp...", "Cancel updated!", "error");
 }
 //clear modal change password 
 function clearModalPwd(){

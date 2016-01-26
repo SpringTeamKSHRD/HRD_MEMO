@@ -44,11 +44,11 @@
 			<li class="dropdown">
 			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
-			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 			  	<li role="separator" class="divider"></li>
 				<li><a href="#!" data-toggle="modal" data-target="#myModal">Change password</a></li>
 				<li role="separator" class="divider"></li>
-				<li><a href="#">Log out</a></li>
+				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
 			</li>
 			<li><a href="#!">About</a></li>
@@ -181,6 +181,8 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
+	<!-- User Report -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>

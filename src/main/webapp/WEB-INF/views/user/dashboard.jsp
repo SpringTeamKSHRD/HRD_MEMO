@@ -26,11 +26,11 @@
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
-	  <li><a href="">Log out</a></li>
+	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul>        	
 	<nav>
 	  <div class="nav-wrapper teal">
@@ -127,14 +127,16 @@
 						</div>
 					</div>
 				<!-- ./Textarea -->
-				<!-- url here -->
-					<div class="row " style="margin: 0 0 10px 0;">
-						<div class="col s6" style="margin-left: 15px;">
+				<!-- url and buttons here -->
+					<div class="row " >
+						<div class="col s12 m12 l6">
 						  <label class="active">Current URL</label>
 						  <input type="text" class="browser-default" readonly="" value="www.khmeracademy.org.kh">
-						</div>						
-						<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
-						<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Cancel</a>			
+						</div>	
+						<div class="col s12 m12 l6">
+							<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
+							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Cancel</a>	
+						</div>													
 					</div>
 				<!-- ./ url here -->
 				<!-- Button Save and Cancel -->
@@ -159,6 +161,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Personal Information -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- Sweet Alert -->

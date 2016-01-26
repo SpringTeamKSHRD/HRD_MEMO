@@ -77,5 +77,16 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		return 0;
 	}
+	@Override
+	public boolean changeMessageIsViewed(int userid) {
+		String sql="UPDATE memo.tbmessage SET isviewed=TRUE WHERE userid=?;";
+		try{	
+			int i=jdbcTemplate.update(sql,userid);
+			if(i>0) return true;
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return false;	
+	}
 
 }
