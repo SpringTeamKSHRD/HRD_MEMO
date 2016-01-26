@@ -25,7 +25,7 @@ $(function(){
 		wrapper.style.height="97%";
 		wrapper.style.width="0px";
 		wrapper.style.right="2px";
-		wrapper.style.position="absolute";
+		wrapper.style.position="fixed";
 		wrapper.style.top="0px";
 		wrapper.style.background="#F5F5F5";
 		wrapper.style.margin="0px";
