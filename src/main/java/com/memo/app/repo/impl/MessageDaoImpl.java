@@ -41,7 +41,7 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public List<Message> getUserMessage(int userid) {
 		String sql="SELECT ms.id,dfm.messsage"
-				+" FROM memo.tbdefaultmessage dfm INNER JOIN memo.tbmessage ms"
+				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
 				+" WHERE userid=? AND isviewed=FALSE;";
 		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid},new RowMapper<Message>(){
@@ -87,7 +87,7 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public List<Message> getOldMessage(int userid) {
 		String sql="SELECT ms.id,dfm.messsage"
-				+" FROM memo.tbdefaultmessage dfm INNER JOIN memo.tbmessage ms"
+				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
 				+" WHERE userid=? AND isviewed=TRUE;";
 		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid},new RowMapper<Message>(){

@@ -17,3 +17,22 @@ a{
 .modal-header{
 	background-color:#00BCD4;
 }
+@media only screen and (min-width: 500px) {
+    .collapse {
+        display: block;
+    }
+
+    .navbar-header {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+     .collapse {
+        display: none;
+     }
+
+     .navbar-header {
+        display: block;
+     }
+}

@@ -34,15 +34,17 @@ function uploadImage() {
 
 //to update user information not include with upload photo
 function updateUserInfo(){
+	//alert($("#dob").val());
 	json = {userid : parseInt($("#userid").val()),
 			username : $("#username").val(),
 			gender : $("input[type='radio'][name='gender']:checked").val(),
+			dateofbirth : $("#dob").val(),
 			phone : $("#phone").val(),
 			email : $("#email").val(),
 			image : img
 		   };
 
-	$.ajax({
+	/*$.ajax({
 		type : "POST",
 		url : domain + "/user/updateuser",
 		data : JSON.stringify(json),
@@ -53,7 +55,7 @@ function updateUserInfo(){
 			alert("Unsuccess: " + data.MESSAGE);
 			console.log("ERROR..." + data);
 		}
-	});
+	});*/
 }
 
 $("#image").change(function() {

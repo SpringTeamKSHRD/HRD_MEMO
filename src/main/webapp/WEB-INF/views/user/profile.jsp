@@ -35,7 +35,7 @@
 		  <a class="navbar-brand" href="#">MEMO PESS</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
 			<li>
@@ -182,7 +182,7 @@
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- User Report -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script> --%>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>

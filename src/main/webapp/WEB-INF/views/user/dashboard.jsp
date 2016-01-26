@@ -31,10 +31,19 @@
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
-	</ul>        	
+	</ul> 
+	<ul id="dropdown2" class="dropdown-content">
+	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
+	</ul> 		
+	<div class="navbar-fixed">       	
 	<nav>
 	  <div class="nav-wrapper teal">
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="">Home</a></li>
 	      <li>
@@ -44,12 +53,25 @@
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
 	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      </li>	      
+	      <li><a href="#!">About</a></li>	      
+	    </ul>
+	    <!-- For mobile menu -->
+	     <ul class="side-nav" id="mobile-demo">
+	      <li><a href="">Home</a></li>
+	      <li>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
-	      
+	      <!-- Dropdown Trigger -->
+	      <li>
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown2">
+	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      </li>	      
 	      <li><a href="#!">About</a></li>	      
 	    </ul>
 	  </div>
 	</nav>
+	</div>
 	<!-- ./close navigation -->
 	<div class="container-fluid">
 		<!-- Page Layout body here -->
@@ -161,7 +183,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script> --%>
 	<!-- Personal Information -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- Sweet Alert -->

@@ -135,9 +135,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean updateUser1(User user) {
-		System.out.println(user.getPhone());
-		String sql = "UPDATE tbluser SET username=?,gender=?,phonenumber=?,email=?,userimageurl=? WHERE userid=?";
-		Object[] obj = new Object[] { user.getUsername(), user.getGender(), user.getPhone(),user.getEmail(), user.getImage(),user.getUserid() };
+		System.out.println("update user"+user.getDob());
+		String sql = "UPDATE tbluser SET username=?,gender=?,dateofbirth=?,phonenumber=?,email=?,userimageurl=? WHERE userid=?";
+		Object[] obj = new Object[] { user.getUsername(),user.getGender(),"'"+user.getDob()+"'",user.getPhone(),user.getEmail(), user.getImage(),user.getUserid() };
 		try {
 			int i=jdbcTemplate.update(sql, obj);
 			if(i>0) return true;
