@@ -38,7 +38,8 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			 <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport"><i class="fa fa-envelope fa-2x"></i></a></li>
+			<%-- <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li> --%>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
@@ -47,7 +48,7 @@
 			  <ul class="dropdown-menu">
 			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 			  	<li role="separator" class="divider"></li>
-				<li><a href="#!" data-toggle="modal" data-target="#myModal">Change password</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/userpassword">Change password</a></li> <!-- href="#!" data-toggle="modal" data-target="#myModal" -->
 				<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
@@ -59,12 +60,12 @@
 	</nav>
 	<!-- Body here -->
 	<div class="container"> <br/><br/><br/>
-		<input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/>
+		<%-- <input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/> --%>
 		<!-- Modal Structure -->
-			<div id="myModal" class="modal fade" role="dialog">
+			<!-- <div id="myModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
 			
-			    <!-- Modal content-->
+			    Modal content
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -91,7 +92,7 @@
 			    </div>
 			
 			  </div>
-			</div>
+			</div> -->
 		<!-- ./close modal  -->
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -182,8 +183,8 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
-	<!-- User Report -->
-	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script> --%>
+	<!-- User Password -->
+	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_password.js"></script> --%>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>

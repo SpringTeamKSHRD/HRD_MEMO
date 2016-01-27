@@ -34,17 +34,17 @@ function uploadImage() {
 
 //to update user information not include with upload photo
 function updateUserInfo(){
-	//alert($("#dob").val());
+	alert($("#dob").val());
 	json = {userid : parseInt($("#userid").val()),
 			username : $("#username").val(),
 			gender : $("input[type='radio'][name='gender']:checked").val(),
-			dateofbirth : $("#dob").val(),
+			dob : $("#dob").val(),
 			phone : $("#phone").val(),
 			email : $("#email").val(),
 			image : img
 		   };
 
-	/*$.ajax({
+	$.ajax({
 		type : "POST",
 		url : domain + "/user/updateuser",
 		data : JSON.stringify(json),
@@ -55,14 +55,14 @@ function updateUserInfo(){
 			alert("Unsuccess: " + data.MESSAGE);
 			console.log("ERROR..." + data);
 		}
-	});*/
+	});
 }
 
 $("#image").change(function() {
 	img=$("#image").val().split("\\").pop();
 });
 
-function updateUserPwd(){
+/*function updateUserPwd(){
 	//alert($("#password").val()+"\n"+$("#old_pwd").val()+$("#new_pwd").val()+$("#con_pwd").val());
 	json = {userid : parseInt($("#userid").val()),
 			password : $("#password").val(),
@@ -87,7 +87,7 @@ function updateUserPwd(){
 			console.log("ERROR..." + data);
 		}
 	});
-}
+}*/
 // cancel for user profile form
 function cancelUser(){
 	//alert("cancel");

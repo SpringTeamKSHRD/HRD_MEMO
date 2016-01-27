@@ -7,8 +7,12 @@ span.listmemo{
 }
 li a i{ cursor: pointer; cursor: hand; }
 
+.default-link{
+	color:#E91E63;
+	font-weight: bold;
+}
 .title{
-	color:#004D40;
+	color:#FF5722; /*#004D40*/
 }
 span.rig-wrap{
 	position: relative;	

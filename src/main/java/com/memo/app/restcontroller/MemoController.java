@@ -54,7 +54,7 @@ public class MemoController {
 	// update user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user,HttpServletRequest request) {
-			//System.out.println("update user memo controller.");		
+			System.out.println("update user memo controller."+user.getDob());		
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			if (userService.updateUser1(user)) {			

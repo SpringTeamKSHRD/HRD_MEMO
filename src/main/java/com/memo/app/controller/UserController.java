@@ -32,6 +32,10 @@ public class UserController {
 	public String getUserReport(){
 		return "user/user_report";
 	}
+	@RequestMapping(value="/userpassword")
+	public String getUserPassword(){
+		return "user/user_password";
+	}
 	
 	
 }

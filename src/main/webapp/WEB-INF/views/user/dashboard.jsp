@@ -5,13 +5,14 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Memo</title>  
+	<title>User Memo Dashboard</title>  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->	
 	<!-- Materialize --> 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/materialize/css/materialize.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Materialize Icon -->
+	<!-- Materialize Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
 	<!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<!-- Own Style -->
@@ -28,14 +29,18 @@
 	<ul id="dropdown1" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
-	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul> 
 	<ul id="dropdown2" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
-	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul> 		
@@ -46,7 +51,7 @@
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="">Home</a></li>
-	      <li><a href=""><i class="large material-icons">email</i></a></li>
+	      <li><a href="${pageContext.request.contextPath}/user/userreport"><i class="large material-icons">email</i></a></li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
@@ -154,18 +159,14 @@
 					<div class="row " >
 						<div class="col s12 m12 l6">
 						  <label class="active">Current URL</label>
-						  <input type="text" class="browser-default" readonly="" value="www.khmeracademy.org.kh">
+						  <input type="text" class="browser-default default-link" readonly="" value="www.khmeracademy.org.kh">
 						</div>	
 						<div class="col s12 m12 l6">
 							<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
-							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px;">Cancel</a>	
+							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px; background-color:#FF9800">Cancel</a>	
 						</div>													
 					</div>
 				<!-- ./ url here -->
-				<!-- Button Save and Cancel -->
-				<div>
-
-				</div>
 			</form>
 			</div>
 			</div>
@@ -177,17 +178,13 @@
     <!-- ./Container --> 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
-	<!-- User Dashboard Script -->
+	<!-- User Memo Dashboard Script -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/delete_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/update_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/add_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
-<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script> --%>
-	<!-- Personal Information -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
-	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
 </html>
