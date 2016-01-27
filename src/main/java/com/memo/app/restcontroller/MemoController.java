@@ -120,10 +120,8 @@ public class MemoController {
 			//get user old reports
 			@RequestMapping(value = "/oldreport/{uid}", method = RequestMethod.GET)
 			public ResponseEntity<Map<String, Object>> listOldReport(@PathVariable("uid") int uid) {
-				System.out.println("list user report controller with userid="+uid);
 				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
-				
 				message =messageService.getOldMessage(uid);
 				if (message.isEmpty()) {
 					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
