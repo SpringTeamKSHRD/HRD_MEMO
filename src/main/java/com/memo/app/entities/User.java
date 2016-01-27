@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
 @Entity
 @Table(name="tbluser",schema="public")
 public class User {

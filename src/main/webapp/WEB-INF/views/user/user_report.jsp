@@ -28,7 +28,9 @@
 	<ul id="dropdown1" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
-	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account Information</a></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul>        	
@@ -85,8 +87,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
 	<!-- Personal Information -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
-	<!-- Personal Information -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- User Report -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Sweet Alert -->

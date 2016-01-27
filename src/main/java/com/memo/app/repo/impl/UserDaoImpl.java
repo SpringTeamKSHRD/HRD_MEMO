@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	public int saveUser(User user) {
 		if (this.getEmail(user.getEmail())=="") {
 			String sql = "INSERT INTO public.tbluser(username,password,gender,email,usertypeid,universityid,departmentid,userimageurl)"
-					+ " VALUES(?,?,?,?,?,?,?,?)";
+						+ " VALUES(?,?,?,?,?,?,?,?)";
 			String password = new BCryptPasswordEncoder().encode(user.getPassword());
 			Object[] obj = new Object[] { user.getUsername(), password, user.getGender(), user.getEmail(), 2, 36, 12,user.getImage() };
 			try {
@@ -136,8 +136,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean updateUser1(User user) {
 		System.out.println("update user"+user.getDob());
+		System.out.println("update user"+user.getPhone());
 		String sql = "UPDATE tbluser SET username=?,gender=?,dateofbirth=?,phonenumber=?,email=?,userimageurl=? WHERE userid=?";
-		Object[] obj = new Object[] { user.getUsername(),user.getGender(),"'"+user.getDob()+"'",user.getPhone(),user.getEmail(), user.getImage(),user.getUserid() };
+		Object[] obj = new Object[] { user.getUsername(),user.getGender(),user.getDob(),user.getPhone(),user.getEmail(), user.getImage(),user.getUserid() };
 		try {
 			int i=jdbcTemplate.update(sql, obj);
 			if(i>0) return true;
