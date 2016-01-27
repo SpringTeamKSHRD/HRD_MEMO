@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/css/materialize.css' />
-	<link rel='stylesheet' href='http://192.168.178.123:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
+	href='http://localhost:8080/HRD_MEMO/resources/materialize/css/materialize.css' />
+	<link rel='stylesheet' href='http://localhost:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/materialize/js/materialize.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/materialize/js/materialize.js'></script>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/js/alertify.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/js/alertify.min.js'></script>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/js/jquery.slimscroll.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/js/jquery.slimscroll.min.js'></script>
 <script
-	src='http://192.168.178.123:8080/HRD_MEMO/resources/admin/js/jquery-cookie.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-cookie.js'></script>
 </head>
 <body style="margin: 0px; padding: 0px;">
 	<div class='row' style="margin: 0px; padding:0px;" id="frm-loginreg-wrapper">
@@ -87,7 +87,7 @@
   </div>
 	<!--Memo Form-->
 	<div class="row" style="margin: 0px; padding: 0px;" id="frm-memodesc-panel">
-		<div class="row" style="margin: 0px; padding: 5px; background:#FAFAFA; box-shadow:1px 2px 3px gray; " id="frm-memo-wrapper">
+		<div class="row" style="margin: 0px; padding: 5px; background:#FAFAFA;" id="frm-memo-wrapper">
 			<form class="col s12" id="hrd-memo-frm" style="margin: 0px; padding: 0px;">
 					<div class="input-field row col s12"
 						style="text-align: right; padding: 0px; margin: 0px 0px 2px 0px;">
@@ -119,7 +119,7 @@
 	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; overflow-y:auto; overflow-x:hidden;">
 	</div>
 	</div>
-	<script type="text/javascript" src="http://192.168.178.123:8080/HRD_MEMO/resources/js/iframeResizer.contentWindow.min.js" defer></script>
+	<script type="text/javascript" src="http://localhost:8080/HRD_MEMO/resources/js/iframeResizer.contentWindow.min.js" defer></script>
 	<!-- my script -->
 	<script type="text/javascript">
 	
@@ -148,7 +148,7 @@
 	var iFrameResizer = {
 			messageCallback : function(message) {
 				var pData = message;
-				var getPdata=pData.split("#");
+				var getPdata=pData.split("hrdmem");
 				cur_h=getPdata[0];
 				domain=getPdata[1];
 				url=getPdata[2];
@@ -158,6 +158,10 @@
 				first=false;
 				}
 				initailizePage();
+				if(first==false){
+				 $(".slimScrollDiv").css('height',getPdata[4]-150+'px');
+				 $("#mydespanel").css('height',getPdata[4]-150+'px');
+				}
 			}
 		}
 	//create description box
@@ -169,7 +173,7 @@
 		memo_img_wraper.setAttribute("title",title);
 		var user_memo_img=document.createElement("img");
 		user_memo_img.setAttribute('class','user-memo-img');
-		user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/'+image);
+		user_memo_img.setAttribute('src','http://localhost:8080/HRD_MEMO/resources/'+image);
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
@@ -210,6 +214,7 @@
 		report.setAttribute('class','material-icons');
 		report.setAttribute('onclick','reportMemo('+retrievedObject.userid+','+memoid+')');
 		report.setAttribute('title','report');
+		report.style.marginRight="7px";
 		report.style.float="right";
 		report.style.color="#FFC107";
 		var report_text=document.createTextNode("assignment");
@@ -217,7 +222,7 @@
 		var desc_text=document.createTextNode(text);
 		//create edit text
 		var edit=document.createElement("i");
-		edit.setAttribute('class','material-icons');
+		edit.setAttribute('class','material-icons edit-btn');
 		edit.setAttribute('onclick','getEditMemo('+memoid+')');
 		edit.setAttribute('title','edit');
 		edit.style.float="right";
@@ -268,7 +273,7 @@
 		json.userid=retrievedObject.userid;
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/plugingetmemoowner",
+			url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemoowner",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -287,7 +292,7 @@
 		json.userid=retrievedObject.userid;
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/plugingetmemopublic",
+			url : "http://localhost:8080/HRD_MEMO/plugin/plugingetmemopublic",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -334,7 +339,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/report",
+			url : "http://localhost:8080/HRD_MEMO/plugin/report",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -368,7 +373,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.123:8080/HRD_MEMO/plugin/savememo",
+				url : "http://localhost:8080/HRD_MEMO/plugin/savememo",
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
@@ -406,7 +411,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.123:8080/HRD_MEMO/plugin/pluginlogin",
+				url : "http://localhost:8080/HRD_MEMO/plugin/pluginlogin",
 		        data:json,
 				success : function(data){
 					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
@@ -440,7 +445,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.123:8080/HRD_MEMO/plugin/signup",
+				url : "http://localhost:8080/HRD_MEMO/plugin/signup",
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
@@ -455,6 +460,7 @@
 				},
 				error : function(data) {
 					 alertify.error("EMAIL IS EXIST");
+					 $("#email").focus();
 				}
 			});
 		} else {
@@ -474,7 +480,7 @@
 		initailizePage();
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/toedit/"+id,
+			url : "http://localhost:8080/HRD_MEMO/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				var p=data.DATA.ispublic;
@@ -487,6 +493,7 @@
 				$("#btn-save-memo").attr("onclick","updateMemoContent("+id+")");
 				isEdit=true;
 				editMemoId=id;
+				$(".edit-btn").css('margin-right','10px');
 			},
 			error : function(data) {
 			}
@@ -506,7 +513,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/editmemocontent",
+			url : "http://localhost:8080/HRD_MEMO/plugin/editmemocontent",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -520,6 +527,7 @@
 				$("#public").prop('checked','');
 				$(".my_delete_btn").fadeIn();
 				alertify.success("Memo has been updated");
+				$(".edit-btn").css('margin-right','2px');
 					//sendReportNotify("public");
 			},
 			error : function(data) {
@@ -555,7 +563,7 @@
 		initailizePage();
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.123:8080/HRD_MEMO/plugin/"+id,
+			url : "http://localhost:8080/HRD_MEMO/plugin/"+id,
 			success : function(data) {
 				 pluginGetMemoOwner();
 			},
@@ -576,7 +584,6 @@
 	$('#mydespanel').slimScroll({
 		alwaysVisible: false,
 	              size:'5px',
-	              height:'500px',
 	               color: '#009688'
 	});
 	 //on keyup textarea auto increase height
@@ -586,14 +593,8 @@
       //change height
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
-	 function myDynamicHeight(){
-		 $(".slimScrollDiv").css('height',window.innerHeight-140+'px');
-		 $("#mydespanel").css('height',window.innerHeight-140+'px');
-	 }
-	 addEventListener('resize', myDynamicHeight,false);
-	 addEventListener('load', myDynamicHeight,false);
 	//Live life
-	 var hrd_notify_url="ws://192.168.178.123:8080/HRD_MEMO/memo/usernotification";
+	 var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){
 	 }
@@ -635,7 +636,7 @@
 	</script>
 </body>
 <link rel='stylesheet'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.core.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.core.css' />
 <link rel='stylesheet'
-	href='http://192.168.178.123:8080/HRD_MEMO/resources/css/alertify.default.css' />
+	href='http://localhost:8080/HRD_MEMO/resources/css/alertify.default.css' />
 </html>

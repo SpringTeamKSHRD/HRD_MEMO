@@ -38,6 +38,7 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
+			 <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>

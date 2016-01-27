@@ -13,7 +13,7 @@
   line-height: 20px;
   padding:0px 0px 0px 3px;
   background-color: #FAFAFA;
-  width:337px;
+  width:335px;
  white-space:normal; 
   border-left:2px solid #00BFA5;
  word-wrap: break-word; 
@@ -79,7 +79,7 @@
 }
 .slimScrollDiv{
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 0px 10px 0px;
 }
 #descmemo {
   height: 70px;

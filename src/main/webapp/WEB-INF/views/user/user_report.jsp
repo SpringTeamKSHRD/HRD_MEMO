@@ -37,6 +37,7 @@
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
+	       <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
@@ -91,4 +92,18 @@
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
+  <style>
+  </style>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
