@@ -136,10 +136,9 @@ function showDetail(id){
 			$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
 			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.ownermemoname);
 			if(ParamToJson().id==undefined) window.history.pushState(null,null,window.location.href+"?id="+data.id);
-			console.log(JSON.stringify(data));
+			$('#myModal').modal('show');
 		}
 	});    	
-	$('#myModal').modal('show');
 }
 function ParamToJson() {            
     var pairs = location.search.slice(1).split('&');    
@@ -175,15 +174,18 @@ jQuery(document).ready(function($) {
     	if(ParamToJson().id) window.history.pushState(null,null,window.location.origin+window.location.pathname);
     })
     $('#btnblock').click(function(){
-    	console.log(JSON.stringify(data));
-    	$.ajax({
-    		url: "http://localhost:8080/HRD_MEMO/admin/report/block",
-    		type: "POST",
-    		dataType : 'json',
-    		contentType: "application/json; charset=utf-8",
-    		data:JSON.stringify(data),
-    		success: function (response) {		}
-    	});  
+    	if(confirm("Are you sure?")) {
+	    	$.ajax({
+	    		url: "http://localhost:8080/HRD_MEMO/admin/report/block",
+	    		type: "POST",
+	    		dataType : 'json',
+	    		contentType: "application/json; charset=utf-8",
+	    		data:JSON.stringify(data),
+	    		success: function (response) {		}
+	    	});
+	    	$('#myModal').modal('hide');
+	    	location.reload();
+    	}
     });
 });
 </script>	

@@ -90,9 +90,9 @@ public class MemoDaoImpl implements MemoDao{
 	@Override
 	public boolean deleteMemo(int id) {
 		System.out.println("delete memo dao.");
-		String sql = "UPDATE memo.tbmemo SET isenable=? WHERE id=?";
+		String sql = "UPDATE memo.tbmemo SET isenable=?,ispublic=? WHERE id=?";
 		try{
-			int i = jdbcTemplate.update(sql, new Object[]{false,id});
+			int i = jdbcTemplate.update(sql, new Object[]{false,false,id});
 			if (i > 0) return true;
 		}catch(Exception e){
 			e.printStackTrace();

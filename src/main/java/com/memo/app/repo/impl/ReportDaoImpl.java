@@ -54,8 +54,8 @@ public class ReportDaoImpl implements ReportDao {
 						+ "INNER JOIN public.tbluser us "
 						+ "ON mm.userid=us.userid) as m_u "
 						+ "ON m_u.mmid=rp.memoid "
-						+ "WHERE rp.id=?";
-		Object[] obj=new Object[]{id};
+						+ "WHERE rp.id=? and rp.isblocked=?";
+		Object[] obj=new Object[]{id,false};
 		Report report=jdbcTemplate.queryForObject(sql,obj,new ReportDetailRowMapper());
 		return report;
 	}

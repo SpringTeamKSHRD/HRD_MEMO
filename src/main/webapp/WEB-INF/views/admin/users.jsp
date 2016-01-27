@@ -10,7 +10,47 @@
 <body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
-<div class="row">
+	<div class="search" style="margin: 15px 50px 20px 50px;">
+		<div class="input-group col-sm-10" style="display: inline-table">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-warning dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false">
+					Action <span class="fa fa-caret-down"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div>
+			<!-- /btn-group -->
+			<input type="text" class="form-control"> <span
+				class="input-group-btn">
+				<button type="submit" name="search" id="search-btn"
+					class="btn btn-flat">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div>
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default" style="background-color: white;">Action</button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span> <span class="sr-only">Toggle
+					Dropdown</span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#">Action</a></li>
+				<li><a href="#">Another action</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Separated link</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-body">
