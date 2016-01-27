@@ -175,16 +175,5 @@ public class EmbededMemoRepoImp implements IEmebededMemoRepo {
 		return null;
 	}
 
-	@Override
-	@Transactional
-	public Boolean isMemoReported(int memoid) {
-		Session ses = sf.getCurrentSession();
-		Criteria cr = ses.createCriteria(Memo.class);
-		cr.add(Restrictions.eq("memoid", memoid));
-		if (cr.uniqueResult() != null)
-			return true;
-		else
-			return false;
-	}
 
 }

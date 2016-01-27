@@ -19,9 +19,9 @@
             if (Storage === void(0)) {
                 this.config.storage = false;
             }
-            //            alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
+            //            memo-alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
 
-            var loading = '<div id="loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+            var loading = '<div id="memo-loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
             $(loading).appendTo(this.$el);
 
             if (typeof Cookies.get('LOGGED') === 'undefined') {
@@ -51,12 +51,12 @@
         //        },
         deleteMemo: function(id) {
             var _this = this;
-            $('#loading').show();
+            $('#memo-loading').show();
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/HRD_MEMO/plugin/memo/" + id,
                 success: function(json) {
-                    $('#loading').hide();
+                    $('#memo-loading').hide();
                     if (json.RESPONSE_DATA) {
                         //                     $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
                         $('#qn').empty();
@@ -69,7 +69,7 @@
             });
         },
         updateMemo: function(id, content, ispublic) {
-            $('#loading').show();
+            $('#memo-loading').show();
             var memo = {
                 "userid": Cookies.getJSON('LOGGED').userid,
                 "id": id,
@@ -85,7 +85,7 @@
                 data: JSON.stringify(memo),
                 success: function(json) {
                     if (json.RESPONSE_DATA) {
-                        $('#loading').hide();
+                        $('#memo-loading').hide();
                         //                     $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
                         $('#qn').empty();
                         _this.appendElem();
@@ -142,7 +142,7 @@
             $("#frmRegister")
                 .submit(
                     function(e) {
-                        $('#loading').show();
+                        $('#memo-loading').show();
                         e.preventDefault();
                         $
                             .ajax({
@@ -154,7 +154,7 @@
                                 success: function(data) {
                                     if (data.RESPONSE_DATA == true) {
                                         $('#warning').remove();
-                                        $('#loading').hide();
+                                        $('#memo-loading').hide();
                                         $('#email').css({
                                             borderColor: 'red'
                                         });
@@ -168,7 +168,7 @@
                                                 data: $("#frmRegister").serialize(),
                                                 success: function(data) {
                                                     if (data.MESSAGE == "SUCCESS") {
-                                                    	$('#loading').hide();
+                                                    	$('#memo-loading').hide();
                                                         Cookies.set('LOGGED', {
                                                             "userid": data.USERID,
                                                             "email": data.EMAIL,
@@ -184,7 +184,7 @@
                                                         $('#mytext').focus();
                                                     } else {
                                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
-                                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">something went wrong !</span>')
+                                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>')
                                                     }
                                                 },
                                                 error: function(data) {
@@ -261,7 +261,7 @@
                     "id": Cookies.getJSON('LOGGED').userid
                 };
                 if ($('.chat-container').length == true) {
-                    $('#loading').show();
+                    $('#memo-loading').show();
                 }
                 $.ajax({
                     type: "POST",
@@ -271,7 +271,7 @@
                     data: JSON.stringify(memo),
                     success: function(json) {
                         console.log(json)
-                        $('#loading').hide();
+                        $('#memo-loading').hide();
                         var cb = '';
                         cb += '<section class="chat-container">';
                         cb += '<ol class="chat-box">';
@@ -290,7 +290,7 @@
                                 report='<span style="position:relative;cursor:pointer" id="'+obj.userid+'" class="report"> Report <img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/report.png" width="9px" height="9px;" title="Report this memo"/></span>';
                             }
                             cb += '<div class="avatar-icon">';
-                            cb += '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '" title="'+obj.username+'" class="powertip">';
+                            cb += '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '" title="'+obj.username+'" >';
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';
@@ -320,6 +320,25 @@
                         
                         //REPORT MEMO
                         $('.report').click(function() {
+                        	
+                        	var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+	                       	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
+	                       	 hrd_memo_websocket.onopen=function(message){
+	                       	 }
+	                       	 hrd_memo_websocket.onclose=function(message){
+	                       	 	hrd_memo_websocket.close();
+	                       	 }
+	                       	 hrd_memo_websocket.onmessage=function(message){
+	                       	 	 if(message.data==="response"){
+	                       	 		 
+	                       	 	 }else if(message.data==="public"){
+	                       	 		pluginGetMemoPulic();
+	                       	 	 }
+	                       	 }
+	                       	 function sendReportNotify(message){
+	                       			hrd_memo_websocket.send(message);
+	                       	 }
+                       	 
                         	var r = confirm("Are you sure want to report this memo ?");
                             if (r == true) {
                             	var memoid=$(this).parent().parent().parent().attr('id');
@@ -327,7 +346,7 @@
                             			"reporterid":Cookies.getJSON('LOGGED').userid,
                             			"memoid":memoid
                             	}
-                               	$('#loading').show();
+                               	$('#memo-loading').show();
                             	$.ajax({
                                     url: "http://localhost:8080/HRD_MEMO/plugin/memo/memoexisted/"+memoid,
                                     type: "POST",
@@ -342,11 +361,13 @@
                                                  data: JSON.stringify(reportedmemo),
                                                  success: function(data) {
                                                      if (data.RESPONSE_DATA==true) {
-                                                    	 $('#loading').hide();
-                                                    	 $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;text-transform:lowercase" id="alert">memo has been reported to administrator !</span>');
+                                                    	 $('#memo-loading').hide();
+                                                    	 $('#memo-alert').remove();
+                                                    	 sendReportNotify("report")
+                                                    	 $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;text-transform:lowercase" id="memo-alert">memo has been reported to administrator !</span>');
                                                      } else {
-                                                    	 $('#loading').hide();
-                                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">something went wrong !</span>');
+                                                    	 $('#memo-loading').hide();
+                                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>');
                                                      }
                                                  },
                                                  error: function(data) {
@@ -354,9 +375,9 @@
                                                  }
                                              });
                                         } else {
-                                        	$('#loading').hide();
-                                        	$('#alert').remove();
-                                        	$("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;text-transform:lowercase" id="alert">this memo already reported to administrator !</span>');
+                                        	$('#memo-loading').hide();
+                                        	$('#memo-alert').remove();
+                                        	$("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;text-transform:lowercase" id="memo-alert">this memo already reported to administrator !</span>');
                                         }
                                     },
                                     error: function(data) {
@@ -402,11 +423,11 @@
                             // BUTTON UPDATE CLICKED
                             $('#btnUpdate').click(function() {
                                 //                              that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
-                                $('#loading').show();
+                                $('#memo-loading').show();
                                 //                              var url = window.location.pathname.replace("/HRD_MEMO",'');
                                 //                              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
-                                var domainName = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
-                                var url = window.location.pathname;
+                                var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                                var url = window.location.href.replace(domainName,"");
                                 var memo = {
                                     "userid": Cookies.getJSON('LOGGED').userid,
                                     "id": memoid,
@@ -424,7 +445,7 @@
                                     data: JSON.stringify(memo),
                                     success: function(json) {
                                         if (json.RESPONSE_DATA) {
-                                            $('#loading').hide();
+                                            $('#memo-loading').hide();
                                             //                                         $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
                                             $('#qn').empty();
                                             _this.appendElem();
@@ -492,7 +513,7 @@
             $("#frmLogin")
                 .submit(
                     function(e) {
-                        $('#loading').show();
+                        $('#memo-loading').show();
                         e.preventDefault();
                         $
                             .ajax({
@@ -500,7 +521,7 @@
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
-                                    $('#loading').hide();
+                                    $('#memo-loading').hide();
                                     if (data.MESSAGE == "SUCCESS") {
                                         Cookies.set('LOGGED', {
                                             "userid": data.USERID,
@@ -517,7 +538,7 @@
                                         $('#mytext').focus();
                                     } else {
                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
-                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="alert">Invalid username or password !</span>')
+                                        $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">Invalid username or password !</span>')
                                     }
                                 },
                                 error: function(data) {
@@ -532,10 +553,9 @@
                 _this.register();
             });
             $('#email').focus(function(event) {
-                $('#alert').remove();
+                $('#memo-alert').remove();
             });
         },
-
         completeNote: function() {
             var _this = this;
             var storage = this.config.storage;
@@ -547,10 +567,10 @@
             this.$el.on('click', '#notes #btnSave', function(e) {
                 // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
 
-                var url = window.location.pathname.replace("/HRD_MEMO", '');
+                //var url = window.location.pathname.replace("/HRD_MEMO", '');
                 //              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
-                var domainName = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
-                var url = window.location.pathname;
+                var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                var url = window.location.href.replace(domainName,"");
                 var memo = {
                     "userid": Cookies.getJSON('LOGGED').userid,
                     "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
@@ -564,7 +584,7 @@
                     //                    if (storage === true) {
                     //                        
                     //                    }
-                    $('#loading').show();
+                    $('#memo-loading').show();
                     $.ajax({
                         type: "POST",
                         url: "http://localhost:8080/HRD_MEMO/plugin/memo/add",
@@ -573,7 +593,7 @@
                         data: JSON.stringify(memo),
                         success: function(data) {
                             if (data.RESPONSE_DATA) {
-                                $('#loading').hide();
+                                $('#memo-loading').hide();
                                 $('#qn').empty();
                                 _this.appendElem();
                             }
@@ -593,7 +613,7 @@
             // });
             // SHOW AND HIDE
             this.$el.on('click', '#qn_sh #show-hide', function() {
-                $('#alert').remove();
+                $('#memo-alert').remove();
                 $('.qn_container #logout,.qn_container #notes,.qn_container .chat-container,.qn_container #username-password').slideToggle(100);
             });
             // CLICK TO CLOSE NOTES

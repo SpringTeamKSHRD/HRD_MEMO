@@ -9,15 +9,14 @@
         Added close
  */
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+ @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 *,
 :before,
 :after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-
+} 
 
 /* container dark */
 
@@ -43,7 +42,6 @@
 
 
 /* end container */
-
 
 /* show/hide */
 
@@ -270,9 +268,9 @@ textarea{
         font-family: "Typicons", sans-serif;
     }
     
-    body {
+ /*    body {
         font-family: arial, sans-serif;
-    }
+    } */
     
     .chat-container {
        /*  width: 300px;
