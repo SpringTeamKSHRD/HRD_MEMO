@@ -77,6 +77,7 @@ function displayData(data) {
 						});	    
 		});
 	}
+	
 	function listReport(){
 		alert("list report");
 		$(".report").attr("display","block");

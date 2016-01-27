@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>User Profile</title>  
+	<title>User Password</title>  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->	
@@ -30,34 +30,47 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-fixed-top">
+	<nav class="navbar navbar-default"> <!-- navbar-fixed-top -->
 	<div class="container-fluid">
 		<div class="navbar-header">
-		  <a class="navbar-brand" href="#">MEMO PESS</a>
-		</div>
+		  <a class="navbar-brand text" href="#">MEMO PESS</a>
+		</div>	
+		<!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	    </div>
+    	<!-- close brand toggle -->    	   
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport"><i class="fa fa-envelope fa-2x"></i></a></li>
+		<!-- <div class="collapse navbar-collapse navbar-ex1-collapse"> -->
+		 <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav navbar-right">		  	
+			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope fa-2x"></i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
-			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/user/userprofile">Account</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
 			</li>
-			<li><a href="#!">About</a></li>
+			<li><a href="#!" class="text">About</a></li>
 		  </ul>
-		</div><!-- /.navbar-collapse -->
+		</div>
+		<!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 	</nav>
+	
 	<!-- Body here -->
-	<div class="container"> <br/><br/><br/>
+	<div class="container">
 		<input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/>
 		<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 		<div class="row">

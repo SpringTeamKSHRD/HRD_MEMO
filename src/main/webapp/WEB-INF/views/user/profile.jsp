@@ -29,21 +29,32 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-fixed-top">
+	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-		  <a class="navbar-brand" href="#">MEMO PESS</a>
+		  <a class="navbar-brand text" href="#">MEMO PESS</a>
 		</div>
+		<!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	    </div>
+    	<!-- close brand toggle -->
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<!-- <div class="collapse navbar-collapse navbar-ex1-collapse"> -->
+		<div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport"><i class="fa fa-envelope fa-2x"></i></a></li>
+			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope fa-2x"></i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
-			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			  	<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/user/userpassword">Change password</a></li> <!-- href="#!" data-toggle="modal" data-target="#myModal" -->
@@ -51,12 +62,11 @@
 				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
 			</li>
-			<li><a href="#!">About</a></li>
+			<li><a href="#!" class="text">About</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 	</nav>
-	<br/><br/><br/>
 	<!-- Body here -->
 	<div class="container"> 
 		<div class="row">
@@ -148,8 +158,6 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
-	<!-- User Password -->
-	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_password.js"></script> --%>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>
