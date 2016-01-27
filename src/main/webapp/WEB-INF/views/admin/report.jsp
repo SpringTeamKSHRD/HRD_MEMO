@@ -116,6 +116,7 @@
 <%@ include file="_defaultJS.jsp"%>
 <script>
 var data = {};
+var websocket=new WebSocket("ws://localhost:8080/HRD_MEMO/memo/usernotification");
 var path="${pageContext.request.contextPath}";
 var imagepath=path+"/resources/admin/imgs/";
 function showDetail(id){
@@ -182,6 +183,7 @@ jQuery(document).ready(function($) {
 	    		contentType: "application/json; charset=utf-8",
 	    		data:JSON.stringify(data),
 	    		success: function (response) {
+	    			websocket.send("response");
 	    			$('#myModal').modal('hide');
 	    		}
 	    	});	    	
@@ -189,6 +191,6 @@ jQuery(document).ready(function($) {
     });
 });
 </script>	
-<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script>
+<!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script> -->
 </body>
 </html>
