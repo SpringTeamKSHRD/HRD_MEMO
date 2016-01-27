@@ -26,10 +26,11 @@ var domain=window.location.origin+"/HRD_MEMO";
 					+"<input type='date' id='e_date' onchange='filterByDate()'>"
 				+"</div>"
 				+"</div>";
-
+	
+	/* to change layout for option searching */
 	$("#searching").change(function(){
 		$("#searcharea").html("");
-		var value = $("#searching").val(); //alert(value);
+		var value = $("#searching").val(); 
 		
 		if(value==1){
 			$("#searcharea").html(s_title);
@@ -53,6 +54,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 					displayData(data);
 				},
 				error : function(data) {
+					sweetAlert("Oops...", "No public memo!", "error");
 					console.log("ERROR..." + data);
 				}
 			});	
@@ -62,37 +64,73 @@ var domain=window.location.origin+"/HRD_MEMO";
 	
 	function filterByTitle(){
 		var title=$("#search_title").val();
-		$.ajax({
-			type : "GET",
-			url : domain+"/user/filter/title/"+title,
-			success : function(data) {
-				displayData(data);
-			},
-			error : function(data) {
-				console.log("ERROR..." + data);
-			}
-		});
+		
+		if(title==""){
+			$.ajax({
+				type : "GET",
+				url : domain+"/user/list/",
+				dataType : 'json',
+				data : null,
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					alert("Unsuccess: " + data.MESSAGE);
+					console.log("ERROR..." + data);
+				}
+			});
+		}else{
+			$.ajax({
+				type : "GET",
+				url : domain+"/user/filter/title/"+title,
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					sweetAlert("Oops...", "Memo is not found!", "error");
+					console.log("ERROR..." + data);
+				}
+			});
+		}	
 	}
 	
 	function filterByWebsite(){
 		var website=$("#search_website").val(); 
-		$.ajax({
-			type : "GET",
-			url : domain+"/user/filter/domain/"+website,
-			success : function(data) {
-				displayData(data);
-			},
-			error : function(data) {
-				console.log("ERROR..." + data);
-			}
-		});
+		if(website==""){
+			$.ajax({
+				type : "GET",
+				url : domain+"/user/list/",
+				dataType : 'json',
+				data : null,
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					alert("Unsuccess: " + data.MESSAGE);
+					console.log("ERROR..." + data);
+				}
+			});
+		}else{
+			$.ajax({
+				type : "GET",
+				url : domain+"/user/filter/domain/"+website,
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					sweetAlert("Oops...", "Memo is not found!", "error");
+					console.log("ERROR..." + data);
+				}
+			});
+		}
+		
 	}
 	
 	function filterByDate(){
 		var sd=$("#s_date").val();
 		var ed=$("#e_date").val();
 		
-		if(sd!=null || ed!=null){
+		if(sd!="" && ed!=""){
 			$.ajax({
 				type : "GET",
 				url : domain+"/user/filterdate/"+sd+"/"+ed,
@@ -102,8 +140,23 @@ var domain=window.location.origin+"/HRD_MEMO";
 					displayData(data);
 				},
 				error : function(data) {
+					sweetAlert("Oops...", "Memo is not found!", "error");
 					console.log("ERROR..." + data);
 				}
 			});
+		}else{
+			/*$.ajax({
+				type : "GET",
+				url : domain+"/user/list/",
+				dataType : 'json',
+				data : null,
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					alert("Unsuccess: " + data.MESSAGE);
+					console.log("ERROR..." + data);
+				}
+			});*/
 		}
 	}

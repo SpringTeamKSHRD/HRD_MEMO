@@ -25,6 +25,7 @@
     <!-- Sweet Alert --> 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!-- Own Style -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/password.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/profile.css">
 </head>
 <body>
@@ -43,11 +44,9 @@
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
-			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
-			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
-			  	<li role="separator" class="divider"></li>
-				<li><a href="#!" data-toggle="modal" data-target="#myModal">Change password</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/userprofile">Account</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
@@ -74,15 +73,18 @@
 						<div class="col-xs-12 col-md-12 col-lg-12">
 							<div class="form-group">
 							    <label for="exampleInputPassword1">Old Password</label>
-							    <input type="password" class="form-control" id="old_pwd" placeholder="Password">
+							    <input type="password" class="form-control" id="old_pwd" onfocusout="checkOldPwd()" placeholder="Password">
+							    <span ><small id="v_op" class="msg-err"></small></span>
 							</div>
 							<div class="form-group">
 							    <label for="exampleInputPassword1">New Password</label>
-							    <input type="password" class="form-control" id="new_pwd" placeholder="Password">
+							    <input type="password" class="form-control" id="new_pwd" onfocusout="checkNewPwd()" placeholder="Password">
+							    <span ><small id="v_np" class="msg-err"></small></span>
 							</div>
 							<div class="form-group">
 							    <label for="exampleInputPassword1">Confirm Password</label>
-							    <input type="password" class="form-control" id="con_pwd" placeholder="Password">
+							    <input type="password" class="form-control" id="con_pwd" onfocusout="checkConPwd()" placeholder="Password">
+							    <span ><small id="v_cp" class="msg-err"></small></span>
 							</div>
 						</div>						
 					</div>	

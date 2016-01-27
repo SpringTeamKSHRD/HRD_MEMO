@@ -30,7 +30,6 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<Memo> listMemo() {
-		System.out.println("List memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo";
 		try{
@@ -58,7 +57,6 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public boolean insertMemo(Memo memo) {
-		System.out.println("insert memo dao.");
 		String sql="INSERT INTO memo.tbmemo(userid,title,content,domain,url,isenable,ispublic ) VALUES(?,?,?,?,?,?,?)";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),memo.getDomain(),
 								  memo.getUrl(),memo.isIsenable(),memo.isIspublic()};
@@ -73,7 +71,6 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public boolean updateMemo(Memo memo) {
-		System.out.println("update memo dao.");
 		String sql="UPDATE memo.tbmemo SET userid=?,title=?,content=?,ispublic=? "
 								      +"WHERE id=?;";
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),
@@ -89,7 +86,6 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public boolean deleteMemo(int id) {
-		System.out.println("delete memo dao.");
 		String sql = "UPDATE memo.tbmemo SET isenable=?,ispublic=? WHERE id=?";
 		try{
 			int i = jdbcTemplate.update(sql, new Object[]{false,false,id});
@@ -102,7 +98,6 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public Memo getMemo(int id) {
-		System.out.println("get memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
@@ -115,11 +110,11 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public List<Memo> filterMemoByColumnName(String column_name,String value) {
-		System.out.println("filter memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic"
 					+" FROM memo.tbmemo "
 					+" WHERE "+column_name
-					+" LIKE ?";
+					+" LIKE ?"
+					+" AND isenable=TRUE;";				
 		try{
 			return jdbcTemplate.query(sql, new Object[]{value+"%"},new UserMemoRowMapper());
 		}catch(Exception e){
@@ -130,7 +125,6 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<HistoryMemo> listHistoryMemo(int memoid) {
-		System.out.println("list history memo dao.");
 		String sql="SELECT id,memoid,title,content,date "
 					+"FROM memo.tbhistory "
 					+"WHERE id=?";
@@ -144,10 +138,10 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public List<Memo> filterMemoByDate(Object sd, Object ed) {
-		System.out.println("filter date meo.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 				  +"FROM memo.tbmemo "
-				  +"WHERE date BETWEEN '"+sd+"' AND '"+ed+"' "
+				  +"WHERE (date BETWEEN '"+sd+"' AND '"+ed+"') "
+				  +"AND isenable=TRUE "
 				  +"ORDER BY date ASC";
 		try{
 			return jdbcTemplate.query(sql,new UserMemoRowMapper());
@@ -159,7 +153,6 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public int countColumn(Object column_name, Object value) {
-		System.out.println("count column.");
 		String sql="SELECT COUNT("+column_name+") "
 				  +"FROM memo.tbmemo "
 				  +"WHERE userid=?";
@@ -172,10 +165,9 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public int countPublicMemo(int userid) {
-		System.out.println("count public memo.");
 		String sql="SELECT COUNT(id)"
 				  +"FROM memo.tbmemo"
-				  +"WHERE userid=? AND ispublic=true";
+				  +"WHERE userid=? AND ispublic=true;";
 				
 		try{
 			return jdbcTemplate.queryForObject(sql, new Object[]{userid},Integer.class);
@@ -187,7 +179,6 @@ public class MemoDaoImpl implements MemoDao{
 	
 	@Override
 	public Memo getMemoByUrl(String domain, String url, int userid) {
-		System.out.println("get memo by url");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic FROM memo.tbmemo " +
 					"WHERE DOMAIN LIKE ? " +
 						"AND url LIKE ? " +
@@ -202,10 +193,9 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public List<Memo> filterMemoByPrivacy(boolean privacy) {
-		System.out.println("filter memo dao.");
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic"
 					+" FROM memo.tbmemo"
-					+" WHERE ispublic=?"
+					+" WHERE ispublic=? AND isenable=TRUE"
 					+" ORDER BY title";
 		try{
 			return jdbcTemplate.query(sql,new Object[]{privacy},new UserMemoRowMapper());
@@ -245,7 +235,6 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public boolean updateMemoContent(Memo memo) {
-		System.out.println("update memo dao.");
 		String sql="UPDATE memo.tbmemo SET content=?,ispublic=? "
 								      +"WHERE id=?;";
 		Object[] obj=new Object[]{memo.getContent(),memo.isIspublic(),memo.getId()};
@@ -259,11 +248,11 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public List<Memo> listMemo(boolean isenabled) {
-		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "+
-				"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "+
-				"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "+
-				"WHERE m.isenable=? "+
-				"ORDER BY id DESC";
+		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain, "
+					+"m.url,m.date,m.isenable,m.ispublic ,u.username,u.userimageurl "
+					+"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "
+					+"WHERE m.isenable=? "
+					+"ORDER BY id DESC";
 		try{
 			return jdbcTemplate.query(sql, new Object[]{isenabled},new AdminMemoRowMapper());
 		}catch(Exception e){

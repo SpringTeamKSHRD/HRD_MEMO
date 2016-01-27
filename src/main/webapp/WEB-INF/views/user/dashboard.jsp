@@ -7,8 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>User Memo Dashboard</title>  
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"><!-- Tell the browser to be responsive to screen width -->	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <!-- Tell the browser to be responsive to screen width -->  
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">	
 	<!-- Materialize --> 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/materialize/css/materialize.css">
 	<!-- Materialize Icon -->
@@ -21,14 +22,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!--Import jQuery before materialize.js-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
 </head>
 <body >
-	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
-	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
@@ -36,8 +34,6 @@
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 	</ul> 
 	<ul id="dropdown2" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
-	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
@@ -58,20 +54,21 @@
 	      <!-- Dropdown Trigger -->
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
-	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>	      
 	      <li><a href="#!">About</a></li>	      
 	    </ul>
 	    <!-- For mobile menu -->
 	     <ul class="side-nav" id="mobile-demo">
 	      <li><a href="">Home</a></li>
+	      <li><a href="${pageContext.request.contextPath}/user/userreport"><i class="large material-icons">email</i></a></li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown2">
-	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>	      
 	      <li><a href="#!">About</a></li>	      
 	    </ul>
@@ -88,7 +85,7 @@
 					 <div class="collection">
 				        <a href="#!" class="collection-item active" style="text-align:center;">List MEMOs</a>
 				      </div>
-					<div id="listmemo" style="overflow-y: scroll; height:700px;">
+					<div id="listmemo" style="overflow-y: scroll; height:600px;">
 						
 					</div>					
 				</div>
@@ -99,8 +96,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- Right Body Section -->
 			
+			<!-- Right Body Section -->		
 			<div class="col s12 m8 l9 body_right"> <!-- Note that "m8 l9" was added -->
 			<!-- Search Area -->
 			<div class="row">
@@ -147,7 +144,7 @@
 						</div>
 					</div>
 
-				<!-- CK Editor -->
+				<!-- Text Area here -->
 					<div class="row " style="margin:0px">
 						<div class="col s12 m12 l12" style="padding:15px;">
 							<textarea id="cont_memo" style="resize:none; width:100%; height:300px;padding:15px;">							
@@ -158,12 +155,12 @@
 				<!-- url and buttons here -->
 					<div class="row " >
 						<div class="col s12 m12 l6">
-						  <label class="active">Current URL</label>
+						  <label class="active" style="color:#FF5722;"><b>Current URL</b></label>
 						  <input type="text" class="browser-default default-link" readonly="" value="www.khmeracademy.org.kh">
 						</div>	
-						<div class="col s12 m12 l6">
-							<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a> 
+						<div class="col s12 m12 l6"> 
 							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px; background-color:#FF9800">Cancel</a>	
+							<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a>
 						</div>													
 					</div>
 				<!-- ./ url here -->
@@ -185,6 +182,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/edit_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/search_memo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
+	<!-- Sweet alert js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
+/* This function is used for getting memo from database with specific memo id*/
 function editmemo(id) {
 	var value1="Private";
 	var value2="Public";
@@ -39,14 +40,14 @@ function editmemo(id) {
 			    // trigger event
 			    $selectDropdown.trigger('contentChanged');
 			}
-		
+			
 			//change button to update
 			$("#btnsave").text("Update");
 			$("#btnsave").attr("onclick","updateMemo("+id+")");
 			
 		},
 		error : function(data) {
-			alert("Unsuccess:" + data.MESSAGE);
+			sweetAlert("Fail", "Memo is not found!", "error");
 			console.log("ERROR..." + data);
 		}
 	});
