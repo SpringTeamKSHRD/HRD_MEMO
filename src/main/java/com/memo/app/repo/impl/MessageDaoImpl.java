@@ -21,14 +21,13 @@ public class MessageDaoImpl implements MessageDao {
 	private JdbcTemplate jdbcTemplate;
 	@Override
 	public int[] saveMessage(final List<Message> messages) {
-		String sql="INSERT INTO memo.tbmessage(userid,message_id,memoid) VALUES(?,?,?)";
+		String sql="INSERT INTO memo.tbmessage(userid,message_id) VALUES(?,?)";
 			int[] inserts= jdbcTemplate.batchUpdate(sql,new BatchPreparedStatementSetter() {
 				@Override
 				public void setValues(PreparedStatement ps, int i) throws SQLException {
 					Message msg=messages.get(i);
-					ps.setInt(1, msg.getUserid());
+					ps.setInt(1,msg.getUserid());
 					ps.setInt(2, msg.getMessageid());
-					ps.setInt(3, msg.getMemoid());
 				}
 				
 				@Override
@@ -41,7 +40,7 @@ public class MessageDaoImpl implements MessageDao {
 	//for user's report.
 	@Override
 	public List<Message> getUserMessage(int userid) {
-		String sql="SELECT ms.id,dfm.messsage"
+		String sql="SELECT ms.id,dfm.messsage,ms.date,ms.memoid"
 				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
 				+" WHERE userid=? AND isviewed=FALSE;";
@@ -51,6 +50,8 @@ public class MessageDaoImpl implements MessageDao {
 				Message msg=new Message();
 				msg.setId(rs.getInt(1));
 				msg.setMessage(rs.getString(2));
+				msg.setDate(rs.getDate(3));
+				msg.setMemoid(rs.getInt(4));
 				return msg;
 			}
 			
@@ -60,7 +61,12 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int getNumberMessage(int userid) {
 		String sql="SELECT count(userid) FROM memo.tbmessage WHERE isviewed=false AND userid=?";
-		return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);
+		try{
+			return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	@Override
