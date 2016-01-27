@@ -144,7 +144,7 @@ DROP TABLE IF EXISTS "memo"."tbmessage";
 CREATE TABLE "memo"."tbmessage" (
 "id" int4 DEFAULT nextval('"memo".tbmessage_id_seq'::regclass) NOT NULL,
 "userid" int4 NOT NULL,
-"memoid" int4 NOT NULL,
+"memoid" int4 ,
 "isviewed" bool DEFAULT false NOT NULL,
 "date" timestamp(6) DEFAULT now(),
 "message_id" int4 NOT NULL
@@ -156,7 +156,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of tbmessage
 -- ----------------------------
-INSERT INTO "memo"."tbmessage" VALUES ('1', '1', 'f', '2016-01-05 17:09:58', '1');
+INSERT INTO "memo"."tbmessage" VALUES ('1', '1', '1', 'f', '2016-01-05 17:09:58', '1');
 
 -- ----------------------------
 -- Table structure for tbreport

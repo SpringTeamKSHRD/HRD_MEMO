@@ -110,8 +110,8 @@ public class AdminController {
 	@RequestMapping(value = "/report/block", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> blockMemo(@RequestBody Report report) {		
 		List<Message> listMessage = new ArrayList<Message>();
-		listMessage.add(new Message(0,report.getOwnermemoid(),1,false,null));
-		listMessage.add(new Message(0,report.getReporterid(),2,false,null));
+		listMessage.add(new Message(0,report.getOwnermemoid(),1,false,null,null,report.getMemoid()));
+		listMessage.add(new Message(0,report.getReporterid(),2,false,null,null,report.getMemoid()));
 		messageDao.saveMessage(listMessage);
 		reportDao.blockMemoReport(report.getId());
 		memoDao.deleteMemo(report.getMemoid());

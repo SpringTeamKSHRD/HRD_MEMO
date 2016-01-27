@@ -106,7 +106,7 @@
 		</form>
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-primary" id="btnblock">Block</button>
+      	<button type="button" class="btn btn-danger" id="btnblock">Block</button>
         <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -181,10 +181,10 @@ jQuery(document).ready(function($) {
 	    		dataType : 'json',
 	    		contentType: "application/json; charset=utf-8",
 	    		data:JSON.stringify(data),
-	    		success: function (response) {		}
-	    	});
-	    	$('#myModal').modal('hide');
-	    	location.reload();
+	    		success: function (response) {
+	    			$('#myModal').modal('hide');
+	    		}
+	    	});	    	
     	}
     });
 });

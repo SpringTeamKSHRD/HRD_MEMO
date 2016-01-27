@@ -11,23 +11,9 @@
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
 	<div class="search" style="margin: 10px 50px 15px 50px;">
-		<div class="input-group col-sm-10" style="display: inline-table">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-warning dropdown-toggle"
-					data-toggle="dropdown" aria-expanded="false">
-					Action <span class="fa fa-caret-down"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else here</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-			</div>
-			<!-- /btn-group -->
-			<input type="text" class="form-control"> <span
-				class="input-group-btn">
+		<div class="input-group col-sm-9" style="display: inline-table">
+			<input type="text" class="form-control" placeholder="Search User"> 
+			<span class="input-group-btn">
 				<button type="submit" name="search" id="search-btn"
 					class="btn btn-flat">
 					<i class="fa fa-search"></i>
@@ -35,7 +21,7 @@
 			</span>
 		</div>
 		<div class="btn-group pull-right">
-			<button type="button" class="btn btn-default" style="background-color: white;">Action</button>
+			<button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				<span class="caret"></span> <span class="sr-only">Toggle
 					Dropdown</span>
@@ -44,8 +30,18 @@
 				<li><a href="#">Action</a></li>
 				<li><a href="#">Another action</a></li>
 				<li><a href="#">Something else here</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Separated link</a></li>
+			</ul>
+		</div>
+		<div class="btn-group pull-right" style="margin-right: 35px;margin-left: 35px;">
+			<button type="button" class="btn btn-default" style="background-color: white;">Name</button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span> <span class="sr-only">Toggle
+					Dropdown</span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#">Action</a></li>
+				<li><a href="#">Another action</a></li>
+				<li><a href="#">Something else here</a></li>
 			</ul>
 		</div>
 	</div>
