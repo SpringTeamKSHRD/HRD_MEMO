@@ -95,7 +95,7 @@
 
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">View all</a></li>
+                  <li class="footer"><a href="${pageContext.request.contextPath}/admin/reports">View all</a></li>
                 </ul>
               </li>
               <!-- Tasks Menu -->

@@ -1,11 +1,15 @@
 package com.memo.app.entities;
 
+import java.sql.Date;
+
 public class Message {
 	private int id;
 	private int  userid;
 	private int messageid;
 	private boolean isview;
 	private String message;	
+	private Date date;
+	private int memoid;
 	public Message(){}
 	public Message(int id, int userid, int messageid, boolean isview, String message) {
 		super();
@@ -45,5 +49,17 @@ public class Message {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public int getMemoid() {
+		return memoid;
+	}
+	public void setMemoid(int memoid) {
+		this.memoid = memoid;
 	}
 }

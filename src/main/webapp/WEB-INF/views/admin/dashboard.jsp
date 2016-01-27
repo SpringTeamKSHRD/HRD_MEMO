@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="icon">
                   <i class="ion ion-person-stalker"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${pageContext.request.contextPath}/admin/users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="icon">
                   <i class="ion ion-document-text"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${pageContext.request.contextPath}/admin/memos" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             </div>
@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="icon">
                   <i class="ion ion-bug"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${pageContext.request.contextPath}/admin/reports" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->

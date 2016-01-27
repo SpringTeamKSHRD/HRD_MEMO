@@ -10,7 +10,7 @@
 <body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
-	<div class="search" style="margin: 15px 50px 20px 50px;">
+	<div class="search" style="margin: 10px 50px 15px 50px;">
 		<div class="input-group col-sm-10" style="display: inline-table">
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-warning dropdown-toggle"

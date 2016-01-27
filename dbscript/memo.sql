@@ -144,6 +144,7 @@ DROP TABLE IF EXISTS "memo"."tbmessage";
 CREATE TABLE "memo"."tbmessage" (
 "id" int4 DEFAULT nextval('"memo".tbmessage_id_seq'::regclass) NOT NULL,
 "userid" int4 NOT NULL,
+"memoid" int4 NOT NULL,
 "isviewed" bool DEFAULT false NOT NULL,
 "date" timestamp(6) DEFAULT now(),
 "message_id" int4 NOT NULL

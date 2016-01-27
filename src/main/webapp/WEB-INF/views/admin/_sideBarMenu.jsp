@@ -35,7 +35,6 @@
             <li ><a href="${pageContext.request.contextPath}/admin"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
             <li ><a href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-users"></i><span>Users</span></a></li>
             <li > <a href="${pageContext.request.contextPath}/admin/memos"><i class="fa fa-sticky-note-o"></i><span>Memos</span></a></li>
-            <li ><a href="${pageContext.request.contextPath}/admin/statistics"><i class="fa fa-line-chart"></i><span>Statistics</span></a></li>
 			<li>
 				<a href="${pageContext.request.contextPath}/admin/reports" id="report-lsit">
 					<i class="fa fa-bug"></i>
