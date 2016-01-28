@@ -446,7 +446,7 @@
 				email : $("#email").val(),
 				password : $("#password").val(),
 				gender : $('input[name="gender"]:checked').val(),
-				image : 'Male-icon.png'
+				image : 'boy-avatar.png'
 			};
 			$.ajax({
 				type : "POST",
