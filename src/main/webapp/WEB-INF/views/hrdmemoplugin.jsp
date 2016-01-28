@@ -424,6 +424,9 @@
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
 					pluginGetMemoOwner();
+					$("#descmemo").val("");
+					$("#descmemo").focus();
+					$("#public").prop('checked','');
 				},
 				error : function(data) {
 					 alertify.error("LOGIN FAILED..!");
@@ -469,6 +472,9 @@
 					username : $("#name").val("");
 					email : $("#email").val("");
 					password : $("#password").val("");
+					$("#descmemo").val("");
+					$("#descmemo").focus();
+					$("#public").prop('checked','');
 				},
 				error : function(data) {
 					 alertify.error("EMAIL IS EXIST");

@@ -84,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.permitAll();
 		http.headers().frameOptions().disable();
 		http.csrf().disable();
-		http.exceptionHandling().accessDeniedPage("/accessDenied");
+		http.exceptionHandling().accessDeniedPage("/login");
 	}
 
 	@Bean

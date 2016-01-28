@@ -113,19 +113,74 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
 			success : function(data) {
+				$("#pagination").html(generatPagination(data.DATA));
 			},
 			error : function(data) {
 			}
 		});
   }
   getAllNumberMessage();
-  
   function generatPagination(data){
-	  var p="<li><i class='material-icons'>chevron_left</i></li>";
-	  for(var i=1;i<=data.DATA;i++){
-		  p+="<li  class='waves-effect><>1</a></li>";
+	  var pn=0;
+	  if(data%10!=0){
+		  pn=Math.floor(data/10)+1;
+	  }else{
+		  pn=data/10; 
+	  }
+	  alert(pn);
+	  if(data!=0){
+			  var p="<li><i class='material-icons'>chevron_left</i></li>";
+			  for(var i=1;i<=pn;i++){
+				  if(i==1){
+					  p+="<li class='waves-effect'><a style='color:#009688; font-size:18px; font-weight:bolder;' class='pbtn' >"+i+"</a></li>";  
+				  }else{
+					  p+="<li class='waves-effect'><a style='color:#009688; font-size:18px; font-weight:bolder;' class='pbtn' >"+i+"</a></li>";
+				  }
+			  }
+			  p+="<li class='waves-effect'><a><i class='material-icons'>chevron_right</i></a></li>";
+		  return p;
+	  }else{
+		  return "";
 	  }
   }
+  $(document).on('click.waves-effect', '.waves-effect .pbtn', function (e) {
+		alert($(this).text());
+});
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
