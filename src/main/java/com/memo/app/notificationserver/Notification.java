@@ -17,6 +17,7 @@ public class Notification {
 		@OnOpen
 		public void onOpen(Session session){
 			clients.add(session);
+			System.out.println("client cooneted");
 		}
 		@OnMessage
 		public void onMessage(String message,Session session){
