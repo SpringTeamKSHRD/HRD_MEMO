@@ -441,12 +441,19 @@
 	function signUpUser() {
 		if ($("#name").val() != "" && validateEmail($("#email").val()) == true
 				&& $("#password").val() != "") {
+			var mygender=$('input[name="gender"]:checked').val();
+			var myimg="";
+			if(mygender=="female"){
+				myimg="girl-avatar.png";
+			}else{
+				myimg="boy-avatar.png";
+			}
 			var json = {
 				username : $("#name").val(),
 				email : $("#email").val(),
 				password : $("#password").val(),
 				gender : $('input[name="gender"]:checked').val(),
-				image : 'boy-avatar.png'
+				image : myimg
 			};
 			$.ajax({
 				type : "POST",
