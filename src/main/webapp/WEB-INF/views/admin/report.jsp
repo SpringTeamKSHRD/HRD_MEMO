@@ -16,7 +16,7 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<table id="tbl-user" class="table table-bordered table-striped table-hover">
+					<table id="tbl-report" class="table table-bordered table-striped table-hover">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -182,6 +182,8 @@ jQuery(document).ready(function($) {
 	    		contentType: "application/json; charset=utf-8",
 	    		data:JSON.stringify(data),
 	    		success: function (response) {
+	    			$("tr[data-href='"+data.id+"']").remove();
+	    			$("li[data-href='"+data.id+"']").remove();
 	    			$('#myModal').modal('hide');
 	    		}
 	    	});	    	
@@ -189,6 +191,5 @@ jQuery(document).ready(function($) {
     });
 });
 </script>	
-<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script>
 </body>
 </html>
