@@ -55,4 +55,9 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.getOldMessage(userid);
 	}
 
+	@Override
+	public int getAllNumberMessage(int userid) {
+		return messageDao.getAllNumberMessage(userid);
+	}
+
 }

@@ -337,5 +337,21 @@ public class MemoController {
 			return null;
 		}
 		
+		//get all message number
+		@RequestMapping(value = "/allnumbermessage/{uid}", method = RequestMethod.GET)
+		public ResponseEntity<Map<String, Object>> getAllNumberMessage(@PathVariable("uid") int uid) {
+			System.out.println(uid);
+			int number=messageService.getAllNumberMessage(uid);
+			Map<String, Object> map = new HashMap<String, Object>();
+			if (number==0) {
+				map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			}
+			map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
+			map.put("STATUS", HttpStatus.OK.value());
+			map.put("DATA", number);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
+		
 	
 }

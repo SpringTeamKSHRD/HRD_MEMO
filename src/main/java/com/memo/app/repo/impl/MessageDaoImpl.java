@@ -21,13 +21,14 @@ public class MessageDaoImpl implements MessageDao {
 	private JdbcTemplate jdbcTemplate;
 	@Override
 	public int[] saveMessage(final List<Message> messages) {
-		String sql="INSERT INTO memo.tbmessage(userid,message_id) VALUES(?,?)";
+		String sql="INSERT INTO memo.tbmessage(userid,message_id,memoid) VALUES(?,?,?)";
 			int[] inserts= jdbcTemplate.batchUpdate(sql,new BatchPreparedStatementSetter() {
 				@Override
 				public void setValues(PreparedStatement ps, int i) throws SQLException {
 					Message msg=messages.get(i);
 					ps.setInt(1,msg.getUserid());
 					ps.setInt(2, msg.getMessageid());
+					ps.setInt(3,msg.getMemoid());
 				}
 				
 				@Override
@@ -114,6 +115,16 @@ public class MessageDaoImpl implements MessageDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public int getAllNumberMessage(int userid) {
+		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=?";
+		try{
+			return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }
