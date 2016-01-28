@@ -434,6 +434,7 @@
                                     "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                                     "ispublic": $("#ispublic").val(),
                                     "domainName": domainName,
+                                    "title":window.location.href,
                                     "url": url
                                 }
                                 console.log(memo);
@@ -576,6 +577,7 @@
                     "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                     "domainName": domainName,
                     "url": url,
+                    "title":window.location.href,
                     "ispublic": $('#ispublic').val()
 
                 }
