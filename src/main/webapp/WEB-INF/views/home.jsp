@@ -14,5 +14,5 @@
 	</div> 
 </body>
 
-<script src='http://192.168.178.123:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>
+<script src='http://192.168.178.186:8080/HRD_MEMO/resources/js/hrdmemoplugin.js'></script>
 </html>
