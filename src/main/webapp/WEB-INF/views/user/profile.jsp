@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!-- Own Style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/profile.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/user_report.css">
 </head>
 <body>
 	<!-- Navigation -->
@@ -49,7 +50,7 @@
 		<div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope fa-2x"></i></a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope fa-2x"><span class="numnotify"></span></i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
@@ -72,7 +73,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-				  <div class="panel-heading" >
+				  <div class="panel-heading" style="background-color:#41BC37;">
 					<span><i class="fa fa-pencil-square fa-2x"></i><span>
 					<span class="panel-title">User Memo Information</span>
 				  </div>
@@ -160,5 +161,39 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
+	
+	<!-- User report nitification -->
+	  <script type="text/javascript">
+		  function getNumberMesage(){
+				var uid=parseInt($("#userid").val());
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
+					success : function(data) {
+						if(data.DATA>0){
+							$(".numnotify").css('display',"inline");
+							$(".numnotify").text(data.DATA);
+						}else{
+							$(".numnotify").css('display',"none");
+						}
+					},
+					error : function(data) {
+					}
+				});
+			}
+		  getNumberMesage();
+		  var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+		  var websocket=new WebSocket(url);
+		  websocket.onopen=function(message){
+		  }
+		  websocket.onclose=function(message){
+		 	 websocket.close();
+		  }
+		  websocket.onmessage=function(message){
+		 	 if(message.data==="response"){
+		 		 getNumberMesage();
+		 	 }
+		  }
+	  </script>
 </body>
 </html>

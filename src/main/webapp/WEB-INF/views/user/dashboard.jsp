@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<!-- Own Style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/user_report.css">
 	<!-- Sweet Alert --> 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!--Import jQuery before materialize.js-->
@@ -188,51 +189,39 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
 	<!-- Sweet alert js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
-		<style>
-   .numnotify{
-  	width: auto;
-  	height: 20px;
-  	border-radius:3px;
-  	padding:2px;
-  	background: #FBC02D;
-  	color:white;
-  	font-size: 12px;
-  	font-weight: bolder;
-  	margin-bottom: 5px;
-  	display: none;
-  }
-  </style>
-  <script type="text/javascript">
-  function getNumberMesage(){
-		var uid=parseInt($("#userid").val());
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
-			success : function(data) {
-				if(data.DATA>0){
-					$(".numnotify").css('display',"inline");
-					$(".numnotify").text(data.DATA);
-				}else{
-					$(".numnotify").css('display',"none");
-				}
-			},
-			error : function(data) {
+	
+	<!-- User report nitification -->
+	  <script type="text/javascript">
+		  function getNumberMesage(){
+				var uid=parseInt($("#userid").val());
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
+					success : function(data) {
+						if(data.DATA>0){
+							$(".numnotify").css('display',"inline");
+							$(".numnotify").text(data.DATA);
+						}else{
+							$(".numnotify").css('display',"none");
+						}
+					},
+					error : function(data) {
+					}
+				});
 			}
-		});
-	}
-  getNumberMesage();
-  var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
-  var websocket=new WebSocket(url);
-  websocket.onopen=function(message){
-  }
-  websocket.onclose=function(message){
- 	 websocket.close();
-  }
-  websocket.onmessage=function(message){
- 	 if(message.data==="response"){
- 		 getNumberMesage();
- 	 }
-  }
-  </script>
+		  getNumberMesage();
+		  var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+		  var websocket=new WebSocket(url);
+		  websocket.onopen=function(message){
+		  }
+		  websocket.onclose=function(message){
+		 	 websocket.close();
+		  }
+		  websocket.onmessage=function(message){
+		 	 if(message.data==="response"){
+		 		 getNumberMesage();
+		 	 }
+		  }
+	  </script>
   </body>
 </html>
