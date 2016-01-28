@@ -10,13 +10,15 @@ function saveMemo(){
 	}else{
 		if($("#privacy").val()==0) ispublic=false;
 		else ispublic=true;
-		
+		var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        var url = window.location.href.replace(domainName,"");
+        
 		json = {userid : parseInt($('#userid').val()),
 				title : $('.titlememo').val(),
 				content : data,
 				titleurl : "Memo Dashboard",
-				domain : "www.khmeracademy.org.kh",
-				url : "http://khmeracademy.org.kh",
+				domain : "memo.khmeracademy.org",
+				url : url,
 				isenable : true,
 				ispublic : ispublic
 			};

@@ -290,7 +290,7 @@
                                 report='<span style="position:relative;cursor:pointer" id="'+obj.userid+'" class="report"> Report <img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/report.png" width="9px" height="9px;" title="Report this memo"/></span>';
                             }
                             cb += '<div class="avatar-icon">';
-                            cb += '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/' + obj.userimageurl + '" title="'+obj.username+'" >';
+                            cb += '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/user/image/' + obj.userimageurl + '" title="'+obj.username+'" >';
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';

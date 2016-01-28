@@ -14,6 +14,7 @@ function loadPage(){
 				},
 				error : function(data) {
 					sweetAlert("Opp...", "No memo!", "error");
+					$("#listmemo").html("");
 					console.log("ERROR..." + data);
 				}
 			});

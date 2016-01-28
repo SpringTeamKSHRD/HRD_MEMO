@@ -5,14 +5,14 @@ function editmemo(id) {
 	var value1="Private";
 	var value2="Public";
 	var data=$("#cont_memo").val("");
-	 
+	$(".titlememo").focus();
 	 	$.ajax({
 		type : "GET",
 		url : domain+"/user/"+ id,
 		success : function(data) {
 			$("#userid").val(data.DATA.userid);
 			$(".titlememo").val(data.DATA.title);
-			$("#cont_memo").val(data.DATA.content);
+			$("#cont_memo").text(data.DATA.content);
 			
 			if(data.DATA.ispublic==false){
 				// clear contents
