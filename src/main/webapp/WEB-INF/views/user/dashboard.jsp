@@ -160,7 +160,7 @@
 					<div class="row " >
 						<div class="col s12 m12 l6">
 						  <label class="active" style="color:#FF5722;"><b>Current URL</b></label>
-						  <input type="text" class="browser-default default-link" readonly="" value="www.khmeracademy.org.kh">
+						  <input type="text" class="browser-default default-link" readonly="" value="www.khmeracademy.org">
 						</div>	
 						<div class="col s12 m12 l6"> 
 							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px; background-color:#FF9800">Cancel</a>	
