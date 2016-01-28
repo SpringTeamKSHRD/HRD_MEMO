@@ -7,7 +7,8 @@
     <!-- AdminLTE App -->
     <script src="${pageContext.request.contextPath}/resources/admin/js/app.min.js"></script>
 	<script>
-	
+		var path="${pageContext.request.contextPath}";
+		var imagepath=path+"/resources/admin/imgs/";
 		/* ADD ACTIVE CLASS TO MENU */
 		var url = $(location).attr('href');;
 		url = url.split("/");
@@ -39,14 +40,14 @@
 		/* list notification from api*/
 		function listnotification(){
 			$.ajax({
-				url: "http://localhost:8080/HRD_MEMO/admin/notification",
+				url: path+"/api/admin/notification",
 				type: "get",
 				success: function (response) {
 					$("#notifcationcount").html(response['DATA'].length);
 					$(".menu").html("");
 					jQuery.each(response['DATA'], function() {
 						$(".menu").append(
-							"<li><a href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
+							"<li data-href="+this.id+"><a href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
 							"<img src='/HRD_MEMO/resources/admin/imgs/"+this.reporterimage+"' alt='User Image'"+
 							"style ='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+
 							this.reportername+" reports a memo.<span class='label pull-right' style='color:#444444;'>"+this.reportdate+"</span>"+
@@ -62,10 +63,12 @@
 	     var websocket=new WebSocket(url);	     
 	     websocket.onmessage=function(message){	    	  
 	    	 if(message.data==="report"){  
-	    			alert("New Report");
 	    		 listnotification();			
 	    	 }
 	     }  
+	    $(".dropdown-toggle").click(function(){
+    		 $("#notifcationcount").html("");
+    	});
 	</script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the

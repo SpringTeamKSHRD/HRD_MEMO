@@ -16,7 +16,7 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<table id="tbl-user" class="table table-bordered table-striped table-hover">
+					<table id="tbl-report" class="table table-bordered table-striped table-hover">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -116,11 +116,10 @@
 <%@ include file="_defaultJS.jsp"%>
 <script>
 var data = {};
-var path="${pageContext.request.contextPath}";
-var imagepath=path+"/resources/admin/imgs/";
+var websocket=new WebSocket("ws://localhost:8080/HRD_MEMO/memo/usernotification");
 function showDetail(id){
 	$.ajax({
-		url: path+"/admin/report/"+id,
+		url: path+"/api/admin/report/"+id,
 		type: "get",
 		success: function (response) {			
 			data = validateNullInJson(response['DATA']);
@@ -176,12 +175,15 @@ jQuery(document).ready(function($) {
     $('#btnblock').click(function(){
     	if(confirm("Are you sure?")) {
 	    	$.ajax({
-	    		url: "http://localhost:8080/HRD_MEMO/admin/report/block",
+	    		url: path+"/api/admin/report/block",
 	    		type: "POST",
 	    		dataType : 'json',
 	    		contentType: "application/json; charset=utf-8",
 	    		data:JSON.stringify(data),
 	    		success: function (response) {
+	    			websocket.send("response");
+	    			$("tr[data-href='"+data.id+"']").remove();
+	    			$("li[data-href='"+data.id+"']").remove();
 	    			$('#myModal').modal('hide');
 	    		}
 	    	});	    	
@@ -189,6 +191,6 @@ jQuery(document).ready(function($) {
     });
 });
 </script>	
-<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script>
+<!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script> -->
 </body>
 </html>

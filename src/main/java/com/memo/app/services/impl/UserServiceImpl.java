@@ -80,5 +80,26 @@ public class UserServiceImpl implements UserService {
 	public boolean updateUserPassword(User user) {
 		return userdao.updateUserPassword(user);
 	}
+
 	
+	@Override
+	public List<User> searchUserByColumn(int limit, int page, String keyword, String column) {
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		if(column.equals("username")) return userdao.searchUserByColumn(limit,offset,"username",keyword);
+		if(column.equals("email")) return userdao.searchUserByColumn(limit,offset,"email",keyword);
+		return null;
+	}
+
+	@Override
+	public boolean updateUserType(int usertypeid, int id) {
+		return userdao.updateUserByColumn("usertypeid", usertypeid, id);
+	}
+
 }

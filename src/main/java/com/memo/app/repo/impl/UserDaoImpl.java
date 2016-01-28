@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int changeUserEnable(int id) {
-		String sql = "UPDATE tbuser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
+		String sql = "UPDATE public.tbluser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
 		try {
 			return jdbcTemplate.update(sql, id);
 		} catch (Exception ex) {
@@ -170,6 +170,30 @@ public class UserDaoImpl implements UserDao {
 		}
 		else{
 			System.out.println("old password did not match!");
+		}
+		return false;
+	}
+
+	@Override
+	public List<User> searchUserByColumn(int limit, int offset, String column, String keyword) {
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,"
+				+ "date(us.registerdate),us.userimageurl,ut.usertypename "
+				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
+				+ "where us.ismemoenabled = true and "+ column +" = ? ORDER BY us.userid limit ? offset ? ";
+		try{
+			return jdbcTemplate.query(sql,  new Object[] { keyword, limit, offset },new UserRowMapper());
+		}catch(Exception ex){ex.printStackTrace();}
+		return null;
+	}
+
+	@Override
+	public boolean updateUserByColumn(String column, Object key, int id) {
+		String sql = "UPDATE public.tbluser SET "+ column +"=? " + "WHERE userid=?;";
+		Object[] obj = new Object[] { key, id};
+		try {
+			if (jdbcTemplate.update(sql, obj) > 0)	return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
