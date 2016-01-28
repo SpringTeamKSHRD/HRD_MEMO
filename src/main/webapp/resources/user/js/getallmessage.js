@@ -112,7 +112,6 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
 			success : function(data) {
-				alert(data.DATA);
 			},
 			error : function(data) {
 			}
