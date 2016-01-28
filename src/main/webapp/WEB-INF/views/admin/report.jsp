@@ -181,9 +181,9 @@ jQuery(document).ready(function($) {
 	    		contentType: "application/json; charset=utf-8",
 	    		data:JSON.stringify(data),
 	    		success: function (response) {
+	    			listnotification();
 	    			websocket.send("response");
 	    			$("tr[data-href='"+data.id+"']").remove();
-	    			$("li[data-href='"+data.id+"']").remove();
 	    			$('#myModal').modal('hide');
 	    		}
 	    	});	    	

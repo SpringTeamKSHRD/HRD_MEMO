@@ -1,6 +1,7 @@
    <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.1.4 -->
+    <script	src='${pageContext.request.contextPath}/resources/js/alertify.min.js'></script>
     <script src="${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="${pageContext.request.contextPath}/resources/admin/js/bootstrap.min.js"></script>
@@ -47,7 +48,7 @@
 					$(".menu").html("");
 					jQuery.each(response['DATA'], function() {
 						$(".menu").append(
-							"<li data-href="+this.id+"><a href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
+							"<li><a href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
 							"<img src='/HRD_MEMO/resources/admin/imgs/"+this.reporterimage+"' alt='User Image'"+
 							"style ='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+
 							this.reportername+" reports a memo.<span class='label pull-right' style='color:#444444;'>"+this.reportdate+"</span>"+
@@ -63,7 +64,8 @@
 	     var websocket=new WebSocket(url);	     
 	     websocket.onmessage=function(message){	    	  
 	    	 if(message.data==="report"){  
-	    		 listnotification();			
+	    		 alertify.success("New Report");
+	    		 listnotification();
 	    	 }
 	     }  
 	    $(".dropdown-toggle").click(function(){
