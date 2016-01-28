@@ -84,7 +84,7 @@
 				my_memo_hide=false;
 			}else{
 				my_memo_hide=true;
-				$("#btn-act-desc").animate({right:1+windowScrollWidth, marginLeft: 0}, {duration: 300});
+				$("#btn-act-desc").animate({right:windowScrollWidth, marginLeft: 0}, {duration: 300});
 				$("#hrd_memo_pess").animate({width: 0-windowScrollWidth, marginLeft: 0,padding:0}, {duration: 300});
 			}
 		});

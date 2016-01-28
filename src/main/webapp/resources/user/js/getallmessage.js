@@ -9,7 +9,7 @@ function listAllMessage(){
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-			  		"<div class='card-panel'>" +
+			  		"<div class='card-panel red'>" +
 			  		"<h3 class='white-text'>NO MESSAGE FOR DISPLAY</h3>" +
 			  		"</div></div></div>");
 		}
@@ -90,6 +90,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
+ 		 alert("respone");
  		listAllMessage();
  	 }
   }

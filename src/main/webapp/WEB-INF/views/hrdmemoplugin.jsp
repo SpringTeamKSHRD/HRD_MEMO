@@ -178,7 +178,7 @@
 		memo_img_wraper.setAttribute("title",title);
 		var user_memo_img=document.createElement("img");
 		user_memo_img.setAttribute('class','user-memo-img');
-		user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/'+image);
+		user_memo_img.setAttribute('src','http://192.168.178.123:8080/HRD_MEMO/resources/user/image/'+image);
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
