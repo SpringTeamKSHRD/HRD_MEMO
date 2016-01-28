@@ -84,8 +84,8 @@
 		<div class="row">
 			    <div class="col s12">
 			      <ul class="tabs">
-			        <li class="tab col s6"><a class="active" style="cursor: pointer;">New Message</a></li>
-			         <li class="tab col s6"><a onclick="goToPage();" style="cursor: pointer;">All Message</a></li>
+			        <li class="tab col s6"><a onclick="goToPage();" style="cursor: pointer;">New Message</a></li>
+			         <li class="tab col s6"><a href="" style="cursor: pointer;">All Message</a></li>
 			      </ul>
 			    </div>
 		  </div>
@@ -133,9 +133,8 @@
     <!-- ./Container --> 
 	<!-- User Dashboard Script -->
 	<!-- User Report -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/getallmessage.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
-  
 </html>

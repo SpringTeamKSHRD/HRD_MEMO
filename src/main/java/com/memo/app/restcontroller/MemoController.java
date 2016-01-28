@@ -54,7 +54,7 @@ public class MemoController {
 	// update user information 
 		@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user,HttpServletRequest request) {
-			System.out.println("update user memo controller."+user.getDob());		
+			//System.out.println("update user memo controller.");		
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			if (userService.updateUser1(user)) {			
@@ -87,34 +87,42 @@ public class MemoController {
 				}
 			}
 		//get user new reports
-			@RequestMapping(value = "/newreport/{uid}", method = RequestMethod.GET)
-			public ResponseEntity<Map<String, Object>> listNewReport(@PathVariable("uid") int uid) {
-				System.out.println("list user report controller with userid="+uid);
+			@RequestMapping(value = "/numbermessage/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> getNumberMessage(@PathVariable("uid") int uid) {
+				int number=messageService.getNumberMessage(uid);
+				Map<String, Object> map = new HashMap<String, Object>();
+				if (number==0) {
+					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
+					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+				}
+				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
+				map.put("STATUS", HttpStatus.OK.value());
+				map.put("DATA", number);
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}
+			//get user new reports
+			@RequestMapping(value = "/newmessage/{uid}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> listNewMessage(@PathVariable("uid") int uid) {
 				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
-				
 				message =messageService.getUserMessage(uid);
-				int total=messageService.getNumberMessage(uid);
 				if (message.isEmpty()) {
 					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
-					map.put("STATUS", HttpStatus.NOT_FOUND.value());
+					//map.put("STATUS", HttpStatus.NOT_FOUND.value());
 					return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 				}
 				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
 				map.put("STATUS", HttpStatus.OK.value());
 				map.put("DATA", message);
-				map.put("TOTAL", total);
+				map.put("TOTAL",message.size());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			}
 			//get user old reports
 			@RequestMapping(value = "/oldreport/{uid}", method = RequestMethod.GET)
 			public ResponseEntity<Map<String, Object>> listOldReport(@PathVariable("uid") int uid) {
-				System.out.println("list user report controller with userid="+uid);
 				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
-				
 				message =messageService.getOldMessage(uid);
-				int total=messageService.getNumberMessage(uid);
 				if (message.isEmpty()) {
 					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
 					map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -123,7 +131,7 @@ public class MemoController {
 				map.put("MESSAGE", "MESSAGES HAVE BEEN FOUND.");
 				map.put("STATUS", HttpStatus.OK.value());
 				map.put("DATA", message);
-				map.put("TOTAL", total);
+				map.put("TOTAL", message.size());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			}
 			//change status report to be viewed

@@ -1,12 +1,10 @@
-
-function listNewMessage(){
+function listAllMessage(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/newmessage/"+uid,
+		url : "http://localhost:8080/HRD_MEMO/user/oldreport/"+uid,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
-		      updateMessageStatus(uid);
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
@@ -16,7 +14,10 @@ function listNewMessage(){
 		}
 	});
 }
-listNewMessage();
+function goToPage() {
+	window.location.href="http://localhost:8080/HRD_MEMO/user/userreport";
+}
+listAllMessage();
 function extractData(data){
 	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
 			"<thead style='background: #26a69a; color:white;'>" +
@@ -62,18 +63,6 @@ function generateTitle(title){
 		 return title;
 	 }
 }
-function updateMessageStatus(){
-	var uid=parseInt($("#userid").val());
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
-		success : function(data) {
-			getNumberMesage();
-		},
-		error : function(data) {
-		}
-	});
-}
 function getNumberMesage(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
@@ -100,11 +89,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
- 		listNewMessage();
+ 		 alert("respone");
+ 		 getNumberMesage();
  	 }
   }
-  function goToPage() {
-		window.location.href="http://localhost:8080/HRD_MEMO/user/getallmessage";
-	}
-
-

@@ -36,6 +36,8 @@ public class UserController {
 	public String getUserPassword(){
 		return "user/user_password";
 	}
-	
-	
+	@RequestMapping(value="/getallmessage")
+	public String getAllMessagePage(){
+		return "user/getallmessage";
+	}
 }
