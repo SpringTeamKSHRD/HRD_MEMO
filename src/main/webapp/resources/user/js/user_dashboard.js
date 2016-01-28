@@ -13,7 +13,7 @@ function loadPage(){
 					displayData(data);
 				},
 				error : function(data) {
-					alert("Unsuccess: " + data.MESSAGE);
+					sweetAlert("Opp...", "No memo!", "error");
 					console.log("ERROR..." + data);
 				}
 			});
@@ -92,25 +92,3 @@ function displayData(data) {
 		clearMemo();
 		loadPage();
 	}
-	
-	/*When user select on combobox to change amount of rows to display.*/
-	/*function limitRow(){
-		var limit=$("#limit_row").val();		
-		clearMemo();
-		$.ajax({
-					type : "GET",
-					url : domain+"/user/list/"+limit,
-					dataType : 'json',
-					data : null,
-					success : function(data) {
-						displayData(data);
-					},
-					error : function(data) {
-						alert("Unsuccess: " + data.MESSAGE);
-						console.log("ERROR..." + data);
-					}
-				});
-		change button to update
-		$("#btnsave").text("Save");
-		$("#btnsave").attr("onclick","saveMemo()");
-	}*/

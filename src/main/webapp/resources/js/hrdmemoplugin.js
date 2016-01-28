@@ -96,6 +96,13 @@
 			document.getElementsByClassName('my-memo-class')[0]
 			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
+		$(window).load(function() {	
+			windowScrollWidth =document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
+			wrapper.style.height= window.innerHeight+"px";
+			wrapper.style.right=windowScrollWidth+'px';
+			document.getElementsByClassName('my-memo-class')[0]
+			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
+			});
 		
 		
 		
