@@ -230,7 +230,6 @@
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
- 		 alert("respone");
  		 getNumberMesage();
  	 }
   }

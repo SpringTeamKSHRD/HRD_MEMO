@@ -5,6 +5,7 @@ function listAllMessage(){
 		url : "http://localhost:8080/HRD_MEMO/user/oldreport/"+uid,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
+		       updateMessageStatus();
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
@@ -89,7 +90,18 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
- 		 alert("respone");
- 		 getNumberMesage();
+ 		listAllMessage();
  	 }
   }
+  function updateMessageStatus(){
+		var uid=parseInt($("#userid").val());
+		$.ajax({
+			type : "GET",
+			url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
+			success : function(data) {
+				getNumberMesage();
+			},
+			error : function(data) {
+			}
+		});
+	}

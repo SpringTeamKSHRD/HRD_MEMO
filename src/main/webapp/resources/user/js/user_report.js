@@ -10,7 +10,7 @@ function listNewMessage(){
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-			  		"<div class='card-panel teal'>" +
+			  		"<div class='card-panel red'>" +
 			  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
 			  		"</div></div></div>");
 		}
