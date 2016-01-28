@@ -75,7 +75,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 					displayData(data);
 				},
 				error : function(data) {
-					alert("Unsuccess: " + data.MESSAGE);
+					sweetAlert("Fail", "Memo is not found!", "error");
 					console.log("ERROR..." + data);
 				}
 			});
@@ -106,7 +106,7 @@ var domain=window.location.origin+"/HRD_MEMO";
 					displayData(data);
 				},
 				error : function(data) {
-					alert("Unsuccess: " + data.MESSAGE);
+					sweetAlert("Fail", "Memo is not found!", "error");
 					console.log("ERROR..." + data);
 				}
 			});
@@ -145,18 +145,6 @@ var domain=window.location.origin+"/HRD_MEMO";
 				}
 			});
 		}else{
-			/*$.ajax({
-				type : "GET",
-				url : domain+"/user/list/",
-				dataType : 'json',
-				data : null,
-				success : function(data) {
-					displayData(data);
-				},
-				error : function(data) {
-					alert("Unsuccess: " + data.MESSAGE);
-					console.log("ERROR..." + data);
-				}
-			});*/
+			sweetAlert("Oops...", "Select both date!", "error");
 		}
 	}
