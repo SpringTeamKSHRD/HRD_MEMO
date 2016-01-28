@@ -1,5 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
+/* This function is for creating memo */
 function saveMemo(){	
 	var data=$("#cont_memo").val();
 	var ispublic;
@@ -17,7 +18,6 @@ function saveMemo(){
 			ispublic : ispublic
 		};
 	
-	//alert("after data json.")
 	$.ajax({
 		type : "POST",
 		url : domain + "/user/",
@@ -28,7 +28,7 @@ function saveMemo(){
 			loadPage();
 		},
 		error : function(data) {
-			alert("Unsuccess: " + data.MESSAGE);
+			sweetAlert("Fail", "Fail with create memo!", "error");
 			console.log("ERROR..." + data);
 		}
 	});

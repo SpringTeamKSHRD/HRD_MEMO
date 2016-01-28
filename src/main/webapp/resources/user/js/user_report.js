@@ -1,77 +1,110 @@
-var domain=window.location.origin+"/HRD_MEMO";
 
-listOldReport();
-listNewReport();
-
-function listReport(){
-	
+function listNewMessage(){
+	var uid=parseInt($("#userid").val());
+	$.ajax({
+		type : "GET",
+		url : "http://localhost:8080/HRD_MEMO/user/newmessage/"+uid,
+		success : function(data) {
+		       $("#message_diplayer").html(extractData(data));
+		      updateMessageStatus(uid);
+		},
+		error : function(data) {
+			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
+			  		"<div class='card-panel teal'>" +
+			  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
+			  		"</div></div></div>");
+		}
+	});
 }
-function displayReport(data){
-	var contents = "<ul class='collection'>";
+listNewMessage();
+function extractData(data){
+	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
+			"<thead style='background: #26a69a; color:white;'>" +
+			"<tr><th data-field='id'>No</th>" +
+			"<th data-field='name'>Sender</th>" +
+			"<th data-field='price'>Description</th>" +
+			"<th data-field='name'>Date</th>" +
+			"<th data-field='name'>Action</th>" +
+			" </tr></thead><tbody>";
 	for(var i=0;i<data.DATA.length;i++){
-		contents+="<li class='collection-item avatar'>"
-				 +"<img src='"+domain+"/resources/user/image/wuyifan.jpg' alt='' class='circle'>"
-				 +"<b><span class='title'>"
-				 	/*+data.DATA[i].id */
-				 	+"Admin"
-				 +"</span></b>"
-				 +"<p>"
-				 	+data.DATA[i].message
-				 +"</p>"
-				 +"</li>";
+		str+=" <tr style='padding:0px;'>"+
+				"<td>"+(i+1)+"</td>" +
+				"<td>Admin</td>" +
+				"<td>"+data.DATA[i].message+"</td>" +
+				"<td>"+data.DATA[i].date+"</td>" +
+				"<td><a class='waves-effect waves-light btn modal-trigger' onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='material-icons'>visibility</i></a></td>" +
+				"</tr>";
 	}
-	contents+="</ul>";
-	return contents;
+	str+=" </tbody></table>";
+	return str;
 }
-function listNewReport(){
-	var uid=parseInt($("#userid").val());
+function getBlockedMemo(id){
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/newreport/"+uid,
-		dataType : 'json',
-		data : null,
+		url : "http://localhost:8080/HRD_MEMO/user/"+id,
 		success : function(data) {
-			$("#list_new_report").html(displayReport(data));
+		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
+		       $("#website").text("Website: "+data.DATA.domain);
+		       $("#memo_content").text(data.DATA.content);
+		       $("#memo_date").text("Date: "+data.DATA.date);
+		       $('#modal1').openModal();
 		},
 		error : function(data) {
-			console.log("ERROR..." + data);
+			 alert("rerror");
 		}
 	});
 }
-function listOldReport(){
+function generateTitle(title){
+	 var tl=title.length;
+	 if(tl>50){
+		 return title.substring(0, 50)+"...";
+	 }else{
+		 return title;
+	 }
+}
+function updateMessageStatus(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/oldreport/"+uid,
-		dataType : 'json',
-		data : null,
+		url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
 		success : function(data) {
-			$("#list_old_report").html(displayReport(data));
+			getNumberMesage();
 		},
 		error : function(data) {
-			console.log("ERROR..." + data);
 		}
 	});
 }
-
-
-function clearReport(){
-	/*var uid=parseInt($("#userid").val());
-	
+function getNumberMesage(){
+	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/changereport/"+uid,
-		dataType : 'json',
-		data : null,
+		url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
 		success : function(data) {
-			//alert(data.MESSAGE);
-			$("#total_report").text("");
-			$("#list_report_area").html("");
+			if(data.DATA>0){
+				$(".numnotify").css('display',"inline");
+				$(".numnotify").text(data.DATA);
+			}else{
+				$(".numnotify").css('display',"none");
+			}
 		},
 		error : function(data) {
-			sweetAlert("Oops...", "Report is not found!", "error");
-			//alert("Unsuccess: " + data.MESSAGE);
-			console.log("ERROR..." + data);
 		}
-	});*/
+	});
 }
+var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+  var websocket=new WebSocket(url);
+  websocket.onopen=function(message){
+  }
+  websocket.onclose=function(message){
+ 	 websocket.close();
+  }
+  websocket.onmessage=function(message){
+ 	 if(message.data==="response"){
+ 		listNewMessage();
+ 	 }
+  }
+  function goToPage() {
+		window.location.href="http://localhost:8080/HRD_MEMO/user/getallmessage";
+	}
+
+

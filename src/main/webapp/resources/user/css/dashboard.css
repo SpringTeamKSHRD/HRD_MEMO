@@ -40,3 +40,6 @@ span.badge.new{
 	background-color:yellow;
 	display:none;
 }
+li.collection-item.avatar:hover{
+	background-color:#ECEFF1;
+}

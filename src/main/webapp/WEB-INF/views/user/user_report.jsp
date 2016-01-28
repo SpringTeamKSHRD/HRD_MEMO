@@ -17,93 +17,125 @@
 	<!-- Own Style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/dashboard.css">
 	<!-- Sweet Alert --> 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/font-awesome-4.3.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.css"/>
 	<!--Import jQuery before materialize.js-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 </head>
 <body >
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
-	</ul>        	
+	</ul> 
+	<ul id="dropdown2" class="dropdown-content">
+	 	<li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
+	  <li class="divider"></li>
+	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
+	</ul> 		
+	<div class="navbar-fixed">  
 	<nav>
 	  <div class="nav-wrapper teal">
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
-	      <li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-	       <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li>
+	      <li><a href="user">Home</a></li>
+	      <li><a href="${pageContext.request.contextPath}/user/userreport">
+	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
 	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
-	      	<span>Ky Sona</span><i class="material-icons right">arrow_drop_down</i></a>
+	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
+	      </li>	      
+	      <li><a href="#!">About</a></li>	      
+	    </ul>
+	    <!-- For mobile menu -->
+	     <ul class="side-nav" id="mobile-demo">
+	      <li><a href="user"">Home</a></li>
+	        <li><a href="${pageContext.request.contextPath}/user/userreport">
+	        <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
+	      <li>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
 	      </li>
+	      <!-- Dropdown Trigger -->
+	      <li>
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown2">
+	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
+	      </li>	      
 	      <li><a href="#!">About</a></li>	      
 	    </ul>
 	  </div>
 	</nav>
+	</div>
 	<!-- ./close navigation -->
-	<div class="container">
-		<!-- Page Layout body here -->
 		<div class="row">
-			<!-- Current user -->
-			<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
-			<!-- List old report here -->
-			<div class="col s12 m12 l3 z-depth-1" style="margin-top:14px;">
-				<div class="collection">
-				     <a href="#!" class="collection-item active" style="text-align:center;">List old Reports</a>
-				</div>
-				<div id="list_old_report">
-				
-				</div>
+			    <div class="col s12">
+			      <ul class="tabs">
+			        <li class="tab col s6"><a class="active" style="cursor: pointer;">New Message</a></li>
+			         <li class="tab col s6"><a onclick="goToPage();" style="cursor: pointer;">All Message</a></li>
+			      </ul>
+			    </div>
+		  </div>
+		  <div class="row col s12" style='margin:0px auto;'>
+			<div class="col s12" id="message_diplayer" style='margin: auto;'>
 			</div>
-			<!-- List new report here-->
-			<div class="col s12 m12 l9 z-depth-1">
-				<div class="collection">
-				    <a href="#!" class="collection-item active" style="text-align:center;">List new Reports</a>
-				</div>
-				<div id="list_new_report">
-				
-				</div>
 			</div>
+			 
+		<div id="modal1" class="modal modal-fixed-footer">
+		    <div class="modal-content">
+		      <div class="row" style="margin: 0px; padding: 0px;">
+			      	<div class="col s7">
+			      	 	<h6 id="memo_title"></h6>
+			      	</div>
+			      	<div class="col s5">
+			      	   <h6 id="website"></h6>
+			      	</div>
+		      </div>
+		      <p id="memo_content"></p>
+		    </div>
+		    <div class="modal-footer">
+		       <small id="memo_date"></small>
+		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " style="color:red;">Close</a>
+		    </div>
+	  </div>
+	  <!--end modal  -->
 		</div>
 		<!-- ./close row body which contain body left and body right -->
 		<!-- ./Page Layout body here -->
-	</div>
+	<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
+	<style>
+   .numnotify{
+  	width: 25px;
+  	height: 20px;
+  	border-radius:3px;
+  	padding:2px;
+  	background: #FBC02D;
+  	color:white;
+  	font-size: 12px;
+  	font-weight: bolder;
+  	margin-bottom: 5px;
+  	display: none;
+  }
+  </style>
     <!-- ./Container --> 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Dashboard Script -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_dashboard.js"></script> 
-	<!-- Personal Information -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
 	<!-- User Report -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>
-  <style>
-  </style>
+  
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

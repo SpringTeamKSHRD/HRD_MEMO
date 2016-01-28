@@ -29,71 +29,46 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-fixed-top">
+	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-		  <a class="navbar-brand" href="#">MEMO PESS</a>
+		  <a class="navbar-brand text" href="#">MEMO PESS</a>
 		</div>
+		<!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	    </div>
+    	<!-- close brand toggle -->
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<!-- <div class="collapse navbar-collapse navbar-ex1-collapse"> -->
+		<div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="${pageContext.request.contextPath}/user/user">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport"><i class="fa fa-envelope fa-2x"></i></a></li>
-			<%-- <li><a href="${pageContext.request.contextPath}/user/user"><i class="large material-icons">email</i></a></li> --%>
+			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope fa-2x"></i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>
 			<li class="dropdown">
-			  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ky Sona <span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
-			  	<li><a href="${pageContext.request.contextPath}/user/userreport">Report<span id="total_report" style="color:red;"></span></a></li>
 			  	<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/user/userpassword">Change password</a></li> <!-- href="#!" data-toggle="modal" data-target="#myModal" -->
 				<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
 			  </ul>
 			</li>
-			<li><a href="#!">About</a></li>
+			<li><a href="#!" class="text">About</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 	</nav>
 	<!-- Body here -->
-	<div class="container"> <br/><br/><br/>
-		<%-- <input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/> --%>
-		<!-- Modal Structure -->
-			<!-- <div id="myModal" class="modal fade" role="dialog">
-			  <div class="modal-dialog">
-			
-			    Modal content
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title">Change Password</h4>
-			      </div>
-			      <div class="modal-body">
-			      	<div class="form-group">
-					    <label>Old Password</label>
-					    <input type="password" class="form-control" id="old_pwd" placeholder="Password">
-					</div>
-					<div class="form-group">
-					    <label>New Password</label>
-					    <input type="password" class="form-control" id="new_pwd" placeholder="Password">
-					</div>
-					<div class="form-group">
-					    <label>Confirm Password</label>
-					    <input type="password" class="form-control" id="con_pwd" placeholder="Password">
-					</div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-success" onclick="updateUserPwd()">Update</button>
-			        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-			      </div>
-			    </div>
-			
-			  </div>
-			</div> -->
-		<!-- ./close modal  -->
+	<div class="container"> 
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -183,8 +158,6 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
-	<!-- User Password -->
-	<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_password.js"></script> --%>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
 </body>

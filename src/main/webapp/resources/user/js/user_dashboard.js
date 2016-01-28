@@ -1,4 +1,5 @@
 var domain=window.location.origin+"/HRD_MEMO";
+
 loadPage();
 
 function loadPage(){
@@ -21,7 +22,7 @@ function loadPage(){
 	$("#btnsave").attr("onclick","saveMemo()");
 }
 
-/* list data */
+/* extract data to display */
 function displayData(data) {
 	var contents = "<ul class='collection'>";
 				 
@@ -61,8 +62,7 @@ function displayData(data) {
 				 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",
 				 confirmButtonText: "Yes, delete it!",
 				 closeOnConfirm: false },
-				 function(){
-					 
+				 function(){					 
 					 $.ajax({
 							type : "DELETE",
 							url : domain+"/user/"+id,
@@ -71,12 +71,13 @@ function displayData(data) {
 								loadPage();
 							},
 							error : function(data) {
-								alert("Unsuccess: " + data.MESSAGE);
+								sweetAlert("Fail", "Fail with deleted memo!", "error");
 								console.log("ERROR..." + data);
 							}
 						});	    
 		});
 	}
+	
 	function listReport(){
 		alert("list report");
 		$(".report").attr("display","block");
@@ -91,6 +92,7 @@ function displayData(data) {
 		clearMemo();
 		loadPage();
 	}
+	
 	/*When user select on combobox to change amount of rows to display.*/
 	/*function limitRow(){
 		var limit=$("#limit_row").val();		
