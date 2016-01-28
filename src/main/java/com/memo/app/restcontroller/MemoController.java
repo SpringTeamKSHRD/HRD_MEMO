@@ -24,12 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.Message;
-import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.MemoService;
 import com.memo.app.services.MessageService;
-import com.memo.app.services.ReportService;
 import com.memo.app.services.UserService;
 
 @RestController
@@ -44,9 +42,6 @@ public class MemoController {
 	
 	@Autowired
 	private UserDaoImpl userDao;
-	
-	@Autowired
-	private ReportService reportDao;
 	
 	@Autowired
 	private MessageService messageService;
@@ -338,10 +333,11 @@ public class MemoController {
 		}
 		
 		//get all message number
-		@RequestMapping(value = "/allnumbermessage/{uid}", method = RequestMethod.GET)
-		public ResponseEntity<Map<String, Object>> getAllNumberMessage(@PathVariable("uid") int uid) {
+		@RequestMapping(value = "/allnumbermessage/{uid}/{limit}/{page}", method = RequestMethod.GET)
+		public ResponseEntity<Map<String, Object>> getAllNumberMessage(@PathVariable("uid") int uid,
+				@PathVariable("limit") int limit,@PathVariable("page") int page) {
 			System.out.println(uid);
-			int number=messageService.getAllNumberMessage(uid);
+			int number=messageService.getAllNumberMessage(uid,limit,page);
 			Map<String, Object> map = new HashMap<String, Object>();
 			if (number==0) {
 				map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");

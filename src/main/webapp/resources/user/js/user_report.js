@@ -10,7 +10,7 @@ function listNewMessage(){
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-			  		"<div class='card-panel red'>" +
+			  		"<div class='card-panel' style='background-color:rgba(255, 0, 0, 0.64);'>" +
 			  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
 			  		"</div></div></div>");
 		}
@@ -27,7 +27,7 @@ function extractData(data){
 			"<th data-field='name'>Action</th>" +
 			" </tr></thead><tbody>";
 	for(var i=0;i<data.DATA.length;i++){
-		str+=" <tr style='padding:0px;'>"+
+		str+=" <tr style='padding:0px; margin:0px;'>"+
 				"<td>"+(i+1)+"</td>" +
 				"<td>Admin</td>" +
 				"<td>"+data.DATA[i].message+"</td>" +

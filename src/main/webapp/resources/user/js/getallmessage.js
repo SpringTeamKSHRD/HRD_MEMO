@@ -113,46 +113,98 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
 			success : function(data) {
-				$("#pagination").html(generatPagination(data.DATA));
+				getNumPagination(data.DATA,10,5);
 			},
 			error : function(data) {
 			}
 		});
   }
   getAllNumberMessage();
-  function generatPagination(data){
-	  var pn=0;
-	  if(data%10!=0){
-		  pn=Math.floor(data/10)+1;
+  var numDisplay=0;
+  var paginNum=0;
+  var currentPNum=0;
+  var currentPagin=1;
+  var pageNum=0;
+  var lastPage=0;
+  var recordNum=0;
+  var trueDisplay=0;
+  function getNumPagination(data,renum,display){
+	  recordNum=renum;
+	  if(data % renum != 0){
+		  pageNum=Math.floor(data/renum)+1;
 	  }else{
-		  pn=data/10; 
+		  pageNum=data/renum;
 	  }
-	  alert(pn);
-	  if(data!=0){
-			  var p="<li><i class='material-icons'>chevron_left</i></li>";
-			  for(var i=1;i<=pn;i++){
-				  if(i==1){
-					  p+="<li class='waves-effect'><a style='color:#009688; font-size:18px; font-weight:bolder;' class='pbtn' >"+i+"</a></li>";  
-				  }else{
-					  p+="<li class='waves-effect'><a style='color:#009688; font-size:18px; font-weight:bolder;' class='pbtn' >"+i+"</a></li>";
-				  }
-			  }
-			  p+="<li class='waves-effect'><a><i class='material-icons'>chevron_right</i></a></li>";
-		  return p;
+	  if(pageNum % display != 0){
+		 paginNum=Math.floor(pageNum/display)+1;
 	  }else{
-		  return "";
+		  paginNum=pnpageNum/display;
 	  }
+	  if(pageNum < display){
+		  trueDisplay=pageNum;
+	  }else{
+		  trueDisplay=display;
+	  }
+	  lastPage=trueDisplay;
+	  $("#pagination").html(firstGeneratePagination());
   }
+	  
   $(document).on('click.waves-effect', '.waves-effect .pbtn', function (e) {
 		alert($(this).text());
+ });
+  $(document).on('click.waves-effect', '.waves-effect #btnprev', function (e) {
+		alert($(this).text()+"left");
 });
+ $(document).on('click.waves-effect', '.waves-effect #btnnext', function (e) {
+		alert($(this).text()+"right");
+});
+  function generatePage(click){
+	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  if(click> pageNum){
+		  
+	  }else if(click > lastPage){
+		  if(currentPagin<paginNum){
+			  currentPagin++;
+		  }else{
+			  currentPagin=currentPagin;
+		  }
+		  if(currentPagin * trueDisplay <= pageNum){
+			  lastPage=currentPagin * trueDisplay;
+			  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
+				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  }  
+		  }else{
+			  lastPage=pageNum;
+			  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
+				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  } 
+		  }
+	  }else{
+		  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
+			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+		  }  
+	  }
+	  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+	  return myPagin;
+  }
   
-  
-  
-  
-  
-  
-  
+  function firstGeneratePagination(){
+	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  if(currentPagin * trueDisplay <= pageNum){
+		  lastPage=currentPagin * trueDisplay;
+		  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
+			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+		  }  
+	  }else{
+		  lastPage=pageNum;
+		  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
+			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+		  }
+	  }
+	  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+	  return myPagin;
+}
+ 
   
   
   

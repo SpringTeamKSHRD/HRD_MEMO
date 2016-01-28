@@ -117,7 +117,7 @@ public class MessageDaoImpl implements MessageDao {
 		return null;
 	}
 	@Override
-	public int getAllNumberMessage(int userid) {
+	public int getAllNumberMessage(int userid,int limit,int page) {
 		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=?";
 		try{
 			return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);

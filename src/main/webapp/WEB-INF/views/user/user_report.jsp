@@ -128,7 +128,17 @@
   	font-weight: bolder;
   	margin-bottom: 5px;
   	display: none;
+  	
   }
+  .card-panel {
+    position: relative;
+    -webkit-animation: mymove 0.5s; /* Chrome, Safari, Opera */ 
+  	}
+	 @-webkit-keyframes mymove {
+	    0%   {top: 0px;}
+	    50%  {top: 100px}
+	    100% {top: 0px;}
+	}
   </style>
     <!-- ./Container --> 
 	<!-- User Dashboard Script -->
