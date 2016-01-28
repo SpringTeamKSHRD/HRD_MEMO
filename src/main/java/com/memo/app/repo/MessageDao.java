@@ -9,6 +9,7 @@ public interface MessageDao {
 	public List<Message> getUserMessage(int userid);
 	public int getNumberMessage(int userid);
     public int changeIsView(int messageid);
+    public int getAllNumberMessage(int userid);
     //sona
     public boolean changeMessageIsViewed(int userid);
     public List<Message> getOldMessage(int userid);
