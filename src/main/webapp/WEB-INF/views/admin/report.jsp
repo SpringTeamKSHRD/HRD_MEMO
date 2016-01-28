@@ -10,6 +10,56 @@
 <body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
+	<div class="search" style="margin: 10px 50px 25px 50px;">
+<form class="form-inline" role="form">
+  <div class="form-group col-sm-7">    
+    <div class="input-group col-sm-12">    
+      <input type="text" class=" form-control" placeholder="Search Report"> 
+      <span class="" style="
+		    position: relative;
+		    font-size: 0;
+		    white-space: nowrap;
+		    width: 1%;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    display: table-cell;
+			">
+        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+          <i class="fa fa-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>  
+  <div class="form-group" style="margin-right: 15px;">    
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span> <span class="sr-only">Toggle
+        Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="form-group">    
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span> <span class="sr-only">Toggle
+        Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>  
+</form>
+	</div>
 <div class="row">
 <div class="col-xs-12">
 	<div class="box">
@@ -38,6 +88,7 @@
 					</table>
 				</div>
 			</div>
+			<div class="form-group pull-right"> <input type="checkbox"  id="checkEnable" value="Bike"> View Reported<br></div>
 		</div>
 	</div>
 	<!-- /.box-body -->
@@ -117,6 +168,9 @@
 <script>
 var data = {};
 var websocket=new WebSocket("ws://localhost:8080/HRD_MEMO/memo/usernotification");
+if(ParamToJson().isblocked){
+	$("#checkEnable").prop( "checked", true);
+}
 function showDetail(id){
 	$.ajax({
 		url: path+"/api/admin/report/"+id,
@@ -138,15 +192,6 @@ function showDetail(id){
 			$('#myModal').modal('show');
 		}
 	});    	
-}
-function ParamToJson() {            
-    var pairs = location.search.slice(1).split('&');    
-    var result = {};
-    pairs.forEach(function(pair) {
-        pair = pair.split('=');
-        result[pair[0]] = decodeURIComponent(pair[1] || '');
-    });
-    return JSON.parse(JSON.stringify(result));
 }
 function validateNullInJson(data){
 	for (var x in data) {
@@ -188,6 +233,10 @@ jQuery(document).ready(function($) {
 	    		}
 	    	});	    	
     	}
+    });
+    $("#checkEnable").click(function(){
+    	if(this.checked)  window.location.href=window.location.href+"?isblocked=true";
+    	else window.location.href=window.location.origin+window.location.pathname;
     });
 });
 </script>	

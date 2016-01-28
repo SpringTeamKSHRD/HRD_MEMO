@@ -169,7 +169,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div> -->
                     <div class="text-center">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>

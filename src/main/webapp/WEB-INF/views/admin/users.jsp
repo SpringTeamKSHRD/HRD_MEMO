@@ -94,9 +94,9 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						   <div id="page-selection">Pagination goes here</div>
 					</div>
 				</div>
+				<div class="form-group pull-right"> <input type="checkbox"  id="checkEnable" value="Bike"> View Memo User Disabled<br></div>
 			</div>
 		</div>
 		<!-- /.box-body -->
@@ -108,19 +108,18 @@
 <%@ include file="_defaultJS.jsp"%>
 <script src="${pageContext.request.contextPath}/resources/admin/js/jquery.bootpag.min.js"></script>
 <script>
+if(ParamToJson().ismemoenabled){
+	$("#checkEnable").prop( "checked", true);
+}
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.document.location = $(this).data("href");
     });
+    $("#checkEnable").click(function(){
+    	if(this.checked)  window.location.href=window.location.href+"?ismemoenabled=false";
+    	else window.location.href=window.location.origin+window.location.pathname;
+    });
 });
-<script>
-// init bootpag
-$('#page-selection').bootpag({
-    total: 10
-}).on("page", function(event, /* page number here */ num){
-     $("#content").html("Insert content"); // some ajax content loading...
-});
-</script>
 </script>
 </body>
 </html>

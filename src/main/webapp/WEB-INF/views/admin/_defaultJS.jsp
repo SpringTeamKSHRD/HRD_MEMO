@@ -17,15 +17,13 @@
 		/* if(typeof variable_here === 'undefined'){
 			$('ul.sidebar-menu li:first-child').addClass('active');
 		}else  */if(newUrl=="users"){
-			$('ul.sidebar-menu li:nth-last-child(4)').addClass('active');
-		}else if(newUrl=="memos"){
 			$('ul.sidebar-menu li:nth-last-child(3)').addClass('active');
-		}else if(newUrl=="statistics"){
+		}else if(newUrl=="memos"){
 			$('ul.sidebar-menu li:nth-last-child(2)').addClass('active');
-		}else if(newUrl=="blacklist"){
+		}else if(newUrl=="reports"){
 			$('ul.sidebar-menu li:nth-last-child(1)').addClass('active');
 		}else{
-			$('ul.sidebar-menu li:nth-last-child(5)').addClass('active');
+			$('ul.sidebar-menu li:nth-last-child(4)').addClass('active');
 		}
 		
 		/* sideBarMenu and header NOTIFICATION*/
@@ -38,6 +36,15 @@
 		  	$(".label-warning").html(result.unreportedlist);
 		  	$("#notification-text").html("&nbsp;&nbsp;"+result.unreportedlist+"&nbsp;&nbsp;memos reported."); 
 		 */
+		 function ParamToJson() {            
+			    var pairs = location.search.slice(1).split('&');    
+			    var result = {};
+			    pairs.forEach(function(pair) {
+			        pair = pair.split('=');
+			        result[pair[0]] = decodeURIComponent(pair[1] || '');
+			    });
+			    return JSON.parse(JSON.stringify(result));
+		}
 		/* list notification from api*/
 		function listnotification(){
 			$.ajax({
