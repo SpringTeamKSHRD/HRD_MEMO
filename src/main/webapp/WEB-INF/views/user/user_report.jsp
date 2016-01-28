@@ -33,7 +33,7 @@
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
-	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
+	  <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
 	</ul> 
 	<ul id="dropdown2" class="dropdown-content">
 	 	<li class="divider"></li>
@@ -41,7 +41,7 @@
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
-	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
+	  <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
 	</ul> 		
 	<div class="navbar-fixed">  
 	<nav>
