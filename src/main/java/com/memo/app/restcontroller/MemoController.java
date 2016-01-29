@@ -96,11 +96,12 @@ public class MemoController {
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			}
 			//get user new reports
-			@RequestMapping(value = "/newmessage/{uid}", method = RequestMethod.GET)
-			public ResponseEntity<Map<String, Object>> listNewMessage(@PathVariable("uid") int uid) {
+			@RequestMapping(value = "/newmessage/{uid}/{page}/{limit}", method = RequestMethod.GET)
+			public ResponseEntity<Map<String, Object>> listNewMessage(@PathVariable("uid") int uid
+					,@PathVariable("page") int page,@PathVariable("limit") int limit) {
 				List<Message> message=new ArrayList<Message>();
 				Map<String, Object> map = new HashMap<String, Object>();
-				message =messageService.getUserMessage(uid);
+				message =messageService.getUserMessage(uid,page,limit);
 				if (message.isEmpty()) {
 					map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
 					//map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -151,7 +152,6 @@ public class MemoController {
 		System.out.println("list user controller."+pathVariables.get("limit"));
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		memos = (ArrayList<Memo>) memoService.listMemo(true);
 		if (memos.isEmpty()) {
 			map.put("MESSAGE", "MEMOS ARE NOT FOUND.");

@@ -6,7 +6,7 @@ import com.memo.app.entities.Message;
 
 public interface MessageDao {
 	public int[] saveMessage(List<Message> messages);
-	public List<Message> getUserMessage(int userid);
+	public List<Message> getUserMessage(int userid,int page,int limit);
 	public int getNumberMessage(int userid);
     public int changeIsView(int messageid);
     public int getAllNumberMessage(int userid);

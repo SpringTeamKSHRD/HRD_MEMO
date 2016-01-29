@@ -1,7 +1,6 @@
 var domain=window.location.origin+"/HRD_MEMO";
 
 loadPage();
-
 function loadPage(){
 	clearMemo();
 	$.ajax({

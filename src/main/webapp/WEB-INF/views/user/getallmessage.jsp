@@ -24,7 +24,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 </head>
-<body >
+<body>
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
@@ -81,7 +81,8 @@
 	</nav>
 	</div>
 	<!-- ./close navigation -->
-		<div class="row">
+	<!--START MENU  -->
+		<div class="row" style="margin-top: 10px;">
 			    <div class="col s12">
 			      <ul class="tabs" style="overflow: hidden;">
 			        <li class="tab col s6"><a onclick="goToPage();" style="cursor: pointer;">New Message</a></li>
@@ -89,6 +90,33 @@
 			      </ul>
 			    </div>
 		  </div>
+		  <!--END MENU  -->
+		  <!--Start Search  -->
+		  <div class="row">
+		  		<div class="col s12 m6 l6">
+		  		 <div class="file-field input-field">
+				      <div class="btn" id="btnsearch">
+				        <span>Search</span>
+				      </div>
+				      <div class="file-path-wrapper">
+				       <input type="date" class="datepicker" id="sdate" placeholder="DATE">
+				      </div>
+				    </div>
+		  		</div>
+		  		<div class="col s12 m6 l6">
+		  		 <div class="file-field input-field">
+				      <div class="btn">
+				        <span>Display Row</span>
+				      </div>
+				      <div class="file-path-wrapper">
+						<p class="range-field" style="margin: 20px 0px 0px 0px;">
+					      <input type="range" id="test4" min="5" max="10" />
+					    </p>
+					 </div>
+				    </div>
+		  		</div>
+		  </div>
+		  <!--end search  -->
 		  <div class="row col s12" style='margin:0px auto;'>
 			<div class="col s12" id="message_diplayer" style='margin: auto;'>
 			</div>
@@ -98,7 +126,7 @@
 			<ul class="pagination" id="pagination">
 			  </ul>
 			</div>
-			 
+			 <!--end pagination -->
 		<div id="modal1" class="modal modal-fixed-footer">
 		    <div class="modal-content">
 		      <div class="row" style="margin: 0px; padding: 0px;">

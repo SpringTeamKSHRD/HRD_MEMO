@@ -24,7 +24,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 </head>
-<body >
+<body onbeforeunload="leavePage()">
 	<!-- Navbar goes here -->
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
@@ -89,11 +89,18 @@
 			      </ul>
 			    </div>
 		  </div>
+		  <!--message displayer  -->
 		  <div class="row col s12" style='margin:0px auto;'>
 			<div class="col s12" id="message_diplayer" style='margin: auto;'>
 			</div>
 			</div>
-			 
+			<!--end displayer  -->
+			 <!--pagination  -->
+			<div class='row col s12' style="text-align: right;">
+			<ul class="pagination" id="pagination">
+			  </ul>
+			</div>
+			 <!--end pagination -->
 		<div id="modal1" class="modal modal-fixed-footer">
 		    <div class="modal-content">
 		      <div class="row" style="margin: 0px; padding: 0px;">

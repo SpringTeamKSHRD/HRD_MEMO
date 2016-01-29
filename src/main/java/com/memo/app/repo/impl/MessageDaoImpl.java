@@ -40,12 +40,13 @@ public class MessageDaoImpl implements MessageDao {
 	}
 	//for user's report.
 	@Override
-	public List<Message> getUserMessage(int userid) {
+	public List<Message> getUserMessage(int userid,int page,int limit) {
 		String sql="SELECT ms.id,dfm.messsage,ms.date,ms.memoid"
 				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
-				+" WHERE userid=? AND isviewed=FALSE;";
-		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid},new RowMapper<Message>(){
+				+" WHERE userid=? AND isviewed=FALSE ORDER BY ms.id DESC LIMIT ? OFFSET ?";
+		int begin = page * limit - limit;
+		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid,limit,begin},new RowMapper<Message>(){
 			@Override
 			public Message mapRow(ResultSet rs, int i) throws SQLException {
 				Message msg=new Message();

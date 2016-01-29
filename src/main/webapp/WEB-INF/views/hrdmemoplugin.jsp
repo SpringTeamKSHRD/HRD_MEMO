@@ -17,7 +17,7 @@
 <script
 	src='http://localhost:8080/HRD_MEMO/resources/js/alertify.min.js'></script>
 <script
-	src='http://localhost:8080/HRD_MEMO/resources/js/jquery.slimscroll.min.js'></script>
+	src='http://localhost:8080/HRD_MEMO/resources/js/lib/jquery.slimscroll.min.js'></script>
 <script
 	src='http://localhost:8080/HRD_MEMO/resources/admin/js/jquery-cookie.js'></script>
 </head>

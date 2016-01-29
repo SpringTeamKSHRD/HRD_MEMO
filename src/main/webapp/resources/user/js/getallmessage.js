@@ -62,23 +62,6 @@ function generateTitle(title){
 		 return title;
 	 }
 }
-function getNumberMesage(){
-	var uid=parseInt($("#userid").val());
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
-		success : function(data) {
-			if(data.DATA>0){
-				$(".numnotify").css('display',"inline");
-				$(".numnotify").text(data.DATA);
-			}else{
-				$(".numnotify").css('display',"none");
-			}
-		},
-		error : function(data) {
-		}
-	});
-}
 var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   var websocket=new WebSocket(url);
   websocket.onopen=function(message){
@@ -88,7 +71,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
- 		listAllMessage(recordNum,trueDisplay);
+ 		getAllNumberMessage();
  		updateMessageStatus();
  	 }
   }
@@ -98,7 +81,6 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
 			success : function(data) {
-				getNumberMesage();
 			},
 			error : function(data) {
 			}
@@ -111,10 +93,14 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
 			success : function(data) {
-				getNumPagination(data.DATA,3,3);
+				getNumPagination(data.DATA,6,4);
 				listAllMessage(1,recordNum);
 			},
 			error : function(data) {
+				$("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
+				  		"<div class='card-panel red'>" +
+				  		"<h3 class='white-text'>NO MESSAGE FOR DISPLAY</h3>" +
+				  		"</div></div></div>");
 			}
 		});
   }
@@ -158,12 +144,14 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
  });
   $(document).on('click.waves-effect', '.waves-effect #btnprev', function (e) {
 		prevPage(lowPage-1);
+		// disableButtNextPrev();
 });
  $(document).on('click.waves-effect', '.waves-effect #btnnext', function (e) {
 	 nextPage(higthPage+1);
+	// disableButtNextPrev();
 });
   function nextPage(click){
-	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
 		  //alert("noth do to do1");
 	  }else if(click > higthPage){
@@ -172,45 +160,66 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		  if(currentPagin * trueDisplay <= pageNum){
 			  higthPage=currentPagin * trueDisplay;
 			  lowPage=higthPage - trueDisplay + 1;
-			  alert(lowPage+"   "+higthPage);
+			 // alert(lowPage+"   "+higthPage);
 			  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
-				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+				  if(i==(currentPagin-1) * trueDisplay+1){
+					  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
+					  }
+					  else{
+						  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+					  }
 			  }  
-			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
 			  $("#pagination").html(myPagin);
 		  }else{
 			  lowPage=higthPage+1;
 			  higthPage=pageNum;
-			  alert(lowPage+"   "+higthPage);
+			  //alert(lowPage+"   "+higthPage);
 			  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
-				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+				  if(i==(currentPagin-1) * trueDisplay+1){
+					  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
+					  }
+					  else{
+						  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+					  }
 			  }
-			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
 			  $("#pagination").html(myPagin);
 		  }
 	  }
   }
   
   function firstGeneratePagination(){
-	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(currentPagin * trueDisplay <= pageNum){
 		  higthPage=currentPagin * trueDisplay;
 		  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
+			  if(i==(currentPagin-1) * trueDisplay+1){
 			  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
+			  }
+			  else{
+				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  }
 		  }  
 	  }else{
 		  higthPage=pageNum;
 		  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
-			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  if(i==(currentPagin-1) * trueDisplay+1){
+				  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
+				  }
+				  else{
+					  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+				  }
 		  }
 	  }
 	 // alert(lowPage);
-	  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+	  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+	  disableButtNextPrev();
 	  return myPagin;
 }
   function prevPage(click){
 	  //alert(click);
-	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click <= 0){
 		  //alert("noth do to do1");
 	  }else if(click < lowPage){
@@ -218,27 +227,63 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		  	  higthPage=currentPagin * trueDisplay;
 		  	  lowPage=higthPage - trueDisplay + 1;
 		      listAllMessage(higthPage-trueDisplay+1,recordNum);
-		      alert(lowPage+"  "+higthPage);
+		    //  alert(lowPage+"  "+higthPage);
 			  for(var i=lowPage;i<=higthPage;i++){
-				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+				  if(i==lowPage){
+					  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
+					  }
+					  else{
+						  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+					  }
 			  }  
-			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
 			  $("#pagination").html(myPagin);
 	  }
   }
-  
   function addAviteClass(obj){
-	  $("#pagination").children().removeClass("active").delay(100,function(){
-		  obj.addClass("active");
-	  });
-	  
+	  $("#pagination").children().removeClass("active");
+	  obj.parent().addClass('active');
   }
-  
-  
-  
-  
-  
-  
+ function disableButtNextPrev(){
+	  if(lowPage==1){
+		  $("#parentprev").addClass("disabled");
+	  }else{
+		  $("#parentprev").removeClass("disabled"); 
+	  }
+	  if(higthPage==pageNum){
+		  $("#parentnext").addClass("disabled"); 
+	  }else{
+		  $("#parentnext").removeClass("disabled");
+	  }
+ }
+ $('#btnsearch').click(function(){
+	 alert(dateFormate($("#sdate").val()));
+ });
+ $('.datepicker').pickadate({
+	 selectMonths: true, // Creates a dropdown to control month
+	 selectYears: 15, // Creates a dropdown of 15 years to control year
+	 format: 'dd-mm-yyyy',
+	 onSet: function (ele) {
+		   if(ele.select){
+		          this.close();
+		   }
+		}
+ });
+ function dateFormate(date){
+	 var extract=date.split("-");
+	 return extract[2]+"-"+extract[1]+"-"+extract[0];
+ }
+ $("#test4").change(function(){
+	 alert($("#test4").val());
+ });
+ var slider = document.getElementById('test4');
+ noUiSlider.create(slider, {
+  start: [0],
+  step: 1,
+  format: wNumb({
+    decimals: 0
+  })
+ });
   
   
   

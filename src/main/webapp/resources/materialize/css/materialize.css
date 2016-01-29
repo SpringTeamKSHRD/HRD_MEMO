@@ -2727,7 +2727,7 @@ video.responsive-video {
 }
 
 .pagination li.active {
-  background-color: #ee6e73;
+  background-color: #009688;
 }
 
 .pagination li.disabled a {
@@ -8091,7 +8091,7 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: rgba(38, 166, 76, 0.8);
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
