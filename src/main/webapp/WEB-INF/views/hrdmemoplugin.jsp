@@ -164,7 +164,7 @@
 				}
 				if(document.getElementById("useropt").checked){
 					 pluginGetMemoPulic();
-				 }else{
+				 }else if(first==false){
 					 pluginGetMemoOwner();
 				 }
 			}

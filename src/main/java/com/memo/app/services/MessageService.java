@@ -9,7 +9,8 @@ public interface MessageService {
 	public List<Message> getUserMessage(int userid);
 	public int getNumberMessage(int userid);
     public boolean changeIsView(int messageid);
-    public int getAllNumberMessage(int userid,int limit,int page);
+    public int getAllNumberMessage(int userid);
+    public List<Message> getOldMessage(int userid,int page,int limit);
     //sona 
     public boolean changeMessageIsViewed(int userid);
     public List<Message> getOldMessage(int userid);

@@ -1,11 +1,10 @@
-function listAllMessage(){
+function listAllMessage(page,limit){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/oldreport/"+uid,
+		url : "http://localhost:8080/HRD_MEMO/user/oldmessage/"+uid+"/"+page+"/"+limit,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
-		       updateMessageStatus();
 		},
 		error : function(data) {
 			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
@@ -18,7 +17,6 @@ function listAllMessage(){
 function goToPage() {
 	window.location.href="http://localhost:8080/HRD_MEMO/user/userreport";
 }
-listAllMessage();
 function extractData(data){
 	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
 			"<thead style='background: #26a69a; color:white;'>" +
@@ -30,7 +28,7 @@ function extractData(data){
 			" </tr></thead><tbody>";
 	for(var i=0;i<data.DATA.length;i++){
 		str+=" <tr style='padding:0px;'>"+
-				"<td>"+(i+1)+"</td>" +
+				"<td>"+data.DATA[i].id+"</td>" +
 				"<td>Admin</td>" +
 				"<td>"+data.DATA[i].message+"</td>" +
 				"<td>"+data.DATA[i].date+"</td>" +
@@ -90,8 +88,8 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   }
   websocket.onmessage=function(message){
  	 if(message.data==="response"){
- 		 alert("respone");
- 		listAllMessage();
+ 		listAllMessage(recordNum,trueDisplay);
+ 		updateMessageStatus();
  	 }
   }
   function updateMessageStatus(){
@@ -113,7 +111,8 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 			type : "GET",
 			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
 			success : function(data) {
-				getNumPagination(data.DATA,10,5);
+				getNumPagination(data.DATA,3,3);
+				listAllMessage(1,recordNum);
 			},
 			error : function(data) {
 			}
@@ -125,87 +124,115 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   var currentPNum=0;
   var currentPagin=1;
   var pageNum=0;
-  var lastPage=0;
+  var higthPage=0;
+  var lowPage=1;
   var recordNum=0;
   var trueDisplay=0;
   function getNumPagination(data,renum,display){
-	  recordNum=renum;
-	  if(data % renum != 0){
-		  pageNum=Math.floor(data/renum)+1;
-	  }else{
-		  pageNum=data/renum;
+	  if(data>0){
+		  recordNum=renum;
+		  if(data % renum != 0){
+			  pageNum=Math.floor(data/renum)+1;
+		  }else{
+			  pageNum=data/renum;
+		  }
+		  if(pageNum % display != 0){
+			 paginNum=Math.floor(pageNum/display)+1;
+		  }else{
+			  paginNum=pageNum/display;
+		  }
+		  if(pageNum < display){
+			  trueDisplay=pageNum;
+		  }else{
+			  trueDisplay=display;
+		  }
+		  higthPage=trueDisplay;
+		  $("#pagination").html(firstGeneratePagination());
 	  }
-	  if(pageNum % display != 0){
-		 paginNum=Math.floor(pageNum/display)+1;
-	  }else{
-		  paginNum=pnpageNum/display;
-	  }
-	  if(pageNum < display){
-		  trueDisplay=pageNum;
-	  }else{
-		  trueDisplay=display;
-	  }
-	  lastPage=trueDisplay;
-	  $("#pagination").html(firstGeneratePagination());
   }
 	  
   $(document).on('click.waves-effect', '.waves-effect .pbtn', function (e) {
-		alert($(this).text());
+		var page = parseInt($(this).text());
+		addAviteClass($(this));
+		listAllMessage(page,recordNum);
  });
   $(document).on('click.waves-effect', '.waves-effect #btnprev', function (e) {
-		alert($(this).text()+"left");
+		prevPage(lowPage-1);
 });
  $(document).on('click.waves-effect', '.waves-effect #btnnext', function (e) {
-		alert($(this).text()+"right");
+	 nextPage(higthPage+1);
 });
-  function generatePage(click){
+  function nextPage(click){
 	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
-		  
-	  }else if(click > lastPage){
-		  if(currentPagin<paginNum){
+		  //alert("noth do to do1");
+	  }else if(click > higthPage){
+		  listAllMessage(click,recordNum);
 			  currentPagin++;
-		  }else{
-			  currentPagin=currentPagin;
-		  }
 		  if(currentPagin * trueDisplay <= pageNum){
-			  lastPage=currentPagin * trueDisplay;
+			  higthPage=currentPagin * trueDisplay;
+			  lowPage=higthPage - trueDisplay + 1;
+			  alert(lowPage+"   "+higthPage);
 			  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
 				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
 			  }  
+			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  $("#pagination").html(myPagin);
 		  }else{
-			  lastPage=pageNum;
+			  lowPage=higthPage+1;
+			  higthPage=pageNum;
+			  alert(lowPage+"   "+higthPage);
 			  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
 				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
-			  } 
+			  }
+			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  $("#pagination").html(myPagin);
 		  }
-	  }else{
-		  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
-			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
-		  }  
 	  }
-	  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
-	  return myPagin;
   }
   
   function firstGeneratePagination(){
 	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(currentPagin * trueDisplay <= pageNum){
-		  lastPage=currentPagin * trueDisplay;
+		  higthPage=currentPagin * trueDisplay;
 		  for(var i=(currentPagin-1) * trueDisplay+1;i<=currentPagin*trueDisplay;i++){
-			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  myPagin+="<li class='waves-effect active'><a class='pbtn'>"+i+"</a></li>";
 		  }  
 	  }else{
-		  lastPage=pageNum;
+		  higthPage=pageNum;
 		  for(var i=(currentPagin-1) * trueDisplay+1;i <= pageNum;i++){
 			  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
 		  }
 	  }
+	 // alert(lowPage);
 	  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
 	  return myPagin;
 }
- 
+  function prevPage(click){
+	  //alert(click);
+	  var myPagin=" <li class='waves-effect'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
+	  if(click <= 0){
+		  //alert("noth do to do1");
+	  }else if(click < lowPage){
+		  	  currentPagin--;
+		  	  higthPage=currentPagin * trueDisplay;
+		  	  lowPage=higthPage - trueDisplay + 1;
+		      listAllMessage(higthPage-trueDisplay+1,recordNum);
+		      alert(lowPage+"  "+higthPage);
+			  for(var i=lowPage;i<=higthPage;i++){
+				  myPagin+="<li class='waves-effect'><a class='pbtn'>"+i+"</a></li>";
+			  }  
+			  myPagin+="<li class='waves-effect'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
+			  $("#pagination").html(myPagin);
+	  }
+  }
   
+  function addAviteClass(obj){
+	  $("#pagination").children().removeClass("active").delay(100,function(){
+		  obj.addClass("active");
+	  });
+	  
+  }
   
   
   

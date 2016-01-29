@@ -117,7 +117,7 @@ public class MessageDaoImpl implements MessageDao {
 		return null;
 	}
 	@Override
-	public int getAllNumberMessage(int userid,int limit,int page) {
+	public int getAllNumberMessage(int userid) {
 		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=?";
 		try{
 			return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);
@@ -126,5 +126,29 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		return 0;
 	}
-
+	@Override
+	public List<Message> getOldMessage(int userid, int page, int limit) {
+		String sql="SELECT ms.id,dfm.messsage,ms.date,ms.memoid"
+				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
+				+" ON dfm.id=ms.message_id"
+				+" WHERE userid=?  ORDER BY ms.id DESC LIMIT ? OFFSET ?";
+		try{
+		int begin = page * limit - limit;
+		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid,limit,begin},new RowMapper<Message>(){
+			@Override
+			public Message mapRow(ResultSet rs, int i) throws SQLException {
+				Message msg=new Message();
+				msg.setId(rs.getInt(1));
+				msg.setMessage(rs.getString(2));
+				msg.setDate(rs.getDate(3));
+				msg.setMemoid(rs.getInt(4));
+				return msg;
+			}
+		});
+		return messages;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
