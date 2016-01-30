@@ -47,18 +47,18 @@
 	<div class="navbar-fixed">  
 	<nav>
 	  <div class="nav-wrapper teal">
-	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	     <a href="#!" class="brand-logo">&nbsp;&nbsp;<i class="fa fa-file-text"></i></a>
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="user">Home</a></li>
 	      <li><a href="${pageContext.request.contextPath}/user/userreport">
 	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
-	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="35px;" height="35px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
-	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">Hi,&nbsp;
 	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>	      
 	      <li><a href="#!">About</a></li>	      
@@ -82,7 +82,7 @@
 	</nav>
 	</div>
 	<!-- ./close navigation -->
-		<div class="row">
+		<div class="row" style="margin-top: 10px;">
 			    <div class="col s12">
 			      <ul class="tabs">
 			        <li class="tab col s6"><a class="active" style="cursor: pointer;">New Message</a></li>

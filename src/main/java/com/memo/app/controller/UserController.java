@@ -40,4 +40,8 @@ public class UserController {
 	public String getAllMessagePage(){
 		return "user/getallmessage";
 	}
+	@RequestMapping(value="/listallmemo")
+	public String getListMemoPage(){
+		return "user/listmemo";
+	}
 }

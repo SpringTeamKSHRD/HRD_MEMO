@@ -47,18 +47,18 @@
 	<div class="navbar-fixed">  
 	<nav>
 	  <div class="nav-wrapper teal">
-	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	     <a href="#!" class="brand-logo">&nbsp;&nbsp;<i class="fa fa-file-text"></i></a>
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="user">Home</a></li>
 	      <li><a href="${pageContext.request.contextPath}/user/userreport">
 	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
-	      <li>
-	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      <li style="padding:5px;">
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:6px;" width="35px;" height="35px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
-	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">Hi,&nbsp;
 	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>	      
 	      <li><a href="#!">About</a></li>	      
@@ -69,7 +69,7 @@
 	        <li><a href="${pageContext.request.contextPath}/user/userreport">
 	        <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
-	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="35px;" height="35px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
@@ -107,7 +107,7 @@
 		  		<div class="col s12 m6 l6">
 		  		 <div class="file-field input-field">
 				      <div class="btn">
-				        <span>Display Row</span>
+				        <span>Row</span>
 				      </div>
 				      <div class="file-path-wrapper">
 						<p class="range-field" style="margin: 25px 0px 0px 0px;">

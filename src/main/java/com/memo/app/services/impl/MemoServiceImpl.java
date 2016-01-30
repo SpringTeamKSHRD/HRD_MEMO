@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.MemoSearch;
 import com.memo.app.repo.MemoDao;
 import com.memo.app.services.MemoService;
 
@@ -17,8 +18,8 @@ public class MemoServiceImpl implements MemoService{
 	private MemoDao memoDao;
 
 	@Override
-	public List<Memo> listMemo() {
-		return memoDao.listMemo();
+	public List<Memo> listMemo(int userid) {
+		return memoDao.listMemo(userid);
 	}
 
 	@Override
@@ -102,5 +103,10 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public List<Memo> pluginGetMemoPulic(int userid,String url) {
 		return memoDao.pluginGetMemoPublic(userid,url);
+	}
+
+	@Override
+	public int getMemoNumber(MemoSearch memo) {
+		return memoDao.getMemoNumber(memo);
 	}	
 }

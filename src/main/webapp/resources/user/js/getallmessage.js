@@ -285,6 +285,8 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		}
  });
  $("#displayrow").change(function(){
+	 currentPagin=1;
+	 lowPage=1;
 	 getAllNumberMessage();
  });
  $('.responsive-table .bordered .highlight').slimScroll({

@@ -1,111 +1,4 @@
-
-function listNewMessage(page,limit){
-	var uid=parseInt($("#userid").val());
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/newmessage/"+uid+"/"+page+"/"+limit,
-		success : function(data) {
-		       $("#message_diplayer").html(extractData(data));
-		       //updateMessageStatus();
-		},
-		error : function(data) {
-		}
-	});
-}
-function extractData(data){
-	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
-			"<thead style='background: #26a69a; color:white;'>" +
-			"<tr><th data-field='id'>No</th>" +
-			"<th data-field='name'>Sender</th>" +
-			"<th data-field='price'>Description</th>" +
-			"<th data-field='name'>Date</th>" +
-			"<th data-field='name'>Action</th>" +
-			" </tr></thead><tbody>";
-	for(var i=0;i<data.DATA.length;i++){
-		str+=" <tr style='padding:0px; margin:0px;'>"+
-				"<td>"+data.DATA[i].id+"</td>" +
-				"<td>Admin</td>" +
-				"<td>"+data.DATA[i].message+"</td>" +
-				"<td>"+data.DATA[i].date+"</td>" +
-				"<td><a class='waves-effect waves-light btn modal-trigger' onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='material-icons'>visibility</i></a></td>" +
-				"</tr>";
-	}
-	str+=" </tbody></table>";
-	return str;
-}
-function getBlockedMemo(id){
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/"+id,
-		success : function(data) {
-		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
-		       $("#website").text("Website: "+data.DATA.domain);
-		       $("#memo_content").text(data.DATA.content);
-		       $("#memo_date").text("Date: "+data.DATA.date);
-		       $('#modal1').openModal();
-		},
-		error : function(data) {
-			 alert("rerror");
-		}
-	});
-}
-function generateTitle(title){
-	 var tl=title.length;
-	 if(tl>50){
-		 return title.substring(0, 50)+"...";
-	 }else{
-		 return title;
-	 }
-}
-function updateMessageStatus(){
-	var uid=parseInt($("#userid").val());
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
-		success : function(data){
-		},
-		error : function(data) {
-		}
-	});
-}
-function getNumberMesage(){
-	var uid=parseInt($("#userid").val());
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
-		success : function(data) {
-			 $("#dsprowwrapper").css("display","block");
-			getNumPagination(data.DATA,$("#displayrow").val(),5);
-			listNewMessage(1,recordNum);
-		},
-		error : function(data) {
-			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-				  		"<div class='card-panel' style='background-color:rgba(255, 0, 0, 0.26);'>" +
-				  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
-				  		"</div></div></div>");
-			  $("#pagination").html("");
-			  $("#dsprowwrapper").css("display","none");
-		}
-	});
-}
-getNumberMesage();
-var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
-  var websocket=new WebSocket(url);
-  websocket.onopen=function(message){
-  }
-  websocket.onclose=function(message){
- 	 websocket.close();
-  }
-  websocket.onmessage=function(message){
- 	 if(message.data==="response"){
- 		getNumberMesage();
- 	 }
-  }
-  function goToPage() {
-		window.location.href="http://localhost:8080/HRD_MEMO/user/getallmessage";
-	}
-//pagination script
-  var numDisplay=0;
+ var numDisplay=0;
   var paginNum=0;
   var currentPNum=0;
   var currentPagin=1;
@@ -140,7 +33,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   $(document).on('click.waves-effect', '.waves-effect .pbtn', function (e) {
 		var page = parseInt($(this).text());
 		addAviteClass($(this));
-		listNewMessage(page,recordNum);
+		listAllMessage(page,recordNum);
  });
   $(document).on('click.waves-effect', '.waves-effect #btnprev', function (e) {
 		prevPage(lowPage-1);
@@ -153,9 +46,9 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   function nextPage(click){
 	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
-		 // alert("noth do to do1");
+		  alert("noth do to do1");
 	  }else if(click > higthPage){
-		  listNewMessage(click,recordNum);
+		  //listAllMessage(click,recordNum);
 			  currentPagin++;
 		  if(currentPagin * trueDisplay <= pageNum){
 			  higthPage=currentPagin * trueDisplay;
@@ -214,7 +107,6 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	  }
 	 // alert(lowPage);
 	  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
-	  disableButtNextPrev();
 	  return myPagin;
 }
   function prevPage(click){
@@ -226,7 +118,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		  	  currentPagin--;
 		  	  higthPage=currentPagin * trueDisplay;
 		  	  lowPage=higthPage - trueDisplay + 1;
-		  	listNewMessage(higthPage-trueDisplay+1,recordNum);
+		      //listAllMessage(higthPage-trueDisplay+1,recordNum);
 		    //  alert(lowPage+"  "+higthPage);
 			  for(var i=lowPage;i<=higthPage;i++){
 				  if(i==lowPage){
@@ -244,28 +136,118 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	  $("#pagination").children().removeClass("active");
 	  obj.parent().addClass('active');
   }
- function disableButtNextPrev(){
-	  if(lowPage==1){
-		  $("#parentprev").addClass("disabled");
-	  }else{
-		  $("#parentprev").removeClass("disabled"); 
-	  }
-	  if(higthPage==pageNum){
-		  $("#parentnext").addClass("disabled"); 
-	  }else{
-		  $("#parentnext").removeClass("disabled");
-	  }
+  function getMemoNumber(){
+	  json = {
+				userid:$("#userid").val(),
+				column:"",
+				search:""
+			};
+	  $.ajax({
+			type : "POST",
+			url : "http://localhost:8080/HRD_MEMO/user/getmemonumber",
+			data : JSON.stringify(json),
+			contentType: 'application/json',
+			success : function(data) {
+				getNumPagination(data.DATA,$("#displayrow").val(),4);
+			},
+			error : function(data) {
+				alert("Unsuccess: " + data.MESSAGE);
+			}
+		});  
   }
- function leavePage(){
-	 updateMessageStatus();
- }
- $("#displayrow").change(function(){
-	 currentPagin=1;
-	 lowPage=1;
-	 getNumberMesage();
- });
- $('.bordered').slimScroll({
-		alwaysVisible: false,
-	              size:'5px',
-	               color: '#009688'
-	});
+  getMemoNumber();
+  var search="";
+  $("#searchopt").change(function(){
+	  if($("#searchopt").val()==="title"){
+		  $("#search").focus();
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  
+	  }else if($("#searchopt").val()==="ispublic"){
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+	  }else if($("#searchopt").val()==="domain"){
+		  $("#search1").focus();
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+	  }else if($("#searchopt").val()==="date"){
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
+	  }else{
+		  $("#opt1").fadeOut(200);
+		  $("#opt2").fadeOut(200);
+		  $("#opt3").fadeOut(200);
+		  $("#opt4").fadeOut(200);
+		
+	  }
+  });
+  $('.datepicker').pickadate({
+		 selectMonths: true, // Creates a dropdown to control month
+		 selectYears: 10, // Creates a dropdown of 15 years to control year
+		 format: 'dd-mm-yyyy',
+		 closeOnSelect: false,
+		 onSet: function (ele) {
+			   if(ele.select){
+			          this.close();
+			          getAllNumberMessage();
+			   }
+			}
+	 });
+  function getSearchValue(){
+	  if($("#searchopt").val()==="title"){
+		  search=$("#search").val();
+	  }else if($("#searchopt").val()==="ispublic"){
+		  search=$("#ispublic").va();
+	  }else if($("#searchopt").val()==="domain"){
+		  search=$("#search1").val();
+	  }else if($("#searchopt").val()==="date"){
+		  search=$("#sdate").val();
+	  }else{
+		  search="";
+	  } 
+  }
+  $("#btntest").click(function(){
+	  if($("#searchopt").val()==="title"){
+		  search=$("#search").val();
+	  }else if($("#searchopt").val()==="ispublic"){
+		  search=$("#ispublic").val();
+	  }else if($("#searchopt").val()==="domain"){
+		  search=$("#search1").val();
+	  }else if($("#searchopt").val()==="date"){
+		  search=$("#sdate").val();
+	  }else{
+		  search="";
+	  } 
+	  alert(search);
+  });
+  $("#displayrow").change(function(){
+	  getMemoNumber();
+  });

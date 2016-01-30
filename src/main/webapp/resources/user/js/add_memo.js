@@ -1,5 +1,4 @@
 var domain=window.location.origin+"/HRD_MEMO";
-
 /* This function is for creating memo */
 function saveMemo(){	
 	var data=$("#cont_memo").val();
@@ -30,7 +29,8 @@ function saveMemo(){
 			contentType: 'application/json',
 			success : function(data) {
 				swal("Success","Your memo has been saved.","success");
-				loadPage();
+				clearMemo();
+				$(".titlememo").focus();
 			},
 			error : function(data) {
 				sweetAlert("Fail", "Fail with create memo!", "error");
@@ -40,3 +40,11 @@ function saveMemo(){
 	}
 	
 }
+$("#listmemo").click(function(){
+	window.location.href="http://localhost:8080/HRD_MEMO/user/listallmemo";
+});
+function clearMemo(){
+	$("#cont_memo").val("");
+	$(".titlememo").val("");
+}
+clearMemo();
