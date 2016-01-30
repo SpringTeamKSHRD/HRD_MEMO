@@ -23,6 +23,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/jquery.slimscroll.min.js"></script>
 </head>
 <body onbeforeunload="leavePage()">
 	<!-- Navbar goes here -->
@@ -89,6 +90,22 @@
 			      </ul>
 			    </div>
 		  </div>
+		   <!--Start Search  -->
+		  <div class="row" id="dsprowwrapper">
+		  		<div class="col s12 m6 l6">
+		  		 <div class="file-field input-field">
+				      <div class="btn">
+				        <span>Display Row</span>
+				      </div>
+				      <div class="file-path-wrapper" style="padding: 0px; margin: 0px;">
+						<p class="range-field" style="margin: 25px 0px 0px 0px; padding: 0px;">
+					      <input type="range" id="displayrow" min="5" max="10" />
+					    </p>
+					 </div>
+				    </div>
+		  		</div>
+		  </div>
+		  <!--end search  -->
 		  <!--message displayer  -->
 		  <div class="row col s12" style='margin:0px auto;'>
 			<div class="col s12" id="message_diplayer" style='margin: auto;'>

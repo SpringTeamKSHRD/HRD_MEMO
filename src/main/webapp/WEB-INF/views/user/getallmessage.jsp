@@ -23,6 +23,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/jquery.slimscroll.min.js"></script>
 </head>
 <body>
 	<!-- Navbar goes here -->
@@ -109,8 +110,8 @@
 				        <span>Display Row</span>
 				      </div>
 				      <div class="file-path-wrapper">
-						<p class="range-field" style="margin: 20px 0px 0px 0px;">
-					      <input type="range" id="test4" min="5" max="10" />
+						<p class="range-field" style="margin: 25px 0px 0px 0px;">
+					      <input type="range" id="displayrow" min="5" max="10" />
 					    </p>
 					 </div>
 				    </div>

@@ -51,7 +51,7 @@
 		 <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav navbar-right">		  	
 			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope-o fa-2x"><span class="numnotify"></span></i></a></li>
+			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 			<li>
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
 	      	</li>

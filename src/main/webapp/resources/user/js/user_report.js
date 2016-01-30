@@ -74,7 +74,8 @@ function getNumberMesage(){
 		type : "GET",
 		url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
 		success : function(data) {
-			getNumPagination(data.DATA,7,5);
+			 $("#dsprowwrapper").css("display","block");
+			getNumPagination(data.DATA,$("#displayrow").val(),5);
 			listNewMessage(1,recordNum);
 		},
 		error : function(data) {
@@ -82,6 +83,8 @@ function getNumberMesage(){
 				  		"<div class='card-panel' style='background-color:rgba(255, 0, 0, 0.26);'>" +
 				  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
 				  		"</div></div></div>");
+			  $("#pagination").html("");
+			  $("#dsprowwrapper").css("display","none");
 		}
 	});
 }
@@ -256,3 +259,11 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
  function leavePage(){
 	 updateMessageStatus();
  }
+ $("#displayrow").change(function(){
+	 getNumberMesage();
+ });
+ $('.bordered').slimScroll({
+		alwaysVisible: false,
+	              size:'5px',
+	               color: '#009688'
+	});

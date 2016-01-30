@@ -1,8 +1,14 @@
 function listAllMessage(page,limit){
 	var uid=parseInt($("#userid").val());
+	var date="";
+	if($("#sdate").val()==""){
+		date="NO";
+	}else{
+		date=$("#sdate").val();
+	}
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/oldmessage/"+uid+"/"+page+"/"+limit,
+		url : "http://localhost:8080/HRD_MEMO/user/oldmessage/"+uid+"/"+page+"/"+limit+"/"+date,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
 		},
@@ -32,7 +38,7 @@ function extractData(data){
 				"<td>Admin</td>" +
 				"<td>"+data.DATA[i].message+"</td>" +
 				"<td>"+data.DATA[i].date+"</td>" +
-				"<td><a class='waves-effect waves-light btn modal-trigger' onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='material-icons'>visibility</i></a></td>" +
+				"<td><a class='waves-effect waves-light btn modal-trigger' style='margin:0px;' onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='material-icons'>visibility</i></a></td>" +
 				"</tr>";
 	}
 	str+=" </tbody></table>";
@@ -89,11 +95,17 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   
   function getAllNumberMessage(){
 	  var uid=parseInt($("#userid").val());
+	  var date="";
+		if($("#sdate").val()==""){
+			date="NO";
+		}else{
+			date=$("#sdate").val();
+		}
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid,
+			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid+"/"+date,
 			success : function(data) {
-				getNumPagination(data.DATA,6,4);
+				getNumPagination(data.DATA,$("#displayrow").val(),4);
 				listAllMessage(1,recordNum);
 			},
 			error : function(data) {
@@ -101,6 +113,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 				  		"<div class='card-panel red'>" +
 				  		"<h3 class='white-text'>NO MESSAGE FOR DISPLAY</h3>" +
 				  		"</div></div></div>");
+				$("#pagination").html("");
 			}
 		});
   }
@@ -257,35 +270,28 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	  }
  }
  $('#btnsearch').click(function(){
-	 alert(dateFormate($("#sdate").val()));
+	 alert(new Date());
  });
  $('.datepicker').pickadate({
 	 selectMonths: true, // Creates a dropdown to control month
-	 selectYears: 15, // Creates a dropdown of 15 years to control year
+	 selectYears: 10, // Creates a dropdown of 15 years to control year
 	 format: 'dd-mm-yyyy',
+	 closeOnSelect: false,
 	 onSet: function (ele) {
 		   if(ele.select){
 		          this.close();
+		          getAllNumberMessage();
 		   }
 		}
  });
- function dateFormate(date){
-	 var extract=date.split("-");
-	 return extract[2]+"-"+extract[1]+"-"+extract[0];
- }
- $("#test4").change(function(){
-	 alert($("#test4").val());
+ $("#displayrow").change(function(){
+	 getAllNumberMessage();
  });
- var slider = document.getElementById('test4');
- noUiSlider.create(slider, {
-  start: [0],
-  step: 1,
-  format: wNumb({
-    decimals: 0
-  })
- });
-  
-  
+ $('.responsive-table .bordered .highlight').slimScroll({
+		alwaysVisible: false,
+	              size:'5px',
+	               color: '#009688'
+	});
   
   
   

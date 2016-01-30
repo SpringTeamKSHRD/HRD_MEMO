@@ -118,24 +118,30 @@ public class MessageDaoImpl implements MessageDao {
 		return null;
 	}
 	@Override
-	public int getAllNumberMessage(int userid) {
-		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=?";
+	public int getAllNumberMessage(int userid,String date) {
+		if(date.equals("NO")){
+			date="";
+		}
+		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=? AND to_char((date::date),'DD-MM-YYYY') LIKE ?";
 		try{
-			return jdbcTemplate.queryForObject(sql,new Object[]{userid},Integer.class);
+			return jdbcTemplate.queryForObject(sql,new Object[]{userid,date+"%"},Integer.class);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return 0;
 	}
 	@Override
-	public List<Message> getOldMessage(int userid, int page, int limit) {
+	public List<Message> getOldMessage(int userid, int page, int limit,String date) {
+		if(date.equals("NO")){
+			date="";
+		}
 		String sql="SELECT ms.id,dfm.messsage,ms.date,ms.memoid"
 				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
-				+" WHERE userid=?  ORDER BY ms.id DESC LIMIT ? OFFSET ?";
+				+" WHERE userid=? AND to_char((ms.date::date),'DD-MM-YYYY') LIKE ? ORDER BY ms.id DESC LIMIT ? OFFSET ?";
 		try{
 		int begin = page * limit - limit;
-		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid,limit,begin},new RowMapper<Message>(){
+		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid,date+"%",limit,begin},new RowMapper<Message>(){
 			@Override
 			public Message mapRow(ResultSet rs, int i) throws SQLException {
 				Message msg=new Message();

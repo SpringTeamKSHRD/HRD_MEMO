@@ -333,10 +333,11 @@ public class MemoController {
 		}
 		
 		//get all message number
-		@RequestMapping(value = "/allnumbermessage/{uid}", method = RequestMethod.GET)
-		public ResponseEntity<Map<String, Object>> getAllNumberMessage(@PathVariable("uid") int uid) {
-			System.out.println(uid);
-			int number=messageService.getAllNumberMessage(uid);
+		@RequestMapping(value = "/allnumbermessage/{uid}/{date}", method = RequestMethod.GET)
+		public ResponseEntity<Map<String, Object>> getAllNumberMessage(@PathVariable("uid") int uid,
+				@PathVariable("date") String date) {
+			System.out.println("i do");
+			int number=messageService.getAllNumberMessage(uid,date);
 			Map<String, Object> map = new HashMap<String, Object>();
 			if (number==0) {
 				map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
@@ -348,12 +349,12 @@ public class MemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 		//get user old reports limit offset
-		@RequestMapping(value = "/oldmessage/{uid}/{page}/{limit}", method = RequestMethod.GET)
+		@RequestMapping(value = "/oldmessage/{uid}/{page}/{limit}/{date}", method = RequestMethod.GET)
 		public ResponseEntity<Map<String, Object>> listOldMessage(@PathVariable("uid") int uid
-				,@PathVariable("page") int page,@PathVariable("limit") int limit){
+				,@PathVariable("page") int page,@PathVariable("limit") int limit,@PathVariable("date") String date){
 			List<Message> message=new ArrayList<Message>();
 			Map<String, Object> map = new HashMap<String, Object>();
-			message =messageService.getOldMessage(uid,page,limit);
+			message =messageService.getOldMessage(uid,page,limit,date);
 			if (message.isEmpty()) {
 				map.put("MESSAGE", "MESSAGES HAS NOT FOUND.");
 				map.put("STATUS", HttpStatus.NOT_FOUND.value());
