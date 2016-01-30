@@ -13,7 +13,7 @@ function listAllMemo(){
 			});
 }
 function displayData(data) {
-	var contents = "<table class='highlight responsive-table'>" +
+	var contents = "<table class='bordered responsive-table'>" +
 					"<thead style='color:white; background:#009688;'>" +
 						"<tr>" +
 							"<th>No.</th>" +

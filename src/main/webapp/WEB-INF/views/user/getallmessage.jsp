@@ -47,7 +47,7 @@
 	<div class="navbar-fixed">  
 	<nav>
 	  <div class="nav-wrapper teal">
-	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	     <a href="#!" class="brand-logo">&nbsp;&nbsp;<i class="fa fa-file-text"></i></a>
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="user">Home</a></li>
@@ -107,7 +107,7 @@
 		  		<div class="col s12 m6 l6">
 		  		 <div class="file-field input-field">
 				      <div class="btn">
-				        <span>Display Row</span>
+				        <span>Row</span>
 				      </div>
 				      <div class="file-path-wrapper">
 						<p class="range-field" style="margin: 25px 0px 0px 0px;">

@@ -45,7 +45,7 @@
 	<div class="navbar-fixed">       	
 	<nav>
 	  <div class="nav-wrapper teal">
-	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
+	    <a href="#!" class="brand-logo">&nbsp;&nbsp;<i class="fa fa-file-text"></i></a>
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
 	      <li><a href="user">Home</a></li>
@@ -56,7 +56,7 @@
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
-	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">Hi,&nbsp;
 	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
 	      </li>	      
 	      <li><a href="#!">About</a></li>	      
@@ -138,7 +138,7 @@
 		  <div class="col s12 m4 l4 right">
 		  		 <div class="file-field input-field">
 				      <div class="btn" id="btntest">
-				        <span>Display Row</span>
+				        <span>Row</span>
 				      </div>
 				      <div class="file-path-wrapper">
 						<p class="range-field" style="margin: 25px 0px 0px 0px;">

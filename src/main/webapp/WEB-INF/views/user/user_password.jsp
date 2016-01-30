@@ -34,7 +34,7 @@
 	<nav class="navbar navbar-default"> <!-- navbar-fixed-top -->
 	<div class="container-fluid">
 		<div class="navbar-header">
-		  <a class="navbar-brand text" href="#">MEMO PESS</a>
+		  <a href="#!" class="brand-logo">&nbsp;&nbsp;<i class="fa fa-file-text" style="font-size: 20px;"></i></a>
 		</div>	
 		<!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -56,7 +56,7 @@
 	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="35px;" height="35px;"/>
 	      	</li>
 			<li class="dropdown">
-			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>
+			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi,&nbsp;${sessionScope['USER'].username}<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/user/userprofile">Account</a></li>
 				<li role="separator" class="divider"></li>
