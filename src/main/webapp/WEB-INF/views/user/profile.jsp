@@ -52,7 +52,7 @@
 			<li><a href="${pageContext.request.contextPath}/user/user" class="text">Home</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/userreport" class="text"><i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 			<li>
-	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="40px;" height="40px;"/>
+	      		<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" style="margin-top:5px;" width="35px;" height="35px;"/>
 	      	</li>
 			<li class="dropdown">
 			  <a href="#!" class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope['USER'].username}<span class="caret"></span></a>

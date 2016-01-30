@@ -52,7 +52,7 @@
 	      <li><a href="${pageContext.request.contextPath}/user/userreport">
 	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
-	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="40px;" height="40px;" alt="" class="circle"/>
+	      	<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="margin-top:10px;" width="35px;" height="35px;" alt="" class="circle"/>
 	      </li>
 	      <!-- Dropdown Trigger -->
 	      <li>
@@ -101,40 +101,43 @@
 			    </select>
 		  </div>
 		  <div class="input-field col s12 m4 l4" id="opt1" style="display: none;">
-			    <select>
-			      <option value="" disabled selected>Search Option</option>
-			      <option value="1">Option 1</option>
-			      <option value="2">Option 2</option>
-			      <option value="3">Option 3</option>
-			    </select>
+			    <nav>
+			    <div class="nav-wrapper">
+			      <form>
+			        <div class="input-field">
+			          <input id="search" type="search" required>
+			          <label for="search"><i class="material-icons">search</i></label>
+			          <i class="material-icons">close</i>
+			        </div>
+			      </form>
+			    </div>
+			  </nav>
 		  </div>
 		  <div class="input-field col s12 m4 l4" id="opt2" style="display: none;">
-			    <select>
-			      <option value="" disabled selected>Search Option</option>
-			      <option value="1">Option 1</option>
-			      <option value="2">Option 2</option>
-			      <option value="3">Option 3</option>
+			    <select id="ispublic">
+			      <option value="false">Private</option>
+			      <option value="true">Public</option>
 			    </select>
 		  </div>
 		  <div class="input-field col s12 m4 l4" id="opt3" style="display: none;">
-			    <select>
-			      <option value="" disabled selected>Search Option</option>
-			      <option value="1">Option 1</option>
-			      <option value="2">Option 2</option>
-			      <option value="3">Option 3</option>
-			    </select>
-		  </div>
+			    <nav>
+				    <div class="nav-wrapper">
+				      <form>
+				        <div class="input-field">
+				          <input id="search1" type="search" required>
+				          <label for="search1"><i class="material-icons">search</i></label>
+				          <i class="material-icons">close</i>
+				        </div>
+				      </form>
+				    </div>
+				  </nav>
+			  </div>
 		  <div class="input-field col s12 m4 l4" id="opt4" style="display: none;">
-			    <select>
-			      <option value="" disabled selected>Search Option</option>
-			      <option value="1">Option 1</option>
-			      <option value="2">Option 2</option>
-			      <option value="3">Option 3</option>
-			    </select>
+			  <input type="date" class="datepicker" id="sdate" placeholder="DATE">
 		  </div>
 		  <div class="col s12 m4 l4 right">
 		  		 <div class="file-field input-field">
-				      <div class="btn">
+				      <div class="btn" id="btntest">
 				        <span>Display Row</span>
 				      </div>
 				      <div class="file-path-wrapper">

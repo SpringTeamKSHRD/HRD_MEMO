@@ -37,10 +37,10 @@ function displayData(data) {
 			 		}
 			 		contents+="<td>"+data.DATA[i].date+"</td>" +
 			 		"<td style='text-align:center;'>" +
-			 		"<a class='btn' onclick=getViewMemo("+data.DATA[i].id+") style='padding:0px 10px 10px 10px;'><i class='small material-icons'>" +
+			 		"<a class='btn waves-effect waves-purple' onclick=getViewMemo("+data.DATA[i].id+") style='background:#fff; color:green; padding:0px 10px 10px 10px;'><i class='small material-icons'>" +
 			 		"visibility</i></a>" +
-			 		"&nbsp;&nbsp;<a class='btn' onclick=toEdit("+data.DATA[i].id+") style='background:#2196F3; padding:0px 10px 10px 10px;'><i class='small material-icons'>mode_edit</i></a>" +
-			 		"&nbsp;&nbsp;<a class='btn' onclick=deletememo("+data.DATA[i].id+") style='background:#F44336; padding:0px 10px 10px 10px;'><i class='small material-icons'>delete</i></a></td>" +
+			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-green' onclick=toEdit("+data.DATA[i].id+") style='background:#fff; color:black; padding:0px 10px 10px 10px;'><i class='small material-icons'>mode_edit</i></a>" +
+			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-red' onclick=deletememo("+data.DATA[i].id+") style='background:#fff; color:red; padding:0px 10px 10px 10px;'><i class='small material-icons'>delete</i></a></td>" +
 		 		" </tr>";
 	}			
 	contents += " </tbody></table>";

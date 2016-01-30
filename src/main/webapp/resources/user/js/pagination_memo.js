@@ -46,9 +46,9 @@
   function nextPage(click){
 	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
-		  //alert("noth do to do1");
+		  alert("noth do to do1");
 	  }else if(click > higthPage){
-		  listAllMessage(click,recordNum);
+		  //listAllMessage(click,recordNum);
 			  currentPagin++;
 		  if(currentPagin * trueDisplay <= pageNum){
 			  higthPage=currentPagin * trueDisplay;
@@ -107,7 +107,6 @@
 	  }
 	 // alert(lowPage);
 	  myPagin+="<li class='waves-effect' id='parentnext'><a id='btnnext'><i class='material-icons'>chevron_right</i></a></li>";
-	  disableButtNextPrev();
 	  return myPagin;
 }
   function prevPage(click){
@@ -119,7 +118,7 @@
 		  	  currentPagin--;
 		  	  higthPage=currentPagin * trueDisplay;
 		  	  lowPage=higthPage - trueDisplay + 1;
-		      listAllMessage(higthPage-trueDisplay+1,recordNum);
+		      //listAllMessage(higthPage-trueDisplay+1,recordNum);
 		    //  alert(lowPage+"  "+higthPage);
 			  for(var i=lowPage;i<=higthPage;i++){
 				  if(i==lowPage){
@@ -149,7 +148,7 @@
 			data : JSON.stringify(json),
 			contentType: 'application/json',
 			success : function(data) {
-				alert(data.DATA);
+				getNumPagination(data.DATA,$("#displayrow").val(),4);
 			},
 			error : function(data) {
 				alert("Unsuccess: " + data.MESSAGE);
@@ -157,9 +156,10 @@
 		});  
   }
   getMemoNumber();
-  
+  var search="";
   $("#searchopt").change(function(){
 	  if($("#searchopt").val()==="title"){
+		  $("#search").focus();
 		  $("#opt2").fadeOut(1,function(){
 			  $("#opt1").fadeIn(200);
 		  });
@@ -181,6 +181,7 @@
 			  $("#opt2").fadeIn(200);
 		  });
 	  }else if($("#searchopt").val()==="domain"){
+		  $("#search1").focus();
 		  $("#opt1").fadeOut(1,function(){
 			  $("#opt3").fadeIn(200);
 		  });
@@ -205,6 +206,48 @@
 		  $("#opt2").fadeOut(200);
 		  $("#opt3").fadeOut(200);
 		  $("#opt4").fadeOut(200);
+		
 	  }
   });
-  
+  $('.datepicker').pickadate({
+		 selectMonths: true, // Creates a dropdown to control month
+		 selectYears: 10, // Creates a dropdown of 15 years to control year
+		 format: 'dd-mm-yyyy',
+		 closeOnSelect: false,
+		 onSet: function (ele) {
+			   if(ele.select){
+			          this.close();
+			          getAllNumberMessage();
+			   }
+			}
+	 });
+  function getSearchValue(){
+	  if($("#searchopt").val()==="title"){
+		  search=$("#search").val();
+	  }else if($("#searchopt").val()==="ispublic"){
+		  search=$("#ispublic").va();
+	  }else if($("#searchopt").val()==="domain"){
+		  search=$("#search1").val();
+	  }else if($("#searchopt").val()==="date"){
+		  search=$("#sdate").val();
+	  }else{
+		  search="";
+	  } 
+  }
+  $("#btntest").click(function(){
+	  if($("#searchopt").val()==="title"){
+		  search=$("#search").val();
+	  }else if($("#searchopt").val()==="ispublic"){
+		  search=$("#ispublic").val();
+	  }else if($("#searchopt").val()==="domain"){
+		  search=$("#search1").val();
+	  }else if($("#searchopt").val()==="date"){
+		  search=$("#sdate").val();
+	  }else{
+		  search="";
+	  } 
+	  alert(search);
+  });
+  $("#displayrow").change(function(){
+	  getMemoNumber();
+  });
