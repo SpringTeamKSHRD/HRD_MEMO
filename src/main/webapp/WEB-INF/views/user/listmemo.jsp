@@ -48,7 +48,7 @@
 	    <a href="#!" class="brand-logo">&nbsp;&nbsp;MEMO PESS</a>
 	    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 	    <ul class="right hide-on-med-and-down">
-	      <li><a href="">Home</a></li>
+	      <li><a href="user">Home</a></li>
 	      <li><a href="${pageContext.request.contextPath}/user/userreport">
 	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
@@ -63,7 +63,7 @@
 	    </ul>
 	    <!-- For mobile menu -->
 	     <ul class="side-nav" id="mobile-demo">
-	      <li><a href="">Home</a></li>
+	      <li><a href="user">Home</a></li>
 	      <li><a href="${pageContext.request.contextPath}/user/userreport">
 	      <i class="fa fa-envelope-o" style="font-weight:bolder; font-size: 20px;"><span class="numnotify"></span></i></a></li>
 	      <li>
@@ -80,78 +80,164 @@
 	</nav>
 	</div>
 	<!-- ./close navigation -->
-	<div class="container-fluid" style="margin:20px 20px 0px 20px; padding:5px; background: white;">
+	<div class="container-fluid" style="margin:20px 20px; padding:5px; background: white;">
 		<div class="row">
 	    <div class="col s12">
-		      <ul class="tabs">
-		        <li class="tab col s6"><a class='active' style="cursor: pointer;" >Write New Memo</a></li>
-		        <li class="tab col s6"><a id="listmemo" style="cursor: pointer;">All Memo</a></li>
+		      <ul class="tabs" style="overflow: hidden;">
+		        <li class="tab col s6"><a id="writememo" style="cursor: pointer;">Write New Memo</a></li>
+		        <li class="tab col s6"><a class="active" style="cursor: pointer;">All Memo</a></li>
 		      </ul>
 		    </div>
 	  </div>
+	  <!--Search Panel  -->
+	  <div class="row">
+		  	<div class="input-field col s12 m4 l4">
+			    <select id="searchopt">
+			      <option value="" selected>Search Option</option>
+			      <option value="title">Title</option>
+			      <option value="ispublic">Privacy</option>
+			      <option value="domain">Domain</option>
+			       <option value="date">Date</option>
+			    </select>
+		  </div>
+		  <div class="input-field col s12 m4 l4" id="opt1" style="display: none;">
+			    <select>
+			      <option value="" disabled selected>Search Option</option>
+			      <option value="1">Option 1</option>
+			      <option value="2">Option 2</option>
+			      <option value="3">Option 3</option>
+			    </select>
+		  </div>
+		  <div class="input-field col s12 m4 l4" id="opt2" style="display: none;">
+			    <select>
+			      <option value="" disabled selected>Search Option</option>
+			      <option value="1">Option 1</option>
+			      <option value="2">Option 2</option>
+			      <option value="3">Option 3</option>
+			    </select>
+		  </div>
+		  <div class="input-field col s12 m4 l4" id="opt3" style="display: none;">
+			    <select>
+			      <option value="" disabled selected>Search Option</option>
+			      <option value="1">Option 1</option>
+			      <option value="2">Option 2</option>
+			      <option value="3">Option 3</option>
+			    </select>
+		  </div>
+		  <div class="input-field col s12 m4 l4" id="opt4" style="display: none;">
+			    <select>
+			      <option value="" disabled selected>Search Option</option>
+			      <option value="1">Option 1</option>
+			      <option value="2">Option 2</option>
+			      <option value="3">Option 3</option>
+			    </select>
+		  </div>
+		  <div class="col s12 m4 l4 right">
+		  		 <div class="file-field input-field">
+				      <div class="btn">
+				        <span>Display Row</span>
+				      </div>
+				      <div class="file-path-wrapper">
+						<p class="range-field" style="margin: 25px 0px 0px 0px;">
+					      <input type="range" id="displayrow" min="5" max="10" />
+					    </p>
+					 </div>
+				    </div>
+		  		</div>
+	  </div>
+	  <!--end search panel  -->
 		<!-- Page Layout body here -->
 		<div class="row">	
-			<!-- Right Body Section -->		
-			<div class="col s12">
-			<div class="row z-depth-1">
-			<form action="#" method="POST" enctype="multipart/form-data">
-				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
-					<!-- List of components memo--> 
-					<div class="row" style="margin:0px">
-						<div class="col s12 m9 l10">
-								<div class="input-field col s12">
-								  <input id="icon_prefix" type="text" class=" titlememo validate">
-								  <label for="icon_prefix">Title Memo</label>
-								</div>
-						</div>
-						<div class="col s12 m3 l2">
-							<div class="input-field col s12">
-								<select id="privacy" >
-								      <!-- <option value="" disabled selected>Choose your option</option> -->
-								      <option value="0">Private</option>
-								      <option value="1">Public</option>
-							    </select>
-						    </div> 
-						</div>
-					</div>
-
-				<!-- Text Area here -->
-					<div class="row " style="margin:0px">
-						<div class="col s12 m12 l12" style="padding:15px;">
-							<textarea id="cont_memo" style="resize:none; width:100%; height:300px;padding:15px;">							
-							</textarea>
-						</div>
-					</div>
-				<!-- ./Textarea -->
-				<!-- url and buttons here -->
-					<div class="row " >
-						<div class="col s12 m12 l6">
-						  <label class="active" style="color:#FF5722;"><b>Current URL</b></label>
-						  <input type="text" class="browser-default default-link" readonly="" value="www.khmeracademy.org">
-						</div>	
-						<div class="col s12 m12 l6"> 
-							<a class="waves-effect waves-light btn right" id="btncancel" onclick="cancelMemo()" style="margin:20px; background-color:#FF9800">Cancel</a>	
-							<a class="waves-effect waves-light btn right" id="btnsave" onclick="saveMemo()" style="margin:20px;">Save</a>
-						</div>													
-					</div>
-				<!-- ./ url here -->
-			</form>
+			<div class="col s12" id="listmemo">
 			</div>
-			</div>
-
 		</div>
-		<!-- ./close row body which contain body left and body right -->
-		<!-- ./Page Layout body here -->
+		<!--pagination  -->
+			<div class='row col s12' style="text-align: right;">
+			<ul class="pagination" id="pagination">
+			 </ul>
+			</div>
+			 <!--end pagination -->
 	</div>
-
+	<!--end contain fluit  -->
+		 <!--mem view modal -->
+		<div id="modal1" class="modal modal-fixed-footer">
+		    <div class="modal-content">
+		      <div class="row" style="margin: 0px; padding: 0px;">
+			      	<div class="col s7">
+			      	 	<h6 id="memo_title" style="color:blue;"></h6>
+			      	</div>
+			      	<div class="col s5">
+			      	   <h6 id="website"></h6>
+			      	</div>
+		      </div>
+		      <p id="memo_content"></p>
+		    </div>
+		    <div class="modal-footer">
+		       <small id="memo_date"></small>
+		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " style="color:red;">Close</a>
+		    </div>
+	  </div>
+	  <!--end modal  -->
+	  <div id="modal2" class="modal modal-fixed-footer">
+		    <div class="modal-content">
+		 		<div class="row col s12">
+					 			<div class="row z-depth-1" style="margin: 0px;">
+						<form action="#" method="POST" enctype="multipart/form-data" style="margin: 0px;">
+							<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
+								<!-- List of components memo--> 
+								<div class="row" style="margin:0px; padding: 0px;">
+									<div class="col s12 m9 l10" style="margin:0px; padding: 0px;">
+											<div class="input-field col s12">
+											  <input id="icon_prefix" type="text" class="titlememo validate">
+											</div>
+									</div>
+									<div class="col s12 m3 l2" style="margin:0px; padding: 0px;">
+										<div class="input-field col s12">
+											<select id="privacy" >
+											      <!-- <option value="" disabled selected>Choose your option</option> -->
+											      <option value="0">Private</option>
+											      <option value="1">Public</option>
+										    </select>
+									    </div> 
+									</div>
+								</div>
+			
+							<!-- Text Area here -->
+								<div class="row " style="margin:0px">
+									<div class="col s12 m12 l12" style="padding:15px;">
+										<textarea id="cont_memo" style="resize:none; width:100%; height:200px;padding:15px;">							
+										</textarea>
+									</div>
+								</div>
+							<!-- ./Textarea -->
+							<!-- url and buttons here -->
+								<div class="row " >
+									<div class="col s12 m12 l6">
+									  <label class="active" style="color:#FF5722;"><b>Memo URL</b></label>
+									  <input type="text" class="browser-default default-link" readonly="readonly" id="editurl">
+									</div>	
+									<div class="col s12 m12 l6" id="btneditwrapper"> 	
+									</div>													
+								</div>
+							<!-- ./ url here -->
+						</form>
+						</div>
+		 		</div>
+		    </div>
+		    <div class="modal-footer">
+		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " style="color:red;">Cancel</a>
+		    </div>
+	  </div>
+	  <!--end modal  -->
+	<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
     <!-- ./Container --> 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/init.js"></script>
 	<!-- User Memo Dashboard Script -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/add_memo.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/memo_action.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/pagination_memo.js"></script>
 	<!-- Sweet alert js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
-	
 	<!-- User report nitification -->
 	  <script type="text/javascript">
 		  function getNumberMesage(){

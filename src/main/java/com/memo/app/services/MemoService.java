@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.MemoSearch;
 
 public interface MemoService {
-	public List<Memo> listMemo();
+	public List<Memo> listMemo(int userid);
 	public List<Memo> listMemo(int limit, int page, boolean isenabled);	
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);
@@ -24,5 +25,5 @@ public interface MemoService {
 	public List<Memo> pluginGetMemoOwner(int userid,String url);
 	public List<Memo> pluginGetMemoPulic(int userid,String url);
 	public boolean updateMemoContent(Memo memo);
-	
+	public int getMemoNumber(MemoSearch memo);
 }

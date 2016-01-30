@@ -82,7 +82,7 @@
 	</nav>
 	</div>
 	<!-- ./close navigation -->
-		<div class="row">
+		<div class="row" style="margin-top: 10px;">
 			    <div class="col s12">
 			      <ul class="tabs">
 			        <li class="tab col s6"><a class="active" style="cursor: pointer;">New Message</a></li>

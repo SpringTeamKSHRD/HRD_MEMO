@@ -13,6 +13,7 @@ import com.memo.app.RowMapper.HistoryMemoRowMapper;
 import com.memo.app.RowMapper.UserMemoRowMapper;
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.MemoSearch;
 import com.memo.app.repo.MemoDao;
 
 @Repository
@@ -29,11 +30,11 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	
 	@Override
-	public List<Memo> listMemo() {
+	public List<Memo> listMemo(int userid) {
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM memo.tbmemo";
+					+"FROM memo.tbmemo WHERE userid=? AND isenable=true ORDER BY id DESC";
 		try{
-			return jdbcTemplate.query(sql, new UserMemoRowMapper());
+			return jdbcTemplate.query(sql,new Object[]{userid},new UserMemoRowMapper());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -71,9 +72,9 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public boolean updateMemo(Memo memo) {
-		String sql="UPDATE memo.tbmemo SET userid=?,title=?,content=?,ispublic=? "
+		String sql="UPDATE memo.tbmemo SET title=?,content=?,ispublic=? "
 								      +"WHERE id=?;";
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle(),memo.getContent(),
+		Object[] obj=new Object[]{memo.getTitle(),memo.getContent(),
 								  memo.isIspublic(),memo.getId()};
 		try{
 			int i=jdbcTemplate.update(sql,obj);
@@ -288,5 +289,20 @@ public class MemoDaoImpl implements MemoDao{
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+	@Override
+	public int getMemoNumber(MemoSearch memo) {
+		try{
+		if(memo.getColumn().equals("")){
+			String sql="SELECT count(userid) FROM memo.tbmemo WHERE userid=? AND isenable=true";
+			return jdbcTemplate.queryForObject(sql,new Object[]{memo.getUserid()},Integer.class);
+		}else{
+			String sql="SELECT count(userid) FROM memo.tbmemo WHERE userid=? AND isenable=true AND "+memo.getColumn()+" LIKE ?";
+			return jdbcTemplate.queryForObject(sql,new Object[]{memo.getUserid(),memo.getSearch()+"%"},Integer.class);
+		}
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return 0;
 	}
 }

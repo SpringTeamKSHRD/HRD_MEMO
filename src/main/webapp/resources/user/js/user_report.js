@@ -153,7 +153,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
   function nextPage(click){
 	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
-		  alert("noth do to do1");
+		 // alert("noth do to do1");
 	  }else if(click > higthPage){
 		  listNewMessage(click,recordNum);
 			  currentPagin++;
@@ -221,7 +221,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	  //alert(click);
 	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click <= 0){
-		  alert("noth do to do1");
+		  //alert("noth do to do1");
 	  }else if(click < lowPage){
 		  	  currentPagin--;
 		  	  higthPage=currentPagin * trueDisplay;
@@ -260,6 +260,8 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	 updateMessageStatus();
  }
  $("#displayrow").change(function(){
+	 currentPagin=1;
+	 lowPage=1;
 	 getNumberMesage();
  });
  $('.bordered').slimScroll({

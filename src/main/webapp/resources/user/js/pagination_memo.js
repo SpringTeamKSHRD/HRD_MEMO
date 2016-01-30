@@ -1,124 +1,4 @@
-function listAllMessage(page,limit){
-	var uid=parseInt($("#userid").val());
-	var date="";
-	if($("#sdate").val()==""){
-		date="NO";
-	}else{
-		date=$("#sdate").val();
-	}
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/oldmessage/"+uid+"/"+page+"/"+limit+"/"+date,
-		success : function(data) {
-		       $("#message_diplayer").html(extractData(data));
-		},
-		error : function(data) {
-			  $("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-			  		"<div class='card-panel red'>" +
-			  		"<h3 class='white-text'>NO MESSAGE FOR DISPLAY</h3>" +
-			  		"</div></div></div>");
-		}
-	});
-}
-function goToPage() {
-	window.location.href="http://localhost:8080/HRD_MEMO/user/userreport";
-}
-function extractData(data){
-	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
-			"<thead style='background: #26a69a; color:white;'>" +
-			"<tr><th data-field='id'>No</th>" +
-			"<th data-field='name'>Sender</th>" +
-			"<th data-field='price'>Description</th>" +
-			"<th data-field='name'>Date</th>" +
-			"<th data-field='name'>Action</th>" +
-			" </tr></thead><tbody>";
-	for(var i=0;i<data.DATA.length;i++){
-		str+=" <tr style='padding:0px;'>"+
-				"<td>"+data.DATA[i].id+"</td>" +
-				"<td>Admin</td>" +
-				"<td>"+data.DATA[i].message+"</td>" +
-				"<td>"+data.DATA[i].date+"</td>" +
-				"<td><a class='waves-effect waves-light btn modal-trigger' style='margin:0px;' onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='material-icons'>visibility</i></a></td>" +
-				"</tr>";
-	}
-	str+=" </tbody></table>";
-	return str;
-}
-function getBlockedMemo(id){
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/"+id,
-		success : function(data) {
-		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
-		       $("#website").text("Website: "+data.DATA.domain);
-		       $("#memo_content").text(data.DATA.content);
-		       $("#memo_date").text("Date: "+data.DATA.date);
-		       $('#modal1').openModal();
-		},
-		error : function(data) {
-			 alert("rerror");
-		}
-	});
-}
-function generateTitle(title){
-	 var tl=title.length;
-	 if(tl>50){
-		 return title.substring(0, 50)+"...";
-	 }else{
-		 return title;
-	 }
-}
-var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
-  var websocket=new WebSocket(url);
-  websocket.onopen=function(message){
-  }
-  websocket.onclose=function(message){
- 	 websocket.close();
-  }
-  websocket.onmessage=function(message){
- 	 if(message.data==="response"){
- 		getAllNumberMessage();
- 		updateMessageStatus();
- 	 }
-  }
-  function updateMessageStatus(){
-		var uid=parseInt($("#userid").val());
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
-			success : function(data) {
-			},
-			error : function(data) {
-			}
-		});
-	}
-  
-  function getAllNumberMessage(){
-	  var uid=parseInt($("#userid").val());
-	  var date="";
-		if($("#sdate").val()==""){
-			date="NO";
-		}else{
-			date=$("#sdate").val();
-		}
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid+"/"+date,
-			success : function(data) {
-				getNumPagination(data.DATA,$("#displayrow").val(),4);
-				listAllMessage(1,recordNum);
-			},
-			error : function(data) {
-				$("#message_diplayer").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
-				  		"<div class='card-panel red'>" +
-				  		"<h3 class='white-text'>NO MESSAGE FOR DISPLAY</h3>" +
-				  		"</div></div></div>");
-				$("#pagination").html("");
-			}
-		});
-  }
-  getAllNumberMessage();
-  var numDisplay=0;
+ var numDisplay=0;
   var paginNum=0;
   var currentPNum=0;
   var currentPagin=1;
@@ -257,62 +137,74 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 	  $("#pagination").children().removeClass("active");
 	  obj.parent().addClass('active');
   }
- function disableButtNextPrev(){
-	  if(lowPage==1){
-		  $("#parentprev").addClass("disabled");
+  function getMemoNumber(){
+	  json = {
+				userid:$("#userid").val(),
+				column:"",
+				search:""
+			};
+	  $.ajax({
+			type : "POST",
+			url : "http://localhost:8080/HRD_MEMO/user/getmemonumber",
+			data : JSON.stringify(json),
+			contentType: 'application/json',
+			success : function(data) {
+				alert(data.DATA);
+			},
+			error : function(data) {
+				alert("Unsuccess: " + data.MESSAGE);
+			}
+		});  
+  }
+  getMemoNumber();
+  
+  $("#searchopt").change(function(){
+	  if($("#searchopt").val()==="title"){
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt1").fadeIn(200);
+		  });
+		  
+	  }else if($("#searchopt").val()==="ispublic"){
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt2").fadeIn(200);
+		  });
+	  }else if($("#searchopt").val()==="domain"){
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+		  $("#opt4").fadeOut(1,function(){
+			  $("#opt3").fadeIn(200);
+		  });
+	  }else if($("#searchopt").val()==="date"){
+		  $("#opt1").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
+		  $("#opt2").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
+		  $("#opt3").fadeOut(1,function(){
+			  $("#opt4").fadeIn(200);
+		  });
 	  }else{
-		  $("#parentprev").removeClass("disabled"); 
+		  $("#opt1").fadeOut(200);
+		  $("#opt2").fadeOut(200);
+		  $("#opt3").fadeOut(200);
+		  $("#opt4").fadeOut(200);
 	  }
-	  if(higthPage==pageNum){
-		  $("#parentnext").addClass("disabled"); 
-	  }else{
-		  $("#parentnext").removeClass("disabled");
-	  }
- }
- $('#btnsearch').click(function(){
-	 alert(new Date());
- });
- $('.datepicker').pickadate({
-	 selectMonths: true, // Creates a dropdown to control month
-	 selectYears: 10, // Creates a dropdown of 15 years to control year
-	 format: 'dd-mm-yyyy',
-	 closeOnSelect: false,
-	 onSet: function (ele) {
-		   if(ele.select){
-		          this.close();
-		          getAllNumberMessage();
-		   }
-		}
- });
- $("#displayrow").change(function(){
-	 currentPagin=1;
-	 lowPage=1;
-	 getAllNumberMessage();
- });
- $('.responsive-table .bordered .highlight').slimScroll({
-		alwaysVisible: false,
-	              size:'5px',
-	               color: '#009688'
-	});
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  });
   
