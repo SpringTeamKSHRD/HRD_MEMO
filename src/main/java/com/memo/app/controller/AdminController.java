@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.memo.app.services.IDashboardService;
 import com.memo.app.services.MemoService;
 import com.memo.app.services.ReportService;
-import com.memo.app.services.UserService;
 
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
-	
-	@Autowired
-	private UserService userDao;
 	
 	@Autowired
 	private IDashboardService dashboard;
@@ -43,13 +39,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/users", method = RequestMethod.GET)
-	public String users(ModelMap m,
-			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled) {
+	public String users(ModelMap m) {
 		
 		this.pageDescription(m, "Users", "List All Users");
-		m.addAttribute("listUser", userDao.getUserList(limit, page, ismemoenabled));
 		return "admin/users";
 	}
 	
@@ -74,7 +66,12 @@ public class AdminController {
 		m.addAttribute("listReport", reportDao.getAllReport(limit, page, isblocked));
 		return "admin/report";
 	}
-
+	
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+	public String report(ModelMap m){		
+		return "admin/testapi";
+	}
+	
 	public void pageDescription(ModelMap m,String pageTitle,String pageDesc){
 		m.addAttribute("pageTitle",pageTitle);
 		m.addAttribute("pageDesc",pageDesc);

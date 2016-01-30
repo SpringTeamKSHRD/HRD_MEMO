@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getUserList(int limit, int offset, boolean ismemoenabled) {
 		try{
-		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename "
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,count(*) OVER() "
 				 + "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "where us.ismemoenabled = ? ORDER BY us.userid limit ? offset ? ";
 		List<User> users = jdbcTemplate.query(sql,  new Object[] { ismemoenabled, limit, offset },new UserRowMapper());
@@ -78,7 +78,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> searchUser(String name) {
-		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled,count(*) OVER() "
 				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "WHERE us.username=?";
 		List<User> users = jdbcTemplate.query(sql, new Object[] { name }, new UserRowMapper());
@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> searchUser(int id) {
-		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled "
+		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,us.ismemoenabled,count(*) OVER() "
 				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
 				+ "WHERE us.userid=?";
 		try{
@@ -175,13 +175,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> searchUserByColumn(int limit, int offset, String column, String keyword) {
+	public List<User> searchUserByColumn(int limit, int offset, boolean ismemoenabled, String column, String keyword) {
 		String sql = "SELECT us.userid,us.username,us.gender,us.email,"
-				+ "date(us.registerdate),us.userimageurl,ut.usertypename "
+				+ "date(us.registerdate),us.userimageurl,ut.usertypename,count(*) OVER() "
 				+ "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
-				+ "where us.ismemoenabled = true and "+ column +" = ? ORDER BY us.userid limit ? offset ? ";
+				+ "where us.ismemoenabled = ? and "+ column +" LIKE ? ORDER BY us.userid limit ? offset ? ";
 		try{
-			return jdbcTemplate.query(sql,  new Object[] { keyword, limit, offset },new UserRowMapper());
+			return jdbcTemplate.query(sql,  new Object[] { ismemoenabled,"%"+keyword+"%", limit, offset },new UserRowMapper());
 		}catch(Exception ex){ex.printStackTrace();}
 		return null;
 	}

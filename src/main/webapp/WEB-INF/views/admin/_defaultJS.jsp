@@ -6,10 +6,10 @@
     <!-- Bootstrap 3.3.5 -->
     <script src="${pageContext.request.contextPath}/resources/admin/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="${pageContext.request.contextPath}/resources/admin/js/app.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin/js/app.min.js"></script>    
 	<script>
 		var path="${pageContext.request.contextPath}";
-		var imagepath=path+"/resources/admin/imgs/";
+		var imagepath=path+"/resources/admin/imgs";
 		/* ADD ACTIVE CLASS TO MENU */
 		var url = $(location).attr('href');;
 		url = url.split("/");
@@ -75,7 +75,7 @@
 	    		 listnotification();
 	    	 }
 	     }  
-	    $(".dropdown-toggle").click(function(){
+	    $(".notifications-menu").click(function(){
     		 $("#notifcationcount").html("");
     	});
 	</script>

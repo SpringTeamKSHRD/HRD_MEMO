@@ -19,6 +19,7 @@ public class UserRowMapper implements RowMapper<User> {
 		user.setRegisterdate(rs.getDate(5));
 		user.setImage(rs.getString(6));
 		user.setType(rs.getString(7));
+		user.setCount(rs.getInt(8));
 		return user;
 	}
 

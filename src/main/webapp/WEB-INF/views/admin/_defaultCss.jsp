@@ -3,9 +3,9 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -15,8 +15,19 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/skins/skin-blue.min.css">
     <link rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/alertify.core.css' />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/alertify.default.css' />
-    
-
+    <style>
+	    .img-avatar{
+	    	float: left;
+	    	width: 25px;
+	    	height: 25px;
+	    	border-radius: 50%; 
+	    	margin-right: 10px;
+	    	margin-top: -2px;
+	    }
+	    .pagination{
+	    	margin: 0px !important;
+	    }
+    </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

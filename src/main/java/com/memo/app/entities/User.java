@@ -32,8 +32,18 @@ public class User {
 	private boolean ismemoenable;
 	@Transient
 	private String type;
+	@Transient
+	private int count;
 	private int usertypeid;
 	private int universityid;
+	@Transient
+	private Date registerdate;
+	@Transient
+	private String oldpwd;
+	@Transient
+	private String newpwd;
+	@Transient
+	private String conpwd;
 	public int getUniversityid() {
 		return universityid;
 	}
@@ -53,16 +63,6 @@ public class User {
 	public void setUsertypeid(int usertypeid) {
 		this.usertypeid = usertypeid;
 	}
-	@Transient
-	private Date registerdate;
-	@Transient
-	private String oldpwd;
-	@Transient
-	private String newpwd;
-	@Transient
-	private String conpwd;
-	
-	
 	public String getOldpwd() {
 		return oldpwd;
 	}
@@ -146,6 +146,12 @@ public class User {
 	}
 	public void setRegisterdate(Date registerdate) {
 		this.registerdate = registerdate;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	@Override
 	public String toString() {

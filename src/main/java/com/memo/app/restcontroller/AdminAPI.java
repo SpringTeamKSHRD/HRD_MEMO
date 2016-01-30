@@ -93,12 +93,14 @@ public class AdminAPI {
 	public ResponseEntity<Map<String, Object>>  searchUser(
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled,
 			@RequestParam(value = "keyword") String keyword,
 			@RequestParam(value = "column", required = false, defaultValue = "username") String column){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<User> users=userDao.searchUserByColumn(limit, page, keyword, column);
+		List<User> users=userDao.searchUserByColumn(limit, page, ismemoenabled, column, keyword);
 		HttpStatus status = HttpStatus.OK;
+		
 		if (!users.isEmpty()) {	
 			map.put("MESSAGE", "USER HAS BEEN FOUND.");
 			map.put("DATA",users);

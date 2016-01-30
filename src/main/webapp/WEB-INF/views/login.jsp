@@ -57,14 +57,14 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">perm_identity</i> <input
-							id="username" type="text" class="validate" name='username'>
+							id="username" type="text" class="validate" name='username' required>
 						<label for="username">Email</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">vpn_key</i> <input id="password"
-							type="password" class="validate" name='password'> <label
+							type="password" class="validate" name='password' required> <label
 							for="password">Password</label>
 					</div>
 				</div>

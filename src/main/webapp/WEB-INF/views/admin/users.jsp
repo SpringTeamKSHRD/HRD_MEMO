@@ -11,63 +11,53 @@
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
 	<div class="search" style="margin: 10px 50px 25px 50px;">
-<form class="form-inline" role="form">
-  <div class="form-group col-sm-7">    
-    <div class="input-group col-sm-12">    
-      <input type="text" class=" form-control" placeholder="Search User"> 
-      <span class="" style="
-		    position: relative;
-		    font-size: 0;
-		    white-space: nowrap;
-		    width: 1%;
-		    white-space: nowrap;
-		    vertical-align: middle;
-		    display: table-cell;
-			">
-        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-          <i class="fa fa-search"></i>
-        </button>
-      </span>
-    </div>
-  </div>  
-  <div class="form-group" style="margin-right: 15px;">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="form-group">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>  
-</form>
+		<form class="form-inline">
+		  <div class="form-group col-sm-7">    
+		    <div class="input-group col-sm-12">    
+		      <input type="text" class="form-control" placeholder="Search User" id="inputSearch" required> 
+		      <span class="input-group-btn">
+		        <button type="submit" id="search-btn" class="btn btn-flat">
+		          <i class="fa fa-search"></i>
+		        </button>
+		      </span>
+		    </div>
+		  </div>  
+		  <div class="form-group" style="margin-right: 15px;">    
+		    <div class="btn-group" id="searchBy">
+		      <button type="button" id="searchByValue" class="btn btn-default" data="username" style="background-color: white;">Username</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="username">Username</a></li>
+		        <li><a href="#" data="email">Email</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		  <div class="form-group">    
+		    <div class="btn-group" id="limitBy">
+		      <button type="button" id="limitByValue" class="btn btn-default" data="10" style="background-color: white;">10 Rows</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="10">10 Rows</a></li>
+		        <li><a href="#" data="20">20 Rows</a></li>
+		        <li><a href="#" data="50">50 Rows</a></li>
+		        <li><a href="#" data="100">100 Rows</a></li>
+		      </ul>
+		    </div>
+		  </div>  
+		</form>
 	</div>
 
-	<div class="row">
+<div class="row">
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-body">
 				<div class="row">
-					<div class="col-sm-12" id="content">
-						<table id="tbl-user" class="table table-bordered table-striped table-hover">
+					<div class="col-sm-12">
+						<table id="tbl-user" class="table table-bordered table-striped table-hover" style="margin: 0px">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -78,47 +68,140 @@
 									<th>Date</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach var="listUser" items="${listUser}">							
-									<tr class='clickable-row' style="cursor:pointer"data-href='${pageContext.request.contextPath}/admin/user/${listUser.userid}'>										
-										<td>${listUser.userid}</td>
-										<td>
-		                    				<img src="${pageContext.request.contextPath}/resources/admin/imgs/${listUser.image}" alt="User Image" style ="float: left;width: 25px;height: 25px;border-radius: 50%; margin-right: 10px;margin-top: -2px;">
-			                   				${listUser.username}     
-										</td>
-										<td>${listUser.gender}</td>
-										<td>${listUser.email}</td>
-										<td>${listUser.type}</td>
-										<td>${listUser.registerdate}</td>										
-									</tr>									  
-								</c:forEach>
+							<tbody id="content">
 							</tbody>
 						</table>
-					</div>
+						<div id="error" style="text-align: center;margin: 15px;display:none;">
+							Users Not Found
+							<a href="#" id="listAllUser">List All User</a>
+						</div>
+						<div id="page-selection" style="padding:15px 15px 0 15px">
+							<div class="form-group pull-right"> 
+								<input type="checkbox"  id="viewEnable" checked> View User Enabled<br>
+							</div>
+						</div>
+					</div>						
 				</div>
-				<div class="form-group pull-right"> <input type="checkbox"  id="checkEnable" value="Bike"> View Memo User Disabled<br></div>
 			</div>
 		</div>
-		<!-- /.box-body -->
 	</div>
-	<!-- /.box -->
 </div>
-<!-- /.col -->
 <%@ include file="_footer.jsp"%>
 <%@ include file="_defaultJS.jsp"%>
 <script src="${pageContext.request.contextPath}/resources/admin/js/jquery.bootpag.min.js"></script>
 <script>
-if(ParamToJson().ismemoenabled){
-	$("#checkEnable").prop( "checked", true);
+var totalrow = 0;
+function contructTable(data){
+	$("#content").html("");
+	$.each(data, function() {
+		$("#content").append(
+		"<tr class=clickable-row style=cursor:pointer "+
+		"data-href="+path+"/admin/user?id="+this.userid+">"+
+			"<td>"+this.userid+"</td>"+
+			"<td><img src="+imagepath+"/"+this.image+" class=img-avatar>"+
+			this.username+"</td>"+
+			"<td>"+this.gender+"</td>"+
+			"<td>"+this.email+"</td>"+
+			"<td>"+this.type+"</td>"+
+			"<td>"+this.registerdate+"</td>"+
+		"</tr>");
+	});	
 }
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
+function listContent(page){
+	$.ajax({
+		url: path+"/api/admin/users"+
+			"?page="+page+
+			"&limit="+$("#limitByValue").attr('data')+
+			"&ismemoenabled="+$("#viewEnable").prop("checked"),
+		async: false,
+		type: "get",
+		success: function (response) {	
+			totalrow = response['DATA'][0].count;
+			contructTable(response['DATA']);				
+		}
+	});		
+}
+function searchUser(page){
+	$.ajax({
+		url: path+"/api/admin/users/search"+
+				"?page="+page+
+				"&limit="+$("#limitByValue").attr('data')+
+				"&ismemoenabled="+$("#viewEnable").prop("checked")+
+				"&keyword="+$("#inputSearch").val()+
+				"&column="+$("#searchByValue").attr('data'),
+		async: false,
+		type: "get",
+		success: function (response) {
+			$(".box-body").css("height","auto");
+			$("#error").hide();
+			totalrow = response['DATA'][0].count;			
+			contructTable(response['DATA']);		
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","160px");
+				$("#error").show();
+		    }
+		}
+	});	
+}
+function createPagination(page,totalrow,listFunction){
+	var totalpage = 0;
+	var limitrow = $("#limitByValue").attr('data');
+	if(totalrow % limitrow != 0)	totalpage = totalrow / limitrow + 1;
+	else							totalpage = totalrow / limitrow;	
+	$('#page-selection').bootpag({
+	    total: totalpage,
+	    maxVisible : 5,
+	    page:page,
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first',
+	    leaps: true,
+	}).on("page", function(event, page){
+		listFunction(page);
+	});
+}
+function listOrSearch(){
+	if($("#inputSearch").val()==""){
+		listContent(1);
+		createPagination(1,totalrow,listContent);	
+	}else{
+		searchUser(1);
+		createPagination(1,totalrow,searchUser);			
+	}
+}
+$(document).ready(function($) {
+	$("body").on("click",".clickable-row",function(){
+		window.document.location = $(this).data("href");
+	});
+    $("#viewEnable").click(function(){
+    	listOrSearch();
     });
-    $("#checkEnable").click(function(){
-    	if(this.checked)  window.location.href=window.location.href+"?ismemoenabled=false";
-    	else window.location.href=window.location.origin+window.location.pathname;
+    $(".form-inline").submit(function(e){
+    	e.preventDefault();
+    	searchUser(1);
+    	createPagination(1,totalrow, searchUser);
+    })
+    $("#searchBy .dropdown-menu li a").click(function(){
+		$("#searchByValue").text($(this).text());
+		$("#searchByValue").attr('data',$(this).attr('data'));
     });
+    $("#limitBy .dropdown-menu li a").click(function(){
+		$("#limitByValue").text($(this).text());
+		$("#limitByValue").attr('data',$(this).attr('data'));
+		listOrSearch();
+    });
+    $("#listAllUser").click(function(){
+		$(".box-body").css("height","auto");
+		$("#error").hide();
+    	$("#inputSearch").val("");
+    	listOrSearch();
+    });
+	listContent(1);
+	createPagination(1,totalrow,listContent);
 });
 </script>
 </body>

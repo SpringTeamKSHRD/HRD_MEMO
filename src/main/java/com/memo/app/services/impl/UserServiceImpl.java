@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	public List<User> searchUserByColumn(int limit, int page, String keyword, String column) {
+	public List<User> searchUserByColumn(int limit, int page, boolean ismemoenabled, String column, String keyword) {
 		//maximum 100 rows
 		if(limit > 100) limit = 100;
 		//minimum 10 rows
@@ -92,8 +92,8 @@ public class UserServiceImpl implements UserService {
 		if(page < 1) page = 1;
 		//calculate offset for database
 		int offset = limit * page - limit;
-		if(column.equals("username")) return userdao.searchUserByColumn(limit,offset,"username",keyword);
-		if(column.equals("email")) return userdao.searchUserByColumn(limit,offset,"email",keyword);
+		if(column.equals("username")) return userdao.searchUserByColumn(limit,offset,ismemoenabled,"username",keyword);
+		if(column.equals("email")) return userdao.searchUserByColumn(limit,offset,ismemoenabled,"email",keyword);
 		return null;
 	}
 
