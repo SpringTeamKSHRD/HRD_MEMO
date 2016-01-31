@@ -18,8 +18,8 @@ public class MemoServiceImpl implements MemoService{
 	private MemoDao memoDao;
 
 	@Override
-	public List<Memo> listMemo(int userid) {
-		return memoDao.listMemo(userid);
+	public List<Memo> listMemo(MemoSearch memo) {
+		return memoDao.listMemo(memo);
 	}
 
 	@Override
