@@ -60,4 +60,20 @@ public class ReportServiceImpl implements ReportService {
 		return reportDao.getAllReport(limit,offset,isblocked);
 	}
 
+	@Override
+	public List<Report> searchReportByColumn(int limit, int page, boolean isblocked, String column, String keyword){
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		if(column.equals("title")) return reportDao.searchReportByColumn(limit,offset,isblocked,"memo.tbmemo.title",keyword);
+		if(column.equals("description")) return reportDao.searchReportByColumn(limit,offset,isblocked,"memo.tbreport.description",keyword);
+		if(column.equals("domain")) return reportDao.searchReportByColumn(limit,offset,isblocked,"memo.tbmemo.domain",keyword);
+		return null;
+	}
+
 }

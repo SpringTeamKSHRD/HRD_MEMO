@@ -15,6 +15,9 @@ public class ReportListRowMapper implements RowMapper<Report> {
 		rp.setMemotitle(rs.getString(2));
 		rp.setDescription(rs.getString(3));
 		rp.setReportdate(rs.getDate(4));
+		rp.setCount(rs.getInt(5));
+		rp.setDomain(rs.getString(6));
+		rp.setUrl(rs.getString(7));
 		return rp;
 	}
 

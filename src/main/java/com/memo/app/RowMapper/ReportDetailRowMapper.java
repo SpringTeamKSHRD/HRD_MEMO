@@ -24,6 +24,8 @@ public class ReportDetailRowMapper implements RowMapper<Report> {
 		rp.setOwnermemoname(rs.getString(11));
 		rp.setOwnermemoimage(rs.getString(12));
 		rp.setMemodate(rs.getDate(13));
+		rp.setDomain(rs.getString(14));
+		rp.setUrl(rs.getString(15));
 		return rp;
 	}
 

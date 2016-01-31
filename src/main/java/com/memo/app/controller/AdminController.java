@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.services.IDashboardService;
 import com.memo.app.services.MemoService;
-import com.memo.app.services.ReportService;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -19,9 +18,6 @@ public class AdminController {
 	
 	@Autowired
 	private IDashboardService dashboard;
-	
-	@Autowired
-	private ReportService reportDao;
 	
 	@Autowired
 	private MemoService memoDao;
@@ -56,19 +52,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/reports", method = RequestMethod.GET)
-	public String report(ModelMap m,
-			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "isblocked", required = false,  defaultValue = "false") boolean isblocked){
-		
+	public String report(ModelMap m){		
 		this.pageDescription(m, "Report", "List All Reports");
-		m.addAttribute("listReport", reportDao.getAllReport(limit, page, isblocked));
 		return "admin/reports";
 	}
 	
 	//for testing only
 	@RequestMapping(value="/test", method = RequestMethod.GET)
-	public String report(ModelMap m){		
+	public String test(ModelMap m){		
 		return "admin/testapi";
 	}
 	

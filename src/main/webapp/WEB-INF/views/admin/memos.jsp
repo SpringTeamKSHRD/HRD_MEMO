@@ -11,10 +11,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>${pageTitle } | Memo</title>
 	<%@ include file="_defaultCss.jsp" %>
   </head>
-<body>
+
 <%@ include file="_header.jsp" %>
 <%@ include file="_sideBarMenu.jsp" %>
-	<div class="search" style="margin: 10px 50px 25px 50px;">
+<div class="search" style="margin: 10px 50px 25px 50px;">
 <form class="form-inline" role="form">
   <div class="form-group col-sm-7">    
     <div class="input-group col-sm-12">    

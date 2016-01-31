@@ -27,6 +27,15 @@
 	    .pagination{
 	    	margin: 0px !important;
 	    }
+	    .modal-link{
+	    	border: 1px solid;
+	    	display: block;
+	    	width: 100%;
+	    	height: 34px;
+	    	padding: 6px 12px;
+	    	font-size: 14px;
+	    	background-color: #eee;
+	    }
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

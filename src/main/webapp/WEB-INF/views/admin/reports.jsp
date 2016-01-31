@@ -7,58 +7,48 @@
     <title>${pageTitle } | Memo</title>
 	<%@ include file="_defaultCss.jsp" %>
   </head>
-<body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
 	<div class="search" style="margin: 10px 50px 25px 50px;">
-<form class="form-inline" role="form">
-  <div class="form-group col-sm-7">    
-    <div class="input-group col-sm-12">    
-      <input type="text" class=" form-control" placeholder="Search Report"> 
-      <span class="" style="
-		    position: relative;
-		    font-size: 0;
-		    white-space: nowrap;
-		    width: 1%;
-		    white-space: nowrap;
-		    vertical-align: middle;
-		    display: table-cell;
-			">
-        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-          <i class="fa fa-search"></i>
-        </button>
-      </span>
-    </div>
-  </div>  
-  <div class="form-group" style="margin-right: 15px;">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="form-group">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>  
-</form>
+		<form class="form-inline">
+		  <div class="form-group col-sm-7">    
+		    <div class="input-group col-sm-12">    
+		      <input type="text" class="form-control" placeholder="Search Report" id="inputSearch" required> 
+		      <span class="input-group-btn">
+		        <button type="submit" id="search-btn" class="btn btn-flat">
+		          <i class="fa fa-search"></i>
+		        </button>
+		      </span>
+		    </div>
+		  </div>  
+		  <div class="form-group" style="margin-right: 15px;">    
+		    <div class="btn-group" id="searchBy">
+		      <button type="button" id="searchByValue" class="btn btn-default" data="title" style="background-color: white;">Title</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="title">Title</a></li>
+		        <li><a href="#" data="description">Description</a></li>
+		        <li><a href="#" data="domain">Domain</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		  <div class="form-group">    
+		    <div class="btn-group" id="limitBy">
+		      <button type="button" id="limitByValue" class="btn btn-default" data="10" style="background-color: white;">10 Rows</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="10">10 Rows</a></li>
+		        <li><a href="#" data="20">20 Rows</a></li>
+		        <li><a href="#" data="50">50 Rows</a></li>
+		        <li><a href="#" data="100">100 Rows</a></li>
+		      </ul>
+		    </div>
+		  </div>  
+		</form>
 	</div>
 <div class="row">
 <div class="col-xs-12">
@@ -66,29 +56,34 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<table id="tbl-report" class="table table-bordered table-striped table-hover">
+					<table class="table table-bordered table-striped table-hover" style="margin: 0px">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Date</th>									
+								<th>Memo Title</th>
+								<th>Domain Website</th>
+								<th>Report Description</th>
+								<th>Report Date</th>
+								<th>Action</th>									
 							</tr>
 						</thead>
-						<tbody> 
-							<c:forEach var="listReport" items="${listReport}">
-								<tr class='clickable-row' style="cursor:pointer" data-href='${listReport.id}'>
-									<td>${listReport.id}</td>
-									<td>${listReport.memotitle}</td>
-									<td>${listReport.description}</td>
-									<td>${listReport.reportdate}</td>
-								</tr>
-							</c:forEach>
+						<tbody id="content"> 
+
 						</tbody>
 					</table>
+					<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
+							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
+								Reports Not Found
+								<a href="#" id="listAllUser">List All Reports</a>
+							</div>
+						</div>
+						<div id="page-selection" style="padding:15px 15px 0 15px">
+							<div class="form-group pull-right"> 
+								<input type="checkbox"  id="viewBlocked"> View Blocked Reports<br>
+							</div>
+						</div>
 				</div>
 			</div>
-			<div class="form-group pull-right"> <input type="checkbox"  id="checkEnable" value="Bike"> View Reported<br></div>
 		</div>
 	</div>
 	<!-- /.box-body -->
@@ -109,11 +104,11 @@
 	    <form role="form" id="formshow">
 		<div class="box-body" style="padding:0px;">
 			<div class="form-group">
-				<div class="col-sm-3" style="padding-left:0px">
+				<div class="col-sm-4" style="padding-left:0px">
 					<label for="id">Report ID</label>
 					<input type="number" class="form-control" id="reportid" readonly>
 				</div>
-				<div class="col-sm-9" style="padding-right:0px">
+				<div class="col-sm-8" style="padding:0px">
 					<label for="date">Report Date</label>
 					<input type="text" class="form-control" id="reportdate" readonly>
 				</div>
@@ -124,33 +119,40 @@
 				<input type="text" class="form-control" id="reportdescription" readonly>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-3" style="padding-left:0px">
+				<div class="col-sm-4" style="padding-left:0px">
 					<label for="id">Memo ID</label>
 					<input type="number" class="form-control" id="memoid" readonly>
 				</div>
-				<div class="col-sm-9" style="padding-right:0px">
+				<div class="col-sm-8" style="padding:0px">
 					<label for="title">Written Date</label>
 					<input type="text" class="form-control" id="memodate" readonly>				
 				</div>
 				<div class="clearfix "></div>
 			</div>		
 			<div class="form-group">
-				<label for="memotitle">Memo Title</label>		
-				<input type="text" class="form-control" id="memotitle" readonly>
+				<div class="col-sm-4" style="padding-left:0px">
+					<label for="memodomain">Domain Website</label>		
+					<input type="text" class="form-control" id="memodomain" readonly>
+				</div>
+				<div class="col-sm-8" style="padding:0px">
+					<label for="memotitle">Memo Title</label>		
+					<a id="memotitle" href="" class="modal-link" target="_blank"></a>
+				</div>
+				<div class="clearfix "></div>
 			</div>
 			<div class="form-group">
 				<label for="id">Memo Content</label>
 				<textarea class="form-control" style="height:150px;max-height:200px;resize:none;" id="memocontent" readonly></textarea>
 			</div>
 			<div class="form-group" style="margin: 0px;">
-				<div class="col-sm-6" style="padding-left:0px">
-					<label for="reportby">Report By</label>		
-					<a id="reportbylink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
-				</div>
 				<div class="col-sm-6">
 					<label for="owner">Owner</label>		
-					<a id="ownerlink" href="" style="display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;"></a>
+					<a id="ownerlink" href="" class="modal-link" target="_blank"></a>
 				</div>			
+				<div class="col-sm-6">
+					<label for="reportby">Report By</label>		
+					<a id="reportbylink" href="" class="modal-link" target="_blank"></a>
+				</div>
 				<div class="clearfix "></div>
 			</div>
 		</div>
@@ -167,8 +169,86 @@
 <%@ include file="_defaultJS.jsp"%>
 <script>
 var data = {};
-if(ParamToJson().isblocked){
-	$("#checkEnable").prop( "checked", true);
+var totalrow = 0;
+function contructTable(data,isblocked){
+	$("#content").html("");
+	$.each(data, function() {
+		$("#content").append(
+		"<tr data-href="+this.id+">"+
+			"<td>"+this.id+"</td>"+
+			"<td style='padding:0px'><a href='"+this.url+"' class='modal-link' target='_blank'>"+this.memotitle+"</a></td>"+
+			"<td>"+this.domain+"</td>"+
+			"<td>"+this.description+"</td>"+
+			"<td>"+this.reportdate+"</td>"+
+			"<td><div class='btn-group'>"+
+				"<button type='button' class='btn btn-block btn-primary btn-xs btn-detail' data-href="+this.id+">"+
+				"Detail <i class='fa fa-info'></i></button></div></td>"+			
+		"</tr>");
+	});	
+}
+function listContent(page){
+	$.ajax({
+		url: path+"/api/admin/reports"+
+			"?page="+page+
+			"&limit="+$("#limitByValue").attr('data')+
+			"&isblocked="+$("#viewBlocked").prop("checked"),
+		async: false,
+		type: "get",
+		success: function (response) {	
+			totalrow = response['DATA'][0].count;
+			contructTable(response['DATA'],$("#viewBlocked").prop("checked"));				
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
+		    }
+		}
+	});		
+}
+function searchReport(page){
+	$.ajax({
+		url: path+"/api/admin/reports/search"+
+				"?page="+page+
+				"&limit="+$("#limitByValue").attr('data')+
+				"&isblocked="+$("#viewBlocked").prop("checked")+
+				"&keyword="+$("#inputSearch").val()+
+				"&column="+$("#searchByValue").attr('data'),
+		async: false,
+		type: "get",
+		success: function (response) {
+			$(".box-body").css("height","auto");
+			$("#error").hide();
+			totalrow = response['DATA'][0].count;			
+			contructTable(response['DATA'],$("#viewBlocked").prop("checked"));		
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
+		    }
+		}
+	});	
+}
+function createPagination(page,totalrow,listFunction){
+	var totalpage = 0;
+	var limitrow = $("#limitByValue").attr('data');
+	if(totalrow % limitrow != 0)	totalpage = totalrow / limitrow + 1;
+	else							totalpage = totalrow / limitrow;	
+	$('#page-selection').bootpag({
+	    total: totalpage,
+	    maxVisible : 5,
+	    page:page,
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first',
+	    leaps: true,
+	}).on("page", function(event, page){
+		listFunction(page);
+	});
 }
 function showDetail(id){
 	$.ajax({
@@ -181,13 +261,14 @@ function showDetail(id){
 			$("#reportdescription").val(data.description);
 			$("#memoid").val(data.memoid);
 			$("#memodate").val(data.memodate);
-			$("#memotitle").val(data.memotitle);
+			$("#memodomain").val(data.domain);
+			$("#memotitle").html(data.memotitle);
+			$("#memotitle").attr('href', data.url);
 			$("#memocontent").val(data.memocontent);
 			$("#reportbylink").attr('href', path+"/admin/user/"+data.reporterid);
-			$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.reportername);
+			$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' class=img-avatar>"+data.reportername);
 			$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
-			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' alt='User Image' style='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+data.ownermemoname);
-			if(ParamToJson().id==undefined) window.history.pushState(null,null,window.location.href+"?id="+data.id);
+			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' class=img-avatar>"+data.ownermemoname);
 			$('#myModal').modal('show');
 		}
 	});    	
@@ -200,43 +281,75 @@ function validateNullInJson(data){
 	}
 	return data;
 }
-jQuery(document).ready(function($) {
-	if(!isNaN(ParamToJson().id)){
-		showDetail(ParamToJson().id);
+function clearModal(){
+	$("#reportbylink").attr('href', '');
+	$("#ownerlink").attr('href', '');
+	$("#memotitle").attr('href', '');
+	$("#reportbylink").html('');
+	$("#ownerlink").html('');
+	$("#memotitle").html('');
+	$("#formshow")[0].reset();
+	data={};
+}
+function blockReport(){
+	if(confirm("Are you sure?")) {
+    	$.ajax({
+    		url: path+"/api/admin/report/block",
+    		type: "POST",
+    		dataType : 'json',
+    		contentType: "application/json; charset=utf-8",
+    		data:JSON.stringify(data),
+    		success: function (response) {
+    			listnotification();
+    			websocket.send("response");
+    			$("tr[data-href='"+data.id+"']").remove();
+    			$('#myModal').modal('hide');
+    		}
+    	});	    	
 	}
-    $(".clickable-row").click(function() {
+}
+function listOrSearch(){
+	if($("#inputSearch").val()==""){
+		listContent(1);
+		createPagination(1,totalrow,listContent);	
+	}else{
+		searchReport(1);
+		createPagination(1,totalrow,searchReport);			
+	}
+}
+jQuery(document).ready(function($) {
+	$("body").on("click",".btn-detail",function(){
     	showDetail($(this).data("href"));
     });
     $('#myModal').on('hidden.bs.modal', function () {
-    	$("#reportbylink").attr('href', '');
-    	$("#ownerlink").attr('href', '');
-    	$("#reportbylink").html('');
-    	$("#ownerlink").html('');
-    	$("#formshow")[0].reset();
-    	data={};
-    	if(ParamToJson().id) window.history.pushState(null,null,window.location.origin+window.location.pathname);
+    	clearModal();
     })
     $('#btnblock').click(function(){
-    	if(confirm("Are you sure?")) {
-	    	$.ajax({
-	    		url: path+"/api/admin/report/block",
-	    		type: "POST",
-	    		dataType : 'json',
-	    		contentType: "application/json; charset=utf-8",
-	    		data:JSON.stringify(data),
-	    		success: function (response) {
-	    			listnotification();
-	    			websocket.send("response");
-	    			$("tr[data-href='"+data.id+"']").remove();
-	    			$('#myModal').modal('hide');
-	    		}
-	    	});	    	
-    	}
+    	blockReport();
     });
-    $("#checkEnable").click(function(){
-    	if(this.checked)  window.location.href=window.location.href+"?isblocked=true";
-    	else window.location.href=window.location.origin+window.location.pathname;
+    $(".form-inline").submit(function(e){
+    	e.preventDefault();
+    	listOrSearch();
+    })
+    $("#viewBlocked").click(function(){
+    	listOrSearch();
     });
+    $("#searchBy .dropdown-menu li a").click(function(){
+		$("#searchByValue").text($(this).text());
+		$("#searchByValue").attr('data',$(this).attr('data'));
+    });
+    $("#limitBy .dropdown-menu li a").click(function(){
+		$("#limitByValue").text($(this).text());
+		$("#limitByValue").attr('data',$(this).attr('data'));
+		listOrSearch();
+    });
+    $("#listAllUser").click(function(){
+		$(".box-body").css("height","auto");
+		$("#error").hide();
+    	$("#inputSearch").val("");
+    	listOrSearch();
+    });
+    listOrSearch();
 });
 </script>	
 <!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script> -->

@@ -42,7 +42,7 @@ public class AdminAPI {
 	
 	//#####################################User
 	@RequestMapping(value="/user/promote", method = RequestMethod.PUT)
-	public ResponseEntity<Map<String, Object>>  promoteUser(
+	public ResponseEntity<Map<String, Object>> promoteUser(
 			@RequestParam(value = "id") int id,
 			@RequestParam(value = "usertypeid", required = false, defaultValue = "2") int usertypeid){
 		
@@ -58,7 +58,7 @@ public class AdminAPI {
 	}
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Map<String, Object>>  deleteUser(@PathVariable("id") int id){		
+	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("id") int id){
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpStatus status = HttpStatus.OK;
 		if (userDao.changeUserEnable(id)) {	
@@ -71,7 +71,7 @@ public class AdminAPI {
 	}
 	
 	@RequestMapping(value="/users", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>>  listUser(
+	public ResponseEntity<Map<String, Object>> listUser(
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled){
@@ -90,7 +90,7 @@ public class AdminAPI {
 	}
 	
 	@RequestMapping(value="/users/search", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>>  searchUser(
+	public ResponseEntity<Map<String, Object>> searchUser(
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled,
@@ -113,7 +113,7 @@ public class AdminAPI {
 	
 	//#####################################Memo
 	@RequestMapping(value="/memos", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>>  listMemo( 
+	public ResponseEntity<Map<String, Object>> listMemo( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled){
@@ -131,9 +131,31 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
-	//#####################################Report
+	//#####################################Report	
+	@RequestMapping(value="/reports/search", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> searchReport(
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "isblocked", required = false,  defaultValue = "false") boolean isblocked,
+			@RequestParam(value = "keyword") String keyword,
+			@RequestParam(value = "column", required = false, defaultValue = "title") String column){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Report> reports=reportDao.searchReportByColumn(limit, page, isblocked, column, keyword);
+		HttpStatus status = HttpStatus.OK;
+		
+		if (!reports.isEmpty()) {	
+			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+			map.put("DATA",reports);
+		} else {
+			map.put("MESSAGE", "REPORT NOT FOUND.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
 	@RequestMapping(value="/reports", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>>  listReport( 
+	public ResponseEntity<Map<String, Object>> listReport( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "isblocked", required = false,  defaultValue = "false") boolean isblocked){
@@ -168,6 +190,7 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
+
 	@RequestMapping(value = "/report/block", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> blockMemo(@RequestBody Report report) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -182,9 +205,13 @@ public class AdminAPI {
 				memoDao.deleteMemo(report.getMemoid())){
 			map.put("MESSAGE", "REPORT HAS BEEN BLOCK.");
 			status = HttpStatus.OK;
+		}else{
+			map.put("MESSAGE", "REPORT HAS NOT BEEN BLOCK.");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
+	
 	
 	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getReportNotification() {
@@ -200,5 +227,4 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
-
 }

@@ -40,6 +40,36 @@ public class Report {
 	private String memotitle;
 	@Transient
 	private String memocontent;
+	@Transient
+	private int count;	
+	@Transient
+	private String domain;
+	@Transient
+	private String url;	
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public boolean isIsblock() {
+		return isblocked;
+	}
+	public void setIsblock(boolean isblocked) {
+		this.isblocked = isblocked;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getId() {
 		return id;
 	}
@@ -63,12 +93,6 @@ public class Report {
 	}
 	public void setReportdate(Date reportdate) {
 		this.reportdate = reportdate;
-	}
-	public boolean isIsblock() {
-		return isblocked;
-	}
-	public void setIsblock(boolean isblocked) {
-		this.isblocked = isblocked;
 	}
 	public String getMemo() {
 		return memo;

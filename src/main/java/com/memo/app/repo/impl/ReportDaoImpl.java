@@ -42,20 +42,20 @@ public class ReportDaoImpl implements ReportDao {
 		String sql="SELECT rp.id,rp.reporterid as reporter_id,us.username as reporter_name,"
 						+ "us.userimageurl as reporter_image,rp.description,date(rp.date),"
 						+ "rp.memoid as mem_id,m_u.title,m_u.content,m_u.ownermemo_id,m_u.ownermemo_name,"
-						+ "m_u.ownermemo_image,m_u.memo_date "
+						+ "m_u.ownermemo_image,m_u.memo_date, m_u.domain, m_u.url "
 					+ "FROM memo.tbreport rp "
 					+ "INNER JOIN public.tbluser us "
 					+ "ON rp.reporterid=us.userid "
 					+ "INNER JOIN(SELECT mm.id as mmid,mm.title as title,mm.content as content,"
 						+ "us.userid as ownermemo_id,"
-						+ "us.username as ownermemo_name,us.userimageurl as ownermemo_image"
-						+ ",date(mm.date) as memo_date "
+						+ "us.username as ownermemo_name,us.userimageurl as ownermemo_image, "
+						+ "date(mm.date) as memo_date, mm.domain, mm.url "
 						+ "FROM memo.tbmemo mm "
 						+ "INNER JOIN public.tbluser us "
 						+ "ON mm.userid=us.userid) as m_u "
 						+ "ON m_u.mmid=rp.memoid "
-						+ "WHERE rp.id=? and rp.isblocked=?";
-		Object[] obj=new Object[]{id,false};
+						+ "WHERE rp.id=?";
+		Object[] obj=new Object[]{id};
 		Report report=jdbcTemplate.queryForObject(sql,obj,new ReportDetailRowMapper());
 		return report;
 	}
@@ -79,13 +79,22 @@ public class ReportDaoImpl implements ReportDao {
 	@Override
 	public List<Report> getAllReport(int limit, int offset, boolean isblocked){
 		String sql="SELECT	memo.tbreport.ID, memo.tbmemo.title, "+
-				"memo.tbreport.description, memo.tbreport.DATE "+
+				"memo.tbreport.description, memo.tbreport.DATE,count(*) OVER(), memo.tbmemo.domain, memo.tbmemo.url "+
 				"FROM memo.tbmemo "+
 				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid "+
 				"where isblocked=? limit ? offset ?";
 		List<Report> reports=jdbcTemplate.query(sql, new Object[]{isblocked,limit,offset},new ReportListRowMapper());
 		return reports;
 	}
-	
 
+	@Override
+	public List<Report> searchReportByColumn(int limit, int offset, boolean isblocked, String column, String keyword) {
+		String sql="SELECT	memo.tbreport.ID, memo.tbmemo.title, "+
+				"memo.tbreport.description, memo.tbreport.DATE,count(*) OVER(), memo.tbmemo.domain, memo.tbmemo.url "+
+				"FROM memo.tbmemo "+
+				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid "+
+				"where isblocked=? and "+ column +" LIKE ? limit ? offset ?";
+		List<Report> reports=jdbcTemplate.query(sql, new Object[]{isblocked,"%"+keyword+"%",limit,offset},new ReportListRowMapper());
+		return reports;
+	}
 }

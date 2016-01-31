@@ -7,7 +7,6 @@
 	<title>${pageTitle }| Memo</title>
 	<%@ include file="_defaultCss.jsp"%>
 </head>
-<body>
 <%@ include file="_header.jsp"%>
 <%@ include file="_sideBarMenu.jsp"%>
 	<div class="search" style="margin: 10px 50px 25px 50px;">
@@ -57,7 +56,7 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<table id="tbl-user" class="table table-bordered table-striped table-hover" style="margin: 0px">
+						<table class="table table-bordered table-striped table-hover" style="margin: 0px">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -73,14 +72,14 @@
 							</tbody>
 						</table>
 						<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
-						<div class="alert alert-danger" style="text-align: center;margin: 15px;">
-							Users Not Found
-							<a href="#" id="listAllUser">List All User</a>
-						</div>
+							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
+								Users Not Found
+								<a href="#" id="listAllUser">List All Users</a>
+							</div>
 						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
 							<div class="form-group pull-right"> 
-								<input type="checkbox"  id="viewEnable" checked> View Enabled Users<br>
+								<input type="checkbox"  id="viewEnabled" checked> View Enabled Users<br>
 							</div>
 						</div>
 					</div>						
@@ -91,7 +90,6 @@
 </div>
 <%@ include file="_footer.jsp"%>
 <%@ include file="_defaultJS.jsp"%>
-<script src="${pageContext.request.contextPath}/resources/admin/js/jquery.bootpag.min.js"></script>
 <script>
 var totalrow = 0;
 function contructTable(data,ismemoenabled){
@@ -111,7 +109,7 @@ function contructTable(data,ismemoenabled){
 		"<tr class=clickable-row style=cursor:pointer "+
 		"data-href="+path+"/admin/user?id="+this.userid+">"+
 			"<td>"+this.userid+"</td>"+
-			"<td><img src="+imagepath+"/"+this.image+" class=img-avatar>"+
+			"<td><img src="+imagepath+this.image+" class=img-avatar>"+
 				this.username+"</td>"+
 			"<td>"+this.gender+"</td>"+
 			"<td>"+this.email+"</td>"+
@@ -127,12 +125,19 @@ function listContent(page){
 		url: path+"/api/admin/users"+
 			"?page="+page+
 			"&limit="+$("#limitByValue").attr('data')+
-			"&ismemoenabled="+$("#viewEnable").prop("checked"),
+			"&ismemoenabled="+$("#viewEnabled").prop("checked"),
 		async: false,
 		type: "get",
 		success: function (response) {	
 			totalrow = response['DATA'][0].count;
-			contructTable(response['DATA'],$("#viewEnable").prop("checked"));				
+			contructTable(response['DATA'],$("#viewEnabled").prop("checked"));				
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
+		    }
 		}
 	});		
 }
@@ -141,7 +146,7 @@ function searchUser(page){
 		url: path+"/api/admin/users/search"+
 				"?page="+page+
 				"&limit="+$("#limitByValue").attr('data')+
-				"&ismemoenabled="+$("#viewEnable").prop("checked")+
+				"&ismemoenabled="+$("#viewEnabled").prop("checked")+
 				"&keyword="+$("#inputSearch").val()+
 				"&column="+$("#searchByValue").attr('data'),
 		async: false,
@@ -150,7 +155,7 @@ function searchUser(page){
 			$(".box-body").css("height","auto");
 			$("#error").hide();
 			totalrow = response['DATA'][0].count;			
-			contructTable(response['DATA'],$("#viewEnable").prop("checked"));		
+			contructTable(response['DATA'],$("#viewEnabled").prop("checked"));		
 		},
 		statusCode: {
 	    	404: function() {
@@ -188,7 +193,7 @@ function listOrSearch(){
 		createPagination(1,totalrow,searchUser);			
 	}
 }
-function blockUser(row){
+function toggleUser(row){
 	if(confirm("Are you sure?")) {
 		$.ajax({
 			url: path+"/api/admin/user/"+row.attr('data'),
@@ -201,19 +206,15 @@ function blockUser(row){
 	}
 }
 $(document).ready(function($) {
-/* 	$("body").on("click",".clickable-row",function(){
-		window.document.location = $(this).data("href");
-	}); */
 	$("body").on("click",".btn-delete",function(){
-		blockUser($(this));
+		toggleUser($(this));
 	}); 
-    $("#viewEnable").click(function(){
+    $("#viewEnabled").click(function(){
     	listOrSearch();
     });
     $(".form-inline").submit(function(e){
     	e.preventDefault();
-    	searchUser(1);
-    	createPagination(1,totalrow, searchUser);
+    	listOrSearch();
     })
     $("#searchBy .dropdown-menu li a").click(function(){
 		$("#searchByValue").text($(this).text());
@@ -230,8 +231,7 @@ $(document).ready(function($) {
     	$("#inputSearch").val("");
     	listOrSearch();
     });
-	listContent(1);
-	createPagination(1,totalrow,listContent);
+    listOrSearch();
 });
 </script>
 </body>
