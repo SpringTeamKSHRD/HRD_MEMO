@@ -10,7 +10,7 @@ function deletememo(id){
 							url : "http://localhost:8080/HRD_MEMO/user/"+id,
 							success : function(data) {
 								swal("Deleted!", "Your memo file has been deleted.", "success");
-								listAllMemo();
+								getMemoNumber();
 							},
 							error : function(data) {
 								sweetAlert("Fail", "Fail with deleted memo!", "error");
@@ -96,16 +96,15 @@ $('select').on('contentChanged', function() {
     $(this).material_select();
   });
 function editProcess(id){
-	var ispublic;
+	var mypublic;
 	if($("#privacy").val()==0) 
-		ispublic=false;
+		mypublic=false;
 	else 
-		ispublic=true;
-	
+		mypublic=true;
 	json = {
 			title : $('.titlememo').val(),
 			content : $("#cont_memo").val(),
-			ispublic : ispublic,
+			ispublic : mypublic,
 			id : id
 		};
 	swal({   title: "Are you sure?",
@@ -121,7 +120,7 @@ function editProcess(id){
 					contentType: 'application/json',
 					success : function(data) {
 						swal("Success","Your memo has been updated.","success");
-					  listAllMemo();
+					  getMemoNumber();
 					},
 					error : function(data) {
 						alert("Unsuccess: " + data.MESSAGE);

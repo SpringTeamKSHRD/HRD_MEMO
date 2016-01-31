@@ -76,7 +76,7 @@
 		<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+				<div class="panel" style="border-radius:0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 				  <div class="panel-heading" style="background-color:#41BC37;">
 					<span><i class="fa fa-pencil-square fa-2x"></i><span>
 					<span class="panel-title">Change Password</span>
@@ -148,5 +148,10 @@
 		 	 }
 		  }
 	  </script>
+	  <style>
+	  	.form-control{
+	  		border-radius:0px;
+	  	}
+	  </style>
 </body>
 </html>
