@@ -1,53 +1,4 @@
-function listAllMemo(){
-	$.ajax({
-				type : "GET",
-				url : "http://localhost:8080/HRD_MEMO/user/list/"+$("#userid").val(),
-				dataType : 'json',
-				data : null,
-				success : function(data) {
-					displayData(data);
-				},
-				error : function(data) {
-					sweetAlert("Opp...", "No memo!", "error");
-				}
-			});
-}
-function displayData(data) {
-	var contents = "<table class='bordered responsive-table'>" +
-					"<thead style='color:white; background:#009688;'>" +
-						"<tr>" +
-							"<th>No.</th>" +
-							"<th>Title</th>" +
-							"<th>Domain</th>" +
-							"<th>Status</th>" +
-							"<th>Date</th>" +
-							"<th style='text-align:center;'>Action</th>" +
-						" </tr>" +
-					"</thead>" +
-					"<tbody>";
-	for (var i = 0; i < data.DATA.length; i++) {
-		 contents+="<tr>" +
-			 		"<td>"+data.DATA[i].id+"</td>" +
-			 		"<td>"+generateText(data.DATA[i].title)+"</td>" +
-			 		"<td>"+generateText(data.DATA[i].domain)+"</td>";
-			 		if(data.DATA[i].ispublic===false){
-			 			contents+="<td>Private</td>";
-			 		}else if(data.DATA[i].ispublic===true){
-			 			contents+="<td>Public</td>";
-			 		}
-			 		contents+="<td>"+data.DATA[i].date+"</td>" +
-			 		"<td style='text-align:center;'>" +
-			 		"<a class='btn waves-effect waves-purple' onclick=getViewMemo("+data.DATA[i].id+") style='background:#fff; color:green; padding:0px 10px 10px 10px;'><i class='small material-icons'>" +
-			 		"visibility</i></a>" +
-			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-green' onclick=toEdit("+data.DATA[i].id+") style='background:#fff; color:black; padding:0px 10px 10px 10px;'><i class='small material-icons'>mode_edit</i></a>" +
-			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-red' onclick=deletememo("+data.DATA[i].id+") style='background:#fff; color:red; padding:0px 10px 10px 10px;'><i class='small material-icons'>delete</i></a></td>" +
-		 		" </tr>";
-	}			
-	contents += " </tbody></table>";
-	$("#listmemo").html(contents);
-}
-listAllMemo();
-	function deletememo(id){
+function deletememo(id){
 		swal({   title: "Are you sure?",
 				 text: "You will not be able to recover this memo file!",
 				 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",
@@ -59,7 +10,7 @@ listAllMemo();
 							url : "http://localhost:8080/HRD_MEMO/user/"+id,
 							success : function(data) {
 								swal("Deleted!", "Your memo file has been deleted.", "success");
-								listAllMemo();
+								getMemoNumber();
 							},
 							error : function(data) {
 								sweetAlert("Fail", "Fail with deleted memo!", "error");
@@ -145,16 +96,15 @@ $('select').on('contentChanged', function() {
     $(this).material_select();
   });
 function editProcess(id){
-	var ispublic;
+	var mypublic;
 	if($("#privacy").val()==0) 
-		ispublic=false;
+		mypublic=false;
 	else 
-		ispublic=true;
-	
+		mypublic=true;
 	json = {
 			title : $('.titlememo').val(),
 			content : $("#cont_memo").val(),
-			ispublic : ispublic,
+			ispublic : mypublic,
 			id : id
 		};
 	swal({   title: "Are you sure?",
@@ -170,7 +120,7 @@ function editProcess(id){
 					contentType: 'application/json',
 					success : function(data) {
 						swal("Success","Your memo has been updated.","success");
-					  listAllMemo();
+					  getMemoNumber();
 					},
 					error : function(data) {
 						alert("Unsuccess: " + data.MESSAGE);

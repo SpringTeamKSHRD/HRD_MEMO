@@ -378,11 +378,11 @@ public class MemoController {
 	}
 
 	// user get owner memo
-	@RequestMapping(value = "/list/{userid}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> listUserMemo(@PathVariable("userid") int userid) {
+	@RequestMapping(value = "/getallmemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> listUserMemo(@RequestBody MemoSearch memo) {
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		memos = (ArrayList<Memo>) memoService.listMemo(userid);
+		memos = (ArrayList<Memo>) memoService.listMemo(memo);
 		if (memos.isEmpty()) {
 			map.put("MESSAGE", "MEMOS ARE NOT FOUND.");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());

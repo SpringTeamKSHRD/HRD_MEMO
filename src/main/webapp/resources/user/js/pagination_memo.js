@@ -1,4 +1,62 @@
- var numDisplay=0;
+function listAllMemo(page,recNum){
+	getSearchValue();
+	var json={
+			userid:parseInt($("#userid").val()),
+			limit:recNum,
+			page:page,
+			search:search,
+			column:$("#searchopt").val()
+	};
+	$.ajax({
+				type : "POST",
+				url : "http://localhost:8080/HRD_MEMO/user/getallmemo",
+				dataType : 'json',
+				contentType: 'application/json',
+				data : JSON.stringify(json),
+				success : function(data) {
+					displayData(data);
+				},
+				error : function(data) {
+					sweetAlert("Opp...", "No memo!", "error");
+				}
+			});
+} 
+function displayData(data) {
+	var contents = "<table class='bordered responsive-table'>" +
+					"<thead style='color:white; background:#009688;'>" +
+						"<tr>" +
+							"<th>No.</th>" +
+							"<th>Title</th>" +
+							"<th>Domain</th>" +
+							"<th>Status</th>" +
+							"<th>Date</th>" +
+							"<th style='text-align:center;'>Action</th>" +
+						" </tr>" +
+					"</thead>" +
+					"<tbody>";
+	for (var i = 0; i < data.DATA.length; i++) {
+		 contents+="<tr>" +
+			 		"<td>"+data.DATA[i].id+"</td>" +
+			 		"<td>"+generateText(data.DATA[i].title)+"</td>" +
+			 		"<td>"+generateText(data.DATA[i].domain)+"</td>";
+			 		if(data.DATA[i].ispublic===false){
+			 			contents+="<td>Private</td>";
+			 		}else if(data.DATA[i].ispublic===true){
+			 			contents+="<td>Public</td>";
+			 		}
+			 		contents+="<td>"+data.DATA[i].date+"</td>" +
+			 		"<td style='text-align:center;'>" +
+			 		"<a class='btn waves-effect waves-purple' onclick=getViewMemo("+data.DATA[i].id+") style='background:#fff; color:black; padding:0px 10px 10px 10px;'><i class='small material-icons'>" +
+			 		"visibility</i></a>" +
+			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-green' onclick=toEdit("+data.DATA[i].id+") style='background:#fff; color:blue; padding:0px 10px 10px 10px;'><i class='small material-icons'>mode_edit</i></a>" +
+			 		"&nbsp;&nbsp;<a class='btn waves-effect waves-red' onclick=deletememo("+data.DATA[i].id+") style='background:#fff; color:red; padding:0px 10px 10px 10px;'><i class='small material-icons'>delete</i></a></td>" +
+		 		" </tr>";
+	}			
+	contents += " </tbody></table>";
+	$("#listmemo").html(contents);
+}
+
+var numDisplay=0;
   var paginNum=0;
   var currentPNum=0;
   var currentPagin=1;
@@ -33,7 +91,7 @@
   $(document).on('click.waves-effect', '.waves-effect .pbtn', function (e) {
 		var page = parseInt($(this).text());
 		addAviteClass($(this));
-		listAllMessage(page,recordNum);
+		listAllMemo(page,recordNum);
  });
   $(document).on('click.waves-effect', '.waves-effect #btnprev', function (e) {
 		prevPage(lowPage-1);
@@ -48,7 +106,7 @@
 	  if(click> pageNum){
 		  alert("noth do to do1");
 	  }else if(click > higthPage){
-		  //listAllMessage(click,recordNum);
+		  listAllMemo(click,recordNum);
 			  currentPagin++;
 		  if(currentPagin * trueDisplay <= pageNum){
 			  higthPage=currentPagin * trueDisplay;
@@ -118,7 +176,7 @@
 		  	  currentPagin--;
 		  	  higthPage=currentPagin * trueDisplay;
 		  	  lowPage=higthPage - trueDisplay + 1;
-		      //listAllMessage(higthPage-trueDisplay+1,recordNum);
+		      listAllMemo(higthPage-trueDisplay+1,recordNum);
 		    //  alert(lowPage+"  "+higthPage);
 			  for(var i=lowPage;i<=higthPage;i++){
 				  if(i==lowPage){
@@ -137,10 +195,11 @@
 	  obj.parent().addClass('active');
   }
   function getMemoNumber(){
+	  getSearchValue();
 	  json = {
 				userid:$("#userid").val(),
-				column:"",
-				search:""
+				column:$("#searchopt").val(),
+				search:search
 			};
 	  $.ajax({
 			type : "POST",
@@ -149,14 +208,22 @@
 			contentType: 'application/json',
 			success : function(data) {
 				getNumPagination(data.DATA,$("#displayrow").val(),4);
+				listAllMemo(1, recordNum);
+				$("#rowwrapper").fadeIn(500);
 			},
 			error : function(data) {
-				alert("Unsuccess: " + data.MESSAGE);
+				$("#listmemo").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
+				  		"<div class='card-panel' style='background-color:rgba(255, 0, 0, 0.26);'>" +
+				  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
+				  		"</div></div></div>");
+			  $("#pagination").html("");
+			  $("#rowwrapper").css("display","none");
 			}
 		});  
   }
   getMemoNumber();
   var search="";
+  var column="";
   $("#searchopt").change(function(){
 	  if($("#searchopt").val()==="title"){
 		  $("#search").focus();
@@ -180,6 +247,7 @@
 		  $("#opt4").fadeOut(1,function(){
 			  $("#opt2").fadeIn(200);
 		  });
+		  getMemoNumber();
 	  }else if($("#searchopt").val()==="domain"){
 		  $("#search1").focus();
 		  $("#opt1").fadeOut(1,function(){
@@ -206,7 +274,7 @@
 		  $("#opt2").fadeOut(200);
 		  $("#opt3").fadeOut(200);
 		  $("#opt4").fadeOut(200);
-		
+		  getMemoNumber();
 	  }
   });
   $('.datepicker').pickadate({
@@ -217,37 +285,41 @@
 		 onSet: function (ele) {
 			   if(ele.select){
 			          this.close();
-			          getAllNumberMessage();
+			          getMemoNumber();
 			   }
 			}
 	 });
   function getSearchValue(){
 	  if($("#searchopt").val()==="title"){
 		  search=$("#search").val();
+		  column="title";
 	  }else if($("#searchopt").val()==="ispublic"){
-		  search=$("#ispublic").va();
+		  search=$("#ispublic").val();
+		  column="ispublic";
 	  }else if($("#searchopt").val()==="domain"){
 		  search=$("#search1").val();
+		  column="domain";
 	  }else if($("#searchopt").val()==="date"){
-		  search=$("#sdate").val();
+		  search=dateFormat($("#sdate").val());
+		  column="date";
 	  }else{
 		  search="";
+		  column="";
 	  } 
   }
   $("#btntest").click(function(){
-	  if($("#searchopt").val()==="title"){
-		  search=$("#search").val();
-	  }else if($("#searchopt").val()==="ispublic"){
-		  search=$("#ispublic").val();
-	  }else if($("#searchopt").val()==="domain"){
-		  search=$("#search1").val();
-	  }else if($("#searchopt").val()==="date"){
-		  search=$("#sdate").val();
-	  }else{
-		  search="";
-	  } 
-	  alert(search);
   });
   $("#displayrow").change(function(){
 	  getMemoNumber();
   });
+  function dateFormat(date){
+	  var format=date.split("-");
+	  return format[2]+"-"+format[1]+"-"+format[0];
+  }
+  function handleKeyPress(){
+			  getMemoNumber(); 
+	} 
+  $("#ispublic").change(function(){
+	  getMemoNumber();
+  });
+  

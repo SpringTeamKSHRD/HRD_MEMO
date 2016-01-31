@@ -90,7 +90,7 @@
 		    </div>
 	  </div>
 	  <!--Search Panel  -->
-	  <div class="row">
+	  <div class="row" id="optionwrapper">
 		  	<div class="input-field col s12 m4 l4">
 			    <select id="searchopt">
 			      <option value="" selected>Search Option</option>
@@ -105,7 +105,7 @@
 			    <div class="nav-wrapper">
 			      <form>
 			        <div class="input-field">
-			          <input id="search" type="search" required>
+			          <input id="search" type="search" onkeyup="handleKeyPress()">
 			          <label for="search"><i class="material-icons">search</i></label>
 			          <i class="material-icons">close</i>
 			        </div>
@@ -124,7 +124,7 @@
 				    <div class="nav-wrapper">
 				      <form>
 				        <div class="input-field">
-				          <input id="search1" type="search" required>
+				          <input id="search1" type="search" onkeyup="handleKeyPress()">
 				          <label for="search1"><i class="material-icons">search</i></label>
 				          <i class="material-icons">close</i>
 				        </div>
@@ -135,7 +135,7 @@
 		  <div class="input-field col s12 m4 l4" id="opt4" style="display: none;">
 			  <input type="date" class="datepicker" id="sdate" placeholder="DATE">
 		  </div>
-		  <div class="col s12 m4 l4 right">
+		  <div class="col s12 m4 l4 right" id="rowwrapper">
 		  		 <div class="file-field input-field">
 				      <div class="btn" id="btntest">
 				        <span>Row</span>

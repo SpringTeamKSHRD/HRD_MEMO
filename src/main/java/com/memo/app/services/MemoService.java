@@ -7,7 +7,7 @@ import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoSearch;
 
 public interface MemoService {
-	public List<Memo> listMemo(int userid);
+	public List<Memo> listMemo(MemoSearch memo);
 	public List<Memo> listMemo(int limit, int page, boolean isenabled);	
 	public boolean insertMemo(Memo memo);
 	public boolean updateMemo(Memo memo);

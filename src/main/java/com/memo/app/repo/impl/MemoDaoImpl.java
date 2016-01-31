@@ -30,11 +30,25 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	
 	@Override
-	public List<Memo> listMemo(int userid) {
-		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
-					+"FROM memo.tbmemo WHERE userid=? AND isenable=true ORDER BY id DESC";
+	public List<Memo> listMemo(MemoSearch memo) {
 		try{
-			return jdbcTemplate.query(sql,new Object[]{userid},new UserMemoRowMapper());
+			if(memo.getColumn().equals("")){
+				String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
+							+"FROM memo.tbmemo WHERE userid=? AND isenable=true ORDER BY id DESC LIMIT ? OFFSET ?";
+				    int begin=memo.getPage()*memo.getLimit()-memo.getLimit(); 
+					return jdbcTemplate.query(sql,new Object[]{memo.getUserid(),memo.getLimit(),begin},
+							new UserMemoRowMapper());
+			}else{
+				String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
+						+"FROM memo.tbmemo WHERE userid=? "
+						+ "AND isenable=true "
+						+ "AND Lower("+memo.getColumn()+"::TEXT) LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?";
+				int begin=memo.getPage()*memo.getLimit()-memo.getLimit(); 
+				return jdbcTemplate.query(sql,new Object[]{memo.getUserid()
+														   ,memo.getSearch().toLowerCase()+"%"
+														   ,memo.getLimit(),begin}
+						,new UserMemoRowMapper());
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -297,8 +311,8 @@ public class MemoDaoImpl implements MemoDao{
 			String sql="SELECT count(userid) FROM memo.tbmemo WHERE userid=? AND isenable=true";
 			return jdbcTemplate.queryForObject(sql,new Object[]{memo.getUserid()},Integer.class);
 		}else{
-			String sql="SELECT count(userid) FROM memo.tbmemo WHERE userid=? AND isenable=true AND "+memo.getColumn()+" LIKE ?";
-			return jdbcTemplate.queryForObject(sql,new Object[]{memo.getUserid(),memo.getSearch()+"%"},Integer.class);
+			String sql="SELECT count(userid) FROM memo.tbmemo WHERE userid=? AND isenable=true AND Lower("+memo.getColumn()+"::TEXT) LIKE ?";
+			return jdbcTemplate.queryForObject(sql,new Object[]{memo.getUserid(),memo.getSearch().toLowerCase()+"%"},Integer.class);
 		}
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
