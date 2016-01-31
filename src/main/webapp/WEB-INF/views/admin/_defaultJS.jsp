@@ -1,5 +1,4 @@
    <!-- REQUIRED JS SCRIPTS -->
-
     <!-- jQuery 2.1.4 -->
     <script	src='${pageContext.request.contextPath}/resources/js/alertify.min.js'></script>
     <script src="${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js"></script>
@@ -9,23 +8,22 @@
     <script src="${pageContext.request.contextPath}/resources/admin/js/app.min.js"></script>    
 	<script>
 		var path="${pageContext.request.contextPath}";
-		var imagepath=path+"/resources/admin/imgs";
+		var imagepath=path+"/resources/user/image";
 		/* ADD ACTIVE CLASS TO MENU */
-		var url = $(location).attr('href');;
-		url = url.split("/");
+		var url = $(location).attr('href').split("/");
 		var newUrl=url[5];
 		/* if(typeof variable_here === 'undefined'){
 			$('ul.sidebar-menu li:first-child').addClass('active');
-		}else  */if(newUrl=="users"){
-			$('ul.sidebar-menu li:nth-last-child(3)').addClass('active');
-		}else if(newUrl=="memos"){
-			$('ul.sidebar-menu li:nth-last-child(2)').addClass('active');
-		}else if(newUrl=="reports"){
-			$('ul.sidebar-menu li:nth-last-child(1)').addClass('active');
-		}else{
+		}else  */
+		if(newUrl==undefined){
 			$('ul.sidebar-menu li:nth-last-child(4)').addClass('active');
-		}
-		
+		}else if(newUrl.search("users") > -1){
+			$('ul.sidebar-menu li:nth-last-child(3)').addClass('active');
+		}else if(newUrl.search("memos") > -1){
+			$('ul.sidebar-menu li:nth-last-child(2)').addClass('active');
+		}else if(newUrl.search("reports") > -1){
+			$('ul.sidebar-menu li:nth-last-child(1)').addClass('active');
+		}		
 		/* sideBarMenu and header NOTIFICATION*/
 		/*	var result = ${dashboard};
 	  		if(result.unreportedlist==0){
@@ -67,8 +65,7 @@
 		}
 		listnotification();
 		/* notification socket*/
-	     var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
-	     var websocket=new WebSocket(url);	     
+		 var websocket=new WebSocket("ws://localhost:8080/HRD_MEMO/memo/usernotification");	     
 	     websocket.onmessage=function(message){	    	  
 	    	 if(message.data==="report"){  
 	    		 alertify.success("New Report");

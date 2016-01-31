@@ -167,7 +167,6 @@
 <%@ include file="_defaultJS.jsp"%>
 <script>
 var data = {};
-var websocket=new WebSocket("ws://localhost:8080/HRD_MEMO/memo/usernotification");
 if(ParamToJson().isblocked){
 	$("#checkEnable").prop( "checked", true);
 }

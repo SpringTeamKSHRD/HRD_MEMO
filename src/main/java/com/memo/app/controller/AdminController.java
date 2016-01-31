@@ -39,8 +39,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/users", method = RequestMethod.GET)
-	public String users(ModelMap m) {
-		
+	public String users(ModelMap m) {		
 		this.pageDescription(m, "Users", "List All Users");
 		return "admin/users";
 	}
@@ -64,9 +63,10 @@ public class AdminController {
 		
 		this.pageDescription(m, "Report", "List All Reports");
 		m.addAttribute("listReport", reportDao.getAllReport(limit, page, isblocked));
-		return "admin/report";
+		return "admin/reports";
 	}
 	
+	//for testing only
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String report(ModelMap m){		
 		return "admin/testapi";

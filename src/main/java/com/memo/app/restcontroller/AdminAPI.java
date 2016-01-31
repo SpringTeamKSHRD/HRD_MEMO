@@ -110,6 +110,7 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
+	
 	//#####################################Memo
 	@RequestMapping(value="/memos", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>>  listMemo( 
@@ -129,6 +130,7 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
+	
 	//#####################################Report
 	@RequestMapping(value="/reports", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>>  listReport( 

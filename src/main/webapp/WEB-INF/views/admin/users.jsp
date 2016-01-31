@@ -66,18 +66,21 @@
 									<th>Email</th>
 									<th>Type</th>
 									<th>Date</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody id="content">
 							</tbody>
 						</table>
-						<div id="error" style="text-align: center;margin: 15px;display:none;">
+						<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
+						<div class="alert alert-danger" style="text-align: center;margin: 15px;">
 							Users Not Found
 							<a href="#" id="listAllUser">List All User</a>
 						</div>
+						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
 							<div class="form-group pull-right"> 
-								<input type="checkbox"  id="viewEnable" checked> View User Enabled<br>
+								<input type="checkbox"  id="viewEnable" checked> View Enabled Users<br>
 							</div>
 						</div>
 					</div>						
@@ -91,19 +94,31 @@
 <script src="${pageContext.request.contextPath}/resources/admin/js/jquery.bootpag.min.js"></script>
 <script>
 var totalrow = 0;
-function contructTable(data){
+function contructTable(data,ismemoenabled){
 	$("#content").html("");
+	var btn,text,icon="";
+	if(ismemoenabled){		
+		btn="btn-danger";
+		text="Disable";
+		icon="fa-ban";
+	}else{
+		btn="btn-primary";
+		text="Enable";
+		icon="fa-unlock";		
+	}
 	$.each(data, function() {
 		$("#content").append(
 		"<tr class=clickable-row style=cursor:pointer "+
 		"data-href="+path+"/admin/user?id="+this.userid+">"+
 			"<td>"+this.userid+"</td>"+
 			"<td><img src="+imagepath+"/"+this.image+" class=img-avatar>"+
-			this.username+"</td>"+
+				this.username+"</td>"+
 			"<td>"+this.gender+"</td>"+
 			"<td>"+this.email+"</td>"+
 			"<td>"+this.type+"</td>"+
 			"<td>"+this.registerdate+"</td>"+
+			"<td><div class='btn-group'><button type='button' class='btn btn-block "+ btn +" btn-xs btn-delete'"+
+				"data="+this.userid+">"+text+" <i class='fa "+icon+"'></i></button></div></td>"+
 		"</tr>");
 	});	
 }
@@ -117,7 +132,7 @@ function listContent(page){
 		type: "get",
 		success: function (response) {	
 			totalrow = response['DATA'][0].count;
-			contructTable(response['DATA']);				
+			contructTable(response['DATA'],$("#viewEnable").prop("checked"));				
 		}
 	});		
 }
@@ -135,13 +150,13 @@ function searchUser(page){
 			$(".box-body").css("height","auto");
 			$("#error").hide();
 			totalrow = response['DATA'][0].count;			
-			contructTable(response['DATA']);		
+			contructTable(response['DATA'],$("#viewEnable").prop("checked"));		
 		},
 		statusCode: {
 	    	404: function() {
 	    		$("#content").html("");
-				$(".box-body").css("height","160px");
-				$("#error").show();
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
 		    }
 		}
 	});	
@@ -173,10 +188,25 @@ function listOrSearch(){
 		createPagination(1,totalrow,searchUser);			
 	}
 }
+function blockUser(row){
+	if(confirm("Are you sure?")) {
+		$.ajax({
+			url: path+"/api/admin/user/"+row.attr('data'),
+			type: "delete",
+			async: false,
+			success: function (response) {
+				row.parents('tr').remove();		
+			}
+		});
+	}
+}
 $(document).ready(function($) {
-	$("body").on("click",".clickable-row",function(){
+/* 	$("body").on("click",".clickable-row",function(){
 		window.document.location = $(this).data("href");
-	});
+	}); */
+	$("body").on("click",".btn-delete",function(){
+		blockUser($(this));
+	}); 
     $("#viewEnable").click(function(){
     	listOrSearch();
     });
