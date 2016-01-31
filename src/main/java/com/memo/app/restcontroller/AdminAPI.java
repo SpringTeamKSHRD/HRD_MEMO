@@ -199,9 +199,9 @@ public class AdminAPI {
 		List<Message> listMessage = new ArrayList<Message>();
 		listMessage.add(new Message(0,report.getOwnermemoid(),1,false,null,null,report.getMemoid()));
 		listMessage.add(new Message(0,report.getReporterid(),2,false,null,null,report.getMemoid()));
-		
+
 		if(		messageDao.saveMessage(listMessage) &&
-				reportDao.blockMemoReport(report.getId()) &&
+				reportDao.updateReportIsBlockedWithMemoid(true, report.getMemoid()) &&
 				memoDao.deleteMemo(report.getMemoid())){
 			map.put("MESSAGE", "REPORT HAS BEEN BLOCK.");
 			status = HttpStatus.OK;

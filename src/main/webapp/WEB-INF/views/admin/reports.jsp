@@ -170,7 +170,7 @@
 <script>
 var data = {};
 var totalrow = 0;
-function contructTable(data,isblocked){
+function contructTable(data){
 	$("#content").html("");
 	$.each(data, function() {
 		$("#content").append(
@@ -196,7 +196,7 @@ function listContent(page){
 		type: "get",
 		success: function (response) {	
 			totalrow = response['DATA'][0].count;
-			contructTable(response['DATA'],$("#viewBlocked").prop("checked"));				
+			contructTable(response['DATA']);				
 		},
 		statusCode: {
 	    	404: function() {
@@ -221,7 +221,7 @@ function searchReport(page){
 			$(".box-body").css("height","auto");
 			$("#error").hide();
 			totalrow = response['DATA'][0].count;			
-			contructTable(response['DATA'],$("#viewBlocked").prop("checked"));		
+			contructTable(response['DATA']);		
 		},
 		statusCode: {
 	    	404: function() {
@@ -302,13 +302,15 @@ function blockReport(){
     		success: function (response) {
     			listnotification();
     			websocket.send("response");
-    			$("tr[data-href='"+data.id+"']").remove();
     			$('#myModal').modal('hide');
+    			listOrSearchReports();
     		}
     	});	    	
 	}
 }
-function listOrSearch(){
+function listOrSearchReports(){
+	$(".box-body").css("height","auto");
+	$("#error").hide();
 	if($("#inputSearch").val()==""){
 		listContent(1);
 		createPagination(1,totalrow,listContent);	
@@ -318,6 +320,7 @@ function listOrSearch(){
 	}
 }
 jQuery(document).ready(function($) {
+ 	if(ParamToJson().id)	showDetail(ParamToJson().id);
 	$("body").on("click",".btn-detail",function(){
     	showDetail($(this).data("href"));
     });
@@ -329,10 +332,12 @@ jQuery(document).ready(function($) {
     });
     $(".form-inline").submit(function(e){
     	e.preventDefault();
-    	listOrSearch();
+    	listOrSearchReports();
     })
     $("#viewBlocked").click(function(){
-    	listOrSearch();
+    	if($("#viewBlocked").prop("checked"))	$('#btnblock').hide();
+    	else									$('#btnblock').show();
+    	listOrSearchReports();
     });
     $("#searchBy .dropdown-menu li a").click(function(){
 		$("#searchByValue").text($(this).text());
@@ -341,15 +346,17 @@ jQuery(document).ready(function($) {
     $("#limitBy .dropdown-menu li a").click(function(){
 		$("#limitByValue").text($(this).text());
 		$("#limitByValue").attr('data',$(this).attr('data'));
-		listOrSearch();
+		listOrSearchReports();
     });
     $("#listAllUser").click(function(){
-		$(".box-body").css("height","auto");
-		$("#error").hide();
     	$("#inputSearch").val("");
-    	listOrSearch();
+    	listOrSearchReports();
     });
-    listOrSearch();
+    $("body").on("click", ".menu li a", function(e){
+    	e.preventDefault();
+    	showDetail($(this).data("href"));
+    })
+    listOrSearchReports();
 });
 </script>	
 <!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script> -->

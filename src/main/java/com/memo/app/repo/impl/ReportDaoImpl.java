@@ -82,7 +82,7 @@ public class ReportDaoImpl implements ReportDao {
 				"memo.tbreport.description, memo.tbreport.DATE,count(*) OVER(), memo.tbmemo.domain, memo.tbmemo.url "+
 				"FROM memo.tbmemo "+
 				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid "+
-				"where isblocked=? limit ? offset ?";
+				"where isblocked=? order by memo.tbreport.ID desc limit ? offset ?";
 		List<Report> reports=jdbcTemplate.query(sql, new Object[]{isblocked,limit,offset},new ReportListRowMapper());
 		return reports;
 	}
@@ -93,8 +93,20 @@ public class ReportDaoImpl implements ReportDao {
 				"memo.tbreport.description, memo.tbreport.DATE,count(*) OVER(), memo.tbmemo.domain, memo.tbmemo.url "+
 				"FROM memo.tbmemo "+
 				"INNER JOIN memo.tbreport ON memo.tbmemo.ID = memo.tbreport.memoid "+
-				"where isblocked=? and "+ column +" LIKE ? limit ? offset ?";
+				"where isblocked=? and "+ column +" LIKE ? order by memo.tbreport.ID desc limit ? offset ?";
 		List<Report> reports=jdbcTemplate.query(sql, new Object[]{isblocked,"%"+keyword+"%",limit,offset},new ReportListRowMapper());
 		return reports;
+	}
+
+	@Override
+	public boolean updateReportFieldWithField(String columnUpdate, String columnLogic, Object keyUpdate, Object keyLogic){
+		String sql = "UPDATE memo.tbreport SET "+ columnUpdate +"=? " + "WHERE "+columnLogic+" =?;";
+		Object[] obj = new Object[] { keyUpdate, keyLogic};
+		try {
+			if (jdbcTemplate.update(sql, obj) > 0)	return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

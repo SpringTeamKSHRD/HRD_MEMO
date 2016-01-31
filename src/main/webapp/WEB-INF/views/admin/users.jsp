@@ -184,7 +184,9 @@ function createPagination(page,totalrow,listFunction){
 		listFunction(page);
 	});
 }
-function listOrSearch(){
+function listOrSearchUsers(){
+	$(".box-body").css("height","auto");
+	$("#error").hide();
 	if($("#inputSearch").val()==""){
 		listContent(1);
 		createPagination(1,totalrow,listContent);	
@@ -210,11 +212,11 @@ $(document).ready(function($) {
 		toggleUser($(this));
 	}); 
     $("#viewEnabled").click(function(){
-    	listOrSearch();
+    	listOrSearchUsers();
     });
     $(".form-inline").submit(function(e){
     	e.preventDefault();
-    	listOrSearch();
+    	listOrSearchUsers();
     })
     $("#searchBy .dropdown-menu li a").click(function(){
 		$("#searchByValue").text($(this).text());
@@ -223,15 +225,13 @@ $(document).ready(function($) {
     $("#limitBy .dropdown-menu li a").click(function(){
 		$("#limitByValue").text($(this).text());
 		$("#limitByValue").attr('data',$(this).attr('data'));
-		listOrSearch();
+		listOrSearchUsers();
     });
     $("#listAllUser").click(function(){
-		$(".box-body").css("height","auto");
-		$("#error").hide();
     	$("#inputSearch").val("");
-    	listOrSearch();
+    	listOrSearchUsers();
     });
-    listOrSearch();
+    listOrSearchUsers();
 });
 </script>
 </body>

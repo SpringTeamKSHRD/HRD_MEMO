@@ -30,6 +30,7 @@
 		if(message.data==="report"){  
 			alertify.success("New Report");
 			listnotification();
+			if(totalrow<10) listOrSearchReports();
 		}
 	}
 	/* clear number on notification */
@@ -49,15 +50,16 @@
 	}
 	/* list report notification from api*/
 	function listnotification(){
+		$(".menu").html("");
+		$("#notifcationcount").html("");
 		$.ajax({
 			url: path+"/api/admin/notification",
 			type: "get",
 			success: function (response) {
-				$("#notifcationcount").html(response['DATA'].length);
-				$(".menu").html("");
+				$("#notifcationcount").html(response['DATA'].length);				
 				jQuery.each(response['DATA'], function() {
 					$(".menu").append(
-						"<li><a href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
+						"<li><a data-href="+this.id+" href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
 						"<img src='/HRD_MEMO/resources/admin/imgs/"+this.reporterimage+"' alt='User Image'"+
 						"style ='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+
 						this.reportername+" reports a memo.<span class='label pull-right' style='color:#444444;'>"+this.reportdate+"</span>"+

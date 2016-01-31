@@ -76,4 +76,9 @@ public class ReportServiceImpl implements ReportService {
 		return null;
 	}
 
+	@Override
+	public boolean updateReportIsBlockedWithMemoid(boolean isBlocked, int memoid) {
+		return reportDao.updateReportFieldWithField("isblocked", "memoid", isBlocked, memoid);
+	}
+
 }
