@@ -102,7 +102,7 @@
 					</div>
 					<div class="input-field col s9"
 						style="text-align: right; padding: 0px; margin: 0px;">
-						<button class="btn waves-effect" type="button" id='btn-save-memo' onclick="saveMemo()"><i class="material-icons">input</i></button>
+						<button class="btn waves-effect" type="button" id='btn-save-memo' style="padding: 0px 10px;" onclick="saveMemo()"><i class="material-icons">input</i></button>
 					</div>
 				</div>
 			</form>
