@@ -1,3 +1,4 @@
+var domain=window.location.origin+"/HRD_MEMO";
 function listAllMessage(page,limit){
 	var uid=parseInt($("#userid").val());
 	var date="";
@@ -8,7 +9,7 @@ function listAllMessage(page,limit){
 	}
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/oldmessage/"+uid+"/"+page+"/"+limit+"/"+date,
+		url : domain+"/user/oldmessage/"+uid+"/"+page+"/"+limit+"/"+date,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
 		},
@@ -21,7 +22,7 @@ function listAllMessage(page,limit){
 	});
 }
 function goToPage() {
-	window.location.href="http://localhost:8080/HRD_MEMO/user/userreport";
+	window.location.href=domain+"/user/userreport";
 }
 function extractData(data){
 	var str="<table class='bordered highlight responsive-table' style='margin-top:10px;'>" +
@@ -47,7 +48,7 @@ function extractData(data){
 function getBlockedMemo(id){
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/"+id,
+		url : domain+"/user/"+id,
 		success : function(data) {
 		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
 		       $("#website").text("Website: "+data.DATA.domain);
@@ -68,7 +69,7 @@ function generateTitle(title){
 		 return title;
 	 }
 }
-var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+var url="ws://"+location.hostname+":"+location.port+"/"+${pageContext.request.contextPath}"/memo/usernotification";
   var websocket=new WebSocket(url);
   websocket.onopen=function(message){
   }
@@ -85,7 +86,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		var uid=parseInt($("#userid").val());
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
+			url : domain+"/user/changereport/"+uid,
 			success : function(data) {
 			},
 			error : function(data) {
@@ -103,7 +104,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
 		}
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/HRD_MEMO/user/allnumbermessage/"+uid+"/"+date,
+			url : domain+"/user/allnumbermessage/"+uid+"/"+date,
 			success : function(data) {
 				getNumPagination(data.DATA,$("#displayrow").val(),4);
 				listAllMessage(1,recordNum);

@@ -1,3 +1,4 @@
+ var domain=window.location.origin+"/HRD_MEMO";
 function listAllMemo(page,recNum){
 	getSearchValue();
 	var json={
@@ -9,7 +10,7 @@ function listAllMemo(page,recNum){
 	};
 	$.ajax({
 				type : "POST",
-				url : "http://localhost:8080/HRD_MEMO/user/getallmemo",
+				url : domain+"/user/getallmemo",
 				dataType : 'json',
 				contentType: 'application/json',
 				data : JSON.stringify(json),
@@ -203,7 +204,7 @@ var numDisplay=0;
 			};
 	  $.ajax({
 			type : "POST",
-			url : "http://localhost:8080/HRD_MEMO/user/getmemonumber",
+			url : domain+"/user/getmemonumber",
 			data : JSON.stringify(json),
 			contentType: 'application/json',
 			success : function(data) {

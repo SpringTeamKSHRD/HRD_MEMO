@@ -1,9 +1,9 @@
-
+var domain=window.location.origin+"/HRD_MEMO";
 function listNewMessage(page,limit){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/newmessage/"+uid+"/"+page+"/"+limit,
+		url : domain+"/user/newmessage/"+uid+"/"+page+"/"+limit,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
 		       //updateMessageStatus();
@@ -36,7 +36,7 @@ function extractData(data){
 function getBlockedMemo(id){
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/"+id,
+		url : domain+"/user/"+id,
 		success : function(data) {
 		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
 		       $("#website").text("Website: "+data.DATA.domain);
@@ -61,7 +61,7 @@ function updateMessageStatus(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/changereport/"+uid,
+		url : domain+"/user/changereport/"+uid,
 		success : function(data){
 		},
 		error : function(data) {
@@ -72,7 +72,7 @@ function getNumberMesage(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
+		url : domain+"/user/numbermessage/"+uid,
 		success : function(data) {
 			 $("#dsprowwrapper").css("display","block");
 			getNumPagination(data.DATA,$("#displayrow").val(),5);
@@ -102,7 +102,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
  	 }
   }
   function goToPage() {
-		window.location.href="http://localhost:8080/HRD_MEMO/user/getallmessage";
+		window.location.href=domain+"/user/getallmessage";
 	}
 //pagination script
   var numDisplay=0;
