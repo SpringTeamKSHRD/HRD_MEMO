@@ -176,7 +176,7 @@ function contructTable(data){
 		$("#content").append(
 		"<tr data-href="+this.id+">"+
 			"<td>"+this.id+"</td>"+
-			"<td style='padding:0px'><a href='"+this.url+"' class='modal-link' target='_blank'>"+this.memotitle+"</a></td>"+
+			"<td style='padding:0px'><a href='"+this.url+"' class='table-link' target='_blank'>"+this.memotitle+"</a></td>"+
 			"<td>"+this.domain+"</td>"+
 			"<td>"+this.description+"</td>"+
 			"<td>"+this.reportdate+"</td>"+

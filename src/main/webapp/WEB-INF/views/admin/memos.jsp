@@ -109,21 +109,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<div class="box-body" style="padding:0px;">
 			<div class="form-group">
 				<div class="col-sm-4" style="padding-left:0px">
-					<label for="id">Report ID</label>
-					<input type="number" class="form-control" id="reportid" readonly>
-				</div>
-				<div class="col-sm-8" style="padding:0px">
-					<label for="date">Report Date</label>
-					<input type="text" class="form-control" id="reportdate" readonly>
-				</div>
-				<div class="clearfix "></div>
-			</div>		
-			<div class="form-group">
-				<label for="description">Report Description</label>
-				<input type="text" class="form-control" id="reportdescription" readonly>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-4" style="padding-left:0px">
 					<label for="id">Memo ID</label>
 					<input type="number" class="form-control" id="memoid" readonly>
 				</div>
@@ -149,13 +134,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<textarea class="form-control" style="height:150px;max-height:200px;resize:none;" id="memocontent" readonly></textarea>
 			</div>
 			<div class="form-group" style="margin: 0px;">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<label for="owner">Owner</label>		
 					<a id="ownerlink" href="" class="modal-link" target="_blank"></a>
 				</div>			
-				<div class="col-sm-6">
-					<label for="reportby">Report By</label>		
-					<a id="reportbylink" href="" class="modal-link" target="_blank"></a>
+				<div class="col-sm-4">
+					<label for="isenable">Enable</label>
+					<input type="text" class="form-control" id="isenable" readonly>		
+				</div>
+				<div class="col-sm-4">
+					<label for="ispublic">Public</label>		
+					<input type="text" class="form-control" id="ispublic" readonly>		
 				</div>
 				<div class="clearfix "></div>
 			</div>
@@ -163,7 +152,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		</form>
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-danger" id="btnblock">Block</button>
         <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -180,13 +168,13 @@ function contructTable(data){
 		$("#content").append(
 			"<tr data-href="+this.id+">"+
 				"<td>"+this.id+"</td>"+
-				"<td style='padding:0px'><a href='"+path+"/admin/users?id="+this.userid+"' class='modal-link' target='_blank'>"+this.username+
+				"<td style='padding:0px'><a href='"+path+"/admin/users?id="+this.userid+"' class='table-link' target='_blank'>"+this.username+
 					"<img src="+imagepath+this.userimage+" class=img-avatar></a></td>"+
-				"<td style='padding:0px'><a href='"+this.url+"' class='modal-link' target='_blank'>"+this.title+"</a></td>"+
+				"<td style='padding:0px'><a href='"+this.url+"' class='table-link' target='_blank'>"+this.title+"</a></td>"+
 				"<td>"+this.domain+"</td>"+
 				"<td>"+this.date+"</td>"+
-				"<td><div class='btn-group'><button type='button' class='btn btn-block btn-primary btn-xs btn-delete'"+
-					"data="+this.userid+">Detail <i class='fa fa-info'></i></button></div></td>"+
+				"<td><div class='btn-group'><button type='button' class='btn btn-block btn-primary btn-xs btn-detail'"+
+					"data-href="+this.id+">Detail <i class='fa fa-info'></i></button></div></td>"+
 			"</tr>");
 	});	
 }
@@ -218,7 +206,16 @@ function showDetail(id){
 		type: "get",
 		success: function (response) {			
 			data = validateNullInJson(response['DATA']);
-			
+			$('#memoid').val(data.id);
+			$("#memodate").val(data.date);
+			$("#memodomain").val(data.domain);
+			$("#memotitle").html(data.title);
+			$("#memotitle").attr('href', data.url);
+			$("#memocontent").val(data.content);
+			$("#ownerlink").attr('href', path+"/admin/users?id="+data.userid);
+			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.userimage+"' class=img-avatar>"+data.username);
+			$("#isenable").val(data.isenable);
+			$("#ispublic").val(data.ispublic);
 			$('#myModal').modal('show');
 		}
 	});    	

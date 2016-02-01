@@ -155,7 +155,6 @@
 		</form>
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-danger" id="btnblock">Block</button>
         <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>

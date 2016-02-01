@@ -27,7 +27,7 @@
 	    .pagination{
 	    	margin: 0px !important;
 	    }
-	    .modal-link{
+	    .table-link, .modal-link{
 	    	display: block;
 	    	width: 100%;
 	    	height: 34px;
@@ -35,9 +35,11 @@
 	    	font-size: 14px;
 	    	border: 1px solid rgba(0, 0, 0, 0);
 	    }
-	    .modal-link:hover{
-	    	background-color: #eee;
+	    .table-link:hover, .modal-link:hover{	    	
 	    	border: 1px solid;
+	    }
+	    .modal-link{
+	    	background-color: #eee;
 	    }
 	    .clickable-row{
 	     	cursor: pointer;
