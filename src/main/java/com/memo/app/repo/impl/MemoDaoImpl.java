@@ -8,14 +8,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.memo.app.RowMapper.AdminMemoDetailRowMapper;
-import com.memo.app.RowMapper.AdminMemoListRowMapper;
-import com.memo.app.RowMapper.HistoryMemoRowMapper;
-import com.memo.app.RowMapper.UserMemoRowMapper;
 import com.memo.app.entities.HistoryMemo;
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoSearch;
 import com.memo.app.repo.MemoDao;
+import com.memo.app.rowmapper.AdminMemoDetailRowMapper;
+import com.memo.app.rowmapper.AdminMemoListRowMapper;
+import com.memo.app.rowmapper.HistoryMemoRowMapper;
+import com.memo.app.rowmapper.UserMemoRowMapper;
 
 @Repository
 public class MemoDaoImpl implements MemoDao{

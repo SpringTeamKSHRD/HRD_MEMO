@@ -1,4 +1,4 @@
-package com.memo.app.RowMapper;
+package com.memo.app.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.memo.app.RowMapper.ReportDetailRowMapper;
-import com.memo.app.RowMapper.ReportListRowMapper;
-import com.memo.app.RowMapper.ReportNotificRowMapper;
 import com.memo.app.entities.Report;
 import com.memo.app.repo.ReportDao;
+import com.memo.app.rowmapper.ReportDetailRowMapper;
+import com.memo.app.rowmapper.ReportListRowMapper;
+import com.memo.app.rowmapper.ReportNotificRowMapper;
 
 @Repository
 public class ReportDaoImpl implements ReportDao {

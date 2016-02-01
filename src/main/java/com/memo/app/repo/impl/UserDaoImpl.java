@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.memo.app.RowMapper.UserRowMapper;
 import com.memo.app.entities.User;
 import com.memo.app.repo.UserDao;
+import com.memo.app.rowmapper.UserRowMapper;
 
 @Repository
 public class UserDaoImpl implements UserDao {
