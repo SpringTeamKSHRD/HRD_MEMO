@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,9 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
-	    request.getSession().setAttribute("USER",userDao.getUserDialInfo((SecurityContextHolder.getContext().getAuthentication().getName())));
+		HttpSession session = request.getSession();
+		//session.setMaxInactiveInterval(10);
+		session.setAttribute("USER",userDao.getUserDialInfo((SecurityContextHolder.getContext().getAuthentication().getName())));
 	    
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		String url = "";

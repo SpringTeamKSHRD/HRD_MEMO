@@ -29,6 +29,7 @@ public class WebInit implements WebApplicationInitializer {
 
 		dispatcherServlet.addMapping("/");
 		dispatcherServlet.setLoadOnStartup(1);
+		container.addListener(new SessionConfig());
 		
 	}
 	

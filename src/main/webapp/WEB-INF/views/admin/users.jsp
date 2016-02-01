@@ -167,7 +167,7 @@ var data = {};
 var totalrow = 0;
 function showDetail(id){
 	$.ajax({
-		url: path+"/api/admin/memo/"+id,
+		url: path+"/api/admin/user/"+id,
 		type: "get",
 		success: function (response) {			
 			data = validateNullInJson(response['DATA']);
