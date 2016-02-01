@@ -93,7 +93,7 @@
 		  		<div class="col s12 m6 l6">
 		  		 <div class="file-field input-field">
 				      <div class="btn">
-				        <span>Display Row</span>
+				        <span>Row</span>
 				      </div>
 				      <div class="file-path-wrapper" style="padding: 0px; margin: 0px;">
 						<p class="range-field" style="margin: 25px 0px 0px 0px; padding: 0px;">
@@ -165,6 +165,9 @@
     <!-- ./Container --> 
 	<!-- User Dashboard Script -->
 	<!-- User Report -->
+	<script type="text/javascript">
+	 var path="${pageContext.request.contextPath}";
+	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_report.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>

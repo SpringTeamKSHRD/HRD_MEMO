@@ -1,4 +1,4 @@
-var domain=window.location.origin+"/HRD_MEMO";
+
 /* This function is for creating memo */
 function saveMemo(){	
 	var data=$("#cont_memo").val();
@@ -24,7 +24,7 @@ function saveMemo(){
 		
 		$.ajax({
 			type : "POST",
-			url : domain + "/user/",
+			url : path+ "/user/",
 			data : JSON.stringify(json),
 			contentType: 'application/json',
 			success : function(data) {

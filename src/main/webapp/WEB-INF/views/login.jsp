@@ -13,6 +13,8 @@
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
 	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.js'></script>
+	<script
+	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
 <title>Login</title>
 <style>
 * {
@@ -83,7 +85,9 @@
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript">var path = '${pageContext.request.contextPath}/'</script>
+	<script type="text/javascript">var path = '${pageContext.request.contextPath}/';
+	 Cookies.remove('MEMO');
+	</script>
 	<script type="text/javascript"
 		src='${pageContext.request.contextPath}/resources/js/login.js'>	
 	</script>

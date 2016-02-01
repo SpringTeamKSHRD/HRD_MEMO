@@ -1,5 +1,3 @@
-var domain=window.location.origin+"/HRD_MEMO";
-
 function checkOldPwd(){
 	var op=$("#old_pwd").val();
 	if(op==""){
@@ -37,7 +35,7 @@ function updateUserPwd(){
 	
 	$.ajax({
 		type : "POST",
-		url : domain + "/user/updatepassword",
+		url : path+ "/user/updatepassword",
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {

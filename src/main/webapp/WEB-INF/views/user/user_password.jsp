@@ -110,6 +110,9 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	 var path="${pageContext.request.contextPath}";
+	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_password.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
@@ -120,7 +123,7 @@
 				var uid=parseInt($("#userid").val());
 				$.ajax({
 					type : "GET",
-					url : "http://localhost:8080/HRD_MEMO/user/numbermessage/"+uid,
+					url : path+"/user/numbermessage/"+uid,
 					success : function(data) {
 						if(data.DATA>0){
 							$(".numnotify").css('display',"inline");
@@ -134,7 +137,7 @@
 				});
 			}
 		  getNumberMesage();
-		  var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+		  var url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
 		  var websocket=new WebSocket(url);
 		  websocket.onopen=function(message){
 		  }
