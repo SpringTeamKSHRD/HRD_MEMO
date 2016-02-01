@@ -96,15 +96,89 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Memo Detail</h4>
+      </div>
+      <div class="modal-body">
+	    <form role="form" id="formshow">
+		<div class="box-body" style="padding:0px;">
+			<div class="form-group">
+				<div class="col-sm-4" style="padding-left:0px">
+					<label for="id">Report ID</label>
+					<input type="number" class="form-control" id="reportid" readonly>
+				</div>
+				<div class="col-sm-8" style="padding:0px">
+					<label for="date">Report Date</label>
+					<input type="text" class="form-control" id="reportdate" readonly>
+				</div>
+				<div class="clearfix "></div>
+			</div>		
+			<div class="form-group">
+				<label for="description">Report Description</label>
+				<input type="text" class="form-control" id="reportdescription" readonly>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4" style="padding-left:0px">
+					<label for="id">Memo ID</label>
+					<input type="number" class="form-control" id="memoid" readonly>
+				</div>
+				<div class="col-sm-8" style="padding:0px">
+					<label for="title">Written Date</label>
+					<input type="text" class="form-control" id="memodate" readonly>				
+				</div>
+				<div class="clearfix "></div>
+			</div>		
+			<div class="form-group">
+				<div class="col-sm-4" style="padding-left:0px">
+					<label for="memodomain">Domain Website</label>		
+					<input type="text" class="form-control" id="memodomain" readonly>
+				</div>
+				<div class="col-sm-8" style="padding:0px">
+					<label for="memotitle">Memo Title</label>		
+					<a id="memotitle" href="" class="modal-link" target="_blank"></a>
+				</div>
+				<div class="clearfix "></div>
+			</div>
+			<div class="form-group">
+				<label for="id">Memo Content</label>
+				<textarea class="form-control" style="height:150px;max-height:200px;resize:none;" id="memocontent" readonly></textarea>
+			</div>
+			<div class="form-group" style="margin: 0px;">
+				<div class="col-sm-6">
+					<label for="owner">Owner</label>		
+					<a id="ownerlink" href="" class="modal-link" target="_blank"></a>
+				</div>			
+				<div class="col-sm-6">
+					<label for="reportby">Report By</label>		
+					<a id="reportbylink" href="" class="modal-link" target="_blank"></a>
+				</div>
+				<div class="clearfix "></div>
+			</div>
+		</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-danger" id="btnblock">Block</button>
+        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>	
 <%@ include file="_footer.jsp" %>
 <%@ include file="_defaultJS.jsp" %>
 <script>
+var data = {};
 var totalrow = 0;
 function contructTable(data){
 	$("#content").html("");
 	$.each(data, function() {
 		$("#content").append(
-			"<tr class=clickable-row data-href="+this.id+">"+
+			"<tr data-href="+this.id+">"+
 				"<td>"+this.id+"</td>"+
 				"<td style='padding:0px'><a href='"+path+"/admin/users?id="+this.userid+"' class='modal-link' target='_blank'>"+this.username+
 					"<img src="+imagepath+this.userimage+" class=img-avatar></a></td>"+
@@ -138,7 +212,19 @@ function listContent(page){
 		}
 	});		
 }
+function showDetail(id){
+	$.ajax({
+		url: path+"/api/admin/memo/"+id,
+		type: "get",
+		success: function (response) {			
+			data = validateNullInJson(response['DATA']);
+			
+			$('#myModal').modal('show');
+		}
+	});    	
+}
 function searchMemo(page){
+	if(ParamToJson().id)	showDetail(ParamToJson().id);
 	$.ajax({
 		url: path+"/api/admin/memos/search"+
 				"?page="+page+
@@ -194,9 +280,10 @@ function listOrSearchMemos(){
 	}
 }
 jQuery(document).ready(function($) {
-/*     $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
-    }); */
+	if(ParamToJson().id)	showDetail(ParamToJson().id);
+	$("body").on("click",".btn-detail",function(){
+    	showDetail($(this).data("href"));
+    });
     $("#viewEnabled").click(function(){
     	listOrSearchMemos();
     });

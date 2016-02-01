@@ -69,4 +69,13 @@
 			}
 		});
 	}
+	/* replace null value with "N/A" */
+	function validateNullInJson(data){
+		for (var x in data) {
+	        if (data[x]==="null" || data[x]===null || data[x]==="" || typeof data[x] === "undefined") {
+	            data[x] = "N/A";
+	        }	    
+		}
+		return data;
+	}
 </script>

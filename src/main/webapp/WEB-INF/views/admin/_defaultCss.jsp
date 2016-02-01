@@ -28,13 +28,16 @@
 	    	margin: 0px !important;
 	    }
 	    .modal-link{
-	    	border: 1px solid;
 	    	display: block;
 	    	width: 100%;
 	    	height: 34px;
 	    	padding: 6px 12px;
 	    	font-size: 14px;
+	    	border: 1px solid rgba(0, 0, 0, 0);
+	    }
+	    .modal-link:hover{
 	    	background-color: #eee;
+	    	border: 1px solid;
 	    }
 	    .clickable-row{
 	     	cursor: pointer;

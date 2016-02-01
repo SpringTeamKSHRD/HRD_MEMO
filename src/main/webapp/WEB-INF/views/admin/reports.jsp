@@ -265,21 +265,13 @@ function showDetail(id){
 			$("#memotitle").html(data.memotitle);
 			$("#memotitle").attr('href', data.url);
 			$("#memocontent").val(data.memocontent);
-			$("#reportbylink").attr('href', path+"/admin/user/"+data.reporterid);
+			$("#reportbylink").attr('href', path+"/admin/users?id="+data.reporterid);
 			$("#reportbylink").html("<img id='ownerimg' src='"+imagepath+data.reporterimage+"' class=img-avatar>"+data.reportername);
-			$("#ownerlink").attr('href', path+"/admin/user/"+data.ownermemoid);
+			$("#ownerlink").attr('href', path+"/admin/users?id="+data.ownermemoid);
 			$("#ownerlink").html("<img id='ownerimg' src='"+imagepath+data.ownermemoimage+"' class=img-avatar>"+data.ownermemoname);
 			$('#myModal').modal('show');
 		}
 	});    	
-}
-function validateNullInJson(data){
-	for (var x in data) {
-        if (data[x]==="null" || data[x]===null || data[x]==="" || typeof data[x] === "undefined") {
-            data[x] = "N/A";
-        }	    
-	}
-	return data;
 }
 function clearModal(){
 	$("#reportbylink").attr('href', '');
