@@ -350,11 +350,7 @@
 		};
 		$.ajax({
 			type : "POST",
-<<<<<<< HEAD
 			url : '${pageContext.request.contextPath}'+"/plugin/report",
-=======
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/report",
->>>>>>> origin/master
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
