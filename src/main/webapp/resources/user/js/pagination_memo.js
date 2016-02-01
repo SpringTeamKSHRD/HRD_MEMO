@@ -1,4 +1,4 @@
- var domain=window.location.origin+"/HRD_MEMO";
+
 function listAllMemo(page,recNum){
 	getSearchValue();
 	var json={
