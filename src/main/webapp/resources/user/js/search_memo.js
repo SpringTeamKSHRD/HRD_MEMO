@@ -1,4 +1,4 @@
-var domain=window.location.origin+"/HRD_MEMO";
+    var domain=window.location.origin+"/HRD_MEMO";
 
 	var s_title="<div class='row'>"
 					+"<div class='input-field col s12'>"
@@ -26,7 +26,6 @@ var domain=window.location.origin+"/HRD_MEMO";
 					+"<input type='date' id='e_date' onchange='filterByDate()'>"
 				+"</div>"
 				+"</div>";
-	
 	/* to change layout for option searching */
 	$("#searching").change(function(){
 		$("#searcharea").html("");

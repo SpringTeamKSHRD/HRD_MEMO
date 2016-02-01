@@ -8,7 +8,9 @@
 		var wrapper=document.getElementById("hrd_memo_pess");
 	//create iframe
 		var ifrm_hrdmemo = document.createElement("IFRAME");
-		ifrm_hrdmemo.setAttribute("src", "http://192.168.178.186:8080/HRD_MEMO/hrdmemoplugin?title="+memo_title+"&url="+location.href+"&domain="+location.hostname);
+
+		ifrm_hrdmemo.setAttribute("src", "http://192.168.178.123:8080/HRD_MEMO/hrdmemoplugin?title="+memo_title+"&url="+location.href+"&domain="+location.hostname);
+
 	//ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 		ifrm_hrdmemo.setAttribute('class','my-memo-class');
 		ifrm_hrdmemo.setAttribute('id','IFRAME_MEMO_PESS');

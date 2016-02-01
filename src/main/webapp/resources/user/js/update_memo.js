@@ -1,5 +1,4 @@
 var domain=window.location.origin+"/HRD_MEMO";
-
 function updateMemo(id){
 	var data=$("#cont_memo").val();
 	var ispublic;

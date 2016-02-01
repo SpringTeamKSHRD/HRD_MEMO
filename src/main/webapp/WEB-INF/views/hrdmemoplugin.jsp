@@ -6,20 +6,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
-	href='http://192.168.178.186:8080/HRD_MEMO/resources/materialize/css/materialize.css' />
-	<link rel='stylesheet' href='http://192.168.178.186:8080/HRD_MEMO/resources/css/icondisplayer.css'/>
+
+	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.css' />
+	<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/icondisplayer.css'/>
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
 	rel='stylesheet'>
 <script
-	src='http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js'></script>
+	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 <script
-	src='http://192.168.178.186:8080/HRD_MEMO/resources/materialize/js/materialize.js'></script>
+	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.js'></script>
 <script
-	src='http://192.168.178.186:8080/HRD_MEMO/resources/js/alertify.min.js'></script>
+	src='${pageContext.request.contextPath}/resources/js/alertify.min.js'></script>
 <script
-	src='http://192.168.178.186:8080/HRD_MEMO/resources/js/lib/jquery.slimscroll.min.js'></script>
+	src='${pageContext.request.contextPath}/resources/js/lib/jquery.slimscroll.min.js'></script>
 <script
-	src='http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/jquery-cookie.js'></script>
+	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
+
 </head>
 <body style="margin: 0px; padding: 0px;">
 	<div class='row' style="margin: 0px; padding:0px;" id="frm-loginreg-wrapper">
@@ -119,10 +121,11 @@
 	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; overflow-y:auto; overflow-x:hidden;">
 	</div>
 	</div>
-	<script type="text/javascript" src="http://192.168.178.186:8080/HRD_MEMO/resources/js/iframeResizer.contentWindow.min.js" defer></script>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/iframeResizer.contentWindow.min.js" defer></script>
+
 	<!-- my script -->
 	<script type="text/javascript">
-	
 	//my variable
 		var retrievedObject="";
 	 var desc_panel=document.getElementById("mydespanel");
@@ -178,7 +181,9 @@
 		memo_img_wraper.setAttribute("title",title);
 		var user_memo_img=document.createElement("img");
 		user_memo_img.setAttribute('class','user-memo-img');
-		user_memo_img.setAttribute('src','http://192.168.178.186:8080/HRD_MEMO/resources/user/image/'+image);
+
+		user_memo_img.setAttribute('src','${pageContext.request.contextPath}'+'/resources/user/image/'+image);
+
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
@@ -278,7 +283,8 @@
 		json.userid=retrievedObject.userid;
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/plugingetmemoowner",
+			url : '${pageContext.request.contextPath}'+"/plugin/plugingetmemoowner",
+
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -297,7 +303,7 @@
 		json.userid=retrievedObject.userid;
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/plugingetmemopublic",
+			url : '${pageContext.request.contextPath}'+"/plugin/plugingetmemopublic",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -344,7 +350,11 @@
 		};
 		$.ajax({
 			type : "POST",
+<<<<<<< HEAD
+			url : '${pageContext.request.contextPath}'+"/plugin/report",
+=======
 			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/report",
+>>>>>>> origin/master
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -378,7 +388,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.186:8080/HRD_MEMO/plugin/savememo",
+				url : '${pageContext.request.contextPath}'+"/plugin/savememo",
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
@@ -416,7 +426,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.186:8080/HRD_MEMO/plugin/pluginlogin",
+				url : '${pageContext.request.contextPath}'+"/plugin/pluginlogin",
 		        data:json,
 				success : function(data){
 					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
@@ -460,7 +470,8 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : "http://192.168.178.186:8080/HRD_MEMO/plugin/signup",
+				url : '${pageContext.request.contextPath}'+"/plugin/signup",
+
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
@@ -498,7 +509,7 @@
 		initailizePage();
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/toedit/"+id,
+			url : '${pageContext.request.contextPath}'+"/plugin/toedit/"+id,
 			success : function(data) {
 				$("#descmemo").val(data.DATA.content);
 				var p=data.DATA.ispublic;
@@ -531,7 +542,7 @@
 		};
 		$.ajax({
 			type : "POST",
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/editmemocontent",
+			url : '${pageContext.request.contextPath}'+"/plugin/editmemocontent",
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -588,7 +599,7 @@
 		initailizePage();
 		$.ajax({
 			type : "GET",
-			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/"+id,
+			url : '${pageContext.request.contextPath}'+"/plugin/"+id,
 			success : function(data) {
 				 pluginGetMemoOwner();
 			},
@@ -619,7 +630,8 @@
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
 	//Live life
-	 var hrd_notify_url="ws://192.168.178.186:8080/HRD_MEMO/memo/usernotification";
+	 var hrd_notify_url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){
 	 }
@@ -661,7 +673,7 @@
 	</script>
 </body>
 <link rel='stylesheet'
-	href='http://192.168.178.186:8080/HRD_MEMO/resources/css/alertify.core.css' />
+	href='${pageContext.request.contextPath}/resources/css/alertify.core.css' />
 <link rel='stylesheet'
-	href='http://192.168.178.186:8080/HRD_MEMO/resources/css/alertify.default.css' />
+	href='${pageContext.request.contextPath}/resources/css/alertify.default.css' />
 </html>
