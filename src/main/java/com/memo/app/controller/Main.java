@@ -55,6 +55,6 @@ public class Main {
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testMemo() {
-		return "admin/test_memo";
+		return "test_memo";
 	}
 }

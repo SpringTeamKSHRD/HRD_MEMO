@@ -41,7 +41,7 @@ function saveMemo(){
 	
 }
 $("#listmemo").click(function(){
-	window.location.href="http://localhost:8080/HRD_MEMO/user/listallmemo";
+	window.location.href=path+"/user/listallmemo";
 });
 function clearMemo(){
 	$("#cont_memo").val("");
