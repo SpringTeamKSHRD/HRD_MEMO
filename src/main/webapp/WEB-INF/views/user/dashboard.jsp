@@ -83,7 +83,7 @@
 	    <div class="col s12">
 		      <ul class="tabs">
 		        <li class="tab col s6"><a class='active' style="cursor: pointer;" >Write New Memo</a></li>
-		        <li class="tab col s6"><a id="listmemo" style="cursor: pointer;">All Memo</a></li>
+		        <li class="tab col s6"><a id="listmemo" style="cursor: pointer;" href="${pageContext.request.contextPath}/user/listallmemo">All Memo</a></li>
 		      </ul>
 		    </div>
 	  </div>

@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css'
+
 	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.css' />
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/icondisplayer.css'/>
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons'
@@ -20,6 +21,7 @@
 	src='${pageContext.request.contextPath}/resources/js/lib/jquery.slimscroll.min.js'></script>
 <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
+
 </head>
 <body style="margin: 0px; padding: 0px;">
 	<div class='row' style="margin: 0px; padding:0px;" id="frm-loginreg-wrapper">
@@ -119,7 +121,9 @@
 	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; overflow-y:auto; overflow-x:hidden;">
 	</div>
 	</div>
+
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/iframeResizer.contentWindow.min.js" defer></script>
+
 	<!-- my script -->
 	<script type="text/javascript">
 	//my variable
@@ -177,7 +181,9 @@
 		memo_img_wraper.setAttribute("title",title);
 		var user_memo_img=document.createElement("img");
 		user_memo_img.setAttribute('class','user-memo-img');
+
 		user_memo_img.setAttribute('src','${pageContext.request.contextPath}'+'/resources/user/image/'+image);
+
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
@@ -278,6 +284,7 @@
 		$.ajax({
 			type : "POST",
 			url : '${pageContext.request.contextPath}'+"/plugin/plugingetmemoowner",
+
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -343,7 +350,11 @@
 		};
 		$.ajax({
 			type : "POST",
+<<<<<<< HEAD
 			url : '${pageContext.request.contextPath}'+"/plugin/report",
+=======
+			url : "http://192.168.178.186:8080/HRD_MEMO/plugin/report",
+>>>>>>> origin/master
 			contentType: 'application/json;charset=utf-8',
 	        data:JSON.stringify(json),
 			success : function(data) {
@@ -460,6 +471,7 @@
 			$.ajax({
 				type : "POST",
 				url : '${pageContext.request.contextPath}'+"/plugin/signup",
+
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
@@ -619,6 +631,7 @@
     });
 	//Live life
 	 var hrd_notify_url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){
 	 }
