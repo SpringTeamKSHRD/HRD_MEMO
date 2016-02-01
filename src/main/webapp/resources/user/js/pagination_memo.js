@@ -10,7 +10,7 @@ function listAllMemo(page,recNum){
 	};
 	$.ajax({
 				type : "POST",
-				url : domain+"/user/getallmemo",
+				url : path+"/user/getallmemo",
 				dataType : 'json',
 				contentType: 'application/json',
 				data : JSON.stringify(json),
@@ -204,7 +204,7 @@ var numDisplay=0;
 			};
 	  $.ajax({
 			type : "POST",
-			url : domain+"/user/getmemonumber",
+			url : path+"/user/getmemonumber",
 			data : JSON.stringify(json),
 			contentType: 'application/json',
 			success : function(data) {

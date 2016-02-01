@@ -1,4 +1,3 @@
-var domain=window.location.origin+"/HRD_MEMO";
 function deletememo(id){
 		swal({   title: "Are you sure?",
 				 text: "You will not be able to recover this memo file!",
@@ -8,7 +7,7 @@ function deletememo(id){
 				 function(){					 
 					 $.ajax({
 							type : "DELETE",
-							url : domain+"/user/"+id,
+							url : path+"/user/"+id,
 							success : function(data) {
 								swal("Deleted!", "Your memo file has been deleted.", "success");
 								getMemoNumber();
@@ -22,7 +21,7 @@ function deletememo(id){
 function getViewMemo(id){
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/"+id,
+		url : path+"/user/"+id,
 		success : function(data) {
 		       $("#memo_title").text("Title: "+generateText(data.DATA.title));
 		       $("#website").text("Website: "+data.DATA.domain);
@@ -36,7 +35,7 @@ function getViewMemo(id){
 	});
 }
 $("#writememo").click(function(){
-	window.location.href=domain+"/user/user";
+	window.location.href=path+"/user/user";
 });
 function generateText(text){
 	if(text.length>30){
@@ -116,7 +115,7 @@ function editProcess(id){
 		 function(){					 
 			 $.ajax({
 					type : "PUT",
-					url : domain+"/user/"+id,
+					url : path+"/user/"+id,
 					data : JSON.stringify(json),
 					contentType: 'application/json',
 					success : function(data) {

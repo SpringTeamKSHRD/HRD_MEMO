@@ -1,4 +1,4 @@
-var domain=window.location.origin+"/HRD_MEMO";
+
 var img="";
 
 function updateUser(){
@@ -19,7 +19,7 @@ function uploadImage() {
     data1 = new FormData($(this)[0]);
     data1.append('file', $('#image')[0].files[0]);
 	$.ajax({
-		url : domain+"/user/uploadimage",
+		url : path+"/user/uploadimage",
 		type : "POST",
 		cache: false,
 		contentType: false,
@@ -45,7 +45,7 @@ function updateUserInfo(){
 
 	$.ajax({
 		type : "POST",
-		url : domain + "/user/updateuser",
+		url : path + "/user/updateuser",
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {

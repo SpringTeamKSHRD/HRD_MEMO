@@ -1,9 +1,8 @@
-var domain=window.location.origin+"/HRD_MEMO";
 function listNewMessage(page,limit){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/newmessage/"+uid+"/"+page+"/"+limit,
+		url : path+"/user/newmessage/"+uid+"/"+page+"/"+limit,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
 		       //updateMessageStatus();
@@ -36,7 +35,7 @@ function extractData(data){
 function getBlockedMemo(id){
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/"+id,
+		url : path+"/user/"+id,
 		success : function(data) {
 		       $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
 		       $("#website").text("Website: "+data.DATA.domain);
@@ -61,7 +60,7 @@ function updateMessageStatus(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/changereport/"+uid,
+		url : path+"/user/changereport/"+uid,
 		success : function(data){
 		},
 		error : function(data) {
@@ -72,7 +71,7 @@ function getNumberMesage(){
 	var uid=parseInt($("#userid").val());
 	$.ajax({
 		type : "GET",
-		url : domain+"/user/numbermessage/"+uid,
+		url : path+"/user/numbermessage/"+uid,
 		success : function(data) {
 			 $("#dsprowwrapper").css("display","block");
 			getNumPagination(data.DATA,$("#displayrow").val(),5);
@@ -89,7 +88,7 @@ function getNumberMesage(){
 	});
 }
 getNumberMesage();
-var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+var url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
   var websocket=new WebSocket(url);
   websocket.onopen=function(message){
   }
@@ -102,7 +101,7 @@ var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
  	 }
   }
   function goToPage() {
-		window.location.href=domain+"/user/getallmessage";
+		window.location.href=path+"/user/getallmessage";
 	}
 //pagination script
   var numDisplay=0;

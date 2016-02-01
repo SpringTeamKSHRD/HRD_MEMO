@@ -168,7 +168,11 @@
     <!-- ./Container --> 
 	<!-- User Dashboard Script -->
 	<!-- User Report -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/getallmessage.js"></script>
+	<script type="text/javascript">
+	     var path="${pageContext.request.contextPath}";
+	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/getallmessage.js">
+	</script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/sweetalert-master/dist/sweetalert.min.js"></script>
   </body>

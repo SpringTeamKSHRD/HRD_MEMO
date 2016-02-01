@@ -31,22 +31,22 @@
       <div class="collapsible-header active"><i class="material-icons">lock_open</i>Login</div>
       <div class="collapsible-body">
       	 <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="loginemail" type="email" class="validate" onkeypress="LoginhandleKeyPress(event);">
-          <label for="loginemail">Emmail</label>
-        </div>
-        <div class="input-field col s12" style="margin: 0px;">
-          <i class="material-icons prefix">vpn_key</i>
-          <input id="loginpassword" type="password" class="validate" onkeypress="LoginhandleKeyPress(event);">
-          <label for="loginpassword">Password</label>
-        </div>
-        <div class="input-field col s12"
-					style="text-align: right; margin: 0px;">
-					<button class="btn waves-effect" type="button" id='btn-login-memo' onclick="loginMemo();">
-					<i class="material-icons">
-					done</i></button>
-		</div>
+	        <div class="input-field col s12">
+	          <i class="material-icons prefix">account_circle</i>
+	          <input id="loginemail" type="email" class="validate" onkeypress="LoginhandleKeyPress(event);">
+	          <label for="loginemail">Emmail</label>
+	        </div>
+	        <div class="input-field col s12" style="margin: 0px;">
+	          <i class="material-icons prefix">vpn_key</i>
+	          <input id="loginpassword" type="password" class="validate" onkeypress="LoginhandleKeyPress(event);">
+	          <label for="loginpassword">Password</label>
+	        </div>
+	        <div class="input-field col s12"
+						style="text-align: right; margin: 0px;">
+						<button class="btn waves-effect" type="button" id='btn-login-memo' onclick="loginMemo();">
+						<i class="material-icons">
+						done</i></button>
+			</div>
       </div>
       </div>
     </li>
@@ -104,7 +104,10 @@
 					</div>
 					<div class="input-field col s9"
 						style="text-align: right; padding: 0px; margin: 0px;">
-						<button class="btn waves-effect" type="button" id='btn-save-memo' style="padding: 0px 10px;" onclick="saveMemo()"><i class="material-icons">input</i></button>
+						<button class="btn waves-effect tooltipped" data-position="left" 
+						data-tooltip="save memo"
+						type="button" id='btn-save-memo' style="padding: 0px 10px;" 
+						onclick="saveMemo()"><i class="material-icons">input</i></button>
 					</div>
 				</div>
 			</form>
@@ -112,10 +115,10 @@
 	<!--End memo form  -->
 	<div class="row" style="margin: 0px; padding: 0px;">
 		<div class="switch col s6" style="margin: 5px 0px; text-align: left; color:red;">
-	    	<label>Owner<input type="checkbox" id="useropt"><span class="lever"></span>Public</label>
+	    	<label>Owner<input type="checkbox" id="useropt" style="margin-top: 5px;"><span class="lever"></span>Public</label>
 	  	</div>
-	  	<div class="col s6" style="margin: 5px 0px; text-align: right;">
-	    	<p class='mysignout' style="cursor:pointer; margin:0px;  font-size: 8px; width:20px; height:20px; float:right;" title='signout'  onclick="signOut();"><i class="material-icons">settings_power</i></p>
+	  	<div class="col s6" style="margin: 5px 0px;">
+	    	<p class='mysignout right' style="cursor:pointer; margin:0px;font-size: 8px; width:20px; height:20px; float:right;" title='signout'  onclick="signOut();"><i class="material-icons">settings_power</i></p>
 	  	</div>
   	</div>
 	<div id="mydespanel" style="margin: 5px 0px 0px 0px; padding: 0px 0px 10px 0px; border-bottom:2px solid #009688; overflow-y:auto; overflow-x:hidden;">
@@ -132,6 +135,7 @@
 	var cur_h=0,domain="",url="",title="";
 	//retriev object
 	function initailizePage(){
+		$("#useropt").prop('checked','');
 		try {
 				retrievedObject = JSON.parse(Cookies.get('MEMO')); 
 				
@@ -263,6 +267,7 @@
 			desc_panel.removeChild(desc_panel.lastChild);
 		}
 	}
+	var ihave=false;
 	function listMemoDescriptionBox(data){
 		removeAllChild();
 		for(var i=0;i<data.DATA.length;i++){
@@ -271,10 +276,10 @@
 			} 
 			createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id,data.DATA[i].date);
 		}
-		/* if(ihave==true){
-			$("#frm-memo-wrapper").css('display','none');
+		if(ihave==true){
+			 $("#frm-memo-wrapper").css('display','none');
 			ihave=false;
-		} */
+		}
 	}
 	//List Owner Memo
 	function pluginGetMemoOwner(){
@@ -393,6 +398,7 @@
 					$("#public").prop('checked','');
 					if(document.getElementById("useropt").checked==false){
 						 pluginGetMemoOwner();
+						 $("#frm-memo-wrapper").slideUp(500);
 					 }
 					//$("#frm-memo-wrapper").fadeOut(500);
 					if(ismpublic==true){
@@ -414,6 +420,8 @@
 		return re.test(email);
 	}
 	function loginMemo() {
+		var email=$("#loginemail").val();
+		var pwd=$("#loginpassword").val();
 		if (validateEmail($("#loginemail").val()) == true
 				&& $("#loginpassword").val() != "") {
 			var json = {
@@ -425,6 +433,9 @@
 				url : '${pageContext.request.contextPath}'+"/plugin/pluginlogin",
 		        data:json,
 				success : function(data){
+					logingMainMemo(email,pwd)
+					$("#useropt").prop('checked','');
+					$("#public").prop('checked','');
 					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
@@ -432,7 +443,6 @@
 					pluginGetMemoOwner();
 					$("#descmemo").val("");
 					$("#descmemo").focus();
-					$("#public").prop('checked','');
 				},
 				error : function(data) {
 					 alertify.error("LOGIN FAILED..!");
@@ -448,6 +458,8 @@
 	}
 	//sign up user
 	function signUpUser() {
+		var email= $("#email").val();
+		var pwd= $("#password").val();
 		if ($("#name").val() != "" && validateEmail($("#email").val()) == true
 				&& $("#password").val() != "") {
 			var mygender=$('input[name="gender"]:checked').val();
@@ -471,6 +483,9 @@
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
+					logingMainMemo(email,pwd)
+					$("#useropt").prop('checked','');
+					$("#public").prop('checked','');
 					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
@@ -481,7 +496,6 @@
 					password : $("#password").val("");
 					$("#descmemo").val("");
 					$("#descmemo").focus();
-					$("#public").prop('checked','');
 				},
 				error : function(data) {
 					 alertify.error("EMAIL IS EXIST");
@@ -553,6 +567,7 @@
 				$(".my_delete_btn").fadeIn();
 				alertify.success("Memo has been updated");
 				$(".edit-btn").css('margin-right','2px');
+				 $("#frm-memo-wrapper").slideUp(500);
 					//sendReportNotify("public");
 			},
 			error : function(data) {
@@ -561,20 +576,6 @@
 		});
 		ismpublic = false;
 	}
-	/* //textarea enter event
-	var enterF=true;
-	var textDesc="";
-	function handleKeyPress(e){
-		 var key=e.keyCode || e.which;
-		  if (key==13){
-		   	   if(enterF==true){
-		   		   textDesc=$("#descmemo").val()+'\n';
-		   		   enterF=false;
-		   	   }else{
-		   		   
-		   	   }
-		  }
-	} */
 	//passwor login textbox enter event
 	function LoginhandleKeyPress(e){
 		 var key=e.keyCode || e.which;
@@ -598,6 +599,7 @@
 			url : '${pageContext.request.contextPath}'+"/plugin/"+id,
 			success : function(data) {
 				 pluginGetMemoOwner();
+				 $("#frm-memo-wrapper").slideDown(500);
 			},
 			error : function(data) {
 			}
@@ -661,10 +663,36 @@
 		 }
 	 });
 	 function signOut(){
-		 Cookies.remove('MEMO');
-			$("#frm-memodesc-panel").fadeOut(300,function(){
+		 $("#frm-memodesc-panel").fadeOut(300,function(){
 				$("#frm-loginreg-wrapper").fadeIn(300);
 			});
+		 Cookies.remove('MEMO');
+		 $.ajax({
+				url : "${pageContext.request.contextPath}/plugin/logout",
+				type : "GET",
+				success : function(data){
+				},
+				error : function(data) {
+					console.log(data);
+				}
+			});
+	 }
+	 function logingMainMemo(email,pwd){
+					var json={
+							username:email,
+							password:pwd
+					};
+					$.ajax({
+						url : "${pageContext.request.contextPath}/login",
+						type : "POST",
+						dataType:'json',
+						data :json,
+						success : function(data) {
+						},
+						error : function(data) {
+							console.log(data);
+						}
+					});
 	 }
 	</script>
 </body>
