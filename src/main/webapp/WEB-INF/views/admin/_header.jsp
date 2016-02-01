@@ -1,6 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     <!--
+<!--
   BODY TAG OPTIONS:
   =================
   Apply one or more of the following classes to get the
@@ -20,7 +18,7 @@
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-   <body class="hold-transition skin-blue sidebar-mini sidebar-collapse     ">
+   <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <div class="wrapper">
 	
       

@@ -7,10 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.services.IDashboardService;
-import com.memo.app.services.MemoService;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -18,9 +16,6 @@ public class AdminController {
 	
 	@Autowired
 	private IDashboardService dashboard;
-	
-	@Autowired
-	private MemoService memoDao;
 	
 	@ModelAttribute
 	public void commonObject(Model m){
@@ -41,13 +36,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/memos", method = RequestMethod.GET)
-	public String memo(ModelMap m,
-			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled){
-		
+	public String memo(ModelMap m){		
 		this.pageDescription(m, "Memos", "List All Memos");
-		m.addAttribute("listMemo", memoDao.listMemo(limit, page, isenabled));
 		return "admin/memos";
 	}
 	

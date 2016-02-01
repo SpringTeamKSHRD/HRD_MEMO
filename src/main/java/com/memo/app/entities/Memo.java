@@ -38,7 +38,15 @@ public class Memo {
 	private boolean ispublic;
 	@Formula(value="domain || url")
 	private String fullDomain;
-	
+	@Transient
+	private int count;
+		
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getId() {
 		return id;
 	}

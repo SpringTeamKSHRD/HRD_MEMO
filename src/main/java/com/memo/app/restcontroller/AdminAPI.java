@@ -41,7 +41,7 @@ public class AdminAPI {
 	private MessageService messageDao;
 	
 	//#####################################User
-	@RequestMapping(value="/user/promote", method = RequestMethod.PUT)
+/*	@RequestMapping(value="/user/promote", method = RequestMethod.PUT)
 	public ResponseEntity<Map<String, Object>> promoteUser(
 			@RequestParam(value = "id") int id,
 			@RequestParam(value = "usertypeid", required = false, defaultValue = "2") int usertypeid){
@@ -55,7 +55,7 @@ public class AdminAPI {
 			status = HttpStatus.NOT_FOUND;
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
-	}
+	}*/
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("id") int id){
@@ -116,10 +116,32 @@ public class AdminAPI {
 	public ResponseEntity<Map<String, Object>> listMemo( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled){
+			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled,
+			@RequestParam(value = "ispublic", required = false,  defaultValue = "true") boolean ispublic){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Memo> memos=memoDao.listMemo(limit, page, isenabled);
+		List<Memo> memos=memoDao.listMemo(limit, page, isenabled, ispublic);
+		HttpStatus status = HttpStatus.OK;
+		if (!memos.isEmpty()) {	
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("DATA",memos);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	@RequestMapping(value="/memos/search", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> searchMemo( 
+			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "isenabled", required = false,  defaultValue = "true") boolean isenabled,
+			@RequestParam(value = "ispublic", required = false,  defaultValue = "true") boolean ispublic,
+			@RequestParam(value = "keyword") String keyword,
+			@RequestParam(value = "column", required = false, defaultValue = "title") String column){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Memo> memos=memoDao.listMemo(limit, page, isenabled, ispublic);
 		HttpStatus status = HttpStatus.OK;
 		if (!memos.isEmpty()) {	
 			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");

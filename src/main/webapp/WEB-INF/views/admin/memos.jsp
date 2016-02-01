@@ -14,55 +14,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <%@ include file="_header.jsp" %>
 <%@ include file="_sideBarMenu.jsp" %>
-<div class="search" style="margin: 10px 50px 25px 50px;">
-<form class="form-inline" role="form">
-  <div class="form-group col-sm-7">    
-    <div class="input-group col-sm-12">    
-      <input type="text" class=" form-control" placeholder="Search Memo"> 
-      <span class="" style="
-		    position: relative;
-		    font-size: 0;
-		    white-space: nowrap;
-		    width: 1%;
-		    white-space: nowrap;
-		    vertical-align: middle;
-		    display: table-cell;
-			">
-        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-          <i class="fa fa-search"></i>
-        </button>
-      </span>
-    </div>
-  </div>  
-  <div class="form-group" style="margin-right: 15px;">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="form-group">    
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" style="background-color: white;">10 Rows</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span> <span class="sr-only">Toggle
-        Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>  
-</form>
+	<div class="search" style="margin: 10px 50px 25px 50px;">
+		<form class="form-inline">
+		  <div class="form-group col-sm-7">    
+		    <div class="input-group col-sm-12">    
+		      <input type="text" class="form-control" placeholder="Search Memo" id="inputSearch" required> 
+		      <span class="input-group-btn">
+		        <button type="submit" id="search-btn" class="btn btn-flat">
+		          <i class="fa fa-search"></i>
+		        </button>
+		      </span>
+		    </div>
+		  </div>  
+		  <div class="form-group" style="margin-right: 15px;">    
+		    <div class="btn-group" id="searchBy">
+		      <button type="button" id="searchByValue" class="btn btn-default" data="username" style="background-color: white;">Username</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="username">Username</a></li>
+		        <li><a href="#" data="email">Email</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		  <div class="form-group">    
+		    <div class="btn-group" id="limitBy">
+		      <button type="button" id="limitByValue" class="btn btn-default" data="10" style="background-color: white;">10 Rows</button>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+		      </button>
+		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="10">10 Rows</a></li>
+		        <li><a href="#" data="20">20 Rows</a></li>
+		        <li><a href="#" data="50">50 Rows</a></li>
+		        <li><a href="#" data="100">100 Rows</a></li>
+		      </ul>
+		    </div>
+		  </div>  
+		</form>
 	</div>
 <div class="row">
 	<div class="col-xs-12">
@@ -101,27 +91,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</table>
 					</div>
 				</div>
-				<div class="form-group pull-right"> <input type="checkbox"  id="checkEnable" value="Bike"> View Disable<br></div>
 			</div>
 		</div>
-		<!-- /.box-body -->
 	</div>
-	<!-- /.box -->
 </div>
-<!-- /.col -->
 <%@ include file="_footer.jsp" %>
 <%@ include file="_defaultJS.jsp" %>
 <script>
-if(ParamToJson().isenabled){
-	$("#checkEnable").prop( "checked", true);
-}
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.document.location = $(this).data("href");
-    });
-    $("#checkEnable").click(function(){
-    	if(this.checked)  window.location.href=window.location.href+"?isenabled=false";
-    	else window.location.href=window.location.origin+window.location.pathname;
     });
 });
 </script>

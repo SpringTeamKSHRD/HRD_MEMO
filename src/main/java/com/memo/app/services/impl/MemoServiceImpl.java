@@ -23,7 +23,7 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<Memo> listMemo(int limit, int page, boolean isenabled){
+	public List<Memo> listMemo(int limit, int page, boolean isenabled, boolean ispublic){
 		//maximum 100 rows
 		if(limit > 100) limit = 100;
 		//minimum 10 rows
@@ -33,7 +33,7 @@ public class MemoServiceImpl implements MemoService{
 		//calculate offset for database
 		int offset = limit * page - limit;
 		//filter only memo that is public
-		return memoDao.listMemo(limit, offset, isenabled, true);
+		return memoDao.listMemo(limit, offset, isenabled, ispublic);
 	}
 	
 	@Override
@@ -108,5 +108,28 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public int getMemoNumber(MemoSearch memo) {
 		return memoDao.getMemoNumber(memo);
+	}
+
+	@Override
+	public List<Memo> searchMemo(int limit, int page, boolean isenabled, boolean ispublic, String column,
+			String keyword) {
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		//filter only memo that is public
+		if(column.equals("title"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "title", keyword);
+		if(column.equals("domain"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "domain", keyword);
+		if(column.equals("username"))	return memoDao.searchMemo(limit, offset, isenabled, ispublic, "username", keyword);
+		return null;
+	}
+
+	@Override
+	public Memo getMemo1(int id) {
+		return memoDao.getMemo1(id);
 	}	
 }
