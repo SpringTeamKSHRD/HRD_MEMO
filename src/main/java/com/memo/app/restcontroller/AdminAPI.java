@@ -131,6 +131,8 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
+	
+
 	@RequestMapping(value="/memos/search", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> searchMemo( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
@@ -141,13 +143,30 @@ public class AdminAPI {
 			@RequestParam(value = "column", required = false, defaultValue = "title") String column){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Memo> memos=memoDao.listMemo(limit, page, isenabled, ispublic);
+		List<Memo> memos=memoDao.searchMemo(limit, page, isenabled, ispublic, column, keyword);
 		HttpStatus status = HttpStatus.OK;
 		if (!memos.isEmpty()) {	
 			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
 			map.put("DATA",memos);
 		} else {
 			map.put("MESSAGE", "MEMO NOT FOUND.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
+	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> reportDetail(  
+			@PathVariable("id") Integer id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Report rp = reportDao.getReportDetail(id);
+		HttpStatus status = HttpStatus.OK;
+		if (rp instanceof Report) {	
+			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
+			map.put("DATA", rp);
+		} else {
+			map.put("MESSAGE", "REPORT NOT FOUND.");
 			status = HttpStatus.NOT_FOUND;
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
@@ -195,16 +214,16 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 
-	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> reportDetail(  
+	@RequestMapping(value="/memo/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> memoDetail(  
 			@PathVariable("id") Integer id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Report rp = reportDao.getReportDetail(id);
+		Memo m = memoDao.getMemo1(id);
 		HttpStatus status = HttpStatus.OK;
-		if (rp instanceof Report) {	
+		if (m instanceof Memo) {	
 			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
-			map.put("DATA", rp);
+			map.put("DATA", m);
 		} else {
 			map.put("MESSAGE", "REPORT NOT FOUND.");
 			status = HttpStatus.NOT_FOUND;
@@ -212,7 +231,6 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
-
 	@RequestMapping(value = "/report/block", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> blockMemo(@RequestBody Report report) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -233,7 +251,6 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
-	
 	
 	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getReportNotification() {

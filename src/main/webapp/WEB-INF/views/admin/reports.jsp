@@ -74,7 +74,7 @@
 					<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
 							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
 								Reports Not Found
-								<a href="#" id="listAllUser">List All Reports</a>
+								<a href="#" id="listAllReport">List All Reports</a>
 							</div>
 						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
@@ -348,7 +348,7 @@ jQuery(document).ready(function($) {
 		$("#limitByValue").attr('data',$(this).attr('data'));
 		listOrSearchReports();
     });
-    $("#listAllUser").click(function(){
+    $("#listAllReport").click(function(){
     	$("#inputSearch").val("");
     	listOrSearchReports();
     });

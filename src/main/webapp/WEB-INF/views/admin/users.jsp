@@ -106,7 +106,7 @@ function contructTable(data,ismemoenabled){
 	}
 	$.each(data, function() {
 		$("#content").append(
-		"<tr class=clickable-row style=cursor:pointer "+
+		"<tr class=clickable-row "+
 		"data-href="+path+"/admin/user?id="+this.userid+">"+
 			"<td>"+this.userid+"</td>"+
 			"<td><img src="+imagepath+this.image+" class=img-avatar>"+

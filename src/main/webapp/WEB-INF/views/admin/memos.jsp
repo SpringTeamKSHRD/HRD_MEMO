@@ -28,13 +28,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		  </div>  
 		  <div class="form-group" style="margin-right: 15px;">    
 		    <div class="btn-group" id="searchBy">
-		      <button type="button" id="searchByValue" class="btn btn-default" data="username" style="background-color: white;">Username</button>
+		      <button type="button" id="searchByValue" class="btn btn-default" data="title" style="background-color: white;">Title</button>
 		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 		        <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
 		      </button>
 		      <ul class="dropdown-menu" role="menu">
+		        <li><a href="#" data="title">Title</a></li>
+		        <li><a href="#" data="domain">Domain</a></li>
 		        <li><a href="#" data="username">Username</a></li>
-		        <li><a href="#" data="email">Email</a></li>
 		      </ul>
 		    </div>
 		  </div>
@@ -66,29 +67,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									<th>#</th>
 									<th>Owner</th>
 									<th>Title</th>
-									<th>Content</th>
 									<th>Domain</th>
-									<th>Url</th>
 									<th>Date</th>
+									<th>Action</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach var="listMemo" items="${listMemo}">							
-									<tr class='clickable-row' style="cursor:pointer"data-href='${pageContext.request.contextPath}/admin/user/${listMemo.id}'>										
-										<td>${listMemo.id}</td>
-										<td>
-		                    				<img src="${pageContext.request.contextPath}/resources/admin/imgs/${listMemo.userimage}" alt="User Image" style ="float: left;width: 25px;height: 25px;border-radius: 50%; margin-right: 10px;margin-top: -2px;">
-			                   				${listMemo.username}     
-										</td>
-										<td>${listMemo.title}</td>
-										<td>${listMemo.content}</td>
-										<td>${listMemo.domain}</td>
-										<td>${listMemo.url}</td>
-										<td>${listMemo.date}</td>										
-									</tr>									  
-								</c:forEach>
+							<tbody id="content">
+
 							</tbody>
 						</table>
+						<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
+							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
+								Memos Not Found
+								<a href="#" id="listAllMemo">List All Memos</a>
+							</div>
+						</div>
+						<div id="page-selection" style="padding:15px 15px 0 15px">
+							<div class="form-group pull-right"> 
+								<input type="checkbox"  id="viewEnabled" checked> View Enabled Memos<br>
+							</div>
+							<div class="form-group pull-right" style="margin-right: 20px;"> 
+								<input type="checkbox"  id="viewPublic" checked> View Public Memos<br>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -98,10 +99,128 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <%@ include file="_footer.jsp" %>
 <%@ include file="_defaultJS.jsp" %>
 <script>
+var totalrow = 0;
+function contructTable(data){
+	$("#content").html("");
+	$.each(data, function() {
+		$("#content").append(
+			"<tr class=clickable-row data-href="+this.id+">"+
+				"<td>"+this.id+"</td>"+
+				"<td style='padding:0px'><a href='"+path+"/admin/users?id="+this.userid+"' class='modal-link' target='_blank'>"+this.username+
+					"<img src="+imagepath+this.userimage+" class=img-avatar></a></td>"+
+				"<td style='padding:0px'><a href='"+this.url+"' class='modal-link' target='_blank'>"+this.title+"</a></td>"+
+				"<td>"+this.domain+"</td>"+
+				"<td>"+this.date+"</td>"+
+				"<td><div class='btn-group'><button type='button' class='btn btn-block btn-primary btn-xs btn-delete'"+
+					"data="+this.userid+">Detail <i class='fa fa-info'></i></button></div></td>"+
+			"</tr>");
+	});	
+}
+function listContent(page){
+	$.ajax({
+		url: path+"/api/admin/memos"+
+			"?page="+page+
+			"&limit="+$("#limitByValue").attr('data')+
+			"&isenabled="+$("#viewEnabled").prop("checked")+
+			"&ispublic="+$("#viewPublic").prop("checked"),
+		async: false,
+		type: "get",
+		success: function (response) {	
+			totalrow = response['DATA'][0].count;
+			contructTable(response['DATA']);				
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
+		    }
+		}
+	});		
+}
+function searchMemo(page){
+	$.ajax({
+		url: path+"/api/admin/memos/search"+
+				"?page="+page+
+				"&limit="+$("#limitByValue").attr('data')+
+				"&isenabled="+$("#viewEnabled").prop("checked")+
+				"&ispublic="+$("#viewPublic").prop("checked")+
+				"&keyword="+$("#inputSearch").val()+
+				"&column="+$("#searchByValue").attr('data'),
+		async: false,
+		type: "get",
+		success: function (response) {
+			$(".box-body").css("height","auto");
+			$("#error").hide();
+			totalrow = response['DATA'][0].count;			
+			contructTable(response['DATA']);		
+		},
+		statusCode: {
+	    	404: function() {
+	    		$("#content").html("");
+				$(".box-body").css("height","205px");
+				$("#error").show(500);
+		    }
+		}
+	});	
+}
+function createPagination(page,totalrow,listFunction){
+	var totalpage = 0;
+	var limitrow = $("#limitByValue").attr('data');
+	if(totalrow % limitrow != 0)	totalpage = totalrow / limitrow + 1;
+	else							totalpage = totalrow / limitrow;	
+	$('#page-selection').bootpag({
+	    total: totalpage,
+	    maxVisible : 5,
+	    page:page,
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first',
+	    leaps: true,
+	}).on("page", function(event, page){
+		listFunction(page);
+	});
+}
+function listOrSearchMemos(){
+	$(".box-body").css("height","auto");
+	$("#error").hide();
+	if($("#inputSearch").val()==""){
+		listContent(1);
+		createPagination(1,totalrow,listContent);	
+	}else{
+		searchMemo(1);
+		createPagination(1,totalrow,searchMemo);			
+	}
+}
 jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
+/*     $(".clickable-row").click(function() {
         window.document.location = $(this).data("href");
+    }); */
+    $("#viewEnabled").click(function(){
+    	listOrSearchMemos();
     });
+    $("#viewPublic").click(function(){
+    	listOrSearchMemos();
+    });
+    $(".form-inline").submit(function(e){
+    	e.preventDefault();
+    	listOrSearchMemos();
+    })
+    $("#searchBy .dropdown-menu li a").click(function(){
+		$("#searchByValue").text($(this).text());
+		$("#searchByValue").attr('data',$(this).attr('data'));
+    });
+    $("#limitBy .dropdown-menu li a").click(function(){
+		$("#limitByValue").text($(this).text());
+		$("#limitByValue").attr('data',$(this).attr('data'));
+		listOrSearchMemos();
+    });
+    $("#listAllMemo").click(function(){
+    	$("#inputSearch").val("");
+    	listOrSearchMemos();
+    });
+    listOrSearchMemos();
 });
 </script>
 </body>

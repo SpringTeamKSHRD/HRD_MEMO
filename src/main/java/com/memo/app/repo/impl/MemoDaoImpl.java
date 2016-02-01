@@ -322,8 +322,8 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public Memo getMemo1(int id) {
-		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic,username,userimageurl "
-					+"FROM memo.tbmemo "
+		String sql="SELECT m.id,m.userid,m.title,m.content,m.domain,m.url,m.date,m.isenable,m.ispublic,u.username,u.userimageurl "
+					+"FROM memo.tbmemo m inner join public.tbluser u on m.userid = u.userid "
 					+"WHERE id=?";
 		try{
 			return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new AdminMemoDetailRowMapper());
