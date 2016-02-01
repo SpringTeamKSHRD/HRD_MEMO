@@ -60,8 +60,7 @@
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown1">Hi,&nbsp;
 	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
-	      </li>	      
-	      <li><a href="#!">About</a></li>	      
+	      </li>	           
 	    </ul>
 	    <!-- For mobile menu -->
 	     <ul class="side-nav" id="mobile-demo">
@@ -75,8 +74,7 @@
 	      <li>
 	      	<a class="dropdown-button" href="#!" data-activates="dropdown2">
 	      	<span>${sessionScope['USER'].username}</span><i class="material-icons right">arrow_drop_down</i></a>
-	      </li>	      
-	      <li><a href="#!">About</a></li>	      
+	      </li>	           
 	    </ul>
 	  </div>
 	</nav>

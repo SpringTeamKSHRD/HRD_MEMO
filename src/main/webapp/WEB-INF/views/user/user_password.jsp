@@ -63,7 +63,6 @@
 				<li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
 			  </ul>
 			</li>
-			<li><a href="#!" class="text">About</a></li>
 		  </ul>
 		</div>
 		<!-- /.navbar-collapse -->

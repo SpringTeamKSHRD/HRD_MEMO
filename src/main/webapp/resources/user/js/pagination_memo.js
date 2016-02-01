@@ -104,7 +104,7 @@ var numDisplay=0;
   function nextPage(click){
 	  var myPagin=" <li class='waves-effect' id='parentprev'><a id='btnprev'><i class='material-icons'>chevron_left</i></a></li>";
 	  if(click> pageNum){
-		  alert("noth do to do1");
+		//  alert("noth do to do1");
 	  }else if(click > higthPage){
 		  listAllMemo(click,recordNum);
 			  currentPagin++;
@@ -214,7 +214,7 @@ var numDisplay=0;
 			error : function(data) {
 				$("#listmemo").html("<div class='row'><div class='col s12 m12' style='text-align:center;'>" +
 				  		"<div class='card-panel' style='background-color:rgba(255, 0, 0, 0.26);'>" +
-				  		"<h3 class='white-text'>NO NEW MESSAGE FOR DISPLAY</h3>" +
+				  		"<h3 class='white-text'>NO MEMO FOR DISPLAYING</h3>" +
 				  		"</div></div></div>");
 			  $("#pagination").html("");
 			  $("#rowwrapper").css("display","none");

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.services.impl.UserSecurityServiceImpl;
 
@@ -42,8 +43,14 @@ public class Main {
 	}
 		
 	@RequestMapping(value = "/hrdmemoplugin", method = RequestMethod.GET)
-	public String getPluginPage() {
-		return "hrdmemoplugin";
+	public String getPluginPage(@RequestParam(value="title",defaultValue="") String title,@RequestParam(value="url",defaultValue="") String url
+			,@RequestParam(value="domain",defaultValue="") String domain) {
+		if(title.equals("")||url.equals("")||domain.equals("")){
+			return "error";
+		}else{
+			return "hrdmemoplugin";
+		}
+		
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
