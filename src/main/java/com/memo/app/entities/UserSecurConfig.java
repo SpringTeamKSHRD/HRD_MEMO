@@ -72,9 +72,34 @@ public class UserSecurConfig implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	//for comparing instance of Custom Userdetails
+	//when using maximum sessions
+    /**
+	 * Returns {@code true} if the supplied object is a {@code User} instance with the
+	 * same {@code username} value.
+	 * <p>
+	 * In other words, the objects are equal if they have the same username, representing the
+	 * same principal.
+	 */
+	@Override
+    public boolean equals(Object o) {
+        if (o instanceof UserSecurConfig) {
+        	System.out.println(username);
+            return username.equals(((UserSecurConfig) o).username);
+        }
+        return false;
+    }
+	
+    /**
+     * Returns the hashcode of the {@code username}.
+     */
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return roles;
 	}
 	@Override

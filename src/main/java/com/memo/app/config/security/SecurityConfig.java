@@ -51,8 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity security) {
 		security.ignoring().antMatchers("/resource/**");
 	}
-
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -91,10 +89,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected SessionRegistry sessionRegistryImpl(){
 		return new SessionRegistryImpl();
 	}	
+	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
+	
 	/*public static void main(String[] args) {
 		System.out.println(new BCryptPasswordEncoder().encode("1"));
 		System.out.println(new BCryptPasswordEncoder().matches("1", "$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2"));
