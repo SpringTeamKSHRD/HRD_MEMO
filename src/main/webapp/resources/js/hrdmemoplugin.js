@@ -1,4 +1,4 @@
-	var path = "http://localhost:8080/HRD_MEMO/";
+	var path = "http://192.168.178.186:8080/HRD_MEMO/";
 	var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 	var windowScrollWidth = document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
 	//add css to iclude iframe
