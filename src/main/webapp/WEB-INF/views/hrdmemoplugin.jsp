@@ -489,6 +489,7 @@
 					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
+					$("#frm-memo-wrapper").slideDown(500);
 					$("#frm-memodesc-panel").fadeIn(500);
 					pluginGetMemoOwner();
 					username : $("#name").val("");
