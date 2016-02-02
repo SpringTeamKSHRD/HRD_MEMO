@@ -69,10 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureHandler(ajaxAuthenticationFailureHandler);
 		http
 			.sessionManagement()
-			.sessionAuthenticationErrorUrl("/login")
-			.maximumSessions(1)
-			.expiredUrl("/login")
-			.sessionRegistry(sessionRegistryImpl());
+			.sessionAuthenticationErrorUrl("/login");
+			//.maximumSessions(1)
+			//.expiredUrl("/login")
+			//.sessionRegistry(sessionRegistryImpl());
 		http
 			.logout()
 			.logoutUrl("/logout")
