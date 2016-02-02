@@ -87,7 +87,9 @@
 	</div>
 	<script type="text/javascript">var path = '${pageContext.request.contextPath}/';
 	 Cookies.remove('MEMO');
-	 Cookies.remove('LOGGED');
+	 Cookies.remove('LOGGED', {
+         path: ''
+     });
 	</script>
 	<script type="text/javascript"
 		src='${pageContext.request.contextPath}/resources/js/login.js'>	
