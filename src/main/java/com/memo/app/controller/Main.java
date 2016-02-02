@@ -43,13 +43,8 @@ public class Main {
 	}
 		
 	@RequestMapping(value = "/hrdmemoplugin", method = RequestMethod.GET)
-	public String getPluginPage(@RequestParam(value="title",defaultValue="") String title,@RequestParam(value="url",defaultValue="") String url
-			,@RequestParam(value="domain",defaultValue="") String domain) {
-		if(title.equals("")||url.equals("")||domain.equals("")){
-			return "error";
-		}else{
+	public String getPluginPage() {
 			return "hrdmemoplugin";
-		}
 		
 	}
 
