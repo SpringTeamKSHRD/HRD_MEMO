@@ -144,9 +144,8 @@
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="${pageContext.request.contextPath}/resources/admin/imgs/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
-                    <p>
-                      Sopheak Nem - Web Developer
-                      <small>Member since Nov. 2012</small>
+                    <p class="text-capitalize">
+                    	${sessionScope['USER'].username}
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -163,10 +162,10 @@
                   </li> -->
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <!-- <div class="pull-left">
+                    <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div> -->
-                    <div class="text-center">
+                    </div>
+                    <div class="pull-right">
                       <a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
