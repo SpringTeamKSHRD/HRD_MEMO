@@ -55,7 +55,7 @@ function toEdit(id){
 	 $("#icon_prefix").focus();
 	 $.ajax({
 			type : "GET",
-			url : domain+"/user/"+id,
+			url : path+"/user/"+id,
 			success : function(data) {
 				if(data.DATA.ispublic==false){
 					// clear contents
