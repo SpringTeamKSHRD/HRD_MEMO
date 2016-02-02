@@ -38,8 +38,12 @@ $("#writememo").click(function(){
 	window.location.href=path+"/user/user";
 });
 function generateText(text){
+	if(text!=null){
 	if(text.length>30){
 		return text=text.substring(0,30)+"...";
+	}else{
+		return text;
+	}
 	}else{
 		return text;
 	}
