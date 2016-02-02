@@ -3,13 +3,13 @@
 	var windowScrollWidth = document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
 	//add css to iclude iframe
 		$('head').append("<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>");
-		$('head').append(" <script type='text/javascript' src='http://192.168.178.186:8080/HRD_MEMO/resources/js/iframeResizer.min.js'></script>");
+		$('head').append(" <script type='text/javascript' src='http://localhost:8080/HRD_MEMO/resources/js/iframeResizer.min.js'></script>");
 	//iframe wrapper
 		var wrapper=document.getElementById("hrd_memo_pess");
 	//create iframe
 		var ifrm_hrdmemo = document.createElement("IFRAME");
 
-		ifrm_hrdmemo.setAttribute("src", "http://192.168.178.186:8080/HRD_MEMO/hrdmemoplugin?title="+memo_title+"&url="+location.href+"&domain="+location.hostname);
+		ifrm_hrdmemo.setAttribute("src", "http://localhost:8080/HRD_MEMO/hrdmemoplugin?title="+memo_title+"&url="+location.href+"&domain="+location.hostname);
 
 	//ifrm_hrdmemo.setAttribute("sandbox","allow-same-origin allow-scripts allow-modals");
 		ifrm_hrdmemo.setAttribute('class','my-memo-class');
@@ -34,7 +34,7 @@
 	//wrapper style
 		wrapper.style.height=window.innerHeight+"px";
 		wrapper.style.width="0px";
-		wrapper.style.zIndex="999999";
+		wrapper.style.zIndex="999999999";
 		wrapper.style.right=windowScrollWidth+'px';
 		wrapper.style.position="fixed";
 		wrapper.style.top="0px";
@@ -83,7 +83,7 @@
 		activate_desc_memo.style.padding="5px";
 		activate_desc_memo.style.textAlign="center";
 		activate_desc_memo.innerHTML=" <i class='large material-icons'>description</i>";
-		activate_desc_memo.style.zIndex="9999";
+		activate_desc_memo.style.zIndex="999999999";
 		$('body').append(activate_desc_memo);
 		var my_memo_hide=true;
 		$("#btn-act-desc").click(function(){
@@ -115,7 +115,7 @@
 			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
 	function gotoMemoMainPage(){
-		window.location.href="http://192.168.178.186:8080/HRD_MEMO/user/listallmemo";
+		window.location.href="http://localhost:8080/HRD_MEMO/user/listallmemo";
 	}	
 		
 		
