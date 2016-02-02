@@ -234,7 +234,7 @@
             dl += '</div>';
             dl += '</div>';
 
-            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/viewall.png" width="25px" heigh="25px" id="viewall" style="cursor:pointer;position:absolute;top:0px;left:6px" title="View all memos"/><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:6px" title="Logout"/></div>';
+            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><a href="http://192.168.178.186:8080/HRD_MEMO/user/listallmemo" target="_blank"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/viewall.png" width="25px" heigh="25px" id="viewall" style="cursor:pointer;position:absolute;top:0px;left:6px" title="View all memos"/></a><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:6px" title="Logout"/></div>';
             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
             var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
@@ -248,6 +248,15 @@
                 Cookies.remove('LOGGED', {
                     path: ''
                 });
+           		 $.ajax({
+           				url : "http://192.168.178.186:8080/HRD_MEMO/plugin/logout",
+           				type : "GET",
+           				success : function(data){
+           				},
+           				error : function(data) {
+           					console.log(data);
+           				}
+           			});
                 $('#qn > .chat-container,#qn_sh,#notes').remove();
                 _this.login();
                 $('.qn_container #notes,.qn_container #username-password').show();
@@ -514,6 +523,23 @@
             $("#frmLogin")
                 .submit(
                     function(e) {
+                    	 function logingMainMemo(email,pwd){
+         					var json={
+         							username:email,
+         							password:pwd
+         					};
+         					$.ajax({
+         						url : "http://192.168.178.186:8080/HRD_MEMO/login",
+         						type : "POST",
+         						dataType:'json',
+         						data :json,
+         						success : function(data) {
+         						},
+         						error : function(data) {
+         							console.log(data);
+         						}
+         					});
+                    	 }
                         $('#memo-loading').show();
                         e.preventDefault();
                         $
@@ -533,6 +559,7 @@
                                             expires: 1,
                                             path: ''
                                         });
+                                        logingMainMemo($('#email').val(),$('#password').val());
                                         console.log(Cookies.getJSON('LOGGED').lang);
                                         $('#qn > #qn_sh,#username-password').remove();
                                         _this.appendElem();
