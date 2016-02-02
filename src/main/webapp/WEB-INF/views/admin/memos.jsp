@@ -75,7 +75,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<tbody id="content">
 
 							</tbody>
-						</table>
+						</table>						
+						<img id="loading" class="center-block" style="display:none;margin: 35px auto;" src="${pageContext.request.contextPath}/resources/admin/imgs/ajax-loader.gif"/>						
 						<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
 							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
 								Memos Not Found
@@ -162,6 +163,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
 var data = {};
 var totalrow = 0;
+function toggleLoading(isLoad){
+	if(isLoad){
+		$("#content").html("");
+		$(".box-body").css("height","205px");
+		$("#loading").show();
+	}else{
+		$(".box-body").css("height","auto");
+		$("#loading").hide();
+	}
+}
 function contructTable(data){
 	$("#content").html("");
 	$.each(data, function() {
