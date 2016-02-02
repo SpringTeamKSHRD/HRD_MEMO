@@ -7,7 +7,7 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="${pageContext.request.contextPath}/resources/admin/imgs/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
+              <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p class="text-capitalize">${sessionScope['USER'].username}</p>

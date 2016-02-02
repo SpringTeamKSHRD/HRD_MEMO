@@ -136,14 +136,14 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <img src="${pageContext.request.contextPath}/resources/admin/imgs/${sessionScope['USER'].image}" class="user-image" alt="User Image">
+                  <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="user-image" alt="User Image">
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs text-capitalize">${sessionScope['USER'].username}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <img src="${pageContext.request.contextPath}/resources/admin/imgs/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
+                    <img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" class="img-circle" alt="User Image">
                     <p class="text-capitalize">
                     	${sessionScope['USER'].username}
                     </p>
