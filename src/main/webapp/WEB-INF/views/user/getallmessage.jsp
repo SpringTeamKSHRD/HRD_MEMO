@@ -43,7 +43,7 @@
 	  <li><a href="${pageContext.request.contextPath}/user/userpassword" >Password</a></li>
 	  <li class="divider"></li>
 	  <li><a href="${pageContext.request.contextPath}/login?logout">Log out</a></li>
-	</ul> 		
+	</ul>
 	<div class="navbar-fixed">  
 	<nav>
 	  <div class="nav-wrapper teal">
@@ -139,7 +139,7 @@
 		      <p id="memo_content"></p>
 		    </div>
 		    <div class="modal-footer">
-		       <small id="memo_date"></small>
+		       <small id="memo_date"></small>  
 		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " style="color:red;">Close</a>
 		    </div>
 	  </div>
