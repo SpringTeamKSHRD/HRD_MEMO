@@ -88,8 +88,8 @@
 		var my_memo_hide=true;
 		$("#btn-act-desc").click(function(){
 			if(my_memo_hide==true){
-				$("#btn-act-desc").animate({right: 341+windowScrollWidth, marginLeft: 0,}, {duration: 300});
-				$("#hrd_memo_pess").animate({width: 341+windowScrollWidth, marginLeft: 0,padding:5}, {duration: 300});
+				$("#btn-act-desc").animate({right: 353, marginLeft: 0,}, {duration: 300});
+				$("#hrd_memo_pess").animate({width: 341, marginLeft: 0,padding:5}, {duration: 300});
 				document.getElementsByClassName('my-memo-class')[0]
 				.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 				my_memo_hide=false;
@@ -115,7 +115,7 @@
 			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
 	function gotoMemoMainPage(){
-		window.location.href=path+"user/listallmemo";
+		window.open(path+"user/listallmemo");
 	}	
 		
 		

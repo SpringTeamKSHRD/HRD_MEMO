@@ -178,7 +178,7 @@
 		}
 	//create description box
 	function createDescribeBox(text,title,image,userid,memoid,date){
-		var desc=document.createElement("P");
+		var desc=document.createElement("div");
 		//create image and data wrapper
 		var memo_img_wraper=document.createElement("DIV");
 		memo_img_wraper.setAttribute("class","memo_img_wrapper");
@@ -233,7 +233,15 @@
 		report.style.color="#FFC107";
 		var report_text=document.createTextNode("assignment");
 		report.appendChild(report_text);
-		var desc_text=document.createTextNode(text);
+		var desc_text=document.createElement("div");
+		desc_text.setAttribute('class','content');
+		desc_text.appendChild(document.createTextNode(text));
+		
+		var readmore = document.createElement("a");
+		readmore.setAttribute('class','read more');
+		readmore.appendChild(document.createTextNode("Read More"));
+		desc_text.appendChild(readmore);		
+				
 		//create edit text
 		var edit=document.createElement("i");
 		edit.setAttribute('class','material-icons edit-btn');
@@ -696,6 +704,12 @@
 						}
 					});
 	 }
+	 $("body").on("click",".read",function(){
+		if($(this).text()=="Read More") $(this).text("Show Fewer"); 
+		else							$(this).text("Read More");
+		$(this).toggleClass("more fewer");
+		$(this).parent().toggleClass("content"); 
+	 });
 	</script>
 </body>
 <link rel='stylesheet'
