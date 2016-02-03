@@ -16,9 +16,9 @@ function generatePageNumber(data,displayrec){
 }
 function getRecordeNumber(){
 	json = {
-			userid:$("#userid").val(),//for userid can ""
-			title:$("#searchtitle").val(),//for search title can ""
-			domain:$("#searchdomain").val(),//for search domain can ""
+			userid:$("#userid").val(),//for userid can text ""
+			title:$("#searchtitle").val(),//for search title text can ""
+			domain:$("#searchdomain").val(),//for search domain text can ""
 			date:$("#searchdate").val(),//for search date format YYYY-MM-DD text can ""
 			ispublic:$("#searchprivacy").val()//for privacy true or false text can ""
 		};
@@ -28,8 +28,8 @@ function getRecordeNumber(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-					generatePageNumber(data.DATA,10);
-					getMemoDisplay(1);
+					generatePageNumber(data.DATA,10);// all recorde and display recorde
+					getMemoDisplay(1);//first load 
 					current=1;
 		},
 		error : function(data) {
