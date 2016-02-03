@@ -131,5 +131,15 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public Memo getMemo1(int id) {
 		return memoDao.getMemo1(id);
+	}
+
+	@Override
+	public List<Memo> listMemoNew(MemoSearch memo) {
+		return memoDao.listMemoNew(memo);
+	}
+
+	@Override
+	public int getMemoNumberNew(MemoSearch memo) {
+		return memoDao.getMemoNumberNew(memo);
 	}	
 }

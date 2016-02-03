@@ -8,7 +8,7 @@ public class MemoSearch {
 		private String domain;
 		private String title;
 		private String date;
-		private Boolean ispublic;
+		private String ispublic;
 		private String search;
 		public int getUserid() {
 			return userid;
@@ -60,10 +60,10 @@ public class MemoSearch {
 			this.date = date;
 		}
 		
-		public Boolean getIspublic() {
+		public String getIspublic() {
 			return ispublic;
 		}
-		public void setIspublic(Boolean ispublic) {
+		public void setIspublic(String ispublic) {
 			this.ispublic = ispublic;
 		}
 		@Override

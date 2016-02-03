@@ -410,4 +410,35 @@ public class MemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+	//for brother pheak
+	@RequestMapping(value = "/usermemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody MemoSearch memo) {
+		ArrayList<Memo> memos = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		memos = (ArrayList<Memo>) memoService.listMemoNew(memo);
+		if (memos.isEmpty()) {
+			map.put("MESSAGE", "MEMOS ARE NOT FOUND.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+		map.put("MESSAGE", "MEMOS HAVE BEEN FOUND.");
+		map.put("STATUS", HttpStatus.OK.value());
+		map.put("DATA", memos);
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/numbermemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> numberMemo(@RequestBody MemoSearch memo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        int mn=memoService.getMemoNumberNew(memo);
+		if (mn>0) {
+			map.put("MESSAGE", "Memo Found.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",mn);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
 }
