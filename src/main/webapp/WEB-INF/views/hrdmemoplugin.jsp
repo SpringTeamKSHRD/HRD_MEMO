@@ -440,6 +440,7 @@
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
+					$("#frm-memo-wrapper").slideDown(500);
 					pluginGetMemoOwner();
 					$("#descmemo").val("");
 					$("#descmemo").focus();

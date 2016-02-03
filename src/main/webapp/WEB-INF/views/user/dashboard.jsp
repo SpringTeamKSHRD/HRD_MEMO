@@ -26,7 +26,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
 </head>
-<body style="background: #ECEFF1;">
+<body style="background: #f5f5f5;">
 	<!-- Dropdown Structure -->
 	<ul id="dropdown1" class="dropdown-content">
 	  <li><a href="${pageContext.request.contextPath}/user/userprofile" >Account</a></li>
@@ -78,31 +78,73 @@
 	</nav>
 	</div>
 	<!-- ./close navigation -->
-	<div class="container-fluid" style="margin:20px 20px 0px 20px; padding:5px; background: white;">
-		<div class="row">
-	    <div class="col s12">
-		      <ul class="tabs">
-		        <li class="tab col s6"><a class='active' style="cursor: pointer;" >Write New Memo</a></li>
-		        <li class="tab col s6"><a id="listmemo" style="cursor: pointer;" href="${pageContext.request.contextPath}/user/listallmemo">All Memo</a></li>
-		      </ul>
-		    </div>
-	  </div>
+	<div class="container-fluid"   style="margin:0px 2px 0px 2px; padding:5px; background: white;">
 		<!-- Page Layout body here -->
-		<div class="row">	
+		<div class="row" style="margin: 0px;" id="mywrapper">		
+			<div class="col s12 m5 l4 z-depth-1" style="margin: 0px; padding: 0px 5px;" id="listmemowr">
+				<div class=" row col s12" style="margin: 0px; padding: 0px;">
+					<div class="col s12 m12 l5">
+					  <select id="searchopt">
+					      <option value="" selected>Search Option</option>
+					      <option value="title">Title</option>
+					      <option value="ispublic">Privacy</option>
+					      <option value="domain">Domain</option>
+					       <option value="date">Date</option>
+					    </select>
+					  </div>
+					  <div class="col s12 m12 l7">
+					  <select id="searchopt">
+					      <option value="" selected>Search Option</option>
+					      <option value="title">Title</option>
+					      <option value="ispublic">Privacy</option>
+					      <option value="domain">Domain</option>
+					       <option value="date">Date</option>
+					    </select>
+					  </div>
+			   </div>
+			   <div class=" row col s12" style="margin: 0px; padding: 0px;">
+				<ul class="collapsible" data-collapsible="accordion">
+					    <li>
+					      <div class="collapsible-header" style="color:blue;"><i class="material-icons">description</i>First</div>
+					      <div class="collapsible-body">
+					      	<p>URL:<a href="http://localhost:8080/HRD_MEMO/user/user">http://localhost:8080/HRD_MEMO/user/user</a></p>
+					        <p>Lorem ipsum dolor sit amet.AXVHHajckmad,nskd,g.fnmlk,.mrlgmtrehlr.r,mhlke.,fmewlkg,erngkl,nfkwe,gmnk,mdj
+					        xb ewnmg  etlkf erm, m,</p>
+					      	<p style="margin-bottom: 5px;"><small style="font-weight: bold;">Date: 12/02/2016</small>
+					      		 <i class="material-icons right" 
+					      		 style='margin-left: 0px; padding: 0px; 
+					      		 color:red; cursor: pointer; font-size: 17px;' title='Delete'>delete</i>
+					      		 <i class="material-icons right" 
+					      		 style='margin-right: 0px; color:#00e676; 
+					      		 padding: 0px; cursor: pointer; font-size: 17px;' title='Edit'>note_add</i>
+					      	</p>	
+					      </div>
+					    </li>
+					    <li>
+					      <div class="collapsible-header"><i class="material-icons">description</i>Second</div>
+					      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+					    </li>
+					    <li>
+					      <div class="collapsible-header"><i class="material-icons">description</i>Third</div>
+					      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+					    </li>
+				 </ul>
+				 </div>
+			</div>
 			<!-- Right Body Section -->		
-			<div class="col s12">
+			<div class="col s12 m7 l8">
 			<div class="row z-depth-1">
 			<form action="#" method="POST" enctype="multipart/form-data">
 				<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 					<!-- List of components memo--> 
 					<div class="row" style="margin:0px">
-						<div class="col s12 m9 l10">
+						<div class="col s12 m8 l10">
 								<div class="input-field col s12">
 								  <input id="icon_prefix" type="text" class=" titlememo validate">
 								  <label for="icon_prefix">Title Memo</label>
 								</div>
 						</div>
-						<div class="col s12 m3 l2">
+						<div class="col s12 m4 l2">
 							<div class="input-field col s12">
 								<select id="privacy" >
 								      <!-- <option value="" disabled selected>Choose your option</option> -->
@@ -185,6 +227,16 @@
 		 		 getNumberMesage();
 		 	 }
 		  }
+		  $("#mywrapper").css('background','white');
+		  function dynamicHeight(){
+			  var dh=document.getElementsByTagName('body')[0].offsetHeight-80;
+			  $("#mywrapper").css('height',dh+'px');
+			  $("#mywrapper").css('max-height',dh+'px');
+			  $("#listmemowr").css('height',dh+'px');
+			  $("#listmemowr").css('max-height',dh+'px');
+		  }
+		  window.addEventListener('resize',dynamicHeight(),false);
+		  window.addEventListener('load',dynamicHeight(),false);
 	  </script>
   </body>
 </html>
