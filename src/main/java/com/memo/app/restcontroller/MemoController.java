@@ -428,6 +428,7 @@ public class MemoController {
 	}
 	@RequestMapping(value = "/numbermemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> numberMemo(@RequestBody MemoSearch memo) {
+		System.out.println("list memo");
 		Map<String, Object> map = new HashMap<String, Object>();
         int mn=memoService.getMemoNumberNew(memo);
 		if (mn>0) {
