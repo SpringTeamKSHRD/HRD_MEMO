@@ -16,7 +16,7 @@ function saveMemo(){
 				title : $('.titlememo').val(),
 				content : data,
 				titleurl : "Memo Dashboard",
-				domain : "memo.khmeracademy.org",
+				domain : domainName,
 				url : url,
 				isenable : true,
 				ispublic : ispublic
