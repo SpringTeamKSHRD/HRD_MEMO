@@ -98,14 +98,13 @@
 						</textarea>
 				</div>
 				<div class="row" style="padding: 0px; margin: 0px;">
-					<div class="input-field col s3" style="padding: 0px; margin: 0px;">
-						<input type="checkbox" class="filled-in" id="public"/><label
+					<div class="input-field col s3" style="padding: 0px; margin: 0px;" title="save memo as public?" >
+						<input type="checkbox" class="filled-in" id="public" ><label
 							for="public">Public</label>
 					</div>
 					<div class="input-field col s9"
 						style="text-align: right; padding: 0px; margin: 0px;">
-						<button class="btn waves-effect tooltipped" data-position="left" 
-						data-tooltip="save memo"
+						<button class="btn waves-effect" title="save memo"
 						type="button" id='btn-save-memo' style="padding: 0px 10px;" 
 						onclick="saveMemo()"><i class="material-icons">input</i></button>
 					</div>

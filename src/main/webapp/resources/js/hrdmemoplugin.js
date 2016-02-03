@@ -69,14 +69,14 @@
 		activate_desc_memo.setAttribute("id","btn-act-desc");
 		activate_desc_memo.setAttribute("title","Memo");
 		activate_desc_memo.style.position="fixed";
-		activate_desc_memo.style.background="#4DB6AC";
+		activate_desc_memo.style.background="rgb(25, 206, 82)";
 		activate_desc_memo.style.borderRadius="10px 0px 0px 10px";
 		activate_desc_memo.style.boxShadow="-1px 2px 3px gray";
 		activate_desc_memo.style.fontSize="14px";
 		activate_desc_memo.style.fontWeight="bold";
 		activate_desc_memo.style.cursor="pointer";
 		activate_desc_memo.style.color="white";
-		activate_desc_memo.style.width="35px";
+		activate_desc_memo.style.width="25px";
 		activate_desc_memo.style.right="0px";
 		activate_desc_memo.style.top="43%";
 		activate_desc_memo.style.margin="0px";
