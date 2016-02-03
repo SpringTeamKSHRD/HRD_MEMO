@@ -6,12 +6,11 @@
    font-feature-settings: 'liga';
 }
 .chip {
-  display: block;
+  padding: 0px 10px 0 10px;
   font-size: 12px;
   font-weight: 500;
   color:black;
   line-height: 20px;
-  padding:0px 0px 0px 3px;
   background-color: #FAFAFA;
   width:335px;
  white-space:normal; 
@@ -29,11 +28,14 @@
   line-height: 32px;
   padding-left: 8px;
 }
-.memo_img_wrapper{
-	margin: 0px;
-	padding:2px 2px 2px 13px;
-    width: 100%;
+.memo_img_wrapper {
+    margin: 0px;
+    position: absolute;
+    padding: 2px 2px 2px 13px;
+    width: inherit;
     height: 20px;
+    left: 0px;
+    top: 0px;
 }
 .user-memo-img{
 	width: 10px;
@@ -44,7 +46,6 @@
 	display: inline;
 }
 .mymemo-footer{
-	background: #69F0AE;
 	margin: 0px;
 	width: 100%;
 }
@@ -97,4 +98,38 @@
 }
 .mysignout:hover{
 	color:red;
+}
+.content{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-box-orient: vertical;
+    line-height: 18px;
+    height: 36px;
+    margin-bottom: 5px;
+    -webkit-line-clamp: 2;
+}
+.read{
+	width: 70px;
+	background: white;
+	text-align: right;
+	cursor: pointer;
+	color: blue;
+    display: block;
+}
+.more{
+	
+    
+
+    position: absolute;
+    right: 12px;
+    top: 48px;
+    
+}
+.fewer{
+	
+    display: block;
+    background: white;
+    
+    float: right;
 }
