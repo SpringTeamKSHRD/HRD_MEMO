@@ -207,7 +207,7 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public List<Memo> pluginGetMemoOwner(int userid, String url) {
-		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl "
+		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl,username "
 				+ "FROM memo.tbmemo mm "
 				+ "INNER JOIN public.tbluser us ON mm.userid=us.userid "
 				+ "WHERE (mm.userid=? AND mm.url=? AND mm.isenable=true) ORDER BY mm.id DESC";
@@ -225,6 +225,7 @@ public class MemoDaoImpl implements MemoDao{
 					mm.setDate(rs.getDate(5));
 					mm.setIspublic(rs.getBoolean(6));
 					mm.setUserimage(rs.getString(7));
+					mm.setUsername(rs.getString(8));
 					return mm;
 				}
 			});
@@ -263,7 +264,7 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public List<Memo> pluginGetMemoPublic(int userid,String url) {
-		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl "
+		String sql="SELECT mm.id,mm.userid,mm.title,mm.content,mm.date,mm.ispublic,us.userimageurl,username "
 				+ "FROM memo.tbmemo mm "
 				+ "INNER JOIN public.tbluser us ON mm.userid=us.userid "
 				+ "WHERE (mm.ispublic=true AND mm.url=? AND mm.isenable=true AND mm.userid <> ?) ORDER BY mm.id DESC";
@@ -281,6 +282,7 @@ public class MemoDaoImpl implements MemoDao{
 					mm.setDate(rs.getDate(5));
 					mm.setIspublic(rs.getBoolean(6));
 					mm.setUserimage(rs.getString(7));
+					mm.setUsername(rs.getString(8));
 					return mm;
 				}
 			});
@@ -345,6 +347,39 @@ public class MemoDaoImpl implements MemoDao{
 			e.printStackTrace();
 			return null;
 		}		
+	}
+	@Override
+	public List<Memo> listMemoNew(MemoSearch memo) {
+		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
+				+ "FROM memo.tbmemo WHERE userid=? AND Lower(title) LIKE ? AND Lower(domain) LIKE ? "
+				+ "AND ispublic=? AND isenable=TRUE AND to_char(date,'DD-MM-YYYY') LIKE ? "
+				+ "ORDER BY id DESC LIMIT ? OFFSET ?";
+		int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
+		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle().toLowerCase()+"%",
+									memo.getDomain().toLowerCase()+"%",memo.getIspublic(),
+									memo.getDate(),memo.getLimit(),begin};
+		try{
+			return jdbcTemplate.query(sql,obj,new UserMemoRowMapper());
+		}catch(Exception ex){
+			System.out.println("error");
+		}
+		return null;
+	}
+	@Override
+	public int getMemoNumberNew(MemoSearch memo) {
+		String sql="SELECT count(userid) "
+				+ "FROM memo.tbmemo WHERE userid=? AND Lower(title) LIKE ? AND Lower(domain) LIKE ? "
+				+ "AND ispublic=? AND isenable=TRUE AND to_char(date,'DD-MM-YYYY') LIKE ?";
+		int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
+		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle().toLowerCase()+"%",
+									memo.getDomain().toLowerCase()+"%",memo.getIspublic(),
+									memo.getDate()};
+		try{
+			return jdbcTemplate.queryForObject(sql,obj,Integer.class);
+		}catch(Exception ex){
+			System.out.println("error");
+		}
+		return 0;
 	}
 	
 }

@@ -29,4 +29,6 @@ public interface MemoDao {
 	public List<Memo> pluginGetMemoPublic(int userid,String url);
 	public boolean updateMemoContent(Memo memo);
 	public int getMemoNumber(MemoSearch memo);
+	public List<Memo> listMemoNew(MemoSearch memo);
+	public int getMemoNumberNew(MemoSearch memo);
 }

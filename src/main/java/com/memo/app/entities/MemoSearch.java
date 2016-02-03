@@ -5,6 +5,10 @@ public class MemoSearch {
 		private int page;
 		private int limit;
 		private String column;
+		private String domain;
+		private String title;
+		private String date;
+		private Boolean ispublic;
 		private String search;
 		public int getUserid() {
 			return userid;
@@ -36,10 +40,36 @@ public class MemoSearch {
 		public void setLimit(int limit) {
 			this.limit = limit;
 		}
+		
+		public String getDomain() {
+			return domain;
+		}
+		public void setDomain(String domain) {
+			this.domain = domain;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getDate() {
+			return date;
+		}
+		public void setDate(String date) {
+			this.date = date;
+		}
+		
+		public Boolean getIspublic() {
+			return ispublic;
+		}
+		public void setIspublic(Boolean ispublic) {
+			this.ispublic = ispublic;
+		}
 		@Override
 		public String toString() {
 			return "MemoSearch [userid=" + userid + ", page=" + page + ", limit=" + limit + ", column=" + column
-					+ ", search=" + search + "]";
+					+ ", domain=" + domain + ", title=" + title + ", date=" + date + ", search=" + search + "]";
 		}
 		
 }

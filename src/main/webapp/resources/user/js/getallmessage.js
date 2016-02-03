@@ -291,9 +291,9 @@ var url="ws://"+location.hostname+":"+location.port+path+"/memo/usernotification
  });
  $('.responsive-table .bordered .highlight').slimScroll({
 		alwaysVisible: false,
-	              size:'5px',
-	               color: '#009688'
-	});
+	    size:'5px',
+	    color: '#009688'
+});
   
   
   
