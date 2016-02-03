@@ -177,7 +177,7 @@
 			}
 		}
 	//create description box
-	function createDescribeBox(text,title,image,userid,memoid,date){
+	function createDescribeBox(text,title,image,userid,memoid,date,username){
 		var desc=document.createElement("div");
 		//create image and data wrapper
 		var memo_img_wraper=document.createElement("DIV");
@@ -187,7 +187,7 @@
 		user_memo_img.setAttribute('class','user-memo-img');
 
 		user_memo_img.setAttribute('src','${pageContext.request.contextPath}'+'/resources/user/image/'+image);
-
+        user_memo_img.setAttribute('title',username);
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
@@ -282,7 +282,7 @@
 			if(data.DATA[i].userid==retrievedObject.userid){
 				ihave=true;
 			} 
-			createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id,data.DATA[i].date);
+			createDescribeBox(data.DATA[i].content,data.DATA[i].title,data.DATA[i].userimage,data.DATA[i].userid,data.DATA[i].id,data.DATA[i].date,data.DATA[i].username);
 		}
 		if(ihave==true){
 			 $("#frm-memo-wrapper").css('display','none');
