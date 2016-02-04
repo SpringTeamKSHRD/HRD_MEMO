@@ -13,7 +13,7 @@ $(function() {
 					|| data == "Bad credentials")
 						alert(data);
 				else{	
-						khmerAcademeyLogin(username, password);
+						//khmerAcademeyLogin(username, password);
 						location.href = path + data
 				};
 			},
@@ -23,21 +23,18 @@ $(function() {
 		});
 	});
 });
-function khmerAcademeyLogin(username,password){
-	alert(username+" "+password);
+/*function khmerAcademeyLogin(username,password){
 	$.ajax({
-		url: "http://192.168.178.121:8080/KAWEBCLIENT/login",
+		url: "http://localhost:8080/KAWEBCLIENT/login",
 		type: "POST",
 		data : {
 		'ka_username':username,
 		'ka_password':password},
 		success: function(data) {
 				 alert("Loig Khmer academy success");	
-				 console.log(data);
 		},
 		error: function(data){
-			alert("Loig Khmer academy error");	
-		console.log(data);
+			 alert("Login Khmer academy error");	
 		}
 		});
-}
+}*/
