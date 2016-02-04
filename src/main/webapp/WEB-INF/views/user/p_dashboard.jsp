@@ -10,6 +10,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>AdminLTE 2 | Starter</title>
+<link rel="shortcut icon"
+	href="http://cdn.sabay.com/cdn/news.sabay.com.kh/wp-content/themes/sabaynews_v1.0.6/images/favicon.ico?ebb82d"
+	type="image/x-icon">
+
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -52,17 +56,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	position: relative;
 	cursor: pointer;
 	color: #dd4b39;
+	top: -6px;
+}
 
-	top:-6px;
-}
-.tools i{
+.tools i {
 	position: absolute;
-	
+	display:none;
 }
-.tools i.fa.fa-trash-o{
+
+.tools i.fa.fa-trash-o {
 	position: absolute;
-	right:6px;
-	top:-1px;
+	right: 6px;
+	top: -1px;
+}
+
+input[name=privacy] {
+	display: none
+}
+
+td.mailbox-subject {
+	white-space: nowrap;
+	max-width: 330px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+td.mailbox-attachment{
+	min-width:50px;
 }
 </style>
 </head>
@@ -249,11 +268,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<div class="col-md-4">
 						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">Inbox</h3>
+								<h3 class="box-title">Memo List</h3>
 								<div class="box-tools pull-right">
 									<div class="has-feedback">
 										<input type="text" class="form-control input-sm"
-											placeholder="Search Mail"> <span
+											placeholder="Search By Title" name="searchtitle"
+											id="searchtitle"> <span
 											class="glyphicon glyphicon-search form-control-feedback"></span>
 									</div>
 								</div>
@@ -262,86 +282,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<!-- /.box-header -->
 							<div class="box-body no-padding">
 								<div class="mailbox-controls">
-									<!-- Check all button -->
-									<button class="btn btn-default btn-sm checkbox-toggle">
-										<i class="fa fa-square-o"></i>
-									</button>
-									<div class="btn-group">
-										<button class="btn btn-default btn-sm">
-											<i class="fa fa-trash-o"></i>
-										</button>
-										<button class="btn btn-default btn-sm">
-											<i class="fa fa-reply"></i>
-										</button>
-										<button class="btn btn-default btn-sm">
-											<i class="fa fa-share"></i>
-										</button>
-									</div>
-									<!-- /.btn-group -->
-									<button class="btn btn-default btn-sm">
-										<i class="fa fa-refresh"></i>
-									</button>
-									<div class="pull-right">
-										1-50/200
-										<div class="btn-group">
-											<button class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-left"></i>
-											</button>
-											<button class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-right"></i>
-											</button>
+									<div class="row">
+										<div class="col-md-6">
+											<label class="btn btn-default btn-sm"><input
+												type="radio" name="privacy" value="" id="all-memo" >All
+												Memo</label> <label class="btn btn-info btn-sm"><input
+												type="radio" name="privacy" value="true" id="public-memo">Public</label>
+											<label class="btn btn-danger btn-sm"><input
+												type="radio" name="privacy" value="false" id="private-memo">Private</label>
 										</div>
-										<!-- /.btn-group -->
+										<div class="col-md-6" >
+											<select class="form-control" name="searchdomain"
+												id="searchdomain">
+
+											</select>
+										</div>
 									</div>
 									<!-- /.pull-right -->
 								</div>
-								<div class="table-responsive mailbox-messages">
-									<table class="table table-hover table-striped" >
+								<div class="table-responsive mailbox-messages" style="height:522px;overflow-y:hidden">
+									<table class="table table-hover table-striped">
 										<tbody>
-											<tr>
-												<td><div class="icheckbox_flat-blue"
-														aria-checked="false" aria-disabled="false"
-														style="position: relative;">
-														<input type="checkbox"
-															style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper"
-															style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-													</div></td>
-												<td class="mailbox-star"><a href="#"><i
-														class="fa fa-star text-yellow"></i></a></td>
-												<td class="mailbox-name"><a href="read-mail.html">Alexander
-														Pierce</a></td>
-												<td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b><br />
-													Trying to find a solution to this problem...</td>
-												<td class="mailbox-attachment">
-														<div class="tools">
-															<i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i>
-														</div>
-												</td>
-												<td class="mailbox-date">01-26-2016 21:33:52 </td>
-											</tr>
-											<tr>
-												<td><div class="icheckbox_flat-blue"
-														aria-checked="false" aria-disabled="false"
-														style="position: relative;">
-														<input type="checkbox"
-															style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper"
-															style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-													</div></td>
-												<td class="mailbox-star"><a href="#"><i
-														class="fa fa-star text-yellow"></i></a></td>
-												<td class="mailbox-name"><a href="read-mail.html">Alexander
-														Pierce</a></td>
-												<td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b><br />
-													Trying to find a solution to this problem...</td>
-												<td class="mailbox-attachment">
-														<div class="tools">
-															<i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i>
-														</div>
-												</td>
-												<td class="mailbox-date">01-26-2016 21:33:52 </td>
-											</tr>
 
 										</tbody>
 									</table>
@@ -448,13 +409,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- /.content-wrapper -->
 
 		<!-- Main Footer -->
-		<footer class="main-footer">
-			<!-- To the right -->
+		<!-- <footer class="main-footer">
+			To the right
 			<div class="pull-right hidden-xs">Anything you want</div>
-			<!-- Default to the left -->
+			Default to the left
 			<strong>Copyright &copy; 2015 <a href="#">Company</a>.
 			</strong> All rights reserved.
-		</footer>
+		</footer> -->
 
 
 		<!-- Add the sidebar's background. This div must be placed
@@ -478,29 +439,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		src="${pageContext.request.contextPath}/resources/admin/js/jquery.slimscroll.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/admin/js/select2.full.min.js"></script>
-		<script
+	<script
+		src="${pageContext.request.contextPath}/resources/admin/js/moment.js"></script>
+	<script
 		src="${pageContext.request.contextPath}/resources/user/js/newlistmemo.js"></script>
 
+
 	<script>
-	var path="${pageContext.request.contextPath}";
+		var path = "${pageContext.request.contextPath}";
 		$(function() {
-			getRecordeNumber();
+
+			init();
+
 			$('#txtTitle').focus();
 			/* ADD SLIM SCROLL */
-			$('.table-responsive').slimScroll({
+			/* $('.table-responsive').slimScroll({
 				height : '526px'
-			});
+			}); */
 
 			/* ADD BOOTSTRAP EDITOR */
 			/* 			$('#content_memo').wysihtml5();
 			 $('#content_memo').height("262"); */
-
-			/* HOVER ON EACH MEMO */
-			$('tr').hover(function() {
-				$(this).find('.tools i').show();
-			}, function() {
-				$(this).find('.tools i').hide();
-			});
 
 			/* PASS URL PATH TO URL TEXTBOX */
 			$('#txtUrl').val(window.location.href);
@@ -536,8 +495,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								$('#content_memo').val("");
 								$('#isPublic').val("false");
 								$('#txtTitle').focus();
-								alert("Success", "Your memo has been saved.",
-										"success");
+								listMemo();
 							},
 							error : function(data) {
 								alert("Fail", "Fail with create memo!", "error");
@@ -562,11 +520,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				$('#isPublic').val("false");
 				$('#txtTitle').focus();
 			});
-			
-			
-			/* LIST MEMO LIMIT 10 */
-			
 
+			/* LIST MEMO LIMIT 10 */
+			$('.mailbox-controls input[type="radio"]').click(function() {
+				listMemo();
+			});
+
+
+			/*SEARCH ON TEXT BOX*/
+			jQuery('#searchtitle').on('input', function() {
+				listMemo();
+			});
+			
+			/* SEARCH ON SELECT CHANGE */
+			$('#searchdomain').on('change', function() {
+				  listMemo();
+				});
 		});
 	</script>
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.

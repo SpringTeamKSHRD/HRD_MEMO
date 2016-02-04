@@ -124,5 +124,12 @@ public class Memo {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	@Override
+	public String toString() {
+		return "Memo [id=" + id + ", userid=" + userid + ", username=" + username + ", userimage=" + userimage
+				+ ", title=" + title + ", content=" + content + ", domainName=" + domainName + ", url=" + url
+				+ ", date=" + date + ", isenable=" + isenable + ", ispublic=" + ispublic + ", fullDomain=" + fullDomain
+				+ ", count=" + count + "]";
 	}	
 }

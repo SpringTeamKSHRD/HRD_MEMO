@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
+import com.memo.app.entities.MemoFilter;
 import com.memo.app.entities.MemoSearch;
 import com.memo.app.entities.Message;
 import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
+import com.memo.app.services.IMemoService;
 import com.memo.app.services.MemoService;
 import com.memo.app.services.MessageService;
 import com.memo.app.services.UserService;
@@ -39,7 +41,10 @@ public class MemoController {
 	// LoggerFactory.getLogger(AdminArticleController.class);
 	@Autowired
 	private MemoService memoService;
-
+	
+	@Autowired
+	private IMemoService pmemoservice;
+	
 	@Autowired
 	private UserService userService;
 
@@ -429,12 +434,73 @@ public class MemoController {
 	@RequestMapping(value = "/numbermemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> numberMemo(@RequestBody MemoSearch memo) {
 		System.out.println("list memo");
+		System.out.println(memo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
         int mn=memoService.getMemoNumberNew(memo);
 		if (mn>0) {
 			map.put("MESSAGE", "Memo Found.");
 			map.put("STATUS", HttpStatus.FOUND.value());
 			map.put("DATA",mn);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	// SOPHEAK'S IMPLEMENT
+	@RequestMapping(value = "/mylistmemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody Memo memo) {
+		System.out.println("list memo");
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(memo.toString());
+		System.out.println(pmemoservice.listMemo(memo, 9, 0));
+		if ((pmemoservice.listMemo(memo, 9, 0)).size()>0) {
+			map.put("MESSAGE", "MEMO FOUND...!");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",pmemoservice.listMemo(memo, 9, 0));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value = "/mylistmemo1", method = RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> listMemoWithPrivacy(@RequestBody Memo memo) {
+		System.out.println("list memo");
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(memo.toString());
+		System.out.println(pmemoservice.listMemo(memo, 9, 0));
+		if ((pmemoservice.listMemoWithPrivacy(memo, 9, 0)).size()>0) {
+			map.put("MESSAGE", "MEMO FOUND...!");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",pmemoservice.listMemoWithPrivacy(memo, 10, 0));
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
+		
+	@RequestMapping(value = "/listdomain", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listDomain() {
+		System.out.println("list domain");
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(pmemoservice.listAllDomain());
+		/*MemoFilter filter = new MemoFilter();
+		filter.setTitle("test");
+		filter.setWebsite("");
+		filter.setHasPublic(true);
+		filter.setPublic(true);
+		System.out.println(pmemoservice.count(filter));*/
+		System.out.println();
+		if ((pmemoservice.listAllDomain()).size()>0) {
+			map.put("MESSAGE", "MEMO FOUND...!");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",pmemoservice.listAllDomain());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
 			map.put("MESSAGE", "MEMO NOT FOUND..!");

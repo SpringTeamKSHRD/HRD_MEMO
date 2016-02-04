@@ -69,7 +69,9 @@ public class MemoSearch {
 		@Override
 		public String toString() {
 			return "MemoSearch [userid=" + userid + ", page=" + page + ", limit=" + limit + ", column=" + column
-					+ ", domain=" + domain + ", title=" + title + ", date=" + date + ", search=" + search + "]";
+					+ ", domain=" + domain + ", title=" + title + ", date=" + date + ", ispublic=" + ispublic
+					+ ", search=" + search + "]";
 		}
+		
 		
 }
