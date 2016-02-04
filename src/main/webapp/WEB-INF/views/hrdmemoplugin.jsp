@@ -34,7 +34,7 @@
 	        <div class="input-field col s12">
 	          <i class="material-icons prefix">account_circle</i>
 	          <input id="loginemail" type="email" class="validate" onkeypress="LoginhandleKeyPress(event);">
-	          <label for="loginemail">Emmail</label>
+	          <label for="loginemail">Email</label>
 	        </div>
 	        <div class="input-field col s12" style="margin: 0px;">
 	          <i class="material-icons prefix">vpn_key</i>
@@ -192,7 +192,7 @@
 		var memo_title_label=document.createElement('small');
 		memo_title_label.style.color="white";
 		memo_title_label.style.float="right";
-		memo_title_label.style.margin="0px";
+		memo_title_label.style.margin="5px 0 0 0";
 		memo_title_label.style.paddingRight="10px";
 		memo_title_label.style.fontSize="14px";
 		var memo_desc_title=document.createTextNode(generateTitle(title));
@@ -234,11 +234,16 @@
 		report.appendChild(report_text);
 		var desc_text=document.createElement("div");
 		desc_text.setAttribute('class','content');
+		desc_text.style.margin="10px";
 		desc_text.appendChild(document.createTextNode(text));
 		
 		var readmore = document.createElement("a");
 		readmore.setAttribute('class','read more');
-		readmore.appendChild(document.createTextNode("Read More"));
+		var smalldot=document.createElement("small");
+		smalldot.appendChild(document.createTextNode("... "));
+		smalldot.style.color = "black";
+		readmore.appendChild(smalldot);
+		readmore.appendChild(document.createTextNode("More"));
 		desc_text.appendChild(readmore);		
 				
 		//create edit text
@@ -251,7 +256,7 @@
 		var edit_text=document.createTextNode("mode_edit");
 		edit.appendChild(edit_text);
 		//create footer
-		var memo_footer=document.createElement("P");
+		var memo_footer=document.createElement("div");
 		memo_footer.setAttribute('class','mymemo-footer');
 		memo_footer.appendChild(memo_date_label);
 		desc.appendChild(memo_img_wraper);
@@ -704,8 +709,8 @@
 					});
 	 }
 	 $("body").on("click",".read",function(){
-		if($(this).text()=="Read More") $(this).text("Show Fewer"); 
-		else							$(this).text("Read More");
+		if($(this).text()=="... More") $(this).text("Fewer"); 
+		else							$(this).text("... More");
 		$(this).toggleClass("more fewer");
 		$(this).parent().toggleClass("content"); 
 	 });

@@ -6,7 +6,7 @@
    font-feature-settings: 'liga';
 }
 .chip {
-  padding: 0px 10px 0 10px;
+  
   font-size: 12px;
   font-weight: 500;
   color:black;
@@ -17,7 +17,7 @@
   border-left:2px solid #00BFA5;
  word-wrap: break-word; 
   box-shadow:1px 1px 4px gray;
-  margin: 5px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
   display:table;
   word-break:break-all;
 }
@@ -29,11 +29,9 @@
   padding-left: 8px;
 }
 .memo_img_wrapper {
-    margin: 0px;
-    position: absolute;
-    padding: 2px 2px 2px 13px;
+
     width: inherit;
-    height: 20px;
+    height: 32px;
     left: 0px;
     top: 0px;
 }
@@ -46,6 +44,7 @@
 	display: inline;
 }
 .mymemo-footer{
+	padding: 0 10px 0 10px;
 	margin: 0px;
 	width: 100%;
 }
@@ -104,32 +103,29 @@
     text-overflow: ellipsis;
     display: -webkit-inline-box;
     -webkit-box-orient: vertical;
-    line-height: 18px;
-    height: 36px;
+    line-height: 20px;
+    height: 40px;
     margin-bottom: 5px;
     -webkit-line-clamp: 2;
 }
 .read{
-	width: 70px;
-	background: white;
+	width: 42px;
+	background: #FAFAFA;
 	text-align: right;
 	cursor: pointer;
 	color: blue;
     display: block;
 }
 .more{
-	
-    
-
     position: absolute;
-    right: 12px;
-    top: 48px;
-    
+    right: 15px;
+    top: 82px;    
 }
-.fewer{
-	
+.fewer{	
     display: block;
-    background: white;
-    
     float: right;
 }
+.chip img {
+	margin-left: 5px;
+}
+
