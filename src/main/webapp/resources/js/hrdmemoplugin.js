@@ -4,8 +4,8 @@
 	//add css to iclude iframe
 		$('head').append("<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>");
 		$('head').append(" <script type='text/javascript' src='"+path+"resources/js/iframeResizer.min.js'></script>");
-	//iframe wrapper
-		var wrapper=document.getElementById("hrd_memo_pess");
+	//iframe memo_ifr_wrapper
+		var memo_ifr_wrapper=document.getElementById("hrd_memo_pess");
 	//create iframe
 		var ifrm_hrdmemo = document.createElement("IFRAME");
 
@@ -31,18 +31,19 @@
 		memo_p.innerHTML=" <i class='small material-icons' onclick='gotoMemoMainPage()' " +
 				"style='cursor:pointer; margin:0px;width:20px; height:20px; color:blue;'>web</i>";
 		
-	//wrapper style
-		wrapper.style.height=window.innerHeight+"px";
-		wrapper.style.width="0px";
-		wrapper.style.zIndex="999999999";
-		wrapper.style.right=windowScrollWidth+'px';
-		wrapper.style.position="fixed";
-		wrapper.style.top="0px";
-		wrapper.style.background="#F5F5F5";
-		wrapper.style.margin="0px";
-		wrapper.style.border="1px solid #E0E0E0";
-		wrapper.appendChild(memo_p);
-		wrapper.appendChild(ifrm_hrdmemo);
+	//memo_ifr_wrapper style
+		memo_ifr_wrapper.style.height=window.innerHeight+"px";
+		memo_ifr_wrapper.style.width="0px";
+		memo_ifr_wrapper.style.zIndex="999999999";
+		memo_ifr_wrapper.style.right=windowScrollWidth+'px';
+		memo_ifr_wrapper.style.position="fixed";
+		memo_ifr_wrapper.style.top="0px";
+		memo_ifr_wrapper.style.background="#F5F5F5";
+		memo_ifr_wrapper.style.margin="0px";
+		memo_ifr_wrapper.style.border="1px solid #E0E0E0";
+		memo_ifr_wrapper.style.overflowX="hidden";
+		memo_ifr_wrapper.appendChild(memo_p);
+		memo_ifr_wrapper.appendChild(ifrm_hrdmemo);
 	///start script
 		var iframe_memo_id="";
 		var memo_iframe_height=0;
@@ -102,15 +103,15 @@
 		$("#btn-act-desc").css('display','block');
 		$(window).resize(function() {	
 			windowScrollWidth =document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
-			wrapper.style.height= window.innerHeight+"px";
-			wrapper.style.right=windowScrollWidth+'px';
+			memo_ifr_wrapper.style.height= window.innerHeight+"px";
+			memo_ifr_wrapper.style.right=windowScrollWidth+'px';
 			document.getElementsByClassName('my-memo-class')[0]
 			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
 		$(window).load(function() {	
 			windowScrollWidth =document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
-			wrapper.style.height= window.innerHeight+"px";
-			wrapper.style.right=windowScrollWidth+'px';
+			memo_ifr_wrapper.style.height= window.innerHeight+"px";
+			memo_ifr_wrapper.style.right=windowScrollWidth+'px';
 			document.getElementsByClassName('my-memo-class')[0]
 			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});

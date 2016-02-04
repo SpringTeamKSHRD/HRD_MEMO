@@ -5,15 +5,16 @@ function updateUser(){
 	if(img==""){
 		img=$("#origin_img").val();
 		updateUserInfo();
-		swal("Success!", "Your profile has been updated.", "success");
+		alert("Your profile has been updated.");
 	}else{
 		uploadImage();
-		swal("Success!", "Your profile has been updated", "success");
+		alert("Error");
 	}
 	img="";
 }
 
 /* For updating profile picture*/
+alert(path);
 function uploadImage() {
 	var data1;
     data1 = new FormData($(this)[0]);
