@@ -79,3 +79,75 @@ $("#prev").click(function(){
 		getMemoDisplay(current);
 	}
 });
+//For Delete Memo
+function deletememo(id){
+	swal({   title: "Are you sure?",
+			 text: "You will not be able to recover this memo file!",
+			 type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",
+			 confirmButtonText: "Yes, delete it!",
+			 closeOnConfirm: false },
+			 function(){					 
+				 $.ajax({
+						type : "DELETE",
+						url : path+"/user/"+id,
+						success : function(data) {
+							swal("Deleted!", "Your memo file has been deleted.", "success");
+							getMemoNumber();
+						},
+						error : function(data) {
+							sweetAlert("Fail", "Fail with deleted memo!", "error");
+						}
+					});	    
+	});
+}
+//To Edit
+function toEdit(id){
+	var value1="Private";
+	var value2="Public";
+	 $("#cont_memo").val("");
+	 $("#icon_prefix").focus();
+	 $.ajax({
+			type : "GET",
+			url : path+"/user/"+id,
+			success : function(data) {
+				   // Private or public data.DATA.ispublic
+			       $(".titlememo").val(data.DATA.title);
+			       $("#editurl").val(data.DATA.url);
+			       $("#cont_memo").val(data.DATA.content);
+			       $('#modal2').openModal();
+			       $("#btneditwrapper").html("<a class='waves-effect waves-light btn right' " +
+			       							"onclick=editProcess("+id+") style='margin:20px;'>Edite</a>");
+			},
+			error : function(data) {
+				 alert("rerror");
+			}
+		});
+}
+//Edit Process
+function editProcess(id){
+	var mypublic;
+	if($("#privacy").val()==0) 
+		mypublic=false;
+	else 
+		mypublic=true;
+	json = {
+			title : $('.titlememo').val(),
+			content : $("#cont_memo").val(),
+			ispublic : mypublic,
+			id : id
+		};				 
+			 $.ajax({
+					type : "PUT",
+					url : path+"/user/"+id,
+					data : JSON.stringify(json),
+					contentType: 'application/json',
+					success : function(data) {
+						alert("Udate Success");
+						getRecordeNumber();
+					},
+					error : function(data) {
+						alert("Update Unsuccess")
+					}
+				});  
+	
+}
