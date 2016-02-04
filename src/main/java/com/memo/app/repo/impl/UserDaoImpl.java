@@ -150,7 +150,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean updateUserPassword(User user) {
-		System.out.println("update user password dao");		
+		System.out.println("update user password dao");	
+		System.out.println(user.getOldpwd()+","+user.getPassword());
 		if(new BCryptPasswordEncoder().matches(user.getOldpwd(),user.getPassword())){
 			System.out.println("old password matched.");
 			if(user.getNewpwd().equals(user.getConpwd())){

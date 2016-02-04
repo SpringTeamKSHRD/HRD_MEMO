@@ -52,5 +52,8 @@ public class UserController {
 	public String getDashBaord(){
 		return "user/dashboard";
 	}
-	
+	@RequestMapping(value="/message")
+	public String getMessagePage(){
+		return "user/message";
+	}
 }

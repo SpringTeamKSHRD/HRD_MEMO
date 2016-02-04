@@ -21,11 +21,14 @@ function checkConPwd(){
 	}else{
 		if($("#new_pwd").val()!=$("#con_pwd").val()){
 			$("#v_cp").text("new password are not match with confirm passowrd!");
+			$("#con_pwd").focus();
 		}
 	}
 }
 
 function updateUserPwd(){
+	if($("#con_pwd").val()===$("#new_pwd").val()&&$("#con_pwd").val()!==""&&$("#new_pwd").val()!==""&&
+			$("#old_pwd").val()!==""){
 	json = {userid : parseInt($("#userid").val()),
 			password : $("#password").val(),
 			oldpwd : $("#old_pwd").val(),
@@ -39,17 +42,18 @@ function updateUserPwd(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
-			swal("Success!", "Your password has been updated.", "success");
+			alert("Update your account success");
 			clearText();
 		},
 		error : function(data) {
-			sweetAlert("Fail", "Fail with password updated!", "error");
+			alert("Old password mismatch..!");
 			console.log("ERROR..." + data);
 		}
 		});
+	}else{
+		alert("Comfirm password mismatch with new password");
+	}
 }
-
-
 function clearText(){
 	$("#old_pwd").val("");
 	$("#new_pwd").val("");

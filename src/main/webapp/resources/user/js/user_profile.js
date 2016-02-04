@@ -5,16 +5,13 @@ function updateUser(){
 	if(img==""){
 		img=$("#origin_img").val();
 		updateUserInfo();
-		alert("Your profile has been updated.");
 	}else{
 		uploadImage();
-		alert("Error");
 	}
 	img="";
 }
 
 /* For updating profile picture*/
-alert(path);
 function uploadImage() {
 	var data1;
     data1 = new FormData($(this)[0]);
@@ -50,9 +47,10 @@ function updateUserInfo(){
 		data : JSON.stringify(json),
 		contentType: 'application/json',
 		success : function(data) {
+			alert("User profile has been updated..!");
 		},
 		error : function(data) {
-			alert("Unsuccess: " + data.MESSAGE);
+			alert("Update Eorror");
 			console.log("ERROR..." + data);
 		}
 	});

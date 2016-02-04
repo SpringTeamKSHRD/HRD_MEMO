@@ -41,7 +41,6 @@
 		memo_ifr_wrapper.style.background="#F5F5F5";
 		memo_ifr_wrapper.style.margin="0px";
 		memo_ifr_wrapper.style.border="1px solid #E0E0E0";
-		memo_ifr_wrapper.style.overflowX="hidden";
 		memo_ifr_wrapper.appendChild(memo_p);
 		memo_ifr_wrapper.appendChild(ifrm_hrdmemo);
 	///start script

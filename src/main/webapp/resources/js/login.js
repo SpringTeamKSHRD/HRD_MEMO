@@ -13,7 +13,7 @@ $(function() {
 					|| data == "Bad credentials")
 						alert(data);
 				else{	
-						//khmerAcademeyLogin(username, password);
+						khmerAcademeyLogin(username, password);
 						location.href = path + data
 				};
 			},
@@ -23,7 +23,7 @@ $(function() {
 		});
 	});
 });
-/*function khmerAcademeyLogin(username,password){
+function khmerAcademeyLogin(username,password){
 	$.ajax({
 		url: "http://localhost:8080/KAWEBCLIENT/login",
 		type: "POST",
@@ -37,4 +37,4 @@ $(function() {
 			 alert("Login Khmer academy error");	
 		}
 		});
-}*/
+}

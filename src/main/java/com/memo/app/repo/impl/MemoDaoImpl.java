@@ -99,13 +99,14 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public Memo getMemo(int id) {
+		System.out.println(id);
 		String sql="SELECT id,userid,title,content,domain,url,date,isenable,ispublic "
 					+"FROM memo.tbmemo "
 					+"WHERE id=?";
 		try{
-			return (Memo)jdbcTemplate.queryForObject(sql, new Object[]{id},new UserMemoRowMapper());
+			return jdbcTemplate.queryForObject(sql, new Object[]{id},new UserMemoRowMapper());
 		}catch(Exception e){
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}

@@ -191,103 +191,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- Content Header (Page header) -->
 			<!-- Main content -->
 			<section class="content">
-				<!-- DASHBOARD HEADER -->
 				<div class="row">
-				<div class="col-md-3 col-sm-2 col-xs-12">
-				</div>
-					<div class="col-md-6 col-sm-8 col-xs-12">
-					<div class="box box-success">
-			            <div class="box-header with-border">
-			              <h3 class="box-title">User Profile</h3>
-			            </div>
-			            <!-- /.box-header -->
-			            <div class="box-body no-padding" style="display: block;">
-			            <form class="form-horizontal" style="padding: 5px;">
-					                <div class="form-group" style="margin-left: 10px;">
-										<br/>
-										<div class="fileinput fileinput-new" data-provides="fileinput">
-											<input type="text" id="origin_img" value="${sessionScope['USER'].image}" hidden="true"/>
-											<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 100px; height: 120px;">
-												<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="width: 100%; height: 100%;"/>
-											</div>
-											  <div>
-											    <span class="btn btn-default btn-file"><span class="fileinput-new">Select Image</i></span>
-											    <span class="fileinput-exists" style="width:47px;" title="change image"><i class="fa fa-pencil-square fa-1x" style="color:green;" ></i></span>
-											    <input type="file" id="image"></span> <!-- file image is here -->
-											    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput" style="width:47px;"><i class="fa fa-remove" style="color:red;"></i></a>
-											  </div>
-										</div>
-									</div>
-				                <div class="form-group">
-				                  <label for="username" class="col-sm-3 control-label">User Name</label>
-				                  <div class="col-sm-9">
-				                    <input type="text" class="form-control" id="username" value="${sessionScope['USER'].username}">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="box">
+				            <div class="box-header with-border">
+				              <h3 class="box-title">All Messages</h3>
+				              <div class="box-tools">
+				                <div class="input-group input-group-sm" style="width: 150px;">
+				                 <input type="date" class="form-control">
+				                  <div class="input-group-btn">
+				                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 				                  </div>
 				                </div>
-				                <div class="form-group">
-				                  <c:choose>
-								    <c:when test="${sessionScope['USER'].gender =='female'}">								    
-								        <label for="gender" class="col-sm-3 control-label">Gender</label>		
-								         <div class="col-sm-9">			
-										<label class="radio-inline">
-										  <input type="radio" name="gender" value="male" > Male
-										</label>
-										<label class="radio-inline">
-										  <input type="radio" name="gender" value="female" checked> Female
-										</label> 
-										</div>
-								    </c:when>    
-								    <c:otherwise>
-								         <label for="gender" class="col-sm-3 control-label">Gender</label>		
-								         <div class="col-sm-9">			
-										<label class="radio-inline">
-										  <input type="radio" name="gender" value="male" checked> Male
-										</label>
-										<label class="radio-inline">
-										  <input type="radio" name="gender" value="female" > Female
-										</label> 
-										</div>
-								    </c:otherwise>
-								</c:choose>
-				                </div>
-				                <div class="form-group">
-									 <label for="email" class="col-sm-3 control-label">Email</label>	
-									 <div class="col-sm-9">	
-									<input type="email" class="form-control" id="email" value="${sessionScope['USER'].email}">
-									</div>
-								</div>
-								<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
-								<div class="form-group">
-									 <label for="phone" class="col-sm-3 control-label">Phone Number</label>		
-									 <div class="col-sm-9">
-									<input type="text" class="form-control" id="phone" value="${sessionScope['USER'].phone}">
-									</div>
-								</div>
-								<div class="form-group">
-									 <label for="dob" class="col-sm-3 control-label">Date of Birth</label>		
-									 <div class="col-sm-9">
-									<input type="date" id="dob" value="${sessionScope['USER'].dob}"/>
-									</div>
-								</div>
-				              <!-- /.box-body -->
-				              <div class="box-footer">
-				                <button type="button" class="btn btn-danger pull-right" onclick="cancelUser()">Cancel</button>
-				                <button type="button" class="btn btn-success pull-right" style="margin-right: 10px;" onclick="updateUser()">Update</button>
 				              </div>
-				              <!-- /.box-footer -->
-				            </form>
-			            </div>
-			            <!-- /.box-body -->
-         			 </div>
-						<!-- /.info-box -->
-					</div>
-					<div class="col-md-3 col-sm-2 col-xs-12">
+				            </div>
+				            <div class="box-body" id="message_diplayer">
+				             
+				            </div>
+				            <div class="box-footer clearfix">
+				              <ul class="pagination pagination-sm no-margin pull-right" 
+				              id="pagination" style="cursor: pointer;">
+				              </ul>
+				            </div>
+	         		 </div>
 				</div>
 				<!--End Row1  -->
 				</div>
 			</section>
 			<!-- /.content -->
 		</div>
+		<input type="text" id="password" value="${sessionScope['USER'].password}" hidden="true"/>
+		<input type="text" id="userid" value="${sessionScope['USER'].userid}" hidden="true"/>
 		<!-- /.content-wrapper -->
 		<!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
@@ -315,7 +249,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<script type="text/javascript">
 		  var path="${pageContext.request.contextPath}";
 		</script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/user_profile.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/message.js"></script>
 		
 </body>
 </html>

@@ -134,7 +134,7 @@
 	var cur_h=0,domain="",url="",title="";
 	//retriev object
 	function initailizePage(){
-		$("#useropt").prop('checked','');
+		//$("#useropt").prop('checked','');
 		try {
 				retrievedObject = JSON.parse(Cookies.get('MEMO')); 
 				
@@ -153,6 +153,7 @@
 	var first=true;
 	var iFrameResizer = {
 			messageCallback : function(message) {
+				
 				var pData = message;
 				var getPdata=pData.split("hrdmem");
 				cur_h=getPdata[0];
@@ -164,16 +165,16 @@
 				first=false;
 				}
 				initailizePage();
-				if(first==false){
 				 $(".slimScrollDiv").css('height',getPdata[4]-150+'px');
 				 $("#mydespanel").css('height',getPdata[4]-150+'px');
-				}
 				if(document.getElementById("useropt").checked){
 					 pluginGetMemoPulic();
 				 }else if(first==false){
 					 pluginGetMemoOwner();
 				 }
+				//alert(getPdata[4]);
 			}
+	     
 		}
 	//create description box
 	function createDescribeBox(text,title,image,userid,memoid,date,username){
