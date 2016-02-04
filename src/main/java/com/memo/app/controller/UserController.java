@@ -48,5 +48,9 @@ public class UserController {
 	public String getHomeMemoPage(){
 		return "user/home";
 	}
+	@RequestMapping(value={"/dashbaord"})
+	public String getDashBaord(){
+		return "user/dashboard";
+	}
 	
 }
