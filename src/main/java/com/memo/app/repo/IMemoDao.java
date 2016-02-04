@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
+import com.memo.app.entities.Pagination;
 
 public interface IMemoDao {
 	public List<Memo> list(Memo m,int limit,int offset);
@@ -12,4 +13,5 @@ public interface IMemoDao {
 	public Long count(MemoFilter filter);
 	public Boolean delete(int id);
 	public Boolean update(Memo m);
+	public List<Memo> listAllMemos(MemoFilter filter, Pagination pagination);
 }

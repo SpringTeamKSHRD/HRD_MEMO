@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
+import com.memo.app.entities.Pagination;
 import com.memo.app.repo.IMemoDao;
 import com.memo.app.repo.impl.PMemoDaoImp;
 import com.memo.app.services.IMemoService;
@@ -47,5 +48,9 @@ public class PMemoServiceImpl implements IMemoService {
 		return memoservice.update(m);
 	}
 
+	@Override
+	public List<Memo> listAllMemos(MemoFilter filter, Pagination pagination) {
+		return memoservice.listAllMemos(filter, pagination);
+	}
 
 }

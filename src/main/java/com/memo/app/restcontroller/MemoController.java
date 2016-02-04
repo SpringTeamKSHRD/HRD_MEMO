@@ -27,6 +27,7 @@ import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
 import com.memo.app.entities.MemoSearch;
 import com.memo.app.entities.Message;
+import com.memo.app.entities.Pagination;
 import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.IMemoService;
@@ -488,12 +489,22 @@ public class MemoController {
 	@RequestMapping(value = "/listdomain", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listDomain() {
 		System.out.println("list domain");
+		MemoFilter filter = new MemoFilter();
+		filter.setTitle("test");
+		filter.setDomainName("");
+		filter.setIsPublic("");
+		filter.setUserId(2);
+		System.out.println(pmemoservice.count(filter));
+		Pagination pagination = new Pagination();
+		pagination.setTotalCount(pmemoservice.count(filter));
+		pagination.setTotalPages(pagination.totalPages());
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println(pmemoservice.listAllDomain());
 		if ((pmemoservice.listAllDomain()).size()>0) {
 			map.put("MESSAGE", "MEMO FOUND...!");
 			map.put("STATUS", HttpStatus.FOUND.value());
 			map.put("DATA",pmemoservice.listAllDomain());
+			map.put("PAGINATION", pagination);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
 			map.put("MESSAGE", "MEMO NOT FOUND..!");
@@ -538,5 +549,26 @@ public class MemoController {
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@RequestMapping(value = "/user/{userId}/memos", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listmemos(@PathVariable("userId") int userId, MemoFilter filter, Pagination pagination) {
+		System.out.println("list memo");
+		Map<String, Object> map = new HashMap<String, Object>();
+		filter.setUserId(userId);
+		System.out.println(filter);
+		pagination.setTotalCount(pmemoservice.count(filter));
+		pagination.setTotalPages(pagination.totalPages());
+		//if ((pmemoservice.listMemoWithPrivacy(memo, 9, 0)).size()>0) {
+			map.put("MESSAGE", "MEMO FOUND...!");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			map.put("DATA",pmemoservice.listAllMemos(filter, pagination));
+			map.put("PAGINATION", pagination);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		/*} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}*/
 	}
 }

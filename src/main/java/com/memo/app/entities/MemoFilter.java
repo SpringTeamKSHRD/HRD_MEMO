@@ -2,44 +2,68 @@ package com.memo.app.entities;
 
 public class MemoFilter {
 
-	private boolean hasPublic;
-	
-	private String website;
+	private String domainName;
 	
 	private String title;
 	
-	private boolean isPublic;
+	private String isPublic;
+	
+	private int userId;
 
-	public boolean isPublic() {
-		return isPublic;
+	/**
+	 * @return the domainName
+	 */
+	public String getDomainName() {
+		return domainName;
 	}
 
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+	/**
+	 * @param domainName the domainName to set
+	 */
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 
-	public String getWebsite() {
-		return website;
-	}
-
-	public void setWebsite(String website) {
-		this.website = website;
-	}
-
+	/**
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * @param title the title to set
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public boolean getHasPublic() {
-		return hasPublic;
+	/**
+	 * @return the isPublic
+	 */
+	public String getIsPublic() {
+		return isPublic;
 	}
 
-	public void setHasPublic(boolean hasPublic) {
-		this.hasPublic = hasPublic;
+	/**
+	 * @param isPublic the isPublic to set
+	 */
+	public void setIsPublic(String isPublic) {
+		this.isPublic = isPublic;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 }

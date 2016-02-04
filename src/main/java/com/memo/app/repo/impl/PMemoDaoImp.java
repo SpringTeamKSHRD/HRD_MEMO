@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
+import com.memo.app.entities.Pagination;
 import com.memo.app.entities.User;
 import com.memo.app.repo.IMemoDao;
 
@@ -74,16 +75,18 @@ public class PMemoDaoImp implements IMemoDao {
 	@Transactional
 	public Long count(MemoFilter filter) {
 		Session session = sf.getCurrentSession();
-		String isPublic = "";
-		if(filter.getHasPublic()){
-			isPublic = " AND M.ispublic = :public";
-		}
-		Query query = session.createQuery("SELECT COUNT(*) FROM Memo M WHERE LOWER(M.title) LIKE :title AND LOWER(M.domainName) LIKE :domain "+ isPublic);
-		query.setParameter("title", "%" + filter.getTitle().toLowerCase() + "%");
-		query.setParameter("domain", "%" + filter.getWebsite().toLowerCase() + "%");
-		if(filter.getHasPublic()){
-			query.setParameter("public", filter.isPublic());
-		}
+		Query query = session.createQuery(
+				  "SELECT COUNT(M.title) "
+				+ "FROM Memo M "
+				+ "WHERE LOWER(M.title) LIKE :title "
+				+ "AND LOWER(M.domainName) LIKE :domain "
+				+ "AND LOWER(CAST(M.ispublic AS string)) LIKE :public "
+				+ "AND M.isenable = true "
+				+ "AND userid = :userId ");
+		query.setParameter("title",  "%" + filter.getTitle().toLowerCase() + "%");
+		query.setParameter("domain", "%" + filter.getDomainName().toLowerCase() + "%");
+		query.setParameter("public", "%" + filter.getIsPublic().toLowerCase()+ "%");
+		query.setParameter("userId", filter.getUserId());
 		Long total = (Long)query.uniqueResult();
 		return total;
 	}
@@ -117,6 +120,20 @@ public class PMemoDaoImp implements IMemoDao {
 		return false;
 	}
 	
-	
-
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Memo> listAllMemos(MemoFilter filter, Pagination pagination) {
+		Session sess= sf.getCurrentSession();
+		Criteria cr = sess.createCriteria(Memo.class);
+				 cr.add(Restrictions.eq("userid",filter.getUserId()));
+				 cr.add(Restrictions.like("domainName", filter.getDomainName(), MatchMode.ANYWHERE).ignoreCase());
+				 cr.add(Restrictions.like("title", filter.getTitle(), MatchMode.ANYWHERE).ignoreCase());
+				 cr.add(Restrictions.eq("isenable", true));
+				 cr.add(Restrictions.sqlRestriction("ispublic::TEXT LIKE '" + "%" +filter.getIsPublic().toLowerCase() +"%'"));
+				 cr.addOrder(Order.desc("date"));
+				 cr.setFirstResult(pagination.offset());
+				 cr.setMaxResults(pagination.getPerPage());
+				 return cr.list();
+	}
 }

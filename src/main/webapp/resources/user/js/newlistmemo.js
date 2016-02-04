@@ -42,11 +42,12 @@ function listMemo() {
     var json = {};
     var url = '';
     if (($('input[name="privacy"]:checked').val()) == "") {
-        url = path + "/user/mylistmemo";
+        url = path + "/user/user/"+$("#userid").val()+"/memos";
         json = {
-            userid: $("#userid").val(), //for userid can text ""
+            userId: $("#userid").val(), //for userid can text ""
             title: $("#searchtitle").val(), //for search title text can ""
             domainName: $("#searchdomain").val(), //for search domainName text can "
+            isPublic :  "",
         };
     } else {
         url = path + "/user/mylistmemo1";
@@ -59,9 +60,9 @@ function listMemo() {
     }
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: url,
-        data: JSON.stringify(json),
+        data: json,
         contentType: 'application/json',
         success: function(data) {
             var tr = '';
@@ -81,7 +82,11 @@ function listMemo() {
             });
             $('table.table').html(tr);
 
-
+            if(data.PAGINATION){
+            	$("#currentPage").html(data.PAGINATION.currentPage);
+            	$("#totalPage").html(data.PAGINATION.totalPages);
+            	$("#totalRecord").html(data.PAGINATION.totalCount);
+            }
             /* HOVER ON EACH MEMO */
             $('tr').hover(function() {
                 $(this).find('.tools i').show();

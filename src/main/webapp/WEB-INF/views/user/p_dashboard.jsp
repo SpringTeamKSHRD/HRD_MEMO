@@ -336,7 +336,7 @@ td.mailbox-attachment{
 										<i class="fa fa-refresh"></i>
 									</button>
 									<div class="pull-right">
-										1-50/200
+										<span id="currentpage">1</span>-<span id="totalPage">50</span>/<span id="totalRecord">200</span>
 										<div class="btn-group">
 											<button class="btn btn-default btn-sm">
 												<i class="fa fa-chevron-left"></i>
