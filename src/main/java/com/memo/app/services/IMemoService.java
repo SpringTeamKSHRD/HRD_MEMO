@@ -10,4 +10,6 @@ public interface IMemoService {
 	public List<Memo> listMemoWithPrivacy(Memo m,int limit,int offset);
 	public List<String> listAllDomain();
 	public Long count(MemoFilter filter);
+	public Boolean deleteMemo(int id);
+	public Boolean updateMemo(Memo m);
 }

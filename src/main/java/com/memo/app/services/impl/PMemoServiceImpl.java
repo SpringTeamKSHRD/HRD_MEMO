@@ -36,5 +36,16 @@ public class PMemoServiceImpl implements IMemoService {
 	public Long count(MemoFilter filter) {
 		return memoservice.count(filter);
 	}
+	@Override
+	public Boolean deleteMemo(int id) {
+		return memoservice.delete(id);
+		
+	}
+
+	@Override
+	public Boolean updateMemo(Memo m) {
+		return memoservice.update(m);
+	}
+
 
 }

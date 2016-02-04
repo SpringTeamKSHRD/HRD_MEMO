@@ -83,6 +83,9 @@ td.mailbox-subject {
 td.mailbox-attachment{
 	min-width:50px;
 }
+.table-responsive.mailbox-messages > table > tbody > tr >td:nth-child(2):hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <!--
@@ -283,15 +286,15 @@ td.mailbox-attachment{
 							<div class="box-body no-padding">
 								<div class="mailbox-controls">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-8">
 											<label class="btn btn-default btn-sm"><input
-												type="radio" name="privacy" value="" id="all-memo" >All
+												type="radio" name="privacy" value="" id="all-memo" checked>All
 												Memo</label> <label class="btn btn-info btn-sm"><input
 												type="radio" name="privacy" value="true" id="public-memo">Public</label>
 											<label class="btn btn-danger btn-sm"><input
 												type="radio" name="privacy" value="false" id="private-memo">Private</label>
 										</div>
-										<div class="col-md-6" >
+										<div class="col-md-4" >
 											<select class="form-control" name="searchdomain"
 												id="searchdomain">
 
@@ -390,10 +393,13 @@ td.mailbox-attachment{
 							<!-- /.box-body -->
 							<div class="box-footer">
 								<div class="pull-right">
+									<button class="btn btn-success" id="btn-addnew" style="display:none">
+										 +Add New
+									</button>
 									<button class="btn btn-default" id="btn-reset">
 										<i class="fa fa-refresh"></i> Reset
 									</button>
-									<button type="submit" class="btn btn-primary" id="btn-save">
+									<button class="btn btn-primary" id="btn-save">
 										<i class="fa fa-save"></i> Save
 									</button>
 								</div>
@@ -503,8 +509,7 @@ td.mailbox-attachment{
 						});
 			}
 			/* SAVE MEMO ACTION */
-			$('#btn-save').click(
-					function() {
+			$('.box-footer').on("click","#btn-save", function() {
 						if ($("#content_memo").val() != ""
 								&& $("#txtTitle").val() != "") {
 							saveMemo();
@@ -512,15 +517,28 @@ td.mailbox-attachment{
 							alert('Title or Memo content can not be empty!');
 						}
 					});
-
+			/* ADD NEW BUTTON CLICK */
+			$('.box-footer').on("click","#btn-addnew", function() {
+				$('#txtTitle').val("");
+				$('#content_memo').val("");
+				$('#isPublic').val("false");
+				$('#txtTitle').focus();
+				$('#btn-update').html('<i class="fa fa-save"></i>Save').attr("id","btn-save");
+				$('div.col-md-8 > div > div.box-header.with-border > h3').text("Compose New Memo");
+				$('#btn-reset').show();
+				$('#btn-addnew').hide();
+					});
+			
 			/* RESET CONTENT */
 			$('#btn-reset').click(function() {
 				$('#txtTitle').val("");
 				$('#content_memo').val("");
 				$('#isPublic').val("false");
 				$('#txtTitle').focus();
+				$('#btn-update').html('<i class="fa fa-save"></i>Save').attr("id","btn-save");
+				$('div.col-md-8 > div > div.box-header.with-border > h3').text("Compose New Memo");
+				
 			});
-
 			/* LIST MEMO LIMIT 10 */
 			$('.mailbox-controls input[type="radio"]').click(function() {
 				listMemo();
@@ -536,6 +554,32 @@ td.mailbox-attachment{
 			$('#searchdomain').on('change', function() {
 				  listMemo();
 				});
+
+			/* EDIT ICON CLICK*/
+			$('table.table').on("click",".fa.fa-edit", function() {
+				var id = $(this).attr('id');
+				alert(id);
+			});
+			
+			
+			/* VIEW EACH MEMO */
+			$('table.table').on("click","td:nth-child(2)", function() {
+				var title=$(this).find('b').html();
+				var memo_content=$(this).find('.memo-content').html();
+				var ispublic =$(this).find('small').html()=="Private" ? "false":"true";
+				var id=$(this).parent().attr('id');
+				var url=$(this).prev().find('a').attr('href');
+			
+				
+				$('#txtTitle').val(title);
+				$('#content_memo').val(memo_content);
+				$('#isPublic').val(ispublic);
+				$('#txtUrl').val(url);
+				$('#btn-save').text('Update').attr("id","btn-update");
+				$('div.col-md-8 > div > div.box-header.with-border > h3').text("Update Memo");
+				$('#btn-addnew').show();
+				$('#btn-reset').hide();
+			});
 		});
 	</script>
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.

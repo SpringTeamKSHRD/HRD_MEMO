@@ -1,5 +1,6 @@
 package com.memo.app.repo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -85,6 +86,35 @@ public class PMemoDaoImp implements IMemoDao {
 		}
 		Long total = (Long)query.uniqueResult();
 		return total;
+	}
+
+	@Override
+	@Transactional
+	public Boolean delete(int id) {
+		try {
+			Session sess = sf.getCurrentSession();
+			Memo memo = sess.load(Memo.class, id);
+			memo.setIsenable(false);
+			sess.update(memo);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public Boolean update(Memo m) {
+		try {
+			Session sess = sf.getCurrentSession();
+			m.setDate(new Date());
+			sess.update(m);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	
