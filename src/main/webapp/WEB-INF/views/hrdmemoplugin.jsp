@@ -192,7 +192,7 @@
 		var memo_title_label=document.createElement('small');
 		memo_title_label.style.color="white";
 		memo_title_label.style.float="right";
-		memo_title_label.style.margin="5px 0 0 0";
+		memo_title_label.style.margin="7px 0 0 0";
 		memo_title_label.style.paddingRight="10px";
 		memo_title_label.style.fontSize="14px";
 		var memo_desc_title=document.createTextNode(generateTitle(title));
@@ -233,18 +233,20 @@
 		var report_text=document.createTextNode("assignment");
 		report.appendChild(report_text);
 		var desc_text=document.createElement("div");
-		desc_text.setAttribute('class','content');
-		desc_text.style.margin="10px";
+		desc_text.setAttribute('class','col s12 content');
+		desc_text.style.margin="10px 0 10px 0";
 		desc_text.appendChild(document.createTextNode(text));
 		
-		var readmore = document.createElement("a");
-		readmore.setAttribute('class','read more');
-		var smalldot=document.createElement("small");
-		smalldot.appendChild(document.createTextNode("... "));
-		smalldot.style.color = "black";
-		readmore.appendChild(smalldot);
-		readmore.appendChild(document.createTextNode("More"));
-		desc_text.appendChild(readmore);		
+		if(text.length>105){
+			var readmore = document.createElement("a");
+			readmore.setAttribute('class','read more');
+			var smalldot=document.createElement("small");
+			smalldot.appendChild(document.createTextNode("... "));
+			smalldot.style.color = "black";
+			readmore.appendChild(smalldot);
+			readmore.appendChild(document.createTextNode("More"));
+			desc_text.appendChild(readmore);
+		}
 				
 		//create edit text
 		var edit=document.createElement("i");
@@ -709,9 +711,9 @@
 					});
 	 }
 	 $("body").on("click",".read",function(){
-		if($(this).text()=="... More") $(this).text("Fewer"); 
+		if($(this).text()=="... More") $(this).text("Less"); 
 		else							$(this).text("... More");
-		$(this).toggleClass("more fewer");
+		$(this).toggleClass("more less");
 		$(this).parent().toggleClass("content"); 
 	 });
 	</script>

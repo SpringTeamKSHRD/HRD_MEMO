@@ -109,7 +109,7 @@
     -webkit-line-clamp: 2;
 }
 .read{
-	width: 42px;
+	width: 47px;
 	background: #FAFAFA;
 	text-align: right;
 	cursor: pointer;
@@ -118,14 +118,17 @@
 }
 .more{
     position: absolute;
-    right: 15px;
-    top: 82px;    
+    right: 12px;
+    top: 62px;    
 }
-.fewer{	
+.less{	
     display: block;
     float: right;
 }
 .chip img {
 	margin-left: 5px;
+}
+.chip{
+	position: relative;
 }
 

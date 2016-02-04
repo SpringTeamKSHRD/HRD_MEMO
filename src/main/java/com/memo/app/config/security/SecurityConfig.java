@@ -95,9 +95,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
-	/*public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("1"));
-		System.out.println(new BCryptPasswordEncoder().matches("1", "$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2"));
+	public static void main(String[] args) {
+		System.out.println(new BCryptPasswordEncoder().encode("123456"));
+		//System.out.println(new BCryptPasswordEncoder().matches("1", "$2a$10$cHHVTPtstZqd0wqhRXpobu0.m15YkxdcQVB5gw.6s9PgIWeF7PFU2"));
 		//System.out.println(Base64.getUrlEncoder().encodeToString("1".getBytes()));
-	}*/
+	}
 }

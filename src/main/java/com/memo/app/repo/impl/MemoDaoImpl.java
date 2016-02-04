@@ -367,6 +367,7 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public int getMemoNumberNew(MemoSearch memo) {
+		System.out.println(memo);
 		String sql="SELECT count(userid) "
 				+ "FROM memo.tbmemo WHERE userid=? AND Lower(title) LIKE ? AND Lower(domain) LIKE ? "
 				+ "AND Lower(ispublic::TEXT) LIKE ? AND isenable=TRUE AND to_char(date,'YYYY-MM-DD') LIKE ?";
