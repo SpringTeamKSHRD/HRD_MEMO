@@ -355,8 +355,8 @@ public class MemoDaoImpl implements MemoDao{
 				+ "AND Lower(ispublic::TEXT) LIKE ? AND isenable=TRUE AND to_char(date,'YYYY-MM-DD') LIKE ? "
 				+ "ORDER BY id DESC LIMIT ? OFFSET ?";
 		int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle().toLowerCase()+"%",
-									memo.getDomain().toLowerCase()+"%",memo.getIspublic(),
+		Object[] obj=new Object[]{memo.getUserid(),""+memo.getTitle()+"%",
+									""+memo.getDomain()+"%",""+memo.getIspublic()+"%",
 									memo.getDate(),memo.getLimit(),begin};
 		try{
 			return jdbcTemplate.query(sql,obj,new UserMemoRowMapper());
@@ -367,13 +367,11 @@ public class MemoDaoImpl implements MemoDao{
 	}
 	@Override
 	public int getMemoNumberNew(MemoSearch memo) {
+		System.out.println(memo);
 		String sql="SELECT count(userid) "
 				+ "FROM memo.tbmemo WHERE userid=? AND Lower(title) LIKE ? AND Lower(domain) LIKE ? "
 				+ "AND Lower(ispublic::TEXT) LIKE ? AND isenable=TRUE AND to_char(date,'YYYY-MM-DD') LIKE ?";
-		int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
-		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle().toLowerCase()+"%",
-									memo.getDomain().toLowerCase()+"%",memo.getIspublic().toLowerCase()+"%",
-									memo.getDate()};
+		Object[] obj=new Object[]{memo.getUserid(),""+memo.getTitle()+"%",""+memo.getDomain()+"%",""+memo.getIspublic()+"%",memo.getDate()};
 		try{
 			return jdbcTemplate.queryForObject(sql,obj,Integer.class);
 		}catch(Exception ex){
