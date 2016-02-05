@@ -130,6 +130,9 @@ td.mailbox-attachment{
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Notifications Menu -->
+						<li class="dropdown user user-menu" style="padding-top:7px">
+							<button class="btn btn-default"> Home </button>
+						</li>
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
@@ -148,6 +151,7 @@ td.mailbox-attachment{
 										</li>
 										<!-- end notification -->
 									</ul>
+									
 								</li>
 								<li class="footer"><a href="#">View all</a></li>
 							</ul>
@@ -177,8 +181,8 @@ td.mailbox-attachment{
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="text-center">
-										<a href="${pageContext.request.contextPath}/home" class="btn btn-default btn-flat">Profile</a>
-										<a href=${pageContext.request.contextPath}/userpassword" class="btn btn-default btn-flat">Account</a>
+										<a href="${pageContext.request.contextPath}/user/home" class="btn btn-default btn-flat">Profile</a>
+										<a href=${pageContext.request.contextPath}/user/userpassword" class="btn btn-default btn-flat">Account</a>
 										<a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
