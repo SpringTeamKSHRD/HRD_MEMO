@@ -117,8 +117,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Notifications Menu -->
-						<li class="dropdown user user-menu">
-							<a href="${pageContext.request.contextPath}/user/user"><button class="btn btn-default"> Home </button></a>
+						<li class="dropdown user user-menu" style="margin: 0px;">
+							<a href="${pageContext.request.contextPath}/user/user" style="margin: 0px;"><button style="margin: 0px;" class="btn btn-default"> Home </button></a>
 						</li>
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
@@ -168,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								<li class="user-footer">
 									<div class="text-center">
 										<a href="${pageContext.request.contextPath}/user/home" class="btn btn-default btn-flat">Profile</a>
-										<a href=${pageContext.request.contextPath}/user/userpassword" class="btn btn-default btn-flat">Account</a>
+										<a href="${pageContext.request.contextPath}/user/userpassword" class="btn btn-default btn-flat">Account</a>
 										<a href="${pageContext.request.contextPath}/user/logout" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
