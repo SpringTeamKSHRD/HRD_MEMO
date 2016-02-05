@@ -176,13 +176,9 @@ td.mailbox-attachment{
 								</li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
-									<div class="pull-left">
-										<a href="home" class="btn btn-default btn-flat">Profile</a>
-									</div>
-									<div class="pull-center">
-										<a href="userpassword" class="btn btn-default btn-flat">Account</a>
-									</div>
-									<div class="pull-right">
+									<div class="text-center">
+										<a href="${pageContext.request.contextPath}/home" class="btn btn-default btn-flat">Profile</a>
+										<a href=${pageContext.request.contextPath}/userpassword" class="btn btn-default btn-flat">Account</a>
 										<a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
