@@ -13,7 +13,7 @@ $(function() {
 					|| data == "Bad credentials")
 						alert(data);
 				else{	
-						khmerAcademeyLogin(username, password);
+						//khmerAcademeyLogin(username, password);
 						location.href = path + data
 				};
 			},
