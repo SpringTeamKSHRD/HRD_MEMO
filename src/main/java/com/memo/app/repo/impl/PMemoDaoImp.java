@@ -12,6 +12,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,8 @@ public class PMemoDaoImp implements IMemoDao {
 	
 	@Autowired
 	private SessionFactory sf;
+	@Autowired
+	private JdbcTemplate jdbctemplate;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -135,5 +138,13 @@ public class PMemoDaoImp implements IMemoDao {
 				 cr.setFirstResult(pagination.offset());
 				 cr.setMaxResults(pagination.getPerPage());
 				 return cr.list();
+	}
+
+	@Override
+	public String dashboardSumary(int userid) {
+		String sql="SELECT row_to_json (T) FROM ( SELECT ( SELECT COUNT (*) FROM memo.tbmemo WHERE userid = ? AND isenable = TRUE ) AS totalmemo, ( SELECT COUNT (*) FROM memo.tbmemo WHERE isenable = TRUE AND ispublic = TRUE AND userid = ? ) AS publicmemo, ( SELECT COUNT (DISTINCT(DOMAIN)) FROM memo.tbmemo WHERE isenable = TRUE AND userid =? ) AS totalsite, ( SELECT COUNT (*) FROM memo.tbmemo WHERE isenable = TRUE AND ispublic = FALSE AND userid = ? ) AS privatememo ) T";
+		String result= jdbctemplate.queryForObject(sql,new Object[]{userid,userid,userid,userid}, String.class);
+		System.out.println(result);
+		return result;
 	}
 }

@@ -19,7 +19,11 @@ function init() {
         type: "GET",
         url: path + "/user/listdomain",
         success: function(data) {
-            console.log(data)
+            var dashb=JSON.parse(data.DASHBOARD_DATA);
+            $('#total-memo').text(dashb.totalmemo);
+            $('#public-memo').text(dashb.publicmemo);
+            $('#private-memo').text(dashb.privatememo);
+            $('#total-website').text(dashb.totalsite);
             $('#searchdomain')
                 .append($("<option></option>")
                     .attr("value", "")

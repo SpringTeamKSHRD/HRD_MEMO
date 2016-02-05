@@ -53,4 +53,9 @@ public class PMemoServiceImpl implements IMemoService {
 		return memoservice.listAllMemos(filter, pagination);
 	}
 
+	@Override
+	public String dashboardSummary(int userid) {
+		return memoservice.dashboardSumary(userid);
+	}
+
 }

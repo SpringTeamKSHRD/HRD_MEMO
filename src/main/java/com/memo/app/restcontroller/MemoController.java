@@ -503,12 +503,17 @@ public class MemoController {
 		Pagination pagination = new Pagination();
 		pagination.setTotalCount(pmemoservice.count(filter));
 		pagination.setTotalPages(pagination.totalPages());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserSecurConfig user = (UserSecurConfig) authentication.getPrincipal();
+		
+		System.out.println(pmemoservice.dashboardSummary(user.getId()));
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println(pmemoservice.listAllDomain());
 		if ((pmemoservice.listAllDomain()).size()>0) {
 			map.put("MESSAGE", "MEMO FOUND...!");
 			map.put("STATUS", HttpStatus.FOUND.value());
 			map.put("DATA",pmemoservice.listAllDomain());
+			map.put("DASHBOARD_DATA", pmemoservice.dashboardSummary(user.getId()));
 			map.put("PAGINATION", pagination);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {

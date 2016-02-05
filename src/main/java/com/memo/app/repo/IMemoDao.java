@@ -14,4 +14,5 @@ public interface IMemoDao {
 	public Boolean delete(int id);
 	public Boolean update(Memo m);
 	public List<Memo> listAllMemos(MemoFilter filter, Pagination pagination);
+	public String dashboardSumary(int userid);
 }
