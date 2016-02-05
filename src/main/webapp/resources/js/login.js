@@ -38,3 +38,64 @@ function khmerAcademeyLogin(username,password){
 		}
 		});
 }
+$("#frmRegister")
+.submit(
+    function(e) {
+        e.preventDefault();
+        $
+            .ajax({
+                url: "http://localhost:8080/HRD_MEMO/plugin/memo/validate",
+                type: "POST",
+                data: {
+                    email: $('#r_email').val()
+                },
+                success: function(data) {
+                    if (data.RESPONSE_DATA == true) {
+                        alert('Email already exist !');
+                    } else {
+                    	console.log(data)
+                        $
+                            .ajax({
+                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/register",
+                                type: "POST",
+                                data: $("#frmRegister").serialize(),
+                                success: function(data) {
+                                    if (data.MESSAGE == "SUCCESS") {
+                                    	var data={
+                                    	"username":$("#r_email").val(),
+                                		"password":$("#r_password").val()
+                                    	}
+                                		$.ajax({
+                                			url : path+"/login",
+                                			type : "POST",
+                                			data : data,
+                                			datatype:"JSON",
+                                			success : function(data) {
+                                				if (data == "User account is locked" 
+                                					|| data == "User is disabled" 
+                                					|| data == "Bad credentials")
+                                						alert(data);
+                                				else{	
+                                						//khmerAcademeyLogin(username, password);
+                                						location.href = path + data
+                                				};
+                                			},
+                                			error : function(data) {
+                                				console.log(data);
+                                			}
+                                		});
+                                    } else {
+                                        alert('Oop ! something went wrong, please try again later !');
+                                    }
+                                },
+                                error: function(data) {
+                                    alert(data.RESPONSE_DATA);
+                                }
+                            });
+                    }
+                },
+                error: function(data) {
+                    alert(data.RESPONSE_DATA);
+                }
+            });
+    });

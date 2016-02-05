@@ -1,98 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <title>Material Login Form</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reset.css">
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login.css">
+    
 
-<link rel='stylesheet' type='text/css'
-	href='${pageContext.request.contextPath}/resources/materialize/css/materialize.css' />
-<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
-	rel='stylesheet'>
-<script
-	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
-<script
-	src='${pageContext.request.contextPath}/resources/materialize/js/materialize.js'></script>
-	<script
-	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
-<title>Login</title>
-<style>
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-.row {
-	margin: 0px;
-}
-
-.card {
-	background: #009688;
-	color: white;
-}
-
-#ceckboxcon {
-	padding-left: 55px;
-}
-</style>
-<style>
-#frm-wrapper {
-	width: 370px;
-	height: 350px;
-	margin: 40px auto;
-	box-shadow: 2px 2px 7px gray;
-}
-</style>
 </head>
+
 <body>
-	<div id='frm-wrapper'>
-		<div class="row">
-			<div class="col s12">
-				<div class="card" style="text-align: center; padding: 6px;">
-					<h4>Login Form</h4>
-				</div>
-			</div>
-		</div>
-		<div class='row'>
-			<form id="frmLogin" action="${pageContext.request.contextPath}/login"
-				method="POST" class='col s12'>
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">perm_identity</i> <input
-							id="username" type="text" class="validate" name='username' required>
-						<label for="username">Email</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">vpn_key</i> <input id="password"
-							type="password" class="validate" name='password' required> <label
-							for="password">Password</label>
-					</div>
-				</div>
-				<!-- 				<div class='row'>
-					<div class='col s12' id='ceckboxcon'>
-						<p>
-							<input type="checkbox" id="test5" /> <label for="test5">Remember me</label>
-						</p>
-					</div>
-				</div> -->
-				<div class="row">
-					<div class="col s12" style='text-align: right;'>
-						<button class="btn waves-effect waves-light" type="submit">Login</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<script type="text/javascript">var path = '${pageContext.request.contextPath}/';
+    <!-- Mixins-->
+    <!-- Pen Title-->
+    <div class="pen-title">
+        <h1>MEMO Login Form</h1><span><i class='fa fa-code'></i> by <a href='http://www.khmeracademy.org'>Khmer Academy</a></span>
+    </div>
+    <!-- <div class="rerun"><a href="">Rerun Pen</a></div> -->
+    <div class="container">
+        <div class="card"></div>
+        <div class="card">
+            <h1 class="title">Login</h1>
+            <form id="frmLogin" action="${pageContext.request.contextPath}/login"
+        method="POST">
+                <div class="input-container">
+                    <input type="text" id="username" name="username" required="required" />
+                    <label for="Username">Email</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="password" name="password" required="required" />
+                    <label for="Password">Password</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="button-container">
+                    <button type="submit"><span>Login</span></button>
+                </div>
+            </form>
+        </div>
+        <div class="card alt">
+            <div class="toggle"></div>
+            <h1 class="title">Register
+      <div class="close"></div>
+    </h1>
+            <form id="frmRegister">
+                <div class="input-container">
+                    <input type="text" id="r_username" name="username" required="required" />
+                    <label for="Username">Username</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <select name="gender" id="gender">
+                      <option value="male" selected="selected">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="email" id="r_email" name="email" required="required" />
+                    <label for="email">Email</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="r_password" name="password" required="required" />
+                    <label for="password">Password</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="button-container">
+                    <button type="submit"><span>Sign Up</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script type="text/javascript">
+    var path = '${pageContext.request.contextPath}/';
 	 Cookies.remove('MEMO');
 	 Cookies.remove('LOGGED', {
          path: ''
      });
 	</script>
-	<script type="text/javascript"
-		src='${pageContext.request.contextPath}/resources/js/login.js'>	
-	</script>
+	<script type="text/javascript"	src='${pageContext.request.contextPath}/resources/js/login.js'>	</script>
+    <script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>
+
 </html>
