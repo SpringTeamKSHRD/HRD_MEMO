@@ -24,8 +24,8 @@ public class PMemoServiceImpl implements IMemoService {
 	}
 
 	@Override
-	public List<String> listAllDomain() {
-		return memoservice.listAllDomain();
+	public List<String> listAllDomain(int userid) {
+		return memoservice.listAllDomain(userid);
 	}
 
 	@Override

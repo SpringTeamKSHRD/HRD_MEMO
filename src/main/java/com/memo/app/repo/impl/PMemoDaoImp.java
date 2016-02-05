@@ -50,10 +50,11 @@ public class PMemoDaoImp implements IMemoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<String> listAllDomain() {
+	public List<String> listAllDomain(int userid) {
 		Session sess= sf.getCurrentSession();
 		Criteria cr = sess.createCriteria(Memo.class);
 			cr.setProjection(Projections.distinct(Projections.property("domainName")));
+			cr.add(Restrictions.eq("userid", userid));
 		return cr.list();
 	}
 

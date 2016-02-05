@@ -9,7 +9,7 @@ import com.memo.app.entities.Pagination;
 public interface IMemoDao {
 	public List<Memo> list(Memo m,int limit,int offset);
 	public List<Memo> listWithPrivacy(Memo m,int limit,int offset);
-	public List<String>listAllDomain();
+	public List<String>listAllDomain(int userid);
 	public Long count(MemoFilter filter);
 	public Boolean delete(int id);
 	public Boolean update(Memo m);

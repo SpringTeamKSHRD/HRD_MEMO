@@ -508,11 +508,11 @@ public class MemoController {
 		
 		System.out.println(pmemoservice.dashboardSummary(user.getId()));
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(pmemoservice.listAllDomain());
-		if ((pmemoservice.listAllDomain()).size()>0) {
+		System.out.println(pmemoservice.listAllDomain(user.getId()));
+		if ((pmemoservice.listAllDomain(user.getId())).size()>0) {
 			map.put("MESSAGE", "MEMO FOUND...!");
 			map.put("STATUS", HttpStatus.FOUND.value());
-			map.put("DATA",pmemoservice.listAllDomain());
+			map.put("DATA",pmemoservice.listAllDomain(user.getId()));
 			map.put("DASHBOARD_DATA", pmemoservice.dashboardSummary(user.getId()));
 			map.put("PAGINATION", pagination);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
