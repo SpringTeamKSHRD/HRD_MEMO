@@ -11,6 +11,7 @@ public interface MessageDao {
     public int changeIsView(int messageid);
     public int getAllNumberMessage(int userid,String date);
     public List<Message> getOldMessage(int userid,int page,int limit,String date);
+    public int deleteMessage(int id);
     //sona
     public boolean changeMessageIsViewed(int userid);
     public List<Message> getOldMessage(int userid);

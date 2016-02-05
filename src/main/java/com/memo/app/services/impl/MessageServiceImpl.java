@@ -65,4 +65,12 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.getOldMessage(userid, page, limit,date);
 	}
 
+	@Override
+	public boolean deleteMessage(int id) {
+		if(messageDao.deleteMessage(id)>0){
+			return true;
+		}
+		return false;
+	}
+
 }

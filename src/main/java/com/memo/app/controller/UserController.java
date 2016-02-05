@@ -56,4 +56,8 @@ public class UserController {
 	public String getMessagePage(){
 		return "user/message";
 	}
+	@RequestMapping(value="/newmessage")
+	public String getMewMessagePage(){
+		return "user/newmessage";
+	}
 }

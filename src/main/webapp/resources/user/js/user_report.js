@@ -5,7 +5,7 @@ function listNewMessage(page,limit){
 		url : path+"/user/newmessage/"+uid+"/"+page+"/"+limit,
 		success : function(data) {
 		       $("#message_diplayer").html(extractData(data));
-		       //updateMessageStatus();
+		       updateMessageStatus();
 		},
 		error : function(data) {
 		}

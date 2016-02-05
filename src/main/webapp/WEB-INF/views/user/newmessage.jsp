@@ -37,13 +37,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
  <!-- Own Style -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/password.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/profile.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/admin/css/skins/skin-green.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/jasny-bootstrap/css/jasny-bootstrap.css"/>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/jasny-bootstrap/js/jasny-bootstrap.js"></script>
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -95,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-<body class="hold-transition skin-green layout-top-nav sidebar-collapse">
+<body class="hold-transition skin-green layout-top-nav sidebar-collapse"  onbeforeunload="leavePage()">
 	<div class="wrapper">
 
 		<!-- Main Header -->
@@ -193,22 +188,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<section class="content">
 			    <div class='row'>
 			    	<div class="col-md-12 col-sm-12 col-xs-12">
-			    		<h3 style="padding:10px; border-bottom: 2px solid #00a65a;"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Display Message</h3>
+			    		<h3 style="padding:10px; border-bottom: 2px solid #00a65a;"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;Display New Message</h3>
 			    	</div>
 			    </div>
 				<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="box">
 				            <div class="box-header with-border">
-				              <h3 class="box-title">All Messages</h3>
-				              <div class="box-tools">
-				                <div class="input-group input-group-sm" style="width: 150px;">
-				                 <input type="date" id="sdate" class="form-control">
-				                  <div class="input-group-btn">
-				                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-				                  </div>
-				                </div>
-				              </div>
+				              <h3 class="box-title">All New Messages</h3>
 				            </div>
 				            <div class="box-body" id="message_diplayer">
 				             
@@ -256,7 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<script type="text/javascript">
 		  var path="${pageContext.request.contextPath}";
 		</script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/message.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/user/js/newmessage.js"></script>
 		
 </body>
 </html>

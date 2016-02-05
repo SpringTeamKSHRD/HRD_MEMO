@@ -1,6 +1,11 @@
 function listAllMessage(page,limit){
 	var uid=parseInt($("#userid").val());
-	var date="NO";
+	 var date="NO";
+		if($("#sdate").val()==""){
+			date="NO";
+		}else{
+			date=$("#sdate").val();
+		}
 	$.ajax({
 		type : "GET",
 		url : path+"/user/oldmessage/"+uid+"/"+page+"/"+limit+"/"+date,
@@ -8,7 +13,16 @@ function listAllMessage(page,limit){
 		       $("#message_diplayer").html(extractData(data));
 		},
 		error : function(data) {
-			  alert("No Message");
+			var str="<table class='table table-bordered'>" +
+			"<tbody>" +
+				"<tr>" +
+					"<th style='width: 15px'>#</th>" +
+					"<th style='width: 60px'>Sender</th>" +
+					"<th>Descript</th>" +
+					"<th style='width: 100px'>Date</th>" +
+					"<th style='width: 60px'>Memo</th>" +
+					"</tr><tbody></table>";
+			 $("#message_diplayer").html(str);
 		}
 	});
 }
@@ -21,7 +35,8 @@ function extractData(data){
 					"<th>Descript</th>" +
 					"<th style='width: 100px'>Date</th>" +
 					"<th style='width: 60px'>Memo</th>" +
-					"</tr></tbody>";
+					"<th style='width: 160px'>Delete Message</th>" +
+					"</tr>";
 	for(var i=0;i<data.DATA.length;i++){
 		str+=" <tr>"+
 				"<td>"+(i+1)+".</td>" +
@@ -30,6 +45,9 @@ function extractData(data){
 				"<td>"+data.DATA[i].date+"</td>" +
 				"<td><button type='button' class='btn btn-success' " +
 				"onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='fa fa-eye'></i></button>" +
+				"</td>" +
+				"<td><button type='button' class='btn btn-danger' " +
+				"onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='fa fa-remove'></i></button>" +
 				"</td>" +
 				"</tr>";
 	}
@@ -89,24 +107,25 @@ var url="ws://"+location.hostname+":"+location.port+path+"/memo/usernotification
   function getAllNumberMessage(){
 	  var uid=parseInt($("#userid").val());
 	  var date="NO";
-		/*if($("#sdate").val()==""){
+		if($("#sdate").val()==""){
 			date="NO";
 		}else{
 			date=$("#sdate").val();
-		}*/
+		}
 		$.ajax({
 			type : "GET",
 			url : path+"/user/allnumbermessage/"+uid+"/"+date,
 			success : function(data) {
-				getNumPagination(data.DATA,5,4);
+				$("#totalmsg").text("Result:    "+data.DATA);
+				getNumPagination(data.DATA,10,4);
 				listAllMessage(1,recordNum);
 			},
 			error : function(data) {
-				alert("get error");
+				 $("#message_diplayer").html("<h2 style='color:red; text-align:center;'>No Message For Display</h2>");
+				 $("#pagination").html("");
 			}
 		});
   }
-  
   getAllNumberMessage();
   var numDisplay=0;
   var paginNum=0;
@@ -241,11 +260,14 @@ var url="ws://"+location.hostname+":"+location.port+path+"/memo/usernotification
 			  $("#pagination").html(myPagin);
 	  }
   }
- $('#btnsearch').click(function(){
-	 alert(new Date());
+ function dateFormat(date){
+	 var fdate=date.split("/");
+	 return fdate[2]+"-"+fdate[0]+"-"+fdate[1];
+ }
+  
+ $("#sdate").change(function(){
+	 getAllNumberMessage();
  });
-  
-  
   
   
   

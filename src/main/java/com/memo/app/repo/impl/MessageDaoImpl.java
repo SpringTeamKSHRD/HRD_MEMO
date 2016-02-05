@@ -122,7 +122,7 @@ public class MessageDaoImpl implements MessageDao {
 		if(date.equals("NO")){
 			date="";
 		}
-		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=? AND to_char((date::date),'DD-MM-YYYY') LIKE ?";
+		String sql="SELECT count(userid) FROM memo.tbmessage WHERE userid=? AND to_char((date::date),'YYYY-MM-DD') LIKE ?";
 		try{
 			return jdbcTemplate.queryForObject(sql,new Object[]{userid,date+"%"},Integer.class);
 		}catch(Exception e){
@@ -138,7 +138,7 @@ public class MessageDaoImpl implements MessageDao {
 		String sql="SELECT ms.id,dfm.messsage,ms.date,ms.memoid"
 				+" FROM memo.tbldefaultmessage dfm INNER JOIN memo.tbmessage ms"
 				+" ON dfm.id=ms.message_id"
-				+" WHERE userid=? AND to_char((ms.date::date),'DD-MM-YYYY') LIKE ? ORDER BY ms.id DESC LIMIT ? OFFSET ?";
+				+" WHERE userid=? AND to_char((ms.date::date),'YYYY-MM-DD') LIKE ? ORDER BY ms.id DESC LIMIT ? OFFSET ?";
 		try{
 		int begin = page * limit - limit;
 		List<Message> messages=jdbcTemplate.query(sql,new Object[]{userid,date+"%",limit,begin},new RowMapper<Message>(){
@@ -157,5 +157,15 @@ public class MessageDaoImpl implements MessageDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public int deleteMessage(int id) {
+		String sql="DELETE FROM memo.tbmessage WHERE id=1?";
+		try{
+			return jdbcTemplate.update(sql,new Object[]{id});
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return 0;
 	}
 }
