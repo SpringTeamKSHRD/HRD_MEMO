@@ -30,11 +30,19 @@ public class Pagination implements Serializable{
 	}
 	
 	public int nextPage(){
-		return this.currentPage+1;
+		if(this.hasNextPage()){
+			return this.currentPage+1;
+		}else{
+			return this.totalPages();
+		}
 	}
 	
 	public int previousPage(){
-		return this.currentPage-1;
+		if(this.hasPreviousPage()){
+			return this.currentPage-1;
+		}else{
+			return 1;
+		}
 	}
 	
 	public boolean hasNextPage(){
@@ -50,6 +58,9 @@ public class Pagination implements Serializable{
 	}
 	
 	public void setCurrentPage(int currentPage) {
+		if(currentPage<=0){
+			currentPage = 1;
+		}
 		this.currentPage = currentPage;
 	}
 

@@ -42,6 +42,8 @@ function init() {
     });
 }
 
+var currentPage = 1;
+
 function listMemo() {
     var json = {};
     var url = '';
@@ -49,6 +51,7 @@ function listMemo() {
         url = path + "/user/user/memos";
         json = {
             //userId: $("#userid").val(), //for userid can text ""
+        	currentPage : currentPage,
             title: $("#searchtitle").val(), //for search title text can ""
             domainName: $("#searchdomain").val(), //for search domainName text can "
             isPublic : $('input[name="privacy"]:checked').val()
@@ -179,4 +182,25 @@ $("#prev").click(function() {
         current--;
         getMemoDisplay(current);
     }
+});
+
+
+// TODO: PAGINATION 
+
+$("#btnNext").click(function(){
+	if($("#currentPage").html() < $("#totalPage").html()){
+		currentPage++;	
+		listMemo();
+	}else{
+		console.log("ELSE IN NEXT BUTTON");
+	}
+});
+
+$("#btnPrevious").click(function(){
+	if($("#currentPage").html() > 1){
+		currentPage--;
+		listMemo();
+	}else{
+		console.log("ELSE IN PREVIOUS BUTTON");
+	}
 });
