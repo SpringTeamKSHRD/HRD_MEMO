@@ -159,7 +159,6 @@
 				cur_h=getPdata[0];
 				domain=getPdata[1];
 				url=getPdata[2];
-				alert(domain+" , "+url);
 				title=getPdata[3];
 				if(first==true&&retrievedObject!==""){
 				pluginGetMemoOwner();
