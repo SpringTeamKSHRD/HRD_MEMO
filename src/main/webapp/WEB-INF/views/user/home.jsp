@@ -197,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<br/>
 										<div class="fileinput fileinput-new" data-provides="fileinput">
 											<input type="text" id="origin_img" value="${sessionScope['USER'].image}" hidden="true"/>
-											<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 100px; height: 120px;">
+											<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 140px; height: 160px;">
 												<img src="${pageContext.request.contextPath}/resources/user/image/${sessionScope['USER'].image}" style="width: 100%; height: 100%;"/>
 											</div>
 											  <div>
