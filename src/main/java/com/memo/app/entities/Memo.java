@@ -12,11 +12,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @Table(name="tbmemo",schema="memo")
+@DynamicUpdate(value=true)
+@SelectBeforeUpdate(value=true) 
 public class Memo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

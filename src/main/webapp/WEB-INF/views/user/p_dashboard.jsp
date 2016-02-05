@@ -10,9 +10,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>AdminLTE 2 | Starter</title>
-<link rel="shortcut icon"
+<!-- <link rel="shortcut icon"
 	href="http://cdn.sabay.com/cdn/news.sabay.com.kh/wp-content/themes/sabaynews_v1.0.6/images/favicon.ico?ebb82d"
-	type="image/x-icon">
+	type="image/x-icon"> -->
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta
@@ -217,7 +217,7 @@ td.mailbox-attachment{
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="info-box">
 							<span class="info-box-icon bg-default"><i
-								class="fa fa-envelope-o"></i></span>
+								class="fa fa-comments-o"></i></span>
 							<div class="info-box-content">
 								<span class="info-box-text">Total</span> <span
 									class="info-box-number" id="total-memo"></span>
@@ -230,7 +230,7 @@ td.mailbox-attachment{
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="info-box">
 							<span class="info-box-icon bg-aqua"><i
-								class="fa fa-flag-o"></i></span>
+								class="fa fa-globe"></i></span>
 							<div class="info-box-content">
 								<span class="info-box-text">Public</span> <span
 									class="info-box-number" id="public-memo"></span>
@@ -243,7 +243,7 @@ td.mailbox-attachment{
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="info-box">
 							<span class="info-box-icon bg-red"><i
-								class="fa fa-files-o"></i></span>
+								class="fa fa-lock"></i></span>
 							<div class="info-box-content">
 								<span class="info-box-text">Private</span> <span
 									class="info-box-number" id="private-memo"></span>
@@ -255,7 +255,7 @@ td.mailbox-attachment{
 					<!-- /.col -->
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="info-box">
-							<span class="info-box-icon bg-yellow"><i class="fa fa-star-o"></i></span>
+							<span class="info-box-icon bg-yellow"><i class="fa fa-html5"></i></span>
 							<div class="info-box-content">
 								<span class="info-box-text">Website</span> <span
 									class="info-box-number" id="total-website"></span>
@@ -314,10 +314,10 @@ td.mailbox-attachment{
 								<!-- /.mail-box-messages -->
 							</div>
 							<!-- /.box-body -->
-							<div class="box-footer no-padding">
+							<div class="box-footer " style="padding:0 !important;padding-bottom:6px !important">
 								<div class="mailbox-controls">
 									<!-- Check all button -->
-									<button class="btn btn-default btn-sm checkbox-toggle">
+									<!-- <button class="btn btn-default btn-sm checkbox-toggle">
 										<i class="fa fa-square-o"></i>
 									</button>
 									<div class="btn-group">
@@ -330,11 +330,11 @@ td.mailbox-attachment{
 										<button class="btn btn-default btn-sm">
 											<i class="fa fa-share"></i>
 										</button>
-									</div>
+									</div> -->
 									<!-- /.btn-group -->
-									<button class="btn btn-default btn-sm">
+									<!-- <button class="btn btn-default btn-sm">
 										<i class="fa fa-refresh"></i>
-									</button>
+									</button> -->
 									<div class="pull-right">
 										<span id="currentPage">1</span>-<span id="totalPage">50</span>/<span id="totalRecord">200</span>
 										<div class="btn-group">
@@ -453,6 +453,7 @@ td.mailbox-attachment{
 
 	<script>
 		var path = "${pageContext.request.contextPath}";
+		var memoid='';
 		$(function() {
 
 			init();
@@ -517,6 +518,16 @@ td.mailbox-attachment{
 							alert('Title or Memo content can not be empty!');
 						}
 					});
+			
+			/* UPDATE MEMO ACTION */
+			$('.box-footer').on("click","#btn-update", function() {
+						if ($("#content_memo").val() != ""
+								&& $("#txtTitle").val() != "") {
+							updateMemo(memoid, $("#content_memo").val(), $("#txtTitle").val(),$('#isPublic').val());
+						} else {
+							alert('Title or Memo content can not be empty!');
+						}
+					});
 			/* ADD NEW BUTTON CLICK */
 			$('.box-footer').on("click","#btn-addnew", function() {
 				$('#txtTitle').val("");
@@ -567,7 +578,7 @@ td.mailbox-attachment{
 				var title=$(this).find('b').html();
 				var memo_content=$(this).find('.memo-content').html();
 				var ispublic =$(this).find('small').html()=="Private" ? "false":"true";
-				var id=$(this).parent().attr('id');
+				memoid=$(this).parent().attr('id');
 				var url=$(this).prev().find('a').attr('href');
 			
 				

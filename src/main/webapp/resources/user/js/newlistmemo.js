@@ -24,6 +24,7 @@ function init() {
             $('#public-memo').text(dashb.publicmemo);
             $('#private-memo').text(dashb.privatememo);
             $('#total-website').text(dashb.totalsite);
+            $('#searchdomain').empty();
             $('#searchdomain')
                 .append($("<option></option>")
                     .attr("value", "")
@@ -111,29 +112,39 @@ function deleteMemo(id){
 	if (r == true) {
 		$.ajax({
 	        type: "POST",
-	        url: "http://localhost:8080/HRD_MEMO/plugin/memo/" + id,
+	        url: path+"/plugin/memo/" + id,
 	        success: function(json) {
-	           listMemo();
+	           init();
 	        }
 	    });
 	} 
 	
 }
-function updateMemo(id, content, ispublic){
+function updateMemo(id, content,title, ispublic){
 	var memo = {
             "userid": $('#userid').val(),
             "id": id,
+            "title":title,
             "content": content,
             "ispublic": ispublic
         }
 	$.ajax({
-        type: "POST",
-        url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
+        type: "PUT",
+        url: path+"/user/"+id,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(memo),
         success: function(json) {
-            
+        	init();
+        	alert("Memo updated !")
+        	$('#txtTitle').val("");
+			$('#content_memo').val("");
+			$('#isPublic').val("false");
+			$('#txtTitle').focus();
+			$('#btn-update').html('<i class="fa fa-save"></i>Save').attr("id","btn-save");
+			$('div.col-md-8 > div > div.box-header.with-border > h3').text("Compose New Memo");
+			$('#btn-reset').show();
+			$('#btn-addnew').hide();
         }
     });
 }

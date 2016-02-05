@@ -110,7 +110,7 @@ public class EmbededMemoController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
 	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo m) {
 		System.out.println("update memo");
-		System.out.println(m.getContent());
+		System.out.println(m.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("MESSAGE", "SUCCESS");

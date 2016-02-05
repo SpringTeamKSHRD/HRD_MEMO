@@ -277,19 +277,19 @@ public class MemoController {
 	}
 
 	// update memo
-//	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo memo) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		if (memoService.updateMemo(memo)) {
-//			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
-//			map.put("STATUS", HttpStatus.FOUND.value());
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//		} else {
-//			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
-//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-//		}
-//	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Map<String, Object>> updateMemo(@RequestBody Memo memo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (memoService.updateMemo(memo)) {
+			map.put("MESSAGE", "MEMO HAS BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO HAS NOT BEEN UPDATED.");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
 
 	// update memo
 //	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -542,25 +542,25 @@ public class MemoController {
 		}
 	}
 //	update memo
-	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-	public ResponseEntity<Map<String, Object>> updateMemoP(@RequestBody Memo m) {
-		System.out.println("update memo");
-		System.out.println(m.getContent());
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			map.put("MESSAGE", "SUCCESS");
-			map.put("STATUS", HttpStatus.OK.value());
-			map.put("RESPONSE_DATA", pmemoservice.updateMemo(m));
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-			map.put("MESSAGE", "LIST EMPTY");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-		}
-	}
-	
+//	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+//	public ResponseEntity<Map<String, Object>> updateMemoP(@RequestBody Memo m) {
+//		System.out.println("update memo");
+//		System.out.println(m.getContent());
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		try {
+//			map.put("MESSAGE", "SUCCESS");
+//			map.put("STATUS", HttpStatus.OK.value());
+//			map.put("RESPONSE_DATA", pmemoservice.updateMemo(m));
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.out.println(e.getMessage());
+//			map.put("MESSAGE", "LIST EMPTY");
+//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+//		}
+//	}
+//	
 	@RequestMapping(value = "/user/memos", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listmemos(MemoFilter filter, Pagination pagination) {
 		System.out.println("list memo");
