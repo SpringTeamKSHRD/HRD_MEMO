@@ -130,8 +130,8 @@ td.mailbox-attachment{
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Notifications Menu -->
-						<li class="dropdown user user-menu" style="padding-top:7px">
-							<button class="btn btn-default"> Home </button>
+						<li class="dropdown user user-menu">
+							<a href="${pageContext.request.contextPath}/user/user"><button class="btn btn-default"> Home </button></a>
 						</li>
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
