@@ -1,4 +1,6 @@
 	var path = "http://localhost:8080/HRD_MEMO/";
+	var memo_domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    var memo_url = window.location.href.replace(domainName,"");
 	var memo_title = document.getElementsByTagName("title")[0].innerHTML;
 	var windowScrollWidth = document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
 	//add css to iclude iframe
@@ -60,7 +62,7 @@
 			resizedCallback         : function(messageData){
 				memo_iframe_height=messageData.height;
 				document.getElementsByClassName('my-memo-class')[0]
-				.iFrameResizer.sendMessage( messageData.height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
+				.iFrameResizer.sendMessage( messageData.height+"hrdmem"+memo_domainName+"hrdmem"+memo_url+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 				ifrm_hrdmemo.style.height="100%";
 			}
 		});
@@ -91,7 +93,7 @@
 				$("#btn-act-desc").animate({right: 353, marginLeft: 0,}, {duration: 300});
 				$("#hrd_memo_pess").animate({width: 341, marginLeft: 0,padding:5}, {duration: 300});
 				document.getElementsByClassName('my-memo-class')[0]
-				.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
+				.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+memo_domainName+"hrdmem"+memo_url+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 				my_memo_hide=false;
 			}else{
 				my_memo_hide=true;
@@ -105,17 +107,17 @@
 			memo_ifr_wrapper.style.height= window.innerHeight+"px";
 			memo_ifr_wrapper.style.right=windowScrollWidth+'px';
 			document.getElementsByClassName('my-memo-class')[0]
-			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
+			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+memo_domainName+"hrdmem"+memo_url+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
 		$(window).load(function() {	
 			windowScrollWidth =document.getElementsByTagName('body')[0].offsetWidth-document.getElementsByTagName('body')[0].clientWidth;
 			memo_ifr_wrapper.style.height= window.innerHeight+"px";
 			memo_ifr_wrapper.style.right=windowScrollWidth+'px';
 			document.getElementsByClassName('my-memo-class')[0]
-			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+location.hostname+"hrdmem"+location.href+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
+			.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+memo_domainName+"hrdmem"+memo_url+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);
 			});
 	function gotoMemoMainPage(){
-		window.open(path+"user/listallmemo");
+		window.open(path+"user/user");
 	}	
 		
 		
