@@ -173,20 +173,14 @@ td.mailbox-attachment{
 									</p></li>
 								<!-- Menu Body -->
 								<li class="user-body">
-									<div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Sales</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
 								</li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
+										<a href="home" class="btn btn-default btn-flat">Profile</a>
+									</div>
+									<div class="pull-center">
+										<a href="userpassword" class="btn btn-default btn-flat">Account</a>
 									</div>
 									<div class="pull-right">
 										<a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
