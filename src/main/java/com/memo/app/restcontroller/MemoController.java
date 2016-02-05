@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ import com.memo.app.entities.MemoSearch;
 import com.memo.app.entities.Message;
 import com.memo.app.entities.Pagination;
 import com.memo.app.entities.User;
+import com.memo.app.entities.UserSecurConfig;
 import com.memo.app.repo.impl.UserDaoImpl;
 import com.memo.app.services.IMemoService;
 import com.memo.app.services.MemoService;
@@ -181,6 +183,9 @@ public class MemoController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
 		System.out.println("add memo controller.");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserSecurConfig user = (UserSecurConfig) authentication.getPrincipal();
+		memo.setUserid(user.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (memoService.insertMemo(memo)) {
@@ -551,11 +556,13 @@ public class MemoController {
 		}
 	}
 	
-	@RequestMapping(value = "/user/{userId}/memos", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> listmemos(@PathVariable("userId") int userId, MemoFilter filter, Pagination pagination) {
+	@RequestMapping(value = "/user/memos", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listmemos(MemoFilter filter, Pagination pagination) {
 		System.out.println("list memo");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserSecurConfig user = (UserSecurConfig) authentication.getPrincipal();
 		Map<String, Object> map = new HashMap<String, Object>();
-		filter.setUserId(userId);
+		filter.setUserId(user.getId());
 		System.out.println(filter);
 		pagination.setTotalCount(pmemoservice.count(filter));
 		pagination.setTotalPages(pagination.totalPages());

@@ -41,23 +41,23 @@ function init() {
 function listMemo() {
     var json = {};
     var url = '';
-    if (($('input[name="privacy"]:checked').val()) == "") {
-        url = path + "/user/user/"+$("#userid").val()+"/memos";
+//    if (($('input[name="privacy"]:checked').val()) == "") {
+        url = path + "/user/user/memos";
         json = {
-            userId: $("#userid").val(), //for userid can text ""
+            //userId: $("#userid").val(), //for userid can text ""
             title: $("#searchtitle").val(), //for search title text can ""
             domainName: $("#searchdomain").val(), //for search domainName text can "
-            isPublic :  "",
+            isPublic : $('input[name="privacy"]:checked').val()
         };
-    } else {
-        url = path + "/user/mylistmemo1";
-        json = {
-            userid: $("#userid").val(), //for userid can text ""
-            title: $("#searchtitle").val(), //for search title text can ""
-            domainName: $("#searchdomain").val(), //for search domainName text can ""
-            ispublic: $('input[name="privacy"]:checked').val() //for privacy true or false text can ""
-        };
-    }
+    //} else {
+//        url = path + "/user/mylistmemo1";
+//        json = {
+//            userid: $("#userid").val(), //for userid can text ""
+//            title: $("#searchtitle").val(), //for search title text can ""
+//            domainName: $("#searchdomain").val(), //for search domainName text can ""
+//            ispublic: $('input[name="privacy"]:checked').val() //for privacy true or false text can ""
+//        };
+//    }
 
     $.ajax({
         type: "GET",
