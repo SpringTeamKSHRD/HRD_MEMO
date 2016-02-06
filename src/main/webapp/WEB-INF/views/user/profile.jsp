@@ -60,7 +60,7 @@
 			  	<li role="separator" class="divider"></li>
 				<li><a href="${pageContext.request.contextPath}/user/userpassword" style="color: white;">Change password</a></li> <!-- href="#!" data-toggle="modal" data-target="#myModal" -->
 				<li role="separator" class="divider"></li>
-				<li><a href="${pageContext.request.contextPath}/login?logout" style="color: white;">Log out</a></li>
+				<li><a href="${pageContext.request.contextPath}/logout" style="color: white;">Log out</a></li>
 			  </ul>
 			</li>
 		  </ul>
