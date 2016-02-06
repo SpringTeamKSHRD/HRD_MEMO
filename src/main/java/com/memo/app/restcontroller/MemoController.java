@@ -583,4 +583,17 @@ public class MemoController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}*/
 	}
+	@RequestMapping(value = "/deletemessage/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> deleteMessage(@PathVariable("id") int id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(messageService.deleteMessage(id)==true){
+			map.put("MESSAGE","MESSAGE HAS BEEN DELETE");
+			map.put("STATUS",HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND..!");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+		}
+	}
 }

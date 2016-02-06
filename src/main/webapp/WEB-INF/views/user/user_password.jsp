@@ -118,28 +118,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<ul class="nav navbar-nav">
 						<!-- Notifications Menu -->
 						<li class="dropdown user user-menu" style="margin: 0px;">
-							<a href="${pageContext.request.contextPath}/user/user" style="margin: 0px;"><button style="margin: 0px;" class="btn btn-default"> Home </button></a>
+							<a href="${pageContext.request.contextPath}/user/user" style="margin: 0px;">Home</a>
 						</li>
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-								class="label label-warning">10</span>
+								class="label label-warning" id="numnotify"></span>
 						</a>
-							<ul class="dropdown-menu">
-								<li class="header">You have 10 notifications</li>
-								<li>
-									<!-- Inner Menu: contains the notifications -->
+							<ul class="dropdown-menu" style="width: 200px; float: right;">
+								<li id="newmsg">
 									<ul class="menu">
-										<li>
-											<!-- start notification --> <a href="#"> <i
-												class="fa fa-users text-aqua"></i> 5 new members joined
-												today
+										<li style="text-align: center;">
+											<a href="${pageContext.request.contextPath}/user/newmessage"> <i
+											class="fa fa-envelope-o text-aqua" id="newnumnotify"></i>
 										</a>
 										</li>
 										<!-- end notification -->
 									</ul>
+									
 								</li>
-								<li class="footer"><a href="#">View all</a></li>
+								<li class="footer"><a href="${pageContext.request.contextPath}/user/message">View all</a></li>
 							</ul>
 						</li>
 						<!-- User Account Menu -->

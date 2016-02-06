@@ -130,30 +130,27 @@ td.mailbox-attachment{
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Notifications Menu -->
-						<li class="dropdown user user-menu" style="margin: 0px;">
-							<a href="${pageContext.request.contextPath}/user/user" style="margin: 0px;"><button style="margin: 0px;" class="btn btn-default"> Home </button></a>
+						<li class="dropdown user user-menu" style="margin: 0px; padding: 0px;">
+							<a href="${pageContext.request.contextPath}/user/user" style="margin: 0px;">Home</a>
 						</li>
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-								class="label label-warning">10</span>
+								class="label label-warning" id="numnotify"></span>
 						</a>
-							<ul class="dropdown-menu">
-								<li class="header">You have 10 notifications</li>
-								<li>
-									<!-- Inner Menu: contains the notifications -->
+							<ul class="dropdown-menu" style="width: 200px; float: right;">
+								<li style="height: 40px;" id="newmsg">
 									<ul class="menu">
-										<li>
-											<!-- start notification --> <a href="#"> <i
-												class="fa fa-users text-aqua"></i> 5 new members joined
-												today
+										<li style="text-align: center;">
+											<a href="${pageContext.request.contextPath}/user/newmessage"> <i
+											class="fa fa-envelope-o text-aqua" id="newnumnotify"></i>
 										</a>
 										</li>
 										<!-- end notification -->
 									</ul>
 									
 								</li>
-								<li class="footer"><a href="#">View all</a></li>
+								<li class="footer"><a href="${pageContext.request.contextPath}/user/message">View all</a></li>
 							</ul>
 						</li>
 						<!-- User Account Menu -->
@@ -586,6 +583,38 @@ td.mailbox-attachment{
 				$('#btn-reset').hide();
 			});
 		});
+		function getNumberMesage(){
+			var uid=parseInt($("#userid").val());
+			$.ajax({
+				type : "GET",
+				url : path+"/user/numbermessage/"+uid,
+				success : function(data) {
+						$("#newmsg").css('display',"inline");
+						$("#numnotify").css('display',"inline");
+						$("#numnotify").text(data.DATA);
+						$("#newnumnotify").css('display',"inline");
+						$("#newnumnotify").text("     You have "+data.DATA+" messages");
+				},
+				error : function(data) {
+					$("#numnotify").css('display',"none");
+					$("#newnumnotify").css('display',"none");
+					$("#newmsg").css('display',"none");
+				}
+			});
+		}
+		getNumberMesage();
+		var url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+		var websocket=new WebSocket(url);
+		websocket.onopen=function(message){
+		}
+		websocket.onclose=function(message){
+			 websocket.close();
+		}
+		websocket.onmessage=function(message){
+			 if(message.data==="response"){
+				 getNumberMesage();
+			 }
+		}
 	</script>
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the

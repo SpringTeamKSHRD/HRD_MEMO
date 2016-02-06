@@ -71,3 +71,35 @@ function clearModalPwd(){
 	$("#new_pwd").val("");
 	$("#con_pwd").val("");
 }
+function getNumberMesage(){
+	var uid=parseInt($("#userid").val());
+	$.ajax({
+		type : "GET",
+		url : path+"/user/numbermessage/"+uid,
+		success : function(data) {
+				$("#newmsg").css('display',"inline");
+				$("#numnotify").css('display',"inline");
+				$("#numnotify").text(data.DATA);
+				$("#newnumnotify").css('display',"inline");
+				$("#newnumnotify").text("     You have "+data.DATA+" messages");
+		},
+		error : function(data) {
+			$("#numnotify").css('display',"none");
+			$("#newnumnotify").css('display',"none");
+			$("#newmsg").css('display',"none");
+		}
+	});
+}
+getNumberMesage();
+var url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+var websocket=new WebSocket(url);
+websocket.onopen=function(message){
+}
+websocket.onclose=function(message){
+	 websocket.close();
+}
+websocket.onmessage=function(message){
+	 if(message.data==="response"){
+		 getNumberMesage();
+	 }
+}

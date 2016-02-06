@@ -23,7 +23,7 @@ function extractData(data) {
 		str += " <tr>" + "<td>" + (i + 1) + ".</td>" + "<td>Admin</td>"
 				+ "<td>" + data.DATA[i].message + "</td>" + "<td>"
 				+ data.DATA[i].date + "</td>"
-				+ "<td><button type='button' class='btn btn-success' "
+				+ "<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal' "
 				+ "onclick=getBlockedMemo(" + data.DATA[i].memoid
 				+ ")><i class='fa fa-eye'></i></button>" + "</td>"
 				+ "</tr>";
@@ -36,12 +36,12 @@ function getBlockedMemo(id) {
 		type : "GET",
 		url : path + "/user/" + id,
 		success : function(data) {
-			alert(data.DATA);
-			/*$("#memo_title").text("Title: " + generateTitle(data.DATA.title));
-			$("#website").text("Website: " + data.DATA.domain);
-			$("#memo_content").text(data.DATA.content);
-			$("#memo_date").text("Date: " + data.DATA.date);
-			$('#modal1').openModal();*/
+			$("#memotitle").text("Title: " + generateTitle(data.DATA.title));
+			$("#memowebsite").text("Website: " + data.DATA.domain);
+			$("#memocontent").text(data.DATA.content);
+			$("#memodate").text("Date: " + data.DATA.date);
+			$("#url").attr("href",data.DATA.domain+data.DATA.url);
+			$("#urlimage").attr("src","https://www.google.com/s2/favicons?domain="+data.DATA.domain+data.DATA.url);
 		},
 		error : function(data) {
 			alert("rerror");
@@ -82,6 +82,7 @@ function getNumberMesage() {
 				error : function(data) {
 					 $("#message_diplayer").html("<h2 style='color:red; text-align:center;'>No New Message For Display</h2>");
 					 $("#pagination").html("");
+					 $("#totalmsg").text("Result:    "+"0");
 				}
 			});
 }
@@ -97,7 +98,6 @@ websocket.onclose = function(message) {
 websocket.onmessage = function(message) {
 	if (message.data === "response") {
 		getNumberMesage();
-		updateMessageStatus();
 	}
 }
 function goToPage() {
@@ -236,6 +236,4 @@ function prevPage(click){
 		  $("#pagination").html(myPagin);
   }
 }
-function leavePage() {
-	updateMessageStatus();
-}
+
