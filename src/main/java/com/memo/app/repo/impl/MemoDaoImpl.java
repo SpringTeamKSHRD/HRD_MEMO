@@ -372,7 +372,7 @@ public class MemoDaoImpl implements MemoDao{
 		String sql="SELECT count(userid) "
 				+ "FROM memo.tbmemo WHERE userid=? AND Lower(title) LIKE ? AND Lower(domain) LIKE ? "
 				+ "AND Lower(ispublic::TEXT) LIKE ? AND isenable=TRUE AND to_char(date,'YYYY-MM-DD') LIKE ?";
-		int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
+		//int begin=memo.getPage()*memo.getLimit()-memo.getLimit();
 		Object[] obj=new Object[]{memo.getUserid(),memo.getTitle()+"%",
 									memo.getDomain()+"%",memo.getIspublic()+"%",
 									memo.getDate()};

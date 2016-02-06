@@ -28,10 +28,10 @@ import com.memo.app.services.impl.EmbededMemoServiceImpl;
 import com.memo.app.services.impl.MemoServiceImpl;
 import com.memo.app.services.impl.ReportServiceImpl;
 import com.memo.app.services.impl.UserServiceImpl;
-
+//phalleak plugin api
 @RestController
 @RequestMapping(value="/plugin")
-public class PluginController {
+public class PluginMemoAPI2 {
 	@Autowired
 	private UserServiceImpl userDao;
 	@Autowired
@@ -173,7 +173,7 @@ public class PluginController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public void getLogoutPage(HttpServletRequest request,
 			HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext()

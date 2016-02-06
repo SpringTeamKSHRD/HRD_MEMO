@@ -62,7 +62,7 @@
         </div>
         <div class="input-field col s12">
           <input id="email" type="email" class="validate">
-          <label for="email">Emmail</label>
+          <label for="email">Email</label>
         </div>
         <div class="input-field col s12">
           <input id="password" type="password" class="validate" onkeypress="registerhandleKeyPress(event);">

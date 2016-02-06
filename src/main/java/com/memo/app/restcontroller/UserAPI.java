@@ -39,9 +39,7 @@ import com.memo.app.services.UserService;
 
 @RestController
 @RequestMapping(value = "/user")
-public class MemoController {
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(AdminArticleController.class);
+public class UserAPI {
 	@Autowired
 	private MemoService memoService;
 	

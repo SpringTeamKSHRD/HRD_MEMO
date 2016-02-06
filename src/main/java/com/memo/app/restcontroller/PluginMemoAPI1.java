@@ -19,28 +19,18 @@ import com.memo.app.entities.Memo;
 import com.memo.app.entities.Report;
 import com.memo.app.entities.User;
 import com.memo.app.services.IEmbededMemoService;
-
+//sopheak plugin api
 @RestController
 @RequestMapping("/plugin/memo")
-public class EmbededMemoController {
+public class PluginMemoAPI1 {
 	@Autowired
 	private IEmbededMemoService embededMemoService;
-	
-	/*@Autowired private String urlMemo;
-	
-	public void commonObject(Model m){
-		 m.addAttribute("URL",urlMemo);
-	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody String listMemo(@RequestBody Memo memo) {
 		System.out.println("list memo");
 		String list = embededMemoService.listMemoByUserIdAndURL(memo.getId(), memo.getFullDomain());
 		System.out.println(list);
-		/*
-		 * Map<String, String> map = new HashMap<>(); map.put("RESPONSE_DATA",
-		 * list);
-		 */
 		return list;
 	}
 
@@ -60,7 +50,7 @@ public class EmbededMemoController {
 				map.put("STATUS", HttpStatus.OK.value());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 				map.put("MESSAGE", "LIST EMPTY");
 				map.put("STATUS", HttpStatus.NOT_FOUND.value());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
@@ -80,7 +70,7 @@ public class EmbededMemoController {
 			map.put("RESPONSE_DATA", embededMemoService.addMemo(memo));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
@@ -98,7 +88,7 @@ public class EmbededMemoController {
 			map.put("RESPONSE_DATA", embededMemoService.deleteMemo(id));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 			System.out.println(e.getMessage());
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -117,7 +107,7 @@ public class EmbededMemoController {
 			map.put("RESPONSE_DATA", embededMemoService.updateMemo(m));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 			System.out.println(e.getMessage());
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -136,7 +126,7 @@ public class EmbededMemoController {
 			map.put("RESPONSE_DATA", embededMemoService.isExistedEmail(email));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 			System.out.println(e.getMessage());
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -179,7 +169,7 @@ public class EmbededMemoController {
 				map.put("STATUS", HttpStatus.OK.value());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 				System.out.println(e.getMessage());
 				map.put("MESSAGE", "LIST EMPTY");
 				map.put("STATUS", HttpStatus.NOT_FOUND.value());
@@ -199,7 +189,7 @@ public class EmbededMemoController {
 				map.put("STATUS", HttpStatus.OK.value());
 				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 				System.out.println(e.getMessage());
 				map.put("MESSAGE", "LIST EMPTY");
 				map.put("STATUS", HttpStatus.NOT_FOUND.value());
