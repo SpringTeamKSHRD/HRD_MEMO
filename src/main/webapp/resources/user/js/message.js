@@ -43,31 +43,44 @@ function extractData(data){
 				"<td>Admin</td>" +
 				"<td>"+data.DATA[i].message+"</td>" +
 				"<td>"+data.DATA[i].date+"</td>" +
-				"<td><button type='button' class='btn btn-success' " +
+				"<td><button type='button' class='btn btn-success' data-toggle='modal' data-target='#myModal' " +
 				"onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='fa fa-eye'></i></button>" +
 				"</td>" +
 				"<td><button type='button' class='btn btn-danger' " +
-				"onclick=getBlockedMemo("+data.DATA[i].memoid+")><i class='fa fa-remove'></i></button>" +
+				"onclick=deleteMessage("+data.DATA[i].id+")><i class='fa fa-remove'></i></button>" +
 				"</td>" +
 				"</tr>";
 	}
 	str+=" </tbody></table>";
 	return str;
 }
-function getBlockedMemo(id){
+function getBlockedMemo(id) {
 	$.ajax({
 		type : "GET",
-		url : path+"/user/"+id,
+		url : path + "/user/" + id,
 		success : function(data) {
-			alert(data.DATA);
-		      /* $("#memo_title").text("Title: "+generateTitle(data.DATA.title));
-		       $("#website").text("Website: "+data.DATA.domain);
-		       $("#memo_content").text(data.DATA.content);
-		       $("#memo_date").text("Date: "+data.DATA.date);
-		       $('#modal1').openModal();*/
+			$("#memotitle").text("Title: " + generateTitle(data.DATA.title));
+			$("#memowebsite").text(":"+data.DATA.domain);
+			$("#memocontent").text(data.DATA.content);
+			$("#memodate").text("Date: " + data.DATA.date);
+			$("#url").attr("href",data.DATA.domain+data.DATA.url);
+			$("#urlimage").attr("src","https://www.google.com/s2/favicons?domain="+data.DATA.domain+data.DATA.url);
 		},
 		error : function(data) {
-			 alert("rerror");
+			alert("rerror");
+		}
+	});
+}
+function deleteMessage(id){
+	$.ajax({
+		type : "GET",
+		url : path + "/user/deletemessage/" + id,
+		success : function(data) {
+			alert(data.MESSAGE);
+			getAllNumberMessage();
+		},
+		error : function(data) {
+			alert("rerror");
 		}
 	});
 }
@@ -123,6 +136,7 @@ var url="ws://"+location.hostname+":"+location.port+path+"/memo/usernotification
 			error : function(data) {
 				 $("#message_diplayer").html("<h2 style='color:red; text-align:center;'>No Message For Display</h2>");
 				 $("#pagination").html("");
+				 $("#totalmsg").text("Result:    "+"0");
 			}
 		});
   }

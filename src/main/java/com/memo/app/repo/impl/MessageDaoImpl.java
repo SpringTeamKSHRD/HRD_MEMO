@@ -160,7 +160,7 @@ public class MessageDaoImpl implements MessageDao {
 	}
 	@Override
 	public int deleteMessage(int id) {
-		String sql="DELETE FROM memo.tbmessage WHERE id=1?";
+		String sql="DELETE FROM memo.tbmessage WHERE id=?";
 		try{
 			return jdbcTemplate.update(sql,new Object[]{id});
 		}catch(Exception e){
