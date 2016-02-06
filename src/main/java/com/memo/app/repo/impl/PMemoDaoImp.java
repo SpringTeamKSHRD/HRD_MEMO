@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
 import com.memo.app.entities.Pagination;
-import com.memo.app.entities.User;
 import com.memo.app.repo.IMemoDao;
 
 @Repository

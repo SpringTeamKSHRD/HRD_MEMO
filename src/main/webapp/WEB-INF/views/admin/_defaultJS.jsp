@@ -60,7 +60,7 @@
 				jQuery.each(response['DATA'], function() {
 					$(".menu").append(
 						"<li><a data-href="+this.id+" href='${pageContext.request.contextPath}/admin/reports?id="+this.id+"'>"+
-						"<img src='/HRD_MEMO/resources/admin/imgs/"+this.reporterimage+"' alt='User Image'"+
+						"<img src='"+imagepath+this.reporterimage+"' alt='User Image'"+
 						"style ='float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;'>"+
 						this.reportername+" reports a memo.<span class='label pull-right' style='color:#444444;'>"+this.reportdate+"</span>"+
 						"</a></li>"

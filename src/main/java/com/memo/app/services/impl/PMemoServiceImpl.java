@@ -9,7 +9,6 @@ import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
 import com.memo.app.entities.Pagination;
 import com.memo.app.repo.IMemoDao;
-import com.memo.app.repo.impl.PMemoDaoImp;
 import com.memo.app.services.IMemoService;
 
 @Service

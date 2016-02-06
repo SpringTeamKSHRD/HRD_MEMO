@@ -23,9 +23,9 @@ CREATE SEQUENCE "public"."tbluser_userid_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 2
+ START 32
  CACHE 1;
-SELECT setval('"public"."tbluser_userid_seq"', 2, true);
+SELECT setval('"public"."tbluser_userid_seq"', 32, true);
 
 -- ----------------------------
 -- Table structure for tbluser
