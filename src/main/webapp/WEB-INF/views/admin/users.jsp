@@ -79,7 +79,7 @@
 						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
 							<div class="form-group pull-right"> 
-								<input type="checkbox"  id="viewEnabled" checked> View Enabled Users<br>
+								<input type="checkbox"  id="viewEnabled" checked> Enabled<br>
 							</div>
 						</div>
 					</div>						

@@ -154,23 +154,23 @@ public class AdminAPI {
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
-	
-	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> reportDetail(  
+
+	@RequestMapping(value="/memo/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> memoDetail(  
 			@PathVariable("id") Integer id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Report rp = reportDao.getReportDetail(id);
+		Memo m = memoDao.getMemo1(id);
 		HttpStatus status = HttpStatus.OK;
-		if (rp instanceof Report) {	
-			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
-			map.put("DATA", rp);
+		if (m instanceof Memo) {	
+			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
+			map.put("DATA", m);
 		} else {
-			map.put("MESSAGE", "REPORT NOT FOUND.");
+			map.put("MESSAGE", "MEMO NOT FOUND.");
 			status = HttpStatus.NOT_FOUND;
 		}
 		return new ResponseEntity<Map<String, Object>>(map, status);
-	}
+	}	
 	
 	//#####################################Report	
 	@RequestMapping(value="/reports/search", method = RequestMethod.GET)
@@ -214,16 +214,16 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 
-	@RequestMapping(value="/memo/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> memoDetail(  
+	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> reportDetail(  
 			@PathVariable("id") Integer id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Memo m = memoDao.getMemo1(id);
+		Report rp = reportDao.getReportDetail(id);
 		HttpStatus status = HttpStatus.OK;
-		if (m instanceof Memo) {	
+		if (rp instanceof Report) {	
 			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
-			map.put("DATA", m);
+			map.put("DATA", rp);
 		} else {
 			map.put("MESSAGE", "REPORT NOT FOUND.");
 			status = HttpStatus.NOT_FOUND;

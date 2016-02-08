@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<div class="box-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<table id="tbl-user" class="table table-bordered table-striped table-hover">
+						<table id="tbl-user" class="table table-bordered table-striped table-hover" style="margin: 0px">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -85,10 +85,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
 							<div class="form-group pull-right"> 
-								<input type="checkbox"  id="viewEnabled" checked> View Enabled Memos<br>
+								<input type="checkbox"  id="viewEnabled" checked> Enabled<br>
 							</div>
 							<div class="form-group pull-right" style="margin-right: 20px;"> 
-								<input type="checkbox"  id="viewPublic" checked> View Public Memos<br>
+								<input type="checkbox"  id="viewPublic" checked> Public<br>
 							</div>
 						</div>
 					</div>

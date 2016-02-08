@@ -11,6 +11,7 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
 @ServerEndpoint("/memo/usernotification")
 public class Notification {
 		private  static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
@@ -25,7 +26,7 @@ public class Notification {
 				try {
 					client.getBasicRemote().sendText(message);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
@@ -34,8 +35,6 @@ public class Notification {
 			clients.remove(session);
 		}
 		@OnError
-		public void onError(Throwable error)
-		{
-	}
-
+		public void onError(Throwable error){
+		}
 }

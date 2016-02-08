@@ -532,7 +532,6 @@ public class UserAPI {
 			map.put("RESPONSE_DATA", pmemoservice.deleteMemo(id));
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());

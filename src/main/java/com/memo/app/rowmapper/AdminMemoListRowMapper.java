@@ -12,7 +12,6 @@ public class AdminMemoListRowMapper implements RowMapper<Memo>{
 	@Override
 	public Memo mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		//System.out.println("memo row mapper.");
 		Memo memo=new Memo();
 		memo.setId(rs.getInt(1));
 		memo.setUserid(rs.getInt(2));

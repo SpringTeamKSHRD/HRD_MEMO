@@ -79,7 +79,7 @@
 						</div>
 						<div id="page-selection" style="padding:15px 15px 0 15px">
 							<div class="form-group pull-right"> 
-								<input type="checkbox"  id="viewBlocked"> View Blocked Reports<br>
+								<input type="checkbox"  id="viewBlocked"> Blocked<br>
 							</div>
 						</div>
 				</div>

@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Your Page Content Here -->
           <!-- Small boxes (Stat box) -->
           <div class="row" id="first-row" >
-            <div class="col-lg-3 col-lg-offset-3 col-xs-6">
+            <div class="col-lg-4 col-lg-offset-2 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="${pageContext.request.contextPath}/admin/users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- ./col -->
             </div>
             <div class="row"> 
-            <div class="col-lg-3 col-lg-offset-3 col-xs-6">
+            <div class="col-lg-4 col-lg-offset-2 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -79,12 +79,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- ./col -->
           </div><!-- /.row -->
     <%@ include file="_footer.jsp" %>
-    <%-- <%@ include file="_controlSideBar.jsp" %> --%>
- <%@ include file="_defaultJS.jsp" %>
+ 	<%@ include file="_defaultJS.jsp" %>
 <script>
-/*   var result = ${dashboard}; 
- * ${dashboard} get from _defaultJs.jsp 
- */
  	var result = ${dashboard};
     $("#total-user").html(result.totaluser);
     $("#total-memo").html(result.totalmemo);
