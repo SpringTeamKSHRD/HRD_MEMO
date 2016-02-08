@@ -131,7 +131,6 @@ function getUserDetail(email,data1){
 			}
 			});
 }
-//getUserDetail("user@gmail.com");
 
 
 

@@ -140,7 +140,6 @@
 		}catch(err) {
 		    retrievedObject="";
 		}
-		alert(retrievedObject);
 		if(retrievedObject==""){
 			
 			$("#frm-loginreg-wrapper").css('display','block');
@@ -342,7 +341,6 @@
 					    alertify.prompt("Enter your report to this memo", function (e, str) {
 					    if (e&&str!=""){
 					    	pluginUserReport(us_rpid,mm_rpid,str);
-					    	sendReportNotify('report');
 					    }
 						}, "");
 			    }else if($(this).text()==='delete'){
@@ -376,6 +374,7 @@
 	        data:JSON.stringify(json),
 			success : function(data) {
 				 alertify.success("REPORT SUCCESSED..!");
+				 sendReportNotify('report');
 			},
 			error : function(data) {
 				 alertify.error("REPORT FAILED..!");
