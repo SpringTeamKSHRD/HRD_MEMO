@@ -31,7 +31,7 @@
 		memo_p.style.margin="0px";
 		memo_p.style.padding="0px";
 		memo_p.innerHTML=" <i class='small material-icons' onclick='gotoMemoMainPage()' " +
-				"style='cursor:pointer; margin:0px;width:20px; height:20px; color:blue;'>web</i>";
+				"style='cursor:pointer; margin:0px;width:20px; height:20px; color:rgb(25, 206, 82);'>web</i>";
 		
 	//memo_ifr_wrapper style
 		memo_ifr_wrapper.style.height=window.innerHeight+"px";
