@@ -75,8 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<tbody id="content">
 
 							</tbody>
-						</table>						
-						<img id="loading" class="center-block" style="display:none;margin: 35px auto;" src="${pageContext.request.contextPath}/resources/admin/imgs/ajax-loader.gif"/>						
+						</table>												
 						<div id="error" class="center-block" style="display:none;width:400px;margin-top: 25px;">
 							<div class="alert alert-danger" style="text-align: center;margin: 15px;">
 								Memos Not Found
@@ -163,16 +162,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
 var data = {};
 var totalrow = 0;
-function toggleLoading(isLoad){
-	if(isLoad){
-		$("#content").html("");
-		$(".box-body").css("height","205px");
-		$("#loading").show();
-	}else{
-		$(".box-body").css("height","auto");
-		$("#loading").hide();
-	}
-}
 function contructTable(data){
 	$("#content").html("");
 	$.each(data, function() {
@@ -184,8 +173,10 @@ function contructTable(data){
 				"<td style='padding:0px'><a href='"+this.url+"' class='table-link' target='_blank'>"+this.title+"</a></td>"+
 				"<td>"+this.domain+"</td>"+
 				"<td>"+this.date+"</td>"+
-				"<td><div class='btn-group'><button type='button' class='btn btn-block btn-primary btn-xs btn-detail'"+
-					"data-href="+this.id+">Detail <i class='fa fa-info'></i></button></div></td>"+
+				"<td><button type='button' style='margin-right:10px' class='btn btn-primary btn-xs btn-detail'"+
+					"data-href="+this.id+">Detail <i class='fa fa-info'></i></button>"+
+					"<button type='button' class='btn btn-danger btn-xs btn-disable'"+
+					"data-href="+this.id+">Disable <i class='fa fa-ban'></i></button></td>"+
 			"</tr>");
 	});	
 }
@@ -232,7 +223,6 @@ function showDetail(id){
 	});    	
 }
 function searchMemo(page){
-	if(ParamToJson().id)	showDetail(ParamToJson().id);
 	$.ajax({
 		url: path+"/api/admin/memos/search"+
 				"?page="+page+

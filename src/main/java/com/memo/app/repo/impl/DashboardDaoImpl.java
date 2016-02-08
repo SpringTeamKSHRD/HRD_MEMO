@@ -8,16 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.memo.app.repo.IDashboardDao;
 @Repository
 public class DashboardDaoImpl implements IDashboardDao {
-private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	public DashboardDaoImpl(JdbcTemplate jdbcTemplate){
-		this.jdbcTemplate=jdbcTemplate;
-	}
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-		
+	@Autowired private JdbcTemplate jdbcTemplate;
+	
 	@Override
 	@Transactional
 	public String getDashboardData() {

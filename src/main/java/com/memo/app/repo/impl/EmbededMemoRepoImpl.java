@@ -19,6 +19,7 @@ import com.memo.app.repo.IEmebededMemoRepo;
 
 @Repository
 public class EmbededMemoRepoImpl implements IEmebededMemoRepo {
+	
 	@Autowired
 	private SessionFactory sf;
 

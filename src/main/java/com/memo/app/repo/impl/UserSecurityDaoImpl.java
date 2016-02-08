@@ -24,9 +24,7 @@ public class UserSecurityDaoImpl implements UserSecurityDao {
 	@Override
 	public UserSecurConfig findUserByUserName(String username) {
 		System.out.println(username);
-
 		String sql = "SELECT userid,email,password,ismemoenabled FROM public.tbluser WHERE email LIKE ?";
-
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, username);
@@ -45,7 +43,6 @@ public class UserSecurityDaoImpl implements UserSecurityDao {
 			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 		}
-
 		return null;
 	}
 	public List<UserRole> findUserRoleByUserId(int id) {

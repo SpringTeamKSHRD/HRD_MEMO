@@ -58,10 +58,10 @@ public class AdminAPI {
 	}*/
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("id") int id){
+	public ResponseEntity<Map<String, Object>> toggleUser(@PathVariable("id") int id){
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpStatus status = HttpStatus.OK;
-		if (userDao.changeUserEnable(id)) {	
+		if (userDao.toggleUser(id)) {	
 			map.put("MESSAGE", "USER HAS BEEN DELETE.");
 		} else {
 			map.put("MESSAGE", "USER NOT FOUND.");
@@ -77,7 +77,7 @@ public class AdminAPI {
 			@RequestParam(value = "ismemoenabled", required = false,  defaultValue = "true") boolean ismemoenabled){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<User> users=userDao.getUserList(limit, page, ismemoenabled);
+		List<User> users=userDao.listUser(limit, page, ismemoenabled);
 		HttpStatus status = HttpStatus.OK;
 		if (!users.isEmpty()) {	
 			map.put("MESSAGE", "USER HAS BEEN FOUND.");
@@ -132,7 +132,6 @@ public class AdminAPI {
 		return new ResponseEntity<Map<String, Object>>(map, status);
 	}
 	
-
 	@RequestMapping(value="/memos/search", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> searchMemo( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
@@ -156,11 +155,11 @@ public class AdminAPI {
 	}
 
 	@RequestMapping(value="/memo/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> memoDetail(  
+	public ResponseEntity<Map<String, Object>> getMemo(  
 			@PathVariable("id") Integer id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Memo m = memoDao.getMemo1(id);
+		Memo m = memoDao.getMemoDetail(id);
 		HttpStatus status = HttpStatus.OK;
 		if (m instanceof Memo) {	
 			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
@@ -202,7 +201,7 @@ public class AdminAPI {
 			@RequestParam(value = "isblocked", required = false,  defaultValue = "false") boolean isblocked){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Report> reports=reportDao.getAllReport(limit, page, isblocked);
+		List<Report> reports=reportDao.listReport(limit, page, isblocked);
 		HttpStatus status = HttpStatus.OK;
 		if (!reports.isEmpty()) {	
 			map.put("MESSAGE", "REPORT HAS BEEN FOUND.");
@@ -215,7 +214,7 @@ public class AdminAPI {
 	}
 
 	@RequestMapping(value="/report/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> reportDetail(  
+	public ResponseEntity<Map<String, Object>> getReport(  
 			@PathVariable("id") Integer id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -241,7 +240,7 @@ public class AdminAPI {
 		listMessage.add(new Message(0,report.getReporterid(),2,false,null,null,report.getMemoid()));
 
 		if(		messageDao.saveMessage(listMessage) &&
-				reportDao.updateReportIsBlockedWithMemoid(true, report.getMemoid()) &&
+				reportDao.disableReportByMemoId(report.getMemoid()) &&
 				memoDao.deleteMemo(report.getMemoid())){
 			map.put("MESSAGE", "REPORT HAS BEEN BLOCK.");
 			status = HttpStatus.OK;
@@ -253,9 +252,9 @@ public class AdminAPI {
 	}
 	
 	@RequestMapping(value = "/notification", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> getReportNotification() {
+	public ResponseEntity<Map<String, Object>> listNotification() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Report> reports=reportDao.getReportNotification();
+		List<Report> reports=reportDao.listNotification();
 		HttpStatus status = HttpStatus.OK;
 		if (!reports.isEmpty()) {	
 			map.put("MESSAGE", "NOTIFICATION HAS BEEN FOUND.");

@@ -14,14 +14,11 @@ import com.memo.app.services.MemoService;
 @Service
 @Lazy
 public class MemoServiceImpl implements MemoService{
+	
 	@Autowired
 	private MemoDao memoDao;
 
-	@Override
-	public List<Memo> listMemo(MemoSearch memo) {
-		return memoDao.listMemo(memo);
-	}
-
+	//admin page
 	@Override
 	public List<Memo> listMemo(int limit, int page, boolean isenabled, boolean ispublic){
 		//maximum 100 rows
@@ -35,16 +32,6 @@ public class MemoServiceImpl implements MemoService{
 		//filter only memo that is public
 		return memoDao.listMemo(limit, offset, isenabled, ispublic);
 	}
-	
-	@Override
-	public boolean insertMemo(Memo memo) {
-		return memoDao.insertMemo(memo);
-	}
-
-	@Override
-	public boolean updateMemo(Memo memo) {
-		return memoDao.updateMemo(memo);
-	}
 
 	@Override
 	public boolean deleteMemo(int id) {
@@ -52,8 +39,48 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
+	public List<Memo> searchMemo(int limit, int page, boolean isenabled, boolean ispublic, String column,
+			String keyword) {
+		//maximum 100 rows
+		if(limit > 100) limit = 100;
+		//minimum 10 rows
+		if(limit < 10) limit = 10;
+		//default is first page
+		if(page < 1) page = 1;
+		//calculate offset for database
+		int offset = limit * page - limit;
+		//filter only memo that is public
+		if(column.equals("title"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "title", keyword);
+		if(column.equals("domain"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "domain", keyword);
+		if(column.equals("username"))	return memoDao.searchMemo(limit, offset, isenabled, ispublic, "username", keyword);
+		return null;
+	}
+
+	@Override
+	public Memo getMemoDetail(int id) {
+		return memoDao.getMemoDetail(id);
+	}
+
+	@Override
+	public boolean toggleMemo(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	//other
+	@Override
 	public Memo getMemo(int id) {
 		return memoDao.getMemo(id);
+	}
+	
+	@Override
+	public boolean insertMemo(Memo memo) {
+		return memoDao.insertMemo(memo);
+	}	
+
+	@Override
+	public boolean updateMemo(Memo memo) {
+		return memoDao.updateMemo(memo);
 	}
 
 	@Override
@@ -90,6 +117,7 @@ public class MemoServiceImpl implements MemoService{
 	public List<Memo> pluginGetMemoOwner(int userid, String url) {
 		return memoDao.pluginGetMemoOwner(userid, url);
 	}	
+	
 	@Override
 	public boolean updateMemoContent(Memo memo) {
 		return memoDao.updateMemoContent(memo);
@@ -111,29 +139,6 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<Memo> searchMemo(int limit, int page, boolean isenabled, boolean ispublic, String column,
-			String keyword) {
-		//maximum 100 rows
-		if(limit > 100) limit = 100;
-		//minimum 10 rows
-		if(limit < 10) limit = 10;
-		//default is first page
-		if(page < 1) page = 1;
-		//calculate offset for database
-		int offset = limit * page - limit;
-		//filter only memo that is public
-		if(column.equals("title"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "title", keyword);
-		if(column.equals("domain"))		return memoDao.searchMemo(limit, offset, isenabled, ispublic, "domain", keyword);
-		if(column.equals("username"))	return memoDao.searchMemo(limit, offset, isenabled, ispublic, "username", keyword);
-		return null;
-	}
-
-	@Override
-	public Memo getMemo1(int id) {
-		return memoDao.getMemo1(id);
-	}
-
-	@Override
 	public List<Memo> listMemoNew(MemoSearch memo) {
 		return memoDao.listMemoNew(memo);
 	}
@@ -142,4 +147,9 @@ public class MemoServiceImpl implements MemoService{
 	public int getMemoNumberNew(MemoSearch memo) {
 		return memoDao.getMemoNumberNew(memo);
 	}	
+	
+	@Override
+	public List<Memo> listMemo(MemoSearch memo) {
+		return memoDao.listMemo(memo);
+	}
 }

@@ -13,42 +13,18 @@ import com.memo.app.services.ReportService;
 @Service
 @Lazy
 public class ReportServiceImpl implements ReportService {
+
 	@Autowired
 	private ReportDao reportDao;
-
+	
+	//admin page	
 	@Override
-	public boolean saveReport(Report rp) {
-        if(reportDao.saveReport(rp)>0){
-        	return true;
-        }else{
-        	return false;
-        }
+	public List<Report> listNotification() {
+		return reportDao.listNotification();
 	}
-
+	
 	@Override
-	public List<Report> getReportNotification() {
-		return reportDao.getReportNotification();
-	}
-	@Override
-	public Report getReportDetail(int id) {
-		return reportDao.getReportDetail(id);
-	}
-
-	@Override
-	public boolean blockMemoReport(int id) {
-		if(reportDao.blockMemoReport(id)>0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	@Override
-	public int numberReport() {
-		return reportDao.numberReport();
-	}
-	@Override
-	public List<Report> getAllReport(int limit, int page, boolean isblocked){
+	public List<Report> listReport(int limit, int page, boolean isblocked){
 		//maximum 100 rows
 		if(limit > 100) limit = 100;
 		//minimum 10 rows
@@ -57,7 +33,7 @@ public class ReportServiceImpl implements ReportService {
 		if(page < 1) page = 1;
 		//calculate offset for database
 		int offset = limit * page - limit;
-		return reportDao.getAllReport(limit,offset,isblocked);
+		return reportDao.listReport(limit,offset,isblocked);
 	}
 
 	@Override
@@ -77,8 +53,37 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public boolean updateReportIsBlockedWithMemoid(boolean isBlocked, int memoid) {
-		return reportDao.updateReportFieldWithField("isblocked", "memoid", isBlocked, memoid);
+	public Report getReportDetail(int id) {
+		return reportDao.getReportDetail(id);
+	}
+	
+	@Override
+	public boolean disableReportByMemoId(int memoid) {
+		return reportDao.disableReportByMemoId(memoid);
+	}
+	
+	//other
+	@Override
+	public boolean saveReport(Report rp) {
+        if(reportDao.saveReport(rp)>0){
+        	return true;
+        }else{
+        	return false;
+        }
+	}
+
+	@Override
+	public boolean blockMemoReport(int id) {
+		if(reportDao.blockMemoReport(id)>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public int numberReport() {
+		return reportDao.numberReport();
 	}
 
 }

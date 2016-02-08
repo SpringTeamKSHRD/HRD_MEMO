@@ -351,6 +351,5 @@ jQuery(document).ready(function($) {
     listOrSearchReports();
 });
 </script>	
-<!-- <script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo.min.js" defer></script> -->
 </body>
 </html>

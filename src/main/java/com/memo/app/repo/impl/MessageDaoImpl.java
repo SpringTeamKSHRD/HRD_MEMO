@@ -19,6 +19,7 @@ public class MessageDaoImpl implements MessageDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
 	@Override
 	public int[] saveMessage(final List<Message> messages) {
 		String sql="INSERT INTO memo.tbmessage(userid,message_id,memoid) VALUES(?,?,?)";

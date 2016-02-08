@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean changeUserEnable(int id) {
-		if (userdao.changeUserEnable(id) > 0) {
+	public boolean toggleUser(int id) {
+		if (userdao.toggleUser(id) > 0) {
 			return true;
 		} else {
 			return false;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserList(int limit, int page, boolean ismemoenabled){
+	public List<User> listUser(int limit, int page, boolean ismemoenabled){
 		//maximum 100 rows
 		if(limit > 100) limit = 100;
 		//minimum 10 rows
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		if(page < 1) page = 1;
 		//calculate offset for database
 		int offset = limit * page - limit;
-		return userdao.getUserList(limit,offset,ismemoenabled);
+		return userdao.listUser(limit,offset,ismemoenabled);
 	}
 
 	@Override

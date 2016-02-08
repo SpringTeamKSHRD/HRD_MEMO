@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
 	}	
 
 	@Override
-	public int changeUserEnable(int id) {
+	public int toggleUser(int id) {
 		String sql = "UPDATE public.tbluser SET ismemoenabled= NOT ismemoenabled WHERE userid=?";
 		try {
 			return jdbcTemplate.update(sql, id);
@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> getUserList(int limit, int offset, boolean ismemoenabled) {
+	public List<User> listUser(int limit, int offset, boolean ismemoenabled) {
 		try{
 		String sql = "SELECT us.userid,us.username,us.gender,us.email,date(us.registerdate),us.userimageurl,ut.usertypename,count(*) OVER() "
 				 + "FROM public.tbluser us " + "INNER JOIN public.tblusertype ut " + "ON us.usertypeid=ut.usertypeid "
