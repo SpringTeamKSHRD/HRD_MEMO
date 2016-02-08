@@ -62,7 +62,7 @@ public class AdminAPI {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpStatus status = HttpStatus.OK;
 		if (userDao.toggleUser(id)) {	
-			map.put("MESSAGE", "USER HAS BEEN DELETE.");
+			map.put("MESSAGE", "USER HAS BEEN TOGGLED.");
 		} else {
 			map.put("MESSAGE", "USER NOT FOUND.");
 			status = HttpStatus.NOT_FOUND;
@@ -112,6 +112,19 @@ public class AdminAPI {
 	}
 	
 	//#####################################Memo
+	@RequestMapping(value="/memo/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> toggleMemo(@PathVariable("id") int id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.OK;
+		if (memoDao.toggleMemo(id)) {	
+			map.put("MESSAGE", "MEMO HAS BEEN TOGGLED.");
+		} else {
+			map.put("MESSAGE", "MEMO NOT FOUND.");
+			status = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<Map<String, Object>>(map, status);
+	}
+	
 	@RequestMapping(value="/memos", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo( 
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,

@@ -162,8 +162,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
 var data = {};
 var totalrow = 0;
-function contructTable(data){
+function contructTable(data,isenable){
 	$("#content").html("");
+	var btn,text,icon="";
+	if(isenable){		
+		btn="btn-danger";
+		text="Disable";
+		icon="fa-ban";
+	}else{
+		btn="btn-primary";
+		text="Enable";
+		icon="fa-unlock";		
+	}
 	$.each(data, function() {
 		$("#content").append(
 			"<tr data-href="+this.id+">"+
@@ -175,8 +185,8 @@ function contructTable(data){
 				"<td>"+this.date+"</td>"+
 				"<td><button type='button' style='margin-right:10px' class='btn btn-primary btn-xs btn-detail'"+
 					"data-href="+this.id+">Detail <i class='fa fa-info'></i></button>"+
-					"<button type='button' class='btn btn-danger btn-xs btn-disable'"+
-					"data-href="+this.id+">Disable <i class='fa fa-ban'></i></button></td>"+
+					"<button type='button' class='btn "+btn+" btn-xs btn-delete'"+
+					"data="+this.id+">"+text+" <i class='fa "+icon+"'></i></button></td>"+
 			"</tr>");
 	});	
 }
@@ -191,7 +201,7 @@ function listContent(page){
 		type: "get",
 		success: function (response) {	
 			totalrow = response['DATA'][0].count;
-			contructTable(response['DATA']);				
+			contructTable(response['DATA'],$("#viewEnabled").prop("checked"));				
 		},
 		statusCode: {
 	    	404: function() {
@@ -237,7 +247,7 @@ function searchMemo(page){
 			$(".box-body").css("height","auto");
 			$("#error").hide();
 			totalrow = response['DATA'][0].count;			
-			contructTable(response['DATA']);		
+			contructTable(response['DATA'],$("#viewEnabled").prop("checked"));		
 		},
 		statusCode: {
 	    	404: function() {
@@ -266,6 +276,18 @@ function createPagination(page,totalrow,listFunction){
 		listFunction(page);
 	});
 }
+function toggleMemo(row){
+	if(confirm("Are you sure?")) {
+		$.ajax({
+			url: path+"/api/admin/memo/"+row.attr('data'),
+			type: "delete",
+			async: false,
+			success: function (response) {
+				row.parents('tr').remove();		
+			}
+		});
+	}
+}
 function listOrSearchMemos(){
 	$(".box-body").css("height","auto");
 	$("#error").hide();
@@ -279,6 +301,9 @@ function listOrSearchMemos(){
 }
 jQuery(document).ready(function($) {
 	if(ParamToJson().id)	showDetail(ParamToJson().id);
+	$("body").on("click",".btn-delete",function(){
+		toggleMemo($(this));
+	}); 
 	$("body").on("click",".btn-detail",function(){
     	showDetail($(this).data("href"));
     });

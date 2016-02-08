@@ -70,7 +70,12 @@ public class MemoDaoImpl implements MemoDao{
 
 	@Override
 	public boolean toggleMemo(int id) {
-		// TODO Auto-generated method stub
+		String sql = "UPDATE memo.tbmemo SET isenable= NOT isenable WHERE id=?";
+		try {
+			 if(jdbcTemplate.update(sql, id)>0) return true;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 		return false;
 	}
 

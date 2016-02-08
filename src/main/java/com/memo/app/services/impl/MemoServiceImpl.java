@@ -63,8 +63,7 @@ public class MemoServiceImpl implements MemoService{
 
 	@Override
 	public boolean toggleMemo(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return memoDao.toggleMemo(id);
 	}
 	
 	//other

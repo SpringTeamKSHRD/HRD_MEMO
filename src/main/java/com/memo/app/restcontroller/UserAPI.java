@@ -40,6 +40,7 @@ import com.memo.app.services.UserService;
 @RestController
 @RequestMapping(value = "/user")
 public class UserAPI {
+	
 	@Autowired
 	private MemoService memoService;
 	
@@ -289,21 +290,6 @@ public class UserAPI {
 		}
 	}
 
-	// update memo
-//	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable("id") int id) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		if (memoService.deleteMemo(id)) {
-//			map.put("MESSAGE", "MEMO HAS BEEN DELETED.");
-//			map.put("STATUS", HttpStatus.FOUND.value());
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//		} else {
-//			map.put("MESSAGE", "MEMO HAS NOT BEEN DELETED.");
-//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-//		}
-//	}
-
 	// upload image
 	@RequestMapping(value = "/uploadimage", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> uploadImage(@RequestParam("file") MultipartFile file,
@@ -419,6 +405,7 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+	
 	//for brother pheak
 	@RequestMapping(value = "/usermemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody MemoSearch memo) {
@@ -435,6 +422,7 @@ public class UserAPI {
 		map.put("DATA", memos);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
+	
 	@RequestMapping(value = "/numbermemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> numberMemo(@RequestBody MemoSearch memo) {
 		System.out.println("list memo");
@@ -452,6 +440,7 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+	
 	// SOPHEAK'S IMPLEMENT
 	@RequestMapping(value = "/mylistmemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody Memo memo) {
@@ -520,7 +509,8 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-//	delete memo
+	
+	//	delete memo
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> deleteMemoP(@PathVariable int id) {
 		System.out.println("delete memo");
@@ -538,26 +528,7 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
-//	update memo
-//	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-//	public ResponseEntity<Map<String, Object>> updateMemoP(@RequestBody Memo m) {
-//		System.out.println("update memo");
-//		System.out.println(m.getContent());
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		try {
-//			map.put("MESSAGE", "SUCCESS");
-//			map.put("STATUS", HttpStatus.OK.value());
-//			map.put("RESPONSE_DATA", pmemoservice.updateMemo(m));
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			System.out.println(e.getMessage());
-//			map.put("MESSAGE", "LIST EMPTY");
-//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-//		}
-//	}
-//	
+	
 	@RequestMapping(value = "/user/memos", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listmemos(MemoFilter filter, Pagination pagination) {
 		System.out.println("list memo");
@@ -580,6 +551,7 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}*/
 	}
+	
 	@RequestMapping(value = "/deletemessage/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> deleteMessage(@PathVariable("id") int id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -593,4 +565,39 @@ public class UserAPI {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 	}
+
+//#########################################################################################unused
+//	update memo
+//	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+//	public ResponseEntity<Map<String, Object>> updateMemoP(@RequestBody Memo m) {
+//		System.out.println("update memo");
+//		System.out.println(m.getContent());
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		try {
+//			map.put("MESSAGE", "SUCCESS");
+//			map.put("STATUS", HttpStatus.OK.value());
+//			map.put("RESPONSE_DATA", pmemoservice.updateMemo(m));
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			map.put("MESSAGE", "LIST EMPTY");
+//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+//		}
+//	}
+//	
+//  update memo
+//	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//	public ResponseEntity<Map<String, Object>> deleteMemo(@PathVariable("id") int id) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		if (memoService.deleteMemo(id)) {
+//			map.put("MESSAGE", "MEMO HAS BEEN DELETED.");
+//			map.put("STATUS", HttpStatus.FOUND.value());
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//		} else {
+//			map.put("MESSAGE", "MEMO HAS NOT BEEN DELETED.");
+//			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+//			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+//		}
+//	}
 }
