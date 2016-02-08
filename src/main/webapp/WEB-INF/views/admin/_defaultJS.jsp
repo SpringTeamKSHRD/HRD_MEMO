@@ -30,7 +30,7 @@
 		if(message.data==="report"){  
 			alertify.success("New Report");
 			listnotification();
-			if(totalrow<10) listOrSearchReports();
+			if(!typeof variable_here === 'undefined' && totalrow<10) listOrSearchReports();
 		}
 	}
 	/* clear number on notification */

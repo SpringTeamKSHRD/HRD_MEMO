@@ -32,7 +32,7 @@ public class ReportDaoImpl implements ReportDao {
 				+ "FROM memo.tbreport rp "
 				+ "INNER JOIN public.tbluser us "
 				+ "ON	rp.reporterid=us.userid "
-				+ "WHERE rp.isblocked=FALSE";
+				+ "WHERE rp.isblocked=FALSE ORDER BY ID DESC";
 		List<Report> reports=jdbcTemplate.query(sql,new ReportNotificRowMapper());
 		return reports;
 	}
