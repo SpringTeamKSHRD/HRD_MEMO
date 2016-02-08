@@ -117,6 +117,7 @@ function logingMainMemo(email,pwd){
 		}
 	});
 }
+
 function getUserDetail(email,data1){
 	 $.ajax({
 			url: path+"getuserdetail",

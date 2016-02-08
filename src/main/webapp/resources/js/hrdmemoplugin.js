@@ -31,7 +31,7 @@
 		memo_p.style.margin="0px";
 		memo_p.style.padding="0px";
 		memo_p.innerHTML=" <i class='small material-icons' onclick='gotoMemoMainPage()' " +
-				"style='cursor:pointer; margin:0px;width:20px; height:20px; color:rgb(25, 206, 82);'>web</i>";
+				"style='cursor:pointer; margin:0px;width:20px; height:20px; color:rgb(80, 162, 83);'>web</i>";
 		
 	//memo_ifr_wrapper style
 		memo_ifr_wrapper.style.height=window.innerHeight+"px";
@@ -71,14 +71,14 @@
 		activate_desc_memo.setAttribute("id","btn-act-desc");
 		activate_desc_memo.setAttribute("title","Memo");
 		activate_desc_memo.style.position="fixed";
-		activate_desc_memo.style.background="rgb(25, 206, 82)";
+		activate_desc_memo.style.background="rgba(0, 0, 0, 0) linear-gradient(#50a253, #4c954d) repeat scroll 0 0";
 		activate_desc_memo.style.borderRadius="10px 0px 0px 10px";
 		activate_desc_memo.style.boxShadow="-1px 2px 3px gray";
 		activate_desc_memo.style.fontSize="14px";
 		activate_desc_memo.style.fontWeight="bold";
 		activate_desc_memo.style.cursor="pointer";
 		activate_desc_memo.style.color="white";
-		activate_desc_memo.style.width="25px";
+		activate_desc_memo.style.width="30px";
 		activate_desc_memo.style.right="0px";
 		activate_desc_memo.style.top="43%";
 		activate_desc_memo.style.margin="0px";
@@ -90,7 +90,7 @@
 		var my_memo_hide=true;
 		$("#btn-act-desc").click(function(){
 			if(my_memo_hide==true){
-				$("#btn-act-desc").animate({right: 353, marginLeft: 0,}, {duration: 300});
+				$("#btn-act-desc").animate({right: 342, marginLeft: 0,}, {duration: 300});
 				$("#hrd_memo_pess").animate({width: 341, marginLeft: 0,padding:5}, {duration: 300});
 				document.getElementsByClassName('my-memo-class')[0]
 				.iFrameResizer.sendMessage( memo_iframe_height+"hrdmem"+memo_domainName+"hrdmem"+memo_url+"hrdmem"+memo_title+"hrdmem"+window.innerHeight);

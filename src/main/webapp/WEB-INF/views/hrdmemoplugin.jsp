@@ -267,7 +267,7 @@
 		if(userid==retrievedObject.userid){
 			memo_date_label.appendChild(close);
 			memo_date_label.appendChild(edit);
-			memo_img_wraper.style.background="#009688";
+			memo_img_wraper.style.background="rgba(0, 0, 0, 0) linear-gradient(#50a253, #4c954d) repeat scroll 0 0";
 		}
 		if(userid!=retrievedObject.userid){
 			memo_date_label.appendChild(report);
