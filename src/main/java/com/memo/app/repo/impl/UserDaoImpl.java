@@ -113,8 +113,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserDialInfo(String emial) {
-		
 		String sql="SELECT userid,username,password,gender,email,phonenumber,dateofbirth,userimageurl FROM public.tbluser WHERE email LIKE ?";
+		try{
 		User user=jdbcTemplate.queryForObject(sql,new Object[]{emial},new RowMapper<User>(){
 			@Override
 			public User mapRow(ResultSet rs, int i) throws SQLException {
@@ -130,7 +130,13 @@ public class UserDaoImpl implements UserDao {
 				return user;
 			}
 		});
+		System.out.println(user);
 		return user;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			
+		}
+		return null;
 	}
 
 	@Override

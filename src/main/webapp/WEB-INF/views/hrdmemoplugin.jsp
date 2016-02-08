@@ -134,14 +134,15 @@
 	var cur_h=0,domain="",url="",title="";
 	//retriev object
 	function initailizePage(){
-		//$("#useropt").prop('checked','');
 		try {
 				retrievedObject = JSON.parse(Cookies.get('MEMO')); 
 				
 		}catch(err) {
 		    retrievedObject="";
 		}
+		alert(retrievedObject);
 		if(retrievedObject==""){
+			
 			$("#frm-loginreg-wrapper").css('display','block');
 			$("#frm-memodesc-panel").css('display','none');
 		}else{
@@ -451,7 +452,7 @@
 					logingMainMemo(email,pwd)
 					$("#useropt").prop('checked','');
 					$("#public").prop('checked','');
-					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
+					Cookies.set('MEMO',JSON.stringify(data.DATA));
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
@@ -502,7 +503,7 @@
 					logingMainMemo(email,pwd)
 					$("#useropt").prop('checked','');
 					$("#public").prop('checked','');
-					Cookies.set('MEMO',JSON.stringify(data.DATA),{expires: 1});
+					Cookies.set('MEMO',JSON.stringify(data.DATA));
 					retrievedObject=Cookies.getJSON('MEMO');
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memo-wrapper").slideDown(500);

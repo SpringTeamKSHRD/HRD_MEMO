@@ -13,8 +13,7 @@ $(function() {
 					|| data == "Bad credentials")
 						alert(data);
 				else{	
-						//khmerAcademeyLogin(username, password);
-						location.href = path + data
+					    getUserDetail(username,data);
 				};
 			},
 			error : function(data) {
@@ -23,21 +22,6 @@ $(function() {
 		});
 	});
 });
-function khmerAcademeyLogin(username,password){
-	$.ajax({
-		url: "http://localhost:8080/KAWEBCLIENT/login",
-		type: "POST",
-		data : {
-		'ka_username':username,
-		'ka_password':password},
-		success: function(data) {
-				 alert("Loig Khmer academy success");	
-		},
-		error: function(data){
-			 alert("Login Khmer academy error");	
-		}
-		});
-}
 $("#frmRegister")
 .submit(
     function(e) {
@@ -99,3 +83,66 @@ $("#frmRegister")
                 }
             });
     });
+
+//Test Login With Khmer Academy
+function isKhmerAcademyLogin(){
+		 $.ajax({
+				url: "http://192.168.178.121:8080/KAWEBCLIENT/api/isLogin",
+				type: "GET",
+				success: function(data) {
+						 alert(data.STATUS);
+				},
+				error: function(data){
+					 	alert("Login Khmer academy error");	
+				}
+				});
+	
+}
+//isKhmerAcademyLogin();
+function logingMainMemo(email,pwd){
+	var json={
+			username:email,
+			password:pwd
+	};
+	$.ajax({
+		url : path+"/login",
+		type : "POST",
+		dataType:'json',
+		data :json,
+		success : function(data) {
+			 getUserDetail(email);
+		},
+		error : function(data) {
+			console.log(data);
+		}
+	});
+}
+function getUserDetail(email,data1){
+	 $.ajax({
+			url: path+"getuserdetail",
+			type: "GET",
+			data:{email:email},
+			success: function(data) {
+				Cookies.set('MEMO',JSON.stringify(data.DATA));
+				location.href = path + data1;
+			},
+			error: function(data){
+				 	alert("Set Cookie Error..!");	
+			}
+			});
+}
+//getUserDetail("user@gmail.com");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
