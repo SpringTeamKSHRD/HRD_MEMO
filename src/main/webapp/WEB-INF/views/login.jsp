@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login.css">
     <script
 	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
-
+<style >
+select option{
+	color: green;
+}
+</style>
 </head>
 
 <body>
@@ -58,7 +62,6 @@
                       <option value="male" selected="selected">Male</option>
                       <option value="female">Female</option>
                     </select>
-                    
                     <div class="bar"></div>
                 </div>
                 <div class="input-container">
