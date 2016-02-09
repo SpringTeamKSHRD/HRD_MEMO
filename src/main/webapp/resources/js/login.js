@@ -35,7 +35,7 @@ $("#frmRegister")
         }else{
         $
             .ajax({
-                url: "http://localhost:8080/HRD_MEMO/plugin/memo/validate",
+                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/validate",
                 type: "POST",
                 data: {
                     email: $('#r_email').val()
@@ -47,7 +47,7 @@ $("#frmRegister")
                     	console.log(data)
                         $
                             .ajax({
-                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/register",
+                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/register",
                                 type: "POST",
                                 data: $("#frmRegister").serialize(),
                                 success: function(data) {
@@ -133,6 +133,15 @@ function getUserDetail(email,data1){
 			data:{email:email},
 			success: function(data) {
 				Cookies.set('MEMO',JSON.stringify(data.DATA));
+				Cookies.set('LOGGED', {
+                    "userid": data.USERID,
+                    "email": data.EMAIL,
+                    "lang": "km",
+                    "imageUrl": data.IMAGE_URL
+                }, {
+                    expires: 1,
+                    path: ''
+                });
 				location.href = path + data1;
 			},
 			error: function(data){

@@ -15,7 +15,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String homePahe1() {
+	public String homePage1() {
 		return "login";
 	}		
 
@@ -25,7 +25,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "test_plugin2", method = RequestMethod.GET)
-	public String homePahe(ModelMap model) {
+	public String homePage(ModelMap model) {
 		return "test_plugin2";
 	}
 	

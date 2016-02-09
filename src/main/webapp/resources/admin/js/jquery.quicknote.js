@@ -355,7 +355,7 @@
             }
             //            memo-alert(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''))
 
-            var loading = '<div id="memo-loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+            var loading = '<div id="memo-loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
             $(loading).appendTo(this.$el);
 
             if (typeof Cookies.get('LOGGED') === 'undefined') {
@@ -380,7 +380,7 @@
             }
         },
         //        showLoading:function(){
-        //          var loading ='<div id="loading" style="position:absolute;top:50%;right:40%"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
+        //          var loading ='<div id="loading" style="position:absolute;top:50%;right:40%"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/loading.gif" /></div>';
         //           $(loading).appendTo(this.$el);
         //        },
         deleteMemo: function(id) {
@@ -388,7 +388,7 @@
             $('#memo-loading').show();
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/HRD_MEMO/plugin/memo/" + id,
+                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/" + id,
                 success: function(json) {
                     $('#memo-loading').hide();
                     if (json.RESPONSE_DATA) {
@@ -413,7 +413,7 @@
             console.log(memo);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
+                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/update",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(memo),
@@ -480,7 +480,7 @@
                         e.preventDefault();
                         $
                             .ajax({
-                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/validate",
+                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/validate",
                                 type: "POST",
                                 data: {
                                     email: $('#email').val()
@@ -497,7 +497,7 @@
                                     	console.log(data)
                                         $
                                             .ajax({
-                                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/register",
+                                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/register",
                                                 type: "POST",
                                                 data: $("#frmRegister").serialize(),
                                                 success: function(data) {
@@ -568,7 +568,7 @@
             dl += '</div>';
             dl += '</div>';
 
-            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><a href="http://localhost:8080/HRD_MEMO/user" target="_blank"><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/viewall.png" width="25px" heigh="25px" id="viewall" style="cursor:pointer;position:absolute;top:0px;left:6px" title="View all memos"/></a><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:6px" title="Logout"/></div>';
+            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide" style="position:relative">KhmerAcademy Memo</span><a href="http://192.168.178.186:8080/HRD_MEMO/user" target="_blank"><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/viewall.png" width="25px" heigh="25px" id="viewall" style="cursor:pointer;position:absolute;top:0px;left:6px" title="View all memos"/></a><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="25px" heigh="25px" id="logout" style="cursor:pointer;position:absolute;top:0px;right:6px" title="Logout"/></div>';
             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
             var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnSave" >Save</button>';
             var notesInp = '<textarea name="qn_input" row="10" style="resize :none;width:100%;min-height: 120px;border:none;padding:10px;" id="mytext"></textarea>';
@@ -583,7 +583,7 @@
                     path: ''
                 });
            		 $.ajax({
-           				url : "http://localhost:8080/HRD_MEMO/plugin/logout",
+           				url : "http://192.168.178.186:8080/HRD_MEMO/plugin/logout",
            				type : "GET",
            				success : function(data){
            				},
@@ -608,7 +608,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/HRD_MEMO/plugin/memo",
+                    url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(memo),
@@ -626,14 +626,14 @@
                                 $('#qn > #notes').remove();
                                 cb += '<li class="another" id="' + obj.id + '">';
                                 cb += '<input type="hidden" id="ispublic" value="' + obj.ispublic + '"/>';
-                                update = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/edit.png" width="14px" heigh="14px" class="btnUpdateMemo" id="' + obj.id + '" style="cursor:pointer" title="Update Memo" />'
-                                deleted = '<img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="' + obj.id + '" style="cursor:pointer" title="Delete Memo" />'
+                                update = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/edit.png" width="14px" heigh="14px" class="btnUpdateMemo" id="' + obj.id + '" style="cursor:pointer" title="Update Memo" />'
+                                deleted = '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/delete.png" width="14px" heigh="14px" class="btnDeleteMemo" id="' + obj.id + '" style="cursor:pointer" title="Delete Memo" />'
                             } else {
                                 cb += '<li class="me" id="' + obj.id + '" >';
-                                report='<span style="position:relative;cursor:pointer" id="'+obj.userid+'" class="report"> Report <img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/report.png" width="9px" height="9px;" title="Report this memo"/></span>';
+                                report='<span style="position:relative;cursor:pointer" id="'+obj.userid+'" class="report"> Report <img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/report.png" width="9px" height="9px;" title="Report this memo"/></span>';
                             }
                             cb += '<div class="avatar-icon">';
-                            cb += '<img src="http://localhost:8080/HRD_MEMO/resources/user/image/' + obj.userimageurl + '" title="'+obj.username+'" >';
+                            cb += '<img src="http://192.168.178.186:8080/HRD_MEMO/resources/user/image/' + obj.userimageurl + '" title="'+obj.username+'" >';
                             cb += '</div>';
                             cb += '<div class="messages">';
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';
@@ -668,7 +668,7 @@
                         //REPORT MEMO
                         $('.report').click(function() {
                         	
-                        	var hrd_notify_url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+                        	var hrd_notify_url="ws://192.168.178.186:8080/HRD_MEMO/memo/usernotification";
 	                       	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	                       	 hrd_memo_websocket.onopen=function(message){
 	                       	 }
@@ -695,13 +695,13 @@
                             	}
                                	$('#memo-loading').show();
                             	$.ajax({
-                                    url: "http://localhost:8080/HRD_MEMO/plugin/memo/memoexisted/"+memoid,
+                                    url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/memoexisted/"+memoid,
                                     type: "POST",
                                     success: function(data) {
                                         if (data.RESPONSE_DATA == false) {
                                         	 $
                                              .ajax({
-                                                 url: "http://localhost:8080/HRD_MEMO/plugin/memo/report",
+                                                 url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/report",
                                                  type: "POST",
                                                  dataType: "json",
                                                  contentType: "application/json; charset=utf-8",
@@ -754,7 +754,7 @@
                             dl += '</div>';
                             dl += '</div>';
 
-                            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://localhost:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
+                            var showHide = '<div id="qn_sh" style="margin-bottom:5px"><span id="show-hide">KhmerAcademy Memo</span><img src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/imgs/logout.png" width="14px" heigh="14px" id="logout" style="cursor:pointer;" title="Logout"/></div>';
                             var divNotes = '<div id="notes" style="background: #E4E4E4;padding-bottom: 30px;"></div>';
                             var cancelBtn = '<button class="memo-uibutton" style="position:absolute;right:70px;bottom:2px;height:24px;" id="btnCancel" >Cancel</button>';
                             var saveBtn = '<button class="memo-uibutton confirm" style="position:absolute;right:8px;bottom:2px;height:24px;" id="btnUpdate" >Update</button>';
@@ -787,7 +787,7 @@
                                 console.log(memo);
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://localhost:8080/HRD_MEMO/plugin/memo/update",
+                                    url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/update",
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",
                                     data: JSON.stringify(memo),
@@ -867,7 +867,7 @@
          							password:pwd
          					};
          					$.ajax({
-         						url : "http://localhost:8080/HRD_MEMO/login",
+         						url : "http://192.168.178.186:8080/HRD_MEMO/login",
          						type : "POST",
          						dataType:'json',
          						data :json,
@@ -882,7 +882,7 @@
                         e.preventDefault();
                         $
                             .ajax({
-                                url: "http://localhost:8080/HRD_MEMO/plugin/memo/login",
+                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/login",
                                 type: "POST",
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
@@ -954,7 +954,7 @@
                     $('#memo-loading').show();
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/HRD_MEMO/plugin/memo/add",
+                        url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/add",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(memo),
