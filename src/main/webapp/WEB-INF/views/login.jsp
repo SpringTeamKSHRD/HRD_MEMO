@@ -65,7 +65,7 @@ select option{
                     <div class="bar"></div>
                 </div>
                 <div class="input-container">
-                    <input type="email" id="r_email" name="email" required="required" />
+                    <input type="text" id="r_email" name="email" required="required" />
                     <label for="email">Email</label>
                     <div class="bar"></div>
                 </div>

@@ -199,7 +199,7 @@ public class UserAPI {
 	}
 
 	// search memo by specific ID
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(@PathVariable("id") int id) {
 		System.out.println("detail controller");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -214,10 +214,10 @@ public class UserAPI {
 		map.put("MESSAGE", "MEMO NOT FOUND.");
 		map.put("STATUS", HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-	}
+	}*/
 
 	// filter memo by title
-	@RequestMapping(value = "/filter/{column}/{value}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/filter/{column}/{value}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> filterMemo(@PathVariable("column") String column,
 			@PathVariable("value") String value) {
 		// System.out.println("filter name controller.");
@@ -235,9 +235,9 @@ public class UserAPI {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
 	}
-
+*/
 	// filter memo by title
-	@RequestMapping(value = "/privacy/{ispublic}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/privacy/{ispublic}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> filterMemoByPrivacy(@PathVariable("ispublic") boolean ispublic) {
 		// System.out.println("filter name controller.");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -253,10 +253,10 @@ public class UserAPI {
 		map.put("DATA", list);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
-	}
+	}*/
 
 	// filter memo by date range
-	@RequestMapping(value = "/filterdate/{sd}/{ed}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/filterdate/{sd}/{ed}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> filterDate(@PathVariable("sd") Object sd,
 			@PathVariable("ed") Object ed) {
 		System.out.println("filter date controller.");
@@ -273,7 +273,7 @@ public class UserAPI {
 		map.put("DATA", list);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
-	}
+	}*/
 
 	// update memo
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -373,7 +373,7 @@ public class UserAPI {
 	}
 
 	// user get owner memo
-	@RequestMapping(value = "/getallmemo", method = RequestMethod.POST,headers = "Accept=application/json")
+/*	@RequestMapping(value = "/getallmemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> listUserMemo(@RequestBody MemoSearch memo) {
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -387,10 +387,10 @@ public class UserAPI {
 		map.put("STATUS", HttpStatus.OK.value());
 		map.put("DATA", memos);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-	}
+	}*/
 
 	// get memo nummber
-	@RequestMapping(value = "/getmemonumber", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/getmemonumber", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> getMemoNumber(@RequestBody MemoSearch memo) {
 		Map<String, Object> map = new HashMap<String, Object>();
         int mn=memoService.getMemoNumber(memo);
@@ -404,10 +404,10 @@ public class UserAPI {
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
-	}
+	}*/
 	
 	//for brother pheak
-	@RequestMapping(value = "/usermemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	/*@RequestMapping(value = "/usermemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody MemoSearch memo) {
 		ArrayList<Memo> memos = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -439,10 +439,10 @@ public class UserAPI {
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
-	}
+	}*/
 	
 	// SOPHEAK'S IMPLEMENT
-	@RequestMapping(value = "/mylistmemo", method = RequestMethod.POST,headers = "Accept=application/json")
+	/*@RequestMapping(value = "/mylistmemo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> listMemo(@RequestBody Memo memo) {
 		System.out.println("list memo");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -476,7 +476,7 @@ public class UserAPI {
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
-	}
+	}*/
 		
 	@RequestMapping(value = "/listdomain", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listDomain() {
