@@ -103,8 +103,10 @@ var url="ws://"+location.hostname+":"+location.port+path+"/memo/usernotification
  	 if(message.data==="response"){
  		getAllNumberMessage();
  		updateMessageStatus();
+ 		audio.play();
  	 }
   }
+  var audio = new Audio(path+'/resources/audio/notifysouand.mp3');
   function updateMessageStatus(){
 		var uid=parseInt($("#userid").val());
 		$.ajax({

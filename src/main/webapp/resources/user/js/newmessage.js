@@ -98,8 +98,10 @@ websocket.onclose = function(message) {
 websocket.onmessage = function(message) {
 	if (message.data === "response") {
 		getNumberMesage();
+		audio.play();
 	}
 }
+var audio = new Audio(path+'/resources/audio/notifysouand.mp3');
 function goToPage() {
 	window.location.href = path + "/user/getallmessage";
 }

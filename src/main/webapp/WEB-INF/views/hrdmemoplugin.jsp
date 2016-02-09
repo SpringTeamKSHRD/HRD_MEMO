@@ -191,6 +191,7 @@
 		memo_img_wraper.appendChild(user_memo_img);
 		//create title 
 		var memo_title_label=document.createElement('small');
+		memo_title_label.setAttribute('id','mytitle');
 		memo_title_label.style.color="white";
 		memo_title_label.style.float="right";
 		memo_title_label.style.margin="7px 0 0 0";
@@ -217,7 +218,7 @@
 		desc.setAttribute('class','chip');
 		var close=document.createElement("i");
 		close.setAttribute('class','material-icons my_delete_btn');
-		close.setAttribute('title','close');
+		close.setAttribute('title','Delete');
 		close.style.float="right";
 		close.style.color="red";
 		close.style.marginRight="7px";
@@ -227,13 +228,14 @@
 		var report=document.createElement("i");
 		report.setAttribute('class','material-icons');
 		report.setAttribute('onclick','reportMemo('+retrievedObject.userid+','+memoid+')');
-		report.setAttribute('title','report');
+		report.setAttribute('title','Report');
 		report.style.marginRight="7px";
 		report.style.float="right";
 		report.style.color="#FFC107";
 		var report_text=document.createTextNode("assignment");
 		report.appendChild(report_text);
 		var desc_text=document.createElement("div");
+		desc_text.setAttribute('id','mycontent');
 		desc_text.setAttribute('class','col s12 content');
 		desc_text.style.margin="10px 0 10px 0";
 		desc_text.appendChild(document.createTextNode(text));
@@ -253,11 +255,21 @@
 		var edit=document.createElement("i");
 		edit.setAttribute('class','material-icons edit-btn');
 		edit.setAttribute('onclick','getEditMemo('+memoid+')');
-		edit.setAttribute('title','edit');
+		edit.setAttribute('title','Edit');
 		edit.style.float="right";
 		edit.style.color="#00E676";
-		var edit_text=document.createTextNode("mode_edit");
+		var edit_text=document.createTextNode("note_add");
 		edit.appendChild(edit_text);
+		//create export btn
+		var exportpdf=document.createElement("i");
+		exportpdf.setAttribute('class','material-icons');
+		exportpdf.setAttribute('title','Export to PDF');
+		exportpdf.style.float="right";
+		exportpdf.style.color="#3F51B5";
+		exportpdf.style.marginRight="0px";
+		exportpdf.setAttribute('onclick','exportPdf()');
+		var pdf_text=document.createTextNode("description");
+		exportpdf.appendChild(pdf_text);
 		//create footer
 		var memo_footer=document.createElement("div");
 		memo_footer.setAttribute('class','mymemo-footer');
@@ -267,6 +279,7 @@
 		if(userid==retrievedObject.userid){
 			memo_date_label.appendChild(close);
 			memo_date_label.appendChild(edit);
+			memo_date_label.appendChild(exportpdf);
 			memo_img_wraper.style.background="rgba(0, 0, 0, 0) linear-gradient(#50a253, #4c954d) repeat scroll 0 0";
 		}
 		if(userid!=retrievedObject.userid){
@@ -717,6 +730,29 @@
 		$(this).toggleClass("more less");
 		$(this).parent().toggleClass("content"); 
 	 });
+	 function exportPdf(){
+		 var url="${pageContext.request.contextPath}/getpdffile";
+         $.ajax({
+                type: "GET", 
+                url: url,
+                data:{
+               	 title:$("#mytitle").text(),
+               	 content:$("#mycontent").text()
+                }, 
+                success: function(response, status, xhr){
+                  var ct = xhr.getResponseHeader("content-type") || "";
+                  if (ct.indexOf('xml') > -1) {
+                         alert("xml");
+                  }
+                  if (ct.indexOf('pdf') > -1) {
+                     window.open(url+"?title="+$("#mytitle").text()+"&content="+$("#mycontent").text());
+                  }   
+                },
+                   error: function(error, status){
+                     window.alert("Problem retrieving PDF.\nThe error status is: " + status);
+                 }
+              });
+	 }
 	</script>
 </body>
 <link rel='stylesheet'

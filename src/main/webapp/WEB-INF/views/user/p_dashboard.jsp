@@ -629,8 +629,10 @@ td.mailbox-attachment{
 		websocket.onmessage=function(message){
 			 if(message.data==="response"){
 				 getNumberMesage();
+				 audio.play();
 			 }
 		}
+		var audio = new Audio(path+'/resources/audio/notifysouand.mp3');
 	</script>
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the
