@@ -54,6 +54,7 @@ public class PMemoDaoImp implements IMemoDao {
 		Criteria cr = sess.createCriteria(Memo.class);
 			cr.setProjection(Projections.distinct(Projections.property("domainName")));
 			cr.add(Restrictions.eq("userid", userid));
+			cr.add(Restrictions.eq("isenable", true));
 		return cr.list();
 	}
 

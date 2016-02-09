@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | Starter</title>
+<title>MEMO | Dashboard</title>
 <!-- <link rel="shortcut icon"
 	href="http://cdn.sabay.com/cdn/news.sabay.com.kh/wp-content/themes/sabaynews_v1.0.6/images/favicon.ico?ebb82d"
 	type="image/x-icon"> -->
@@ -86,6 +86,15 @@ td.mailbox-attachment{
 .table-responsive.mailbox-messages > table > tbody > tr >td:nth-child(2):hover {
 	cursor: pointer;
 }
+.loading{
+	display:none;
+	z-index:9999;	
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
 </style>
 </head>
 <!--
@@ -109,6 +118,7 @@ td.mailbox-attachment{
   |---------------------------------------------------------|
   -->
 <body class="hold-transition skin-green layout-top-nav sidebar-collapse">
+	<div class="loading"><img src="${pageContext.request.contextPath}/resources/admin/imgs/loading.gif" /></div>
 	<div class="wrapper">
 
 		<!-- Main Header -->
@@ -489,6 +499,7 @@ td.mailbox-attachment{
 							data : JSON.stringify(json),
 							contentType : 'application/json',
 							success : function(data) {
+								$('.loading').hide();
 								$('#txtTitle').val("");
 								$('#content_memo').val("");
 								$('#isPublic').val("false");
@@ -504,6 +515,7 @@ td.mailbox-attachment{
 			$('.box-footer').on("click","#btn-save", function() {
 						if ($("#content_memo").val() != ""
 								&& $("#txtTitle").val() != "") {
+							$('.loading').show();
 							saveMemo();
 						} else {
 							alert('Title or Memo content can not be empty!');
@@ -514,6 +526,7 @@ td.mailbox-attachment{
 			$('.box-footer').on("click","#btn-update", function() {
 						if ($("#content_memo").val() != ""
 								&& $("#txtTitle").val() != "") {
+							$('.loading').show();
 							updateMemo(memoid, $("#content_memo").val(), $("#txtTitle").val(),$('#isPublic').val());
 						} else {
 							alert('Title or Memo content can not be empty!');
@@ -543,25 +556,28 @@ td.mailbox-attachment{
 			});
 			/* LIST MEMO LIMIT 10 */
 			$('.mailbox-controls input[type="radio"]').click(function() {
+				$('.loading').show();
 				listMemo();
 			});
 
 
 			/*SEARCH ON TEXT BOX*/
 			jQuery('#searchtitle').on('input', function() {
+				$('.loading').show();
 				listMemo();
 			});
 			
 			/* SEARCH ON SELECT CHANGE */
 			$('#searchdomain').on('change', function() {
+				$('.loading').show();
 				  listMemo();
 				});
 
 			/* EDIT ICON CLICK*/
-			$('table.table').on("click",".fa.fa-edit", function() {
+			/* $('table.table').on("click",".fa.fa-edit", function() {
 				var id = $(this).attr('id');
 				alert(id);
-			});
+			}); */
 			
 			
 			/* VIEW EACH MEMO */

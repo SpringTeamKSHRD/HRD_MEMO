@@ -38,7 +38,12 @@ function init() {
             listMemo();
         },
         error: function(data) {
-            console.log(data)
+        	$('#total-memo').text("");
+            $('#public-memo').text("");
+            $('#private-memo').text("");
+            $('#total-website').text("");
+            $('#searchdomain').empty();
+            listMemo();
         }
     });
 }
@@ -73,6 +78,7 @@ function listMemo() {
         data: json,
         contentType: 'application/json',
         success: function(data) {
+        	if(data.STATUS==302){
             var tr = '';
             var privacy_icon = '';
             $.each(data.DATA, function(key, value) {
@@ -89,7 +95,7 @@ function listMemo() {
                 tr += '</tr>';
             });
             $('table.table').html(tr);
-
+            $('.loading').hide();
             if(data.PAGINATION){
             	$("#currentPage").html(data.PAGINATION.currentPage);
             	$("#totalPage").html(data.PAGINATION.totalPages);
@@ -101,20 +107,27 @@ function listMemo() {
             }, function() {
                 $(this).find('.tools i').hide();
             });
+        	}else{
+        		$('.loading').hide();
+        	}
         },
         error: function(data) {
             $('table.table').html("");
+            $('.loading').hide();
         }
     });
 }
 function deleteMemo(id){
 	var r = confirm("Are you sure to delete this memo ?");
 	if (r == true) {
+		$('.loading').show();
 		$.ajax({
 	        type: "POST",
 	        url: path+"/plugin/memo/" + id,
 	        success: function(json) {
+	        	$('.loading').hide();
 	           init();
+	           alert('Memo deleted !');
 	        }
 	    });
 	} 
@@ -135,6 +148,7 @@ function updateMemo(id, content,title, ispublic){
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(memo),
         success: function(json) {
+        	$('.loading').hide();
         	init();
         	alert("Memo updated !")
         	$('#txtTitle').val("");
