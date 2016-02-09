@@ -198,8 +198,7 @@ public class UserAPI {
 		}
 	}
 
-	// search memo by specific ID
-	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> getMemo(@PathVariable("id") int id) {
 		System.out.println("detail controller");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -214,7 +213,7 @@ public class UserAPI {
 		map.put("MESSAGE", "MEMO NOT FOUND.");
 		map.put("STATUS", HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-	}*/
+	}
 
 	// filter memo by title
 	/*@RequestMapping(value = "/filter/{column}/{value}", method = RequestMethod.GET)
