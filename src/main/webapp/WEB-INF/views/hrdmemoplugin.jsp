@@ -461,6 +461,7 @@
 				url : '${pageContext.request.contextPath}'+"/plugin2login",
 		        data:json,
 				success : function(data){
+					logingMainMemo(email,pwd);
 					$("#useropt").prop('checked','');
 					$("#public").prop('checked','');
 					Cookies.set('MEMO',JSON.stringify(data.DATA));
@@ -468,11 +469,8 @@
 					$("#frm-loginreg-wrapper").css('display','none');
 					$("#frm-memodesc-panel").fadeIn(500);
 					$("#frm-memo-wrapper").slideDown(500);
-					pluginGetMemoOwner();
 					$("#descmemo").val("");
 					$("#descmemo").focus();
-					alert(retrievedObject);
-					logingMainMemo(email,pwd);
 				},
 				error : function(data) {
 					 alertify.error("LOGIN FAILED..!");
@@ -508,12 +506,12 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : '${pageContext.request.contextPath}'+"/plugin/signup",
+				url : '${pageContext.request.contextPath}'+"/signup",
 
 				contentType: 'application/json;charset=utf-8',
 		        data:JSON.stringify(json),
 				success : function(data) {
-					logingMainMemo(email,pwd)
+					logingMainMemo(email,pwd);
 					$("#useropt").prop('checked','');
 					$("#public").prop('checked','');
 					Cookies.set('MEMO',JSON.stringify(data.DATA));
@@ -719,9 +717,9 @@
 						dataType:'json',
 						data :json,
 						success : function(data) {
-							alert("Success Login");
 						},
 						error : function(data) {
+							pluginGetMemoOwner();
 							console.log(data);
 						}
 					});

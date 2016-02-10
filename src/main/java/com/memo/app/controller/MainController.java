@@ -14,18 +14,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.memo.app.entities.User;
 import com.memo.app.services.impl.EmbededMemoServiceImpl;
+import com.memo.app.services.impl.UserServiceImpl;
 
 @RequestMapping(value="/")
 @Controller
 public class MainController {
 	@Autowired
 	private EmbededMemoServiceImpl embedDao;
+	@Autowired
+	private UserServiceImpl userDao;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home() {
 		/*return "home";*/
@@ -80,5 +85,18 @@ public class MainController {
 	public String getRole(){
 		return SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next().toString();
 	}
-
+	@RequestMapping(value="signup",method=RequestMethod.POST,headers = "Accept=application/json")
+	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user,HttpServletResponse respone){
+	  Map<String,Object> map=new HashMap<String,Object>();
+	  if(userDao.saveUser(user)==true){
+		  map.put("MESSAGE","USER HAS BEEN SIGN UP");
+		  map.put("STATUS",HttpStatus.ACCEPTED.value());
+		  map.put("DATA",userDao.getUserByEmail(user.getEmail()));
+		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+	  }else{
+		  map.put("MESSAGE","USER SIGN UP FAILED");
+		  map.put("STATUS",HttpStatus.NOT_ACCEPTABLE.value());
+		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.NOT_ACCEPTABLE);
+	  }
+	}
 }

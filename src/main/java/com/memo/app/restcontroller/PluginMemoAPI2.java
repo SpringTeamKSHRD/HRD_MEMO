@@ -5,55 +5,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.Report;
-import com.memo.app.entities.User;
-import com.memo.app.services.impl.EmbededMemoServiceImpl;
 import com.memo.app.services.impl.MemoServiceImpl;
 import com.memo.app.services.impl.ReportServiceImpl;
-import com.memo.app.services.impl.UserServiceImpl;
 //phalleak plugin api
 @RestController
 @RequestMapping(value="/plugin")
 public class PluginMemoAPI2 {
-	@Autowired
-	private UserServiceImpl userDao;
+	
 	@Autowired
 	private ReportServiceImpl reportDao;
 	@Autowired
 	private MemoServiceImpl memoDao;
 	
-	
-	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
-	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user,HttpServletResponse respone){
-	  Map<String,Object> map=new HashMap<String,Object>();
-	  if(userDao.saveUser(user)==true){
-		  map.put("MESSAGE","USER HAS BEEN SIGN UP");
-		  map.put("STATUS",HttpStatus.ACCEPTED.value());
-		  map.put("DATA",userDao.getUserByEmail(user.getEmail()));
-		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
-	  }else{
-		  map.put("MESSAGE","USER SIGN UP FAILED");
-		  map.put("STATUS",HttpStatus.NOT_ACCEPTABLE.value());
-		  return new ResponseEntity<Map<String,Object>>(map,HttpStatus.NOT_ACCEPTABLE);
-	  }
-	}
 	@RequestMapping(value = "/savememo", method = RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
 		Map<String, Object> map = new HashMap<String, Object>();
