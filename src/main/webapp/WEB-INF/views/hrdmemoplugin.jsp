@@ -458,10 +458,9 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : '${pageContext.request.contextPath}'+"/plugin/pluginlogin",
+				url : '${pageContext.request.contextPath}'+"/plugin2login",
 		        data:json,
 				success : function(data){
-					logingMainMemo(email,pwd)
 					$("#useropt").prop('checked','');
 					$("#public").prop('checked','');
 					Cookies.set('MEMO',JSON.stringify(data.DATA));
@@ -472,6 +471,8 @@
 					pluginGetMemoOwner();
 					$("#descmemo").val("");
 					$("#descmemo").focus();
+					alert(retrievedObject);
+					logingMainMemo(email,pwd);
 				},
 				error : function(data) {
 					 alertify.error("LOGIN FAILED..!");
@@ -698,7 +699,7 @@
 			});
 		 Cookies.remove('MEMO');
 		 $.ajax({
-				url : "${pageContext.request.contextPath}/plugin/logout",
+				url : "${pageContext.request.contextPath}/plugin2/logout",
 				type : "GET",
 				success : function(data){
 				},
@@ -718,6 +719,7 @@
 						dataType:'json',
 						data :json,
 						success : function(data) {
+							alert("Success Login");
 						},
 						error : function(data) {
 							console.log(data);

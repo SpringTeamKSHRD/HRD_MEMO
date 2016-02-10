@@ -38,8 +38,7 @@ public class PluginMemoAPI2 {
 	private ReportServiceImpl reportDao;
 	@Autowired
 	private MemoServiceImpl memoDao;
-	@Autowired
-	private EmbededMemoServiceImpl embedDao;
+	
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST,headers = "Accept=application/json")
 	public ResponseEntity<Map<String,Object>> userSignup(@RequestBody User user,HttpServletResponse respone){
@@ -156,33 +155,5 @@ public class PluginMemoAPI2 {
 			map.put("STATUS", true);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_ACCEPTABLE);
 		}
-	}
-	@RequestMapping(value = "/pluginlogin", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> userPluginLogin(@RequestParam("email") String email,@RequestParam("password") String password) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		User user=embedDao.memoLogin(email, password);
-		System.out.println(user);
-		if (user!=null) {	
-			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
-			map.put("STATUS","true");
-			map.put("DATA",user);
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} else {
-			map.put("MESSAGE", "MEMO NOT FOUND.");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-		}
-	}
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public void getLogoutPage(HttpServletRequest request,
-			HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (auth != null)
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-	}
-	
-	public String getRole(){
-		return SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next().toString();
 	}
 }
