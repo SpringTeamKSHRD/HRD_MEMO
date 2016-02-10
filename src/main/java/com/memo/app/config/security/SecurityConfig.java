@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -15,7 +16,9 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
+import com.memo.app.config.SimpleCORSFilter;
 import com.memo.app.services.impl.UserSecurityServiceImpl;
 
 @Configuration
@@ -55,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http
+			.addFilterBefore(new SimpleCORSFilter(), ChannelProcessingFilter.class)
 			.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/user/**","/plugin/**").hasAnyRole("Subscriber" , "Admin")
@@ -70,9 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.sessionManagement()
 			.sessionAuthenticationErrorUrl("/login");
-			//.maximumSessions(1)
-			//.expiredUrl("/login")
-			//.sessionRegistry(sessionRegistryImpl());
+//			.maximumSessions(1)
+//			.expiredUrl("/login")
+//			.sessionRegistry(sessionRegistryImpl());
 		http
 			.logout()
 			.logoutUrl("/logout")
