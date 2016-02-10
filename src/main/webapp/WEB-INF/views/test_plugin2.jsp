@@ -9,8 +9,8 @@
 	<script	src='${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js'></script>
 </head>
 <body>
-	<div id="hrd_memo_pess">		
-	</div> 
+<!-- 	<div id="hrd_memo_pess">		
+	</div>  -->
 </body>
 
 <script src='${pageContext.request.contextPath}/resources/js/hrdmemoplugin.js'></script>

@@ -11,7 +11,8 @@ public class MainController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home() {
-		return "home";		
+		/*return "home";*/
+		return "guideline";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)

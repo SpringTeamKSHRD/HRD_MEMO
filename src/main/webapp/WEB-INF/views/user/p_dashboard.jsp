@@ -125,9 +125,9 @@ td.mailbox-attachment{
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="${pageContext.request.contextPath}/user" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>Admin</b>LTE</span>
+				<span class="logo-lg">KHMERACADEMY<b> MEMO</b></span>
 			</a>
 
 			<!-- Header Navbar -->
@@ -207,7 +207,7 @@ td.mailbox-attachment{
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					HRD MEMO <small>All memo information</small>
+					KHMERACADEMY MEMO <small>All memo information</small>
 				</h1>
 			</section>
 
