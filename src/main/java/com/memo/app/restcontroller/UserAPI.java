@@ -26,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.app.entities.Memo;
 import com.memo.app.entities.MemoFilter;
-import com.memo.app.entities.MemoSearch;
 import com.memo.app.entities.Message;
 import com.memo.app.entities.Pagination;
 import com.memo.app.entities.User;
@@ -161,7 +160,7 @@ public class UserAPI {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 
-	// list memo with limiting amount of rows
+/*	// list memo with limiting amount of rows
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listMemo(@PathVariable Map<String, String> pathVariables) {
 		ArrayList<Memo> memos = null;
@@ -176,7 +175,7 @@ public class UserAPI {
 		map.put("STATUS", HttpStatus.OK.value());
 		map.put("DATA", memos);
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-	}
+	}*/	
 
 	// insert memo
 	@RequestMapping(value = "/", method = RequestMethod.POST)
