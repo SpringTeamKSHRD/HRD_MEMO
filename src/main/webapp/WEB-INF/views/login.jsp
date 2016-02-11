@@ -15,9 +15,6 @@
 select option{
 	color: green;
 }
-input{
-	z-index:0;
-}
 </style>
 </head>
 
