@@ -458,7 +458,7 @@
 			};
 			$.ajax({
 				type : "POST",
-				url : '${pageContext.request.contextPath}'+"/plugin2login",
+				url : '${pageContext.request.contextPath}'+"/plugin2/login",
 		        data:json,
 				success : function(data){
 					logingMainMemo(email,pwd);

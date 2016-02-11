@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/")
 @Controller
 public class MainController {
-
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home() {
 		return "guideline";
@@ -35,37 +35,8 @@ public class MainController {
 	
 	@RequestMapping(value = "hrdmemoplugin", method = RequestMethod.GET)
 	public String getPluginPage() {
-<<<<<<< HEAD
 		return "hrdmemoplugin";
 		
-	}
-	@RequestMapping(value = "plugin2login", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> userPluginLogin(@RequestParam("email") String email,@RequestParam("password") String password) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		User user=embedDao.memoLogin(email, password);
-		System.out.println(user);
-		if (user!=null) {	
-			map.put("MESSAGE", "MEMO HAS BEEN FOUND.");
-			map.put("STATUS","true");
-			map.put("DATA",user);
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} else {
-			map.put("MESSAGE", "MEMO NOT FOUND.");
-			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-		}
-	}
-	@RequestMapping(value = "plugin2/logout", method = RequestMethod.GET)
-	public void getLogoutPage(HttpServletRequest request,
-			HttpServletResponse response) {
-		System.out.println("olo");
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (auth != null)
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-=======
-		return "hrdmemoplugin";		
->>>>>>> origin/master
 	}
 	
 }

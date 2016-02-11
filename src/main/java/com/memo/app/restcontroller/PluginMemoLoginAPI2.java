@@ -48,7 +48,7 @@ public class PluginMemoLoginAPI2 {
 		
 	}
 	
-	@RequestMapping(value = "plugin2login", method = RequestMethod.POST)
+	@RequestMapping(value = "plugin2/login", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> userPluginLogin(@RequestParam("email") String email,@RequestParam("password") String password) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		User user=embedDao.memoLogin(email, password);
