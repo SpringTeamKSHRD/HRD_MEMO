@@ -21,7 +21,7 @@ import com.memo.app.entities.User;
 import com.memo.app.services.IEmbededMemoService;
 //sopheak plugin api
 @RestController
-@RequestMapping("/plugin/memo")
+@RequestMapping("/plugin1/memo")
 public class PluginMemoAPI1 {
 	@Autowired
 	private IEmbededMemoService embededMemoService;

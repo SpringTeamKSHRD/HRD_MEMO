@@ -18,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
-import com.memo.app.config.SimpleCORSFilter;
 import com.memo.app.services.impl.UserSecurityServiceImpl;
 
 @Configuration
@@ -58,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http
-			.addFilterBefore(new SimpleCORSFilter(), ChannelProcessingFilter.class)
 			.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/user/**","/plugin/**").hasAnyRole("Subscriber" , "Admin")

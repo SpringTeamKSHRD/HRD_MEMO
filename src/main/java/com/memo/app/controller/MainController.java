@@ -46,6 +46,10 @@ public class MainController {
 	public String testMemo() {
 		return "test_plugin1";
 	}
+	@RequestMapping(value = "test_plugin", method = RequestMethod.GET)
+	public String testMemo1() {
+		return "memo_plugin";
+	}
 	
 	@RequestMapping(value = "test_plugin2", method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -76,6 +80,7 @@ public class MainController {
 	@RequestMapping(value = "plugin2/logout", method = RequestMethod.GET)
 	public void getLogoutPage(HttpServletRequest request,
 			HttpServletResponse response) {
+		System.out.println("olo");
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		if (auth != null)

@@ -24,6 +24,7 @@ public class UserDetailController {
 		System.out.println(email);
 		Map<String,Object> map=new HashMap<String, Object>();
 		User user=userDao.getUserByEmail(email);
+		System.out.println(user.toString());
 		if(user!=null){
 			map.put("MESSAGE","USER WAS FOUND..!");
 			map.put("DATA",user);

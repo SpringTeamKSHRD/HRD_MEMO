@@ -126,28 +126,30 @@ function logingMainMemo(email,pwd){
 	});
 }
 
-function getUserDetail(email,data1){
-	 $.ajax({
-			url: path+"getuserdetail",
-			type: "GET",
-			data:{email:email},
-			success: function(data) {
-				Cookies.set('MEMO',JSON.stringify(data.DATA));
-				Cookies.set('LOGGED', {
-                    "userid": data.USERID,
-                    "email": data.EMAIL,
-                    "lang": "km",
-                    "imageUrl": data.IMAGE_URL
-                }, {
-                    expires: 1,
-                    path: ''
-                });
-				location.href = path + data1;
-			},
-			error: function(data){
-				 	alert("Set Cookie Error..!");	
-			}
+function getUserDetail(email, data1) {
+	$.ajax({
+		url : path + "getuserdetail",
+		type : "GET",
+		data : {
+			email : email
+		},
+		success : function(data) {
+			Cookies.set('MEMO', JSON.stringify(data.DATA));
+			Cookies.set('LOGGED', {
+				"userid" : data.USERID,
+				"email" : data.EMAIL,
+				"lang" : "km",
+				"imageUrl" : data.IMAGE_URL
+			}, {
+				expires : 1,
+				path : ''
 			});
+			location.href = path + data1;
+		},
+		error : function(data) {
+			alert("Set Cookie Error..!");
+		}
+	});
 }
 
 
