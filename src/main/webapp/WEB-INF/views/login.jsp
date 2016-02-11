@@ -15,7 +15,7 @@
 select option{
 	color: green;
 }
-input#username{
+input{
 	z-index:0;
 }
 </style>
