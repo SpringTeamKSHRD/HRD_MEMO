@@ -23,7 +23,7 @@ import com.memo.app.services.impl.EmbededMemoServiceImpl;
 import com.memo.app.services.impl.UserServiceImpl;
 
 @RestController
-public class UserDetailController {
+public class PluginMemoLoginAPI2 {
 	
 	@Autowired
 	private UserServiceImpl userDao;
