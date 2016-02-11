@@ -46,6 +46,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style>
+	a.demo{
+    z-index: 100;
+    display: block;
+    width: 100%;
+    height: 100%;
+    }
+</style>    
 </head>
 
 <body class="hold-transition skin-green layout-top-nav sidebar-collapse">
@@ -118,10 +126,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<div class="text-center"><h1>#1</h1></div>
 										<div class="timeline-item">
 											<div class="timeline-body">
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/startup.png" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/login_memo.png" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/register_memo.PNG" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/logged_memo.png" width="200px" height="200px"/>
+												<a class="demo" href="test_plugin1">
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/startup.png" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/login_memo.png" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/register_memo.PNG" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/logged_memo.png" width="200px" height="200px"/>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -133,10 +143,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<div class="text-center"><h1>#2</h1></div>
 										<div class="timeline-item">
 											<div class="timeline-body">
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_startup.png" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_login_memo.png" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_register_memo.png" width="200px" height="200px"/>
-												<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_logged_memo.png" width="200px" height="200px"/>
+												<a class="demo" href="test_plugin2">
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_startup.png" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_login_memo.png" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_register_memo.png" width="200px" height="200px"/>
+													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/pl_logged_memo.png" width="200px" height="200px"/>
+												</a>
 											</div>
 										</div>
 									</div>
