@@ -10,9 +10,9 @@ $(function() {
 			success : function(data) {
 				if (data == "User account is locked" 
 					|| data == "User is disabled" 
-					|| data == "Bad credentials")
-						//alert(data);
-				else{	
+					|| data == "Bad credentials"){
+						alert(data);
+				}else{	
 					    getUserDetail(username,data);
 				};
 			},
@@ -35,7 +35,7 @@ $("#frmRegister")
         }else{
         $
             .ajax({
-                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/validate",
+                url: path+"plugin1/memo/validate",
                 type: "POST",
                 data: {
                     email: $('#r_email').val()
@@ -47,7 +47,7 @@ $("#frmRegister")
                     	console.log(data)
                         $
                             .ajax({
-                                url: "http://192.168.178.186:8080/HRD_MEMO/plugin/memo/register",
+                                url: path+"plugin1/memo/register",
                                 type: "POST",
                                 data: $("#frmRegister").serialize(),
                                 success: function(data) {
@@ -64,12 +64,12 @@ $("#frmRegister")
                                 			success : function(data) {
                                 				if (data == "User account is locked" 
                                 					|| data == "User is disabled" 
-                                					|| data == "Bad credentials")
+                                					|| data == "Bad credentials"){
                                 						//alert(data);
-                                				else{	
+                                				}else{	
                                 						//khmerAcademeyLogin(username, password);
-                                						location.href = path + data
-                                				};
+                                						location.href = path + data.split("#")[0];
+                                				}
                                 			},
                                 			error : function(data) {
                                 				console.log(data);

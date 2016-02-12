@@ -1,9 +1,10 @@
 
+window.onload = function() {
     var iframe = document.createElement('iframe');
     iframe.id="form-memo-iframe";
     iframe.style.border="none";
     iframe.style.background="transparent";
-    iframe.style.zIndex="99999999";
+    iframe.style.zIndex="99999998";
     iframe.style.maring="0";
     iframe.style.overflow="hidden";
     iframe.style.position="fixed";
@@ -14,7 +15,7 @@
     iframe.scrolling="no";
     iframe.src = "http://192.168.178.186:8080/HRD_MEMO/test_plugin1";
     document.body.appendChild(iframe);
-    
+}
  // SEND MESSAGE TO IFRAME
 /*    addEventListener('load',function(){
     	var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
