@@ -123,7 +123,7 @@ function deleteMemo(id){
 		$('.loading').show();
 		$.ajax({
 	        type: "POST",
-	        url: path+"/plugin/memo/" + id,
+	        url: path+"/plugin1/memo/" + id,
 	        success: function(json) {
 	        	$('.loading').hide();
 	           init();
