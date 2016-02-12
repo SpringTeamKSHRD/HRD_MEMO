@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.memo.app.entities.User;
 import com.memo.app.repo.impl.UserDaoImpl;
 
 @Component("ajaxAuthenticationSuccessHandler")
@@ -28,7 +29,8 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		//session.setMaxInactiveInterval(10);
-		session.setAttribute("USER",userDao.getUserDialInfo((SecurityContextHolder.getContext().getAuthentication().getName())));
+		User user=userDao.getUserDialInfo((SecurityContextHolder.getContext().getAuthentication().getName()));
+		session.setAttribute("USER",user);
 	    
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		String url = "";
@@ -41,7 +43,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		else if (roles.contains("ROLE_Subscriber"))
 			url = "user/user";
 		else	url = "accessDenied";
-		response.getWriter().print(url);
+		response.getWriter().print(url+"#"+user.getUserid());
 		response.getWriter().flush();
 	}
 }

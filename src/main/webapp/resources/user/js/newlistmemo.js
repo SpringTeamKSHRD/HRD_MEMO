@@ -88,7 +88,7 @@ function listMemo() {
                     privacy_icon = '<small class="label label-info">Public</small>';
                 }
                 tr += '<tr id="'+value.id+'">';
-                tr += '<td class="mailbox-name" align="center"><a href="' + value.fullDomain + '"><img src="https://www.google.com/s2/favicons?domain=' + value.fullDomain + '" title="' + value.fullDomain + '" target="_blank"></a></td>';
+                tr += '<td class="mailbox-name" align="center"><a href="' + value.fullDomain + '" target="_blank"><img src="https://www.google.com/s2/favicons?domain=' + value.fullDomain + '" title="' + value.fullDomain + '" ></a></td>';
                 tr += '<td class="mailbox-subject">' + privacy_icon + "&nbsp;&nbsp;&nbsp;<b>" + value.title + '</b> <br /><span class="memo-content">' + value.content + '</span></td>';
                 tr += '<td class="mailbox-attachment"><div class="tools"><i class="fa fa-trash-o" onclick="deleteMemo('+value.id+')"></i></div>';
                 tr += '</td><td class="mailbox-date" align="center">' + moment(value.date).format("DD-MM-YYYY HH:mm:ss") + ' </td>';

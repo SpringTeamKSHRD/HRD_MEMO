@@ -11,7 +11,7 @@ $(function() {
 				if (data == "User account is locked" 
 					|| data == "User is disabled" 
 					|| data == "Bad credentials")
-						alert(data);
+						//alert(data);
 				else{	
 					    getUserDetail(username,data);
 				};
@@ -65,7 +65,7 @@ $("#frmRegister")
                                 				if (data == "User account is locked" 
                                 					|| data == "User is disabled" 
                                 					|| data == "Bad credentials")
-                                						alert(data);
+                                						//alert(data);
                                 				else{	
                                 						//khmerAcademeyLogin(username, password);
                                 						location.href = path + data
@@ -144,7 +144,7 @@ function getUserDetail(email, data1) {
 				expires : 1,
 				path : ''
 			});
-			location.href = path + data1;
+			location.href = path + data1.split("#")[0];
 		},
 		error : function(data) {
 			alert("Set Cookie Error..!");

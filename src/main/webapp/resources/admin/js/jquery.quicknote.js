@@ -11,7 +11,6 @@
  */
 
 /* global jQuery */
-var userid='';
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
@@ -329,14 +328,13 @@ var userid='';
 
 }));
 
-var iframe_fullDomain='';
-handleSizingResponse = function(e) {
-	      iframe_fullDomain=e.data;
-	}
-window.addEventListener('message', handleSizingResponse, false);
-
-
-
+var a=document.createElement('a');
+a.href=document.referrer;
+//alert([a.protocol,a.host,a.pathname].join('\n'));
+var fullDomain1 = (window.location != window.parent.location)? a.href: window.location.href;
+var domainName1= (window.location != window.parent.location)? (a.protocol + '//' + a.hostname + (a.port ? ':' + a.port : '')):(window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : ''));
+var url1 = (window.location != window.parent.location)? a.href.replace(domainName1,""): window.location.href.replace(domainName1,"");
+a='';
 (function($, window, document, undefined) {
     'use strict';
     var QuickNote = function(el, options) {
@@ -375,6 +373,7 @@ window.addEventListener('message', handleSizingResponse, false);
             }
             this.completeNote();
         },
+        
         isURL: function(str) {
             // CHECKING IF NOTE IS HAS URL FORMAT
             if (/(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(str)) {
@@ -409,7 +408,7 @@ window.addEventListener('message', handleSizingResponse, false);
         updateMemo: function(id, content, ispublic) {
             $('#memo-loading').show();
             var memo = {
-                "userid": userid,
+                "userid": Cookies.getJSON('LOGGED').userid,
                 "id": id,
                 "content": content,
                 "ispublic": ispublic
@@ -461,7 +460,6 @@ window.addEventListener('message', handleSizingResponse, false);
             $(okBtn).appendTo(this.$el.find('#div-btn'));
             $(cancelBtn).appendTo(this.$el.find('#div-btn'));
 
-
             $('#email').focus(function(e) {
                 $(this).css('borderColor', '');
             });
@@ -506,20 +504,32 @@ window.addEventListener('message', handleSizingResponse, false);
                                                 data: $("#frmRegister").serialize(),
                                                 success: function(data) {
                                                     if (data.MESSAGE == "SUCCESS") {
-                                                    	$('#memo-loading').hide();
-                                                        Cookies.set('LOGGED', {
-                                                            "userid": data.USERID,
-                                                            "email": data.EMAIL,
-                                                            "lang": "km",
-                                                            "imageUrl": data.IMAGE_URL
-                                                        }, {
-                                                            expires: 1,
-                                                            path: ''
+                                                    	$
+                                                        .ajax({
+                                                            url: "http://192.168.178.186:8080/HRD_MEMO/login",
+                                                            type: "POST",
+                                                            data: {username:$('#email').val(),password:$('#password').val()},
+                                                            datatype:"json",
+                                                            success: function(data) {
+                                                                $('#memo-loading').hide();
+                                                                if (data.split("#")[0] == "user/user") {
+                                                                    Cookies.set('LOGGED', {
+                                                                        "userid":data.split('#')[1] ,
+                                                                        "lang": "km"
+                                                                    });
+                                                                    console.log(Cookies.getJSON('LOGGED').lang);
+                                                                    $('#qn > #qn_sh,#username-password').remove();
+                                                                    _this.appendElem();
+                                                                    $('#mytext').focus();
+                                                                } else {
+                                                                    $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
+                                                                    $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>')
+                                                                }
+                                                            },
+                                                            error: function(data) {
+                                                                alert(data.RESPONSE_DATA);
+                                                            }
                                                         });
-                                                        console.log(Cookies.getJSON('LOGGED').lang);
-                                                        $('#qn > #qn_sh,#username-password').remove();
-                                                        _this.appendElem();
-                                                        $('#mytext').focus();
                                                     } else {
                                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
                                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>')
@@ -581,10 +591,7 @@ window.addEventListener('message', handleSizingResponse, false);
             $(saveBtn).appendTo(this.$el.find('#notes'));
             $(dl).appendTo(this.$el.find('#notes'));
             $('.logout').click(function() {
-                Cookies.get('LOGGED'); // => 'value'
-                Cookies.remove('LOGGED', {
-                    path: ''
-                });
+                Cookies.remove('LOGGED');
            		 $.ajax({
            				url : "http://192.168.178.186:8080/HRD_MEMO/plugin2/logout",
            				type : "GET",
@@ -601,13 +608,13 @@ window.addEventListener('message', handleSizingResponse, false);
        				url : "http://192.168.178.186:8080/HRD_MEMO/logout"
        			});
             });
-            //          $('.qn_container #notes,.qn_container #username-password').hide();
-            // CHECK EXISTING NOTES IN localStorage
+               //          $('.qn_container #notes,.qn_container #username-password').hide();
+         // CHECK EXISTING NOTES IN localStorage
             if (this.config.storage === true) {
                 var url = window.location.href;
                 var memo = {
-                    "fullDomain": iframe_fullDomain.substr(0,iframe_fullDomain.indexOf(' '))+iframe_fullDomain.substr(iframe_fullDomain.indexOf(' ')+1),
-                    "id": userid
+                    "fullDomain": fullDomain1,
+                    "id": Cookies.getJSON('LOGGED').userid
                 };
                 
                 if ($('.chat-container').length == true) {
@@ -629,7 +636,7 @@ window.addEventListener('message', handleSizingResponse, false);
                             var deleted = "";
                             var update = "";
                             var report='';
-                            if (obj.userid == userid) {
+                            if (obj.userid == Cookies.getJSON('LOGGED').userid) {
                                 $('#qn > #notes').remove();
                                 cb += '<li class="another" id="' + obj.id + '">';
                                 cb += '<input type="hidden" id="ispublic" value="' + obj.ispublic + '"/>';
@@ -646,8 +653,8 @@ window.addEventListener('message', handleSizingResponse, false);
                             cb += '<p style="font-size:13px">' + obj.content + '</p>';
                             cb += '<time datetime="2009-11-13T20:00" style="font-size:9px">' + obj.date + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+report + update + "&nbsp;&nbsp;" + deleted + ' </time>';
                             cb += '</div>';
-                            /*  cb+='<span class="close"></span>';*/
-                            cb += '</li>';
+                               /*  cb+='<span class="close"></span>';*/
+                         cb += '</li>';
 
                             var qnText = obj.content;
                             if (isURL(qnText)) {
@@ -697,7 +704,7 @@ window.addEventListener('message', handleSizingResponse, false);
                             if (r == true) {
                             	var memoid=$(this).parent().parent().parent().attr('id');
                                	var reportedmemo={
-                            			"reporterid":userid,
+                            			"reporterid":Cookies.getJSON('LOGGED').userid,
                             			"memoid":memoid
                             	}
                                	$('#memo-loading').show();
@@ -774,10 +781,7 @@ window.addEventListener('message', handleSizingResponse, false);
                             $(cancelBtn).appendTo('#notes');
                             $('#mytext').focus();
                             $('.logout').click(function() {
-                                Cookies.get('LOGGED'); // => 'value'
-                                Cookies.remove('LOGGED', {
-                                    path: ''
-                                });
+                                Cookies.remove('LOGGED');
                            		 $.ajax({
                            				url : "http://192.168.178.186:8080/HRD_MEMO/plugin2/logout",
                            				type : "GET",
@@ -790,22 +794,22 @@ window.addEventListener('message', handleSizingResponse, false);
                                 $('#qn > .chat-container,#qn_sh,#notes').remove();
                                 _this.login();
                                 $('.qn_container #notes,.qn_container #username-password').show();
-                                
+                                   
 
-                            });
+                         });
                             // BUTTON UPDATE CLICKED
                             $('#btnUpdate').click(function() {
-                                //                              that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
-                                $('#memo-loading').show();
-                                //                              var url = window.location.pathname.replace("/HRD_MEMO",'');
+                                   //                              that.updateMemo(memoid,$("#notes textarea[name$='qn_input']").val(),$("#ispublic").val());
+                             $('#memo-loading').show();
+                                   //                              var url = window.location.pathname.replace("/HRD_MEMO",'');
                                 //                              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
                                 //var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-                                var domainName=iframe_fullDomain.substr(0,iframe_fullDomain.indexOf(' '));
-                                //var domainName = iframe_fullDomain+1;
-                                var url=iframe_fullDomain.substr(iframe_fullDomain.indexOf(' ')+1);
-                                //var url = window.location.href.replace(domainName,"");
-                                var memo = {
-                                    "userid": userid,
+                             var domainName=domainName1;
+                                   //var domainName = iframe_fullDomain+1;
+                             var url=url1;
+                                   //var url = window.location.href.replace(domainName,"");
+                             var memo = {
+                                    "userid": Cookies.getJSON('LOGGED').userid,
                                     "id": memoid,
                                     "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                                     "ispublic": $("#ispublic").val(),
@@ -823,8 +827,8 @@ window.addEventListener('message', handleSizingResponse, false);
                                     success: function(json) {
                                         if (json.RESPONSE_DATA) {
                                             $('#memo-loading').hide();
-                                            //                                         $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
-                                            $('#qn').empty();
+                                               //                                         $('#qn > .chat-container,#qn > #notes,#qn > #qn_sh').remove();
+                                         $('#qn').empty();
                                             _this.appendElem();
                                         } else {
                                             console.log(json.RESPONSE_DATA);
@@ -890,27 +894,6 @@ window.addEventListener('message', handleSizingResponse, false);
             $("#frmLogin")
                 .submit(
                     function(e) {
-                    	
-                    	function getUserDetail(email) {
-                    		$.ajax({
-                    			url : "http://192.168.178.186:8080/HRD_MEMO/getuserdetail",
-                    			type : "GET",
-                    			data : {
-                    				email : email
-                    			},
-                    			success : function(data) {
-                    				Cookies.set('MEMO', JSON.stringify(data.DATA));
-                    				
-                    				var cookie=JSON.parse(Cookies.get("MEMO"));
-                    				userid=cookie.userid;
-
-                    				/*location.href = path + data1;*/
-                    			},
-                    			error : function(data) {
-                    				alert("Set Cookie Error..!");
-                    			}
-                    		});
-                    	}
                         $('#memo-loading').show();
                         e.preventDefault();
                         $
@@ -920,14 +903,10 @@ window.addEventListener('message', handleSizingResponse, false);
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
                                     $('#memo-loading').hide();
-                                    if (data == "user/user") {
-                                    	getUserDetail($('#username').val());
+                                    if (data.split("#")[0] == "user/user") {
                                         Cookies.set('LOGGED', {
-                                            "userid":userid ,
+                                            "userid":data.split('#')[1] ,
                                             "lang": "km"
-                                        }, {
-                                            expires: 1,
-                                            path: ''
                                         });
                                         console.log(Cookies.getJSON('LOGGED').lang);
                                         $('#qn > #qn_sh,#username-password').remove();
@@ -945,9 +924,9 @@ window.addEventListener('message', handleSizingResponse, false);
                     });
             $("#regBtn").click(function(e) {
                 e.preventDefault();
-                /* var win = window.open("http://www.khmeracademy.org", '_blank');
+                   /* var win = window.open("http://www.khmeracademy.org", '_blank');
                 win.focus();*/
-                _this.register();
+             _this.register();
             });
             $('#email').focus(function(event) {
                 $('#memo-alert').remove();
@@ -957,20 +936,20 @@ window.addEventListener('message', handleSizingResponse, false);
             var _this = this;
             var storage = this.config.storage;
             var isURL = this.isURL;
-            // this.$el.on('keypress', '#notes input', function(e) {
+               // this.$el.on('keypress', '#notes input', function(e) {
             //     // RETURN KEY PRESSED
             //     if (e.which == 13 || e.keyCode == 13) {
             //            $('#myimg').click(function(e) {
-            this.$el.on('click', '#notes #btnSave', function(e) {
-                // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
+         this.$el.on('click', '#notes #btnSave', function(e) {
+                   // var notesInpVal = $("#notes textarea[name$='qn_input']").val();
 
                 //var url = window.location.pathname.replace("/HRD_MEMO", '');
                 //              var domainName = window.location.href.replace(window.location.pathname,'/HRD_MEMO');
-            	var domainName=iframe_fullDomain.substr(0,iframe_fullDomain.indexOf(' '));
-                //var domainName = iframe_fullDomain+1;
-                var url=iframe_fullDomain.substr(iframe_fullDomain.indexOf(' ')+1);
+         	var domainName=domainName1;
+                   //var domainName = iframe_fullDomain+1;
+             var url=url1;
                 var memo = {
-                    "userid": userid,
+                    "userid": Cookies.getJSON('LOGGED').userid,
                     "content": $("#notes textarea[name$='qn_input']").val().replace("<script>","").replace("</script>",""),
                     "domainName": domainName,
                     "url": url,
@@ -979,11 +958,11 @@ window.addEventListener('message', handleSizingResponse, false);
 
                 }
                 if ($("#notes textarea[name$='qn_input']").val()) {
-                    //                    // SAVE TO localStorage
+                       //                    // SAVE TO localStorage
                     //                    if (storage === true) {
                     //                        
                     //                    }
-                    $('#memo-loading').show();
+                 $('#memo-loading').show();
                     $.ajax({
                         type: "POST",
                         url: "http://192.168.178.186:8080/HRD_MEMO/plugin1/memo/add",
@@ -1007,10 +986,10 @@ window.addEventListener('message', handleSizingResponse, false);
                     console.log('Empty note!');
                 }
             });
-
+   
             // }
             // });
-            // SHOW AND HIDE
+         // SHOW AND HIDE
             this.$el.on('click', '#qn_sh #show-hide', function() {
                 $('#memo-alert').remove();
                 $('.qn_container .logout,.qn_container #viewall,.qn_container #notes,.qn_container .chat-container,.qn_container #username-password').slideToggle(100);

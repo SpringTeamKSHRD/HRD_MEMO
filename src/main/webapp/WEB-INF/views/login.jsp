@@ -84,9 +84,7 @@ select option{
     <script type="text/javascript">
     var path = '${pageContext.request.contextPath}/';
 	 Cookies.remove('MEMO');
-	 Cookies.remove('LOGGED', {
-         path: ''
-     });
+	 Cookies.remove('LOGGED');
 	</script>
 	<script type="text/javascript"	src='${pageContext.request.contextPath}/resources/js/login.js'>	</script>
     <script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
