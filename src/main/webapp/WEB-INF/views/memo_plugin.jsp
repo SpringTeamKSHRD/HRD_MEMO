@@ -6,7 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
-<script src="http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/memo_plugin.js"></script>
+<!-- <script src="http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js"></script>  -->
+<script src="http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/memo_plugin.js"></script>
+<!-- <script>
+	iFrameResize({log:true,bodyMargin:0});
+</script> -->
 </body>
 </html>

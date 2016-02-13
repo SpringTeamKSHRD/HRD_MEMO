@@ -1,39 +1,46 @@
+if (window.jQuery) {
+    $(window).bind("load", function() {
+        	$.getScript('http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/iframeResizer.min.js', function() {
+        		$(function() {
+//            	APPEND iFrame
+        		var iframe = document.createElement('iframe');
+       			iframe.id = "form-memo-iframe";
+      			iframe.style.border = "none";
+        		//iframe.style.overflow="hidden";
+        		iframe.style.position="fixed";
+        		iframe.style.right="0px";
+        		iframe.style.bottom="0px";
+        		//iframe.style.width = "100%";
+        		iframe.scrolling = "no";
+        		iframe.src = "http://10.10.10.105:8080/HRD_MEMO/test_plugin1";
+        		document.body.appendChild(iframe);
+        			iFrameResize({log:true,bodyMargin:0});
+                })
 
-window.onload = function() {
-    var iframe = document.createElement('iframe');
-    iframe.id="form-memo-iframe";
-    iframe.style.border="none";
-    iframe.style.background="transparent";
-    iframe.style.zIndex="99999998";
-    iframe.style.maring="0";
-    iframe.style.overflow="hidden";
-    iframe.style.position="fixed";
-    iframe.style.right="0px";
-    iframe.style.bottom="0px";
-    iframe.style.width="100%";
-    iframe.style.height="100%";
-    iframe.scrolling="no";
-    iframe.src = "http://192.168.178.186:8080/HRD_MEMO/test_plugin1";
-    document.body.appendChild(iframe);
+        	});
+    });
+} else {
+    script = document.createElement("script"),
+        script.onload = function() {
+    	$.getScript('http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/iframeResizer.min.js', function() {
+    		$(function() {
+//        	APPEND iFrame
+    		var iframe = document.createElement('iframe');
+   			iframe.id = "form-memo-iframe";
+  			iframe.style.border = "none";
+    		//iframe.style.overflow="hidden";
+    		iframe.style.position="fixed";
+    		iframe.style.right="0px";
+    		iframe.style.bottom="0px";
+    		//iframe.style.width = "100%";
+    		iframe.scrolling = "no";
+    		iframe.src = "http://10.10.10.105:8080/HRD_MEMO/test_plugin1";
+    		document.body.appendChild(iframe);
+    			iFrameResize({log:true,bodyMargin:0});
+            })
+    	});
+        },
+        script.type = "text/javascript",
+        script.src = "http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js",
+        document.body.appendChild(script);
 }
- // SEND MESSAGE TO IFRAME
-/*    addEventListener('load',function(){
-    	var domainName = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-        var url = window.location.href.replace(domainName,"");
-    	iframe = document.getElementById('form-memo-iframe');
-    	iframe.contentWindow.postMessage(domainName+" "+url, 'http://192.168.178.186:8080');
-    },true);
-   */
-
-
-/*#form-memo-iframe{
-	z-index:9999999;
-    margin: 0;
-    border: none;
-    overflow: hidden;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    width: 100%;
-    height: 100%;
-}*/
