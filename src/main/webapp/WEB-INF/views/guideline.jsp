@@ -170,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<p class="lead">
 											Append below script to HTML body tag
 										</p>
-										<pre class="hierarchy bring-up text-center" ><code class="language-bash" data-lang="bash">&lt;script src=&quot;http://memo.khmeracademy.org/resources/admin/js/memo_plugin.js&quot; defer&gt;&lt;&frasl;script&gt;</code></pre>
+										<pre class="hierarchy bring-up text-center" ><code class="language-bash" data-lang="bash">&lt;script src=&quot;http://memo.khmeracademy.org/resources/admin/js/memo_plugin.js&quot; defer&gt;&lt;/script&gt;</code></pre>
 									</div>
 								</div>
 							</div>
@@ -180,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<p class="lead">
 											Append below script to HTML body tag (required jQuery library)
 										</p>
-										<pre class="hierarchy bring-up text-center" ><code class="language-bash" data-lang="bash">&lt;script src=&quot;http://memo.khmeracademy.org/resources/js/hrdmemoplugin.js&quot;&gt;&lt;&frasl;script&gt;</code></pre>
+										<pre class="hierarchy bring-up text-center" ><code class="language-bash" data-lang="bash">&lt;script src=&quot;http://memo.khmeracademy.org/resources/js/hrdmemoplugin.js&quot;&gt;&lt;/script&gt;</code></pre>
 									</div>
 								</div>
 							</div>
