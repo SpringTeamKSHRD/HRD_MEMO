@@ -619,7 +619,7 @@ td.mailbox-attachment{
 			});
 		}
 		getNumberMesage();
-		var url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+		var url="ws://khmemo-plugin.herokuapp.com/memo/usernotification";
 		var websocket=new WebSocket(url);
 		websocket.onopen=function(message){
 		}

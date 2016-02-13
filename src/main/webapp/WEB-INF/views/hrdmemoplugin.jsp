@@ -657,7 +657,7 @@
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
 	//Live life
-	 var hrd_notify_url="ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification";
+	 var hrd_notify_url="ws://khmemo-plugin.herokuapp.com/memo/usernotification";
 
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){
