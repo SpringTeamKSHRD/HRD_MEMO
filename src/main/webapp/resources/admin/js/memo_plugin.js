@@ -4,7 +4,8 @@ if (window.jQuery) {
         		$(function() {
 //            	APPEND iFrame
         		var iframe = document.createElement('iframe');
-       			iframe.id = "form-memo-iframe";
+       			iframe.zIndex="99999999";
+        		iframe.id = "form-memo-iframe";
       			iframe.style.border = "none";
         		//iframe.style.overflow="hidden";
         		iframe.style.position="fixed";
@@ -26,7 +27,8 @@ if (window.jQuery) {
     		$(function() {
 //        	APPEND iFrame
     		var iframe = document.createElement('iframe');
-   			iframe.id = "form-memo-iframe";
+    		iframe.zIndex="99999999";
+    		iframe.id = "form-memo-iframe";
   			iframe.style.border = "none";
     		//iframe.style.overflow="hidden";
     		iframe.style.position="fixed";
