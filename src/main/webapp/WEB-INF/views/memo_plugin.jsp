@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script src="http://10.10.10.105:8080/HRD_MEMO/resources/admin/js/memo_plugin.js"></script>
+<script src="http://khmemo-plugin.herokuapp.com/resources/admin/js/memo_plugin.js" defer></script>
 </body>
 </html>

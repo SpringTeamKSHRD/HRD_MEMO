@@ -19,6 +19,7 @@ select option{
 </head>
 
 <body>
+	<div id="memo-loading" style="position:absolute;top:40%;right:45%;z-index:99999999;display:none;"><img src="${pageContext.request.contextPath}/resources/admin/imgs/loading.gif" /></div>
     <!-- Mixins-->
     <!-- Pen Title-->
     <div class="pen-title">
@@ -82,7 +83,7 @@ select option{
     </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
     <script type="text/javascript">
-    var path = '${pageContext.request.contextPath}/';
+     var path = '${pageContext.request.contextPath}/';
 	 Cookies.remove('MEMO');
 	 Cookies.remove('LOGGED');
 	</script>

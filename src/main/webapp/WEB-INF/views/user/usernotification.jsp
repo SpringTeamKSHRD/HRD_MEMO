@@ -15,7 +15,7 @@
      <div id="numnot" style="background: red; color: white; font-size: 17; border-radius:90%; padding: 5px; width: 30px; height: 30px; margin: auto; font-weight: bolder;"></div>
      <script type="text/javascript">
      var notify=0;
-     var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+     var url="ws://khmemo-plugin.herokuapp.com:8080/HRD_MEMO/memo/usernotification";
      var websocket=new WebSocket(url);
      
      var messages=document.getElementById("messages");

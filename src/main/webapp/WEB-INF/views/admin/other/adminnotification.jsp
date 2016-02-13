@@ -14,7 +14,7 @@
      
      <script type="text/javascript">
      var notify=0;
-     var url="ws://localhost:8080/HRD_MEMO/memo/usernotification";
+     var url="ws://khmemo-plugin.herokuapp.com:8080/HRD_MEMO/memo/usernotification";
      var websocket=new WebSocket(url);
      
      var messages=document.getElementById("messages");

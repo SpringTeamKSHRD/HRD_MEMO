@@ -3,16 +3,20 @@ $(function() {
 		var username=$("#username").val();
 		var password=$("#password").val();
 		e.preventDefault();
+		$('#memo-loading').show();
 		$.ajax({
-			url : path+"/login",
+			url : path+"login",
 			type : "POST",
 			data : $("#frmLogin").serialize(),
 			success : function(data) {
+				
 				if (data == "User account is locked" 
 					|| data == "User is disabled" 
 					|| data == "Bad credentials"){
+					$('#memo-loading').hide();
 						alert(data);
 				}else{	
+						$('#memo-loading').hide();
 					    getUserDetail(username,data);
 				};
 			},
@@ -30,6 +34,7 @@ $("#frmRegister")
 .submit(
     function(e) {
         e.preventDefault();
+        $('#memo-loading').show();
         if(!isValidEmailAddress($('#r_email').val())){
         	alert('Invalid email address !');
         }else{
@@ -42,6 +47,7 @@ $("#frmRegister")
                 },
                 success: function(data) {
                     if (data.RESPONSE_DATA == true) {
+                    	$('#memo-loading').hide();
                         alert('Email already exist !');
                     } else {
                     	console.log(data)
@@ -52,6 +58,7 @@ $("#frmRegister")
                                 data: $("#frmRegister").serialize(),
                                 success: function(data) {
                                     if (data.MESSAGE == "SUCCESS") {
+                                    	$('#memo-loading').hide();
                                     	var data={
                                     	"username":$("#r_email").val(),
                                 		"password":$("#r_password").val()
