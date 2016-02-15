@@ -143,13 +143,8 @@ function getUserDetail(email, data1) {
 		success : function(data) {
 			Cookies.set('MEMO', JSON.stringify(data.DATA));
 			Cookies.set('LOGGED', {
-				"userid" : data.USERID,
-				"email" : data.EMAIL,
-				"lang" : "km",
-				"imageUrl" : data.IMAGE_URL
-			}, {
-				expires : 1,
-				path : ''
+				"userid" : data.DATA.userid,
+				"lang" : "km"
 			});
 			location.href = path + data1.split("#")[0];
 		},
