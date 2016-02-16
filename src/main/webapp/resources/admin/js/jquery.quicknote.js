@@ -682,7 +682,7 @@ a='';
                         //REPORT MEMO
                         $('.report').click(function() {
                         	
-                        	var hrd_notify_url="ws://"+location.hostname+":80/memo/usernotification";
+                        	var hrd_notify_url="ws://khmemo-plugin.herokuapp.com/memo/usernotification";
 	                       	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	                       	 hrd_memo_websocket.onopen=function(message){
 	                       	 }

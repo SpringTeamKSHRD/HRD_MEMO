@@ -92,7 +92,7 @@ function generateTitle(title){
 		 return title;
 	 }
 }
-var url="ws://"+location.hostname+"/memo/usernotification";
+var url="ws://khmemo-plugin.herokuapp.com/memo/usernotification";
   var websocket=new WebSocket(url);
   websocket.onopen=function(message){
   }
