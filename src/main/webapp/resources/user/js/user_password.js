@@ -84,7 +84,7 @@ function getNumberMesage(){
 	});
 }
 getNumberMesage();
-var url="ws://"+location.hostname+"/memo/usernotification";
+var url="ws://"+location.hostname+":80/memo/usernotification";
 var websocket=new WebSocket(url);
 websocket.onopen=function(message){
 }

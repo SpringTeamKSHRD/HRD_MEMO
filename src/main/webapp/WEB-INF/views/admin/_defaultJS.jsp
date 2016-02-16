@@ -25,8 +25,8 @@
 		$('ul.sidebar-menu li:nth-last-child(1)').addClass('active');
 	}
 	/*websocket for receiving notification report*/
-	//var websocket=new WebSocket("ws://"+location.hostname+":"+location.port+"/HRD_MEMO/memo/usernotification");
-	var websocket=new WebSocket( "ws://"+location.hostname+"/memo/usernotification");
+	//var websocket=new WebSocket("ws://"+location.hostname+":80:"+location.port+"/HRD_MEMO/memo/usernotification");
+	var websocket=new WebSocket( "ws://"+location.hostname+":80/memo/usernotification");
 	websocket.onmessage=function(message){	    	  
 		if(message.data==="report"){  
 			alertify.success("New Report");
