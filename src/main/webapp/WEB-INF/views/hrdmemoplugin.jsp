@@ -129,6 +129,7 @@
 	<!-- my script -->
 	<script type="text/javascript">
 	//my variable
+	alert(location.hostname);
 		var retrievedObject="";
 	 var desc_panel=document.getElementById("mydespanel");
 	var cur_h=0,domain="",url="",title="";
@@ -657,7 +658,7 @@
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
 	//Live life
-	 var hrd_notify_url="ws://"+location.hostname+":80/memo/usernotification";
+	 var hrd_notify_url="ws://"+location.hostname+"/memo/usernotification";
 
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){

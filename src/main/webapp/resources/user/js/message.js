@@ -92,7 +92,7 @@ function generateTitle(title){
 		 return title;
 	 }
 }
-var url="ws://"+location.hostname+":80/memo/usernotification";
+var url="ws://"+location.hostname+"/memo/usernotification";
   var websocket=new WebSocket(url);
   websocket.onopen=function(message){
   }
