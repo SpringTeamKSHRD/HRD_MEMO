@@ -619,7 +619,7 @@ td.mailbox-attachment{
 			});
 		}
 		getNumberMesage();
-		var url="ws://192.168.178.186:8080/HRD_MEMO/memo/usernotification";
+		var url="ws://"+location.hostname+"/memo/usernotification";
 		var websocket=new WebSocket(url);
 		websocket.onopen=function(message){
 		}

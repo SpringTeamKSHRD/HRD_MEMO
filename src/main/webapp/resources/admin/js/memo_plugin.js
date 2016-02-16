@@ -1,6 +1,6 @@
 if (window.jQuery) {
     $(window).bind("load", function() {
-        	$.getScript('http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/iframeResizer.min.js', function() {
+        	$.getScript('http://khmemo-plugin.herokuapp.com/resources/admin/js/iframeResizer.min.js', function() {
         		$(function() {
 //            	APPEND iFrame
         		var iframe = document.createElement('iframe');
@@ -13,7 +13,7 @@ if (window.jQuery) {
         		iframe.style.bottom="0px";
         		//iframe.style.width = "100%";
         		iframe.scrolling = "no";
-        		iframe.src = "http://192.168.178.186:8080/HRD_MEMO/test_plugin1";
+        		iframe.src = "http://khmemo-plugin.herokuapp.com/test_plugin1";
         		document.body.appendChild(iframe);
         			iFrameResize({log:true,bodyMargin:0});
                 })
@@ -23,7 +23,7 @@ if (window.jQuery) {
 } else {
     script = document.createElement("script"),
         script.onload = function() {
-    	$.getScript('http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/iframeResizer.min.js', function() {
+    	$.getScript('http://khmemo-plugin.herokuapp.com/resources/admin/js/iframeResizer.min.js', function() {
     		$(function() {
 //        	APPEND iFrame
     		var iframe = document.createElement('iframe');
@@ -36,13 +36,13 @@ if (window.jQuery) {
     		iframe.style.bottom="0px";
     		//iframe.style.width = "100%";
     		iframe.scrolling = "no";
-    		iframe.src = "http://192.168.178.186:8080/HRD_MEMO/test_plugin1";
+    		iframe.src = "http://khmemo-plugin.herokuapp.com/test_plugin1";
     		document.body.appendChild(iframe);
     			iFrameResize({log:true,bodyMargin:0});
             })
     	});
         },
         script.type = "text/javascript",
-        script.src = "http://192.168.178.186:8080/HRD_MEMO/resources/admin/js/jquery-2.1.4.min.js",
+        script.src = "http://khmemo-plugin.herokuapp.com/resources/admin/js/jquery-2.1.4.min.js",
         document.body.appendChild(script);
 }

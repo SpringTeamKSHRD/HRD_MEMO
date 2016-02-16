@@ -657,7 +657,7 @@
       $(this).css('height', ($(this).prop('scrollHeight')) + "px");
     });
 	//Live life
-	 var hrd_notify_url="ws://192.168.178.186:8080/HRD_MEMO/memo/usernotification";
+	 var hrd_notify_url="ws://"+location.hostname+"/memo/usernotification";
 
 	 var hrd_memo_websocket=new WebSocket(hrd_notify_url);
 	 hrd_memo_websocket.onopen=function(message){

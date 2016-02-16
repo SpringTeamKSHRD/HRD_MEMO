@@ -38,17 +38,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	 * return an object that should be registered as a bean in the Spring
 	 * application context.
 	 */
-//	@Bean
-//	public DataSource getDataSource(){
-//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName("org.postgresql.Driver");
-//		dataSource.setUrl("jdbc:postgresql://localhost:5432/memo");
-//		dataSource.setUsername("postgres");
-//		dataSource.setPassword("12345");
-//		return dataSource;
-//	}
 
-	/*@Bean
+	@Bean
 	public DataSource getDataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
@@ -56,8 +47,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		dataSource.setUsername("mceyhqrmfkstin");
 		dataSource.setPassword("sSaiW1jcEC76w8VsMDLwA3PPNN");
 	return dataSource;
-	}*/
-	@Bean
+	}
+	/*@Bean
 	public DataSource getDataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
@@ -65,7 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("12345");
 	return dataSource;
-	}
+	}*/
 	@Bean
 	public JdbcTemplate getJdbcTemplate(){
 		return new JdbcTemplate(dataSource);
