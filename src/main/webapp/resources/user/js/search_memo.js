@@ -1,4 +1,4 @@
-    var domain=window.location.origin+"/HRD_MEMO";
+    var domain=window.location.origin;
 
 	var s_title="<div class='row'>"
 					+"<div class='input-field col s12'>"
