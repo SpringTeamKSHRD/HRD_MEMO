@@ -1,4 +1,4 @@
-	var path = "http://khmemo-plugin.herokuapp.com/";
+	var path = "http://memo.khmeradcademy.org/";
 	
 	// create div with id=hrd_memo_pess	
 	var div = document.createElement("div");
