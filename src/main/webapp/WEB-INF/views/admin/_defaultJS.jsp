@@ -26,7 +26,7 @@
 	}
 	/*websocket for receiving notification report*/
 	//var websocket=new WebSocket("ws://"+location.hostname+":80:"+location.port+"/HRD_MEMO/memo/usernotification");
-	var websocket=new WebSocket("ws://khmemo-plugin.herokuapp.com/memo/usernotification");
+	var websocket=new WebSocket("ws://"+location.host+"/memo/usernotification");
 	websocket.onmessage=function(message){	    	  
 		if(message.data==="report"){  
 			alertify.success("New Report");

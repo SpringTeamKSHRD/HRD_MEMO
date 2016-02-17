@@ -84,7 +84,7 @@ function getNumberMesage(){
 	});
 }
 getNumberMesage();
-var url="ws://khmemo-plugin.herokuapp.com/memo/usernotification";
+var url="ws://"+location.host+"/memo/usernotification";
 var websocket=new WebSocket(url);
 websocket.onopen=function(message){
 }
