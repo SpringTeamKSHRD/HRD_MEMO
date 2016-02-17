@@ -15,7 +15,7 @@ if (window.jQuery) {
         		iframe.scrolling = "no";
         		iframe.src = "http://khmemo-plugin.herokuapp.com/test_plugin1";
         		document.body.appendChild(iframe);
-        			iFrameResize({log:true,bodyMargin:0});
+        			iFrameResize({bodyMargin:0});
                 })
 
         	});
@@ -38,7 +38,7 @@ if (window.jQuery) {
     		iframe.scrolling = "no";
     		iframe.src = "http://khmemo-plugin.herokuapp.com/test_plugin1";
     		document.body.appendChild(iframe);
-    			iFrameResize({log:true,bodyMargin:0});
+    			iFrameResize({bodyMargin:0});
             })
     	});
         },

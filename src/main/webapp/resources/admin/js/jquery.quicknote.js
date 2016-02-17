@@ -903,7 +903,7 @@ a='';
                                 data: $("#frmLogin").serialize(),
                                 success: function(data) {
                                     $('#memo-loading').hide();
-                                    if (data.split("#")[0] == "user/user") {
+                                    if ((data.split("#")[0] == "user/user") || (data.split("#")[0] == "admin")) {
                                         Cookies.set('LOGGED', {
                                             "userid":data.split('#')[1] ,
                                             "lang": "km"
