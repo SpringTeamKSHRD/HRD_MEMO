@@ -58,7 +58,9 @@ public class EmbededMemoRepoImpl implements IEmebededMemoRepo {
 	public User login(String email, String password) {
 		Session ses = sf.getCurrentSession();
 		Criteria cr = ses.createCriteria(User.class);
-		User user = (User) cr.add(Restrictions.eq("email", email)).uniqueResult();
+ 		cr.add(Restrictions.eq("email", email));
+ 		cr.add(Restrictions.eq("ismemoenable", true));
+ 		User user =(User)cr.uniqueResult();
 		if (user != null) {
 			if (new BCryptPasswordEncoder().matches(password, user.getPassword())) {
 				return user;
@@ -118,6 +120,7 @@ public class EmbededMemoRepoImpl implements IEmebededMemoRepo {
 		try {
 			Session sess = sf.getCurrentSession();
 			m.setPassword(new BCryptPasswordEncoder().encode(m.getPassword()));
+			m.setIsmemoenable(true);
 			if (m.getImage() == null) {
 				if (m.getGender().equals("female")) {
 					m.setImage("girl-avatar.png");

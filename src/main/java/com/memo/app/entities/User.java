@@ -28,7 +28,7 @@ public class User {
 	private String phone;
 	@Column(name="userimageurl")
 	private String image;
-	@Transient
+	@Column(name="ismemoenabled")
 	private boolean ismemoenable;
 	@Transient
 	private String type;
