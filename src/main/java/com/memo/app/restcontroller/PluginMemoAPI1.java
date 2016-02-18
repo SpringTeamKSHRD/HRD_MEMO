@@ -120,17 +120,16 @@ public class PluginMemoAPI1 {
 		System.out.println("validate email");
 		System.out.println(email);
 		Map<String, Object> map = new HashMap<String, Object>();
-		try {
+		if(embededMemoService.isExistedEmail(email)) {
 			map.put("MESSAGE", "SUCCESS");
 			map.put("STATUS", HttpStatus.OK.value());
-			map.put("RESPONSE_DATA", embededMemoService.isExistedEmail(email));
+			map.put("RESPONSE_DATA", true);
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} catch (Exception e) {
-
-			System.out.println(e.getMessage());
+		} else {
 			map.put("MESSAGE", "LIST EMPTY");
 			map.put("STATUS", HttpStatus.NOT_FOUND.value());
-			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			map.put("RESPONSE_DATA", false);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 	}
 
