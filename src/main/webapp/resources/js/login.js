@@ -50,7 +50,6 @@ $("#frmRegister")
                     	$('#memo-loading').hide();
                         alert('Email already exist !');
                     } else {
-                    	console.log(data)
                         $
                             .ajax({
                                 url: path+"plugin1/memo/register",
@@ -58,7 +57,6 @@ $("#frmRegister")
                                 data: $("#frmRegister").serialize(),
                                 success: function(data) {
                                     if (data.MESSAGE == "SUCCESS") {
-                                    	$('#memo-loading').hide();
                                     	var data={
                                     	"username":$("#r_email").val(),
                                 		"password":$("#r_password").val()
@@ -69,6 +67,7 @@ $("#frmRegister")
                                 			data : data,
                                 			datatype:"JSON",
                                 			success : function(data) {
+                                            	$('#memo-loading').hide();
                                 				if (data == "User account is locked" 
                                 					|| data == "User is disabled" 
                                 					|| data == "Bad credentials"){

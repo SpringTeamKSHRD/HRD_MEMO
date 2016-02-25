@@ -9,8 +9,7 @@
     <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login.css">
-    <script
-	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
+    
 <style >
 select option{
 	color: green;
@@ -81,14 +80,15 @@ select option{
             </form>
         </div>
     </div>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
-    <script type="text/javascript">
-     var path = '${pageContext.request.contextPath}/';
-	 Cookies.remove('MEMO');
-	 Cookies.remove('LOGGED');
-	</script>
+    <script src="${pageContext.request.contextPath}/resources/admin/js/jquery-2.1.4.min.js"></script>
+    <script	src='${pageContext.request.contextPath}/resources/admin/js/jquery-cookie.js'></script>
 	<script type="text/javascript"	src='${pageContext.request.contextPath}/resources/js/login.js'>	</script>
     <script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+	<script type="text/javascript">
+		var path = 'http://memo.khmeracademy.org/';
+		Cookies.remove('MEMO');
+		Cookies.remove('LOGGED');
+	</script>
 </body>
 
 </html>
