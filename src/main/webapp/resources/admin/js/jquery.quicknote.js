@@ -496,7 +496,6 @@ a='';
                                         });
                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="warning">Email already existed !</span>')
                                     } else {
-                                    	console.log(data)
                                         $
                                             .ajax({
                                                 url: path+"/plugin1/memo/register",
@@ -517,7 +516,6 @@ a='';
                                                                         "userid":data.split('#')[1] ,
                                                                         "lang": "km"
                                                                     });
-                                                                    console.log(Cookies.getJSON('LOGGED').lang);
                                                                     $('#qn > #qn_sh,#username-password').remove();
                                                                     _this.appendElem();
                                                                     $('#mytext').focus();
@@ -525,18 +523,12 @@ a='';
                                                                     $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
                                                                     $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>')
                                                                 }
-                                                            },
-                                                            error: function(data) {
-                                                                alert(data.RESPONSE_DATA);
                                                             }
                                                         });
                                                     } else {
                                                         $('#qn_sh').html('<span id="show-hide">KhmerAcademy Memo</span>');
                                                         $("#qn_sh").append('<span style="color:#FFC962;text-decoration:none;" id="memo-alert">something went wrong !</span>')
                                                     }
-                                                },
-                                                error: function(data) {
-                                                    alert(data.RESPONSE_DATA);
                                                 }
                                             });
                                     }

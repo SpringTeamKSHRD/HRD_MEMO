@@ -34,7 +34,7 @@ public class PluginMemoAPI1 {
 		return list;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> login(@ModelAttribute User user) {
 		System.out.println("login");
 		User temp = embededMemoService.memoLogin(user.getEmail(), user.getPassword());
@@ -57,7 +57,7 @@ public class PluginMemoAPI1 {
 			}
 		}
 		return null;
-	}
+	}*/
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
 	public ResponseEntity<Map<String, Object>> addMemo(@RequestBody Memo memo) {
@@ -155,27 +155,16 @@ public class PluginMemoAPI1 {
 	public ResponseEntity<Map<String, Object>> registerUser(@ModelAttribute User temp) {
 		System.out.println("register new user");
 		Map<String, Object> map = new HashMap<String, Object>();
-//		temp.setImage("sopheak.jpg");
+		// temp.setImage("sopheak.jpg");
 		if (embededMemoService.RegisterUser(temp) != null) {
-			
-			try {
-
-				map.put("USERID", temp.getUserid());
-				map.put("USERNAME", temp.getUsername());
-				map.put("IMAGE_URL", temp.getImage());
-				map.put("EMAIL", temp.getEmail());
-				map.put("MESSAGE", "SUCCESS");
-				map.put("STATUS", HttpStatus.OK.value());
-				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-			} catch (Exception e) {
-
-				System.out.println(e.getMessage());
-				map.put("MESSAGE", "LIST EMPTY");
-				map.put("STATUS", HttpStatus.NOT_FOUND.value());
-				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-			}
+			map.put("MESSAGE", "SUCCESS");
+			map.put("STATUS", HttpStatus.OK.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} else {
+			map.put("MESSAGE", "UNSUCCESS");
+			map.put("STATUS", HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
-		return null;
 	}
 	
 	@RequestMapping(value = "/report", method = RequestMethod.POST)

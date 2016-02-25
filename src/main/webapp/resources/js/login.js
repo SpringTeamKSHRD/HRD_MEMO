@@ -77,23 +77,14 @@ $("#frmRegister")
                                 						//khmerAcademeyLogin(username, password);
                                 						location.href = path + data.split("#")[0];
                                 				}
-                                			},
-                                			error : function(data) {
-                                				console.log(data);
                                 			}
                                 		});
                                     } else {
                                         alert('Oop ! something went wrong, please try again later !');
                                     }
-                                },
-                                error: function(data) {
-                                    alert(data.RESPONSE_DATA);
                                 }
                             });
                     }
-                },
-                error: function(data) {
-                    alert(data.RESPONSE_DATA);
                 }
             });
         }
