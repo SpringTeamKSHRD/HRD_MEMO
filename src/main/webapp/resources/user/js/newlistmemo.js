@@ -38,10 +38,10 @@ function init() {
             listMemo();
         },
         error: function(data) {
-        	$('#total-memo').text("");
-            $('#public-memo').text("");
-            $('#private-memo').text("");
-            $('#total-website').text("");
+        	$('#total-memo').text("0");
+            $('#public-memo').text("0");
+            $('#private-memo').text("0");
+            $('#total-website').text("0");
             $('#searchdomain').empty();
             listMemo();
         }

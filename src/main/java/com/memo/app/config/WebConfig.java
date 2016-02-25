@@ -17,20 +17,21 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@Configuration 
+@Configuration
 /*
- * indicates that the class can be used by the Spring IoC
- * container as a source of bean definitions.
+ * indicates that the class can be used by the Spring IoC container as a source
+ * of bean definitions.
  */
 @EnableWebMvc /*
- * activates annotation-driven controller request mapping and
- * replaces <mvc:annotation-driven>.
- */
+				 * activates annotation-driven controller request mapping and
+				 * replaces <mvc:annotation-driven>.
+				 */
 @ComponentScan(basePackages = "com.memo.app")
-public class WebConfig extends WebMvcConfigurerAdapter{
-	
-	@Autowired Environment environment;
-	
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+	@Autowired
+	Environment environment;
+
 	@Autowired
 	private DataSource dataSource;
 	/*
@@ -39,35 +40,36 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	 * application context.
 	 */
 
+	// @Bean
+	// public DataSource getDataSource(){
+	// DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	// dataSource.setDriverClassName("org.postgresql.Driver");
+	// dataSource.setUrl("jdbc:postgresql://ec2-54-83-53-120.compute-1.amazonaws.com:5432/d7tak2uasi7ro3?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
+	// dataSource.setUsername("mceyhqrmfkstin");
+	// dataSource.setPassword("sSaiW1jcEC76w8VsMDLwA3PPNN");
+	// return dataSource;
+	// }
 	@Bean
-	public DataSource getDataSource(){
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://ec2-54-83-53-120.compute-1.amazonaws.com:5432/d7tak2uasi7ro3?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
-		dataSource.setUsername("mceyhqrmfkstin");
-		dataSource.setPassword("sSaiW1jcEC76w8VsMDLwA3PPNN");
-	return dataSource;
-	}
-	/*@Bean
-	public DataSource getDataSource(){
+	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/memodb");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("12345");
-	return dataSource;
-	}*/
+		return dataSource;
+	}
+
 	@Bean
-	public JdbcTemplate getJdbcTemplate(){
+	public JdbcTemplate getJdbcTemplate() {
 		return new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry){
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	    registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-	
+
 	@Bean
 	public ViewResolver viewRsolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -75,21 +77,22 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+
 	@Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*");
-    }
-	
-	// Upload File 
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*");
+	}
+
+	// Upload File
 	@Bean
 	public MultipartResolver multipartResolver() {
 		org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(2097152);
 		return multipartResolver;
 	}
-	
+
 	@Bean
-	public String urlMemo(){
+	public String urlMemo() {
 		return environment.getProperty("MEMO.URL");
 	}
 
