@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<div class="text-center"><h1>#1</h1></div>
 										<div class="timeline-item">
 											<div class="timeline-body">
-												<a class="demo" href="test_plugin1">
+												<a class="demo" href="test_plugin">
 													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/startup.png" width="200px" height="200px"/>
 													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/login_memo.png" width="200px" height="200px"/>
 													<img class="margin" src="${pageContext.request.contextPath }/resources/admin/imgs/register_memo.PNG" width="200px" height="200px"/>
