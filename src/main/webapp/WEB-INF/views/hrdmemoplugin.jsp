@@ -129,7 +129,7 @@
 	<!-- my script -->
 	<script type="text/javascript">
 	//my variable
-	alert(location.hostname);
+	//alert(location.hostname);
 		var retrievedObject="";
 	 var desc_panel=document.getElementById("mydespanel");
 	var cur_h=0,domain="",url="",title="";
